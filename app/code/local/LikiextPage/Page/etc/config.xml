@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<global>
+	   <blocks>
+		  <page>
+			<rewrite>
+			   <html_header>LikiextPage_Page_Block_Html_Header</html_header>
+			 </rewrite>
+		  </page>
+	   </blocks>
+	</global>
+</config>

@@ -1,0 +1,101 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+<?php
+if ($head = $this->getChild('argento.head')) :
+    echo $head->getLinks();
+endif;
+?>
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+<script type="text/javascript" src="http://retaildeal.biz/js/prototype/window.js"></script>
+<link rel="shortcut icon" href="http://retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
+
+<script>
+		  function showPopup(sUrl) {
+		  oPopup = new Window({
+		  id:'popup_window',
+		  className: 'magento',
+		  url: sUrl,
+		  width: 800,
+		  height: 325,
+		 // height: 413,
+		  minimizable: false,
+		  maximizable: false,
+		  showEffectOptions: {
+			  duration: 0.4
+		  },
+		  hideEffectOptions:{
+			  duration: 0.4
+		  },
+		  destroyOnClose: true
+		  });
+		  oPopup.setZIndex(100);
+		  oPopup.showCenter(true);
+	  }
+
+	  function closePopup() {
+		  Windows.close('popup_window');
+	  }
+</script>
+<script type="text/javascript">
+        function OpenModeless () {
+            if (window.showModelessDialog) {        // Internet Explorer
+                showModelessDialog ("http://retaildeal.biz/liki_intro/index.phtml", window, "dialogWidth:800px; dialogHeight:335px; resizable:yes;");
+            } 
+            else {
+                window.open ("http://retaildeal.biz/liki_intro/index.phtml", "","width=800, height=335, alwaysRaised=yes");
+            }
+        }
+		/*function remove_error(id,req_id){		
+			var items = document.getElementsByClassName('validation-advice');
+			var i, len;
+			for (i = 0, len = items.length; i < len; i++) 
+			{
+    			items[i].innerHTML = "&nbsp;";
+			}
+			document.getElementById(id).style.border='1px solid #ddd';
+			document.getElementById(id).style.background='1px solid #fafafa';
+		}*/
+</script>

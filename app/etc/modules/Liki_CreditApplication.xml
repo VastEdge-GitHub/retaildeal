@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules> 
+        <Liki_CreditApplication>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Liki_CreditApplication>
+    </modules>
+</config>

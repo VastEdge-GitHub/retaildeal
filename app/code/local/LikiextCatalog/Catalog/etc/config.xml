@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<global>
+	   <helpers>
+		  <catalog>
+			<rewrite>
+			   <product_compare>LikiextCatalog_Catalog_Helper_Product_Compare</product_compare>
+			 </rewrite>
+		  </catalog>
+	   </helpers>
+	</global>
+</config>

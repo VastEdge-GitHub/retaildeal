@@ -1,0 +1,51 @@
+
+TIMING CATEGORY:db
+--------------------------------
+Phase:beforeImport
+- Class:Magmi_CSVDataSource :0.0001 - Class:Magmi_OptimizerPlugin :0.0012 
+Phase:indb
+- Class:Magmi_ProductImportEngine :2.0771 - Class:ItemIndexer :1.9553 - Class:ImageAttributeItemProcessor :0.1214 - Class:Magmi_ReindexingPlugin :0.0007 
+Phase:startImport
+- Class:Magmi_ProductImportEngine :0.0002 - Class:Magmi_CSVDataSource :0.0001 
+Phase:processColumnList
+- Class:Magmi_ProductImportEngine :0.0001 - Class:ImageAttributeItemProcessor :0.0001 - Class:Magmi_DefaultAttributeItemProcessor :0.0001 
+Phase:processItemBeforeId
+- Class:Magmi_ProductImportEngine :0.3961 - Class:GenericMapperProcessor :0.7908 - Class:ImageAttributeItemProcessor :0.2276 - Class:ItemIndexer :0.2112 - Class:CustomOptionsItemProcessor :0.2099 - Class:ProductDeleter :0.206 - Class:Magmi_DefaultAttributeItemProcessor :0.2071 
+Phase:processItemAfterId
+- Class:Magmi_ProductImportEngine :0.4605 - Class:GenericMapperProcessor :0.2428 - Class:ImageAttributeItemProcessor :0.2718 - Class:ItemIndexer :0.2238 - Class:CustomOptionsItemProcessor :0.6356 - Class:ProductDeleter :0.2299 - Class:Magmi_DefaultAttributeItemProcessor :0.2538 
+Phase:processItemAfterImport
+- Class:Magmi_ProductImportEngine :0.0001 
+Phase:endImport
+
+Phase:afterImport
+- Class:EmailReportPlugin :0.0267 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 
+TIMING CATEGORY:global
+--------------------------------
+Phase:beforeImport
+- Class:Magmi_CSVDataSource :0.0001 - Class:Magmi_OptimizerPlugin :0.0012 
+Phase:startImport
+- Class:Magmi_ProductImportEngine :0.0002 - Class:Magmi_CSVDataSource :0.0001 
+Phase:processColumnList
+- Class:Magmi_ProductImportEngine :0.0001 - Class:ImageAttributeItemProcessor :0.0001 - Class:Magmi_DefaultAttributeItemProcessor :0.0001 
+Phase:processItemBeforeId
+- Class:Magmi_ProductImportEngine :0.3961 - Class:GenericMapperProcessor :0.7908 - Class:ImageAttributeItemProcessor :0.2276 - Class:ItemIndexer :0.2112 - Class:CustomOptionsItemProcessor :0.2099 - Class:ProductDeleter :0.206 - Class:Magmi_DefaultAttributeItemProcessor :0.2071 
+Phase:processItemAfterId
+- Class:Magmi_ProductImportEngine :0.4605 - Class:GenericMapperProcessor :0.2428 - Class:ImageAttributeItemProcessor :0.2718 - Class:ItemIndexer :0.2238 - Class:CustomOptionsItemProcessor :0.6356 - Class:ProductDeleter :0.2299 - Class:Magmi_DefaultAttributeItemProcessor :0.2538 
+Phase:processItemAfterImport
+- Class:Magmi_ProductImportEngine :0.0001 
+Phase:endImport
+
+Phase:afterImport
+- Class:EmailReportPlugin :0.0267 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 
+TIMING CATEGORY:line
+--------------------------------
+Phase:processItemBeforeId
+- Class:GenericMapperProcessor :0.0001 
+Phase:processItemAfterId
+- Class:CustomOptionsItemProcessor :0.0001 
+Phase:processItemAfterImport
+
+Phase:endImport
+
+Phase:afterImport
+- Class:EmailReportPlugin :0.0267 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 

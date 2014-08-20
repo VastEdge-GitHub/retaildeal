@@ -1,0 +1,37 @@
+<!--<div class="liki_intro_popup">
+<p style="text-align: left; color: #144f91; font-size: 24px; padding: 0 0 5px 0; margin: 0 0 10px 0; border-bottom: 1px solid #ddd; font-weight: bold;">Introducing LeaseItKeepIt</p>
+<p style="text-align: center; width: 100%; float: left; margin: 10px 0 20px 0;"><img style="float: left; padding-left: 280px; margin-top: -3px;" title="LeaseIt-KeepIt" src="/amazon_import_products/liki_img/leaseit_keepit.png" alt="LeasIt-KeepIt" width="200" /></p>
+<p style="text-align: justify;">LeaseItKeepIt is a partner of ours that makes it easy for us to provide you with product through a flexible payment system where you only pay a small amount down. We ship you the product and you can continue to make modest monthly payments on it, or you can send it back. After 12 months, you own the product outright.</p>
+<p style="text-align: justify;">LeaseItKeepIt is a new Internet startup company based in Phoenix and San Francisco that is focused on bringing new payment and finance options to help consumers get the things they want.</p>
+<p style="text-align: justify;">All you need to do is add the products you want to your shopping cart, the same as always. During the checkout process you'll be given the chance to pay with LeaseItKeepIt.</p>
+<p style="text-align: justify;">For more information about the company, see leaseitkeepit.com.</p>
+</div>-->
+<?php 
+
+require_once('../app/Mage.php');
+
+
+umask(0);
+
+$layout = Mage::app()
+    ->getLayout();
+
+$layout
+    ->getUpdate()
+    ->addHandle('default')
+    ->load();
+
+$layout
+    ->generateXml()
+    ->generateBlocks();
+	
+Mage::getDesign()->setTheme('argento');
+
+echo $layout->getBlock('head')->toHtml();	
+
+echo $layout
+    ->createBlock('cms/block')
+    ->setBlockId('liki_intro')
+    ->toHtml();
+
+?> 
