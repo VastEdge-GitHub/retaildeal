@@ -1275,8 +1275,12 @@ tr.summary-details-excluded { font-style:italic; }
 /* ======================================================================================= */
 
 /* Financing Leaseit-Keepit */
-.overlay_magento{background:#000000;opacity:0.5;z-index:999 !important;}
-.dialog{position:absolute;border-radius:5px;background: #ffffff;padding:0 0 20px 0;margin:0;z-index:9999 !important;}
+.overlay_magento{background:#000000;opacity:0.5;z-index:999 !important;display:none;}
+/* to make liki popup draggable */
+#popup_window_top{width:800px;height:30px;position:absolute;cursor:move;background:#144f91;border-radius:5px 5px 0 0;}
+#popup_window_row2{margin-top:10px;}
+
+.dialog{position:absolute;border-radius:5px;background: #ffffff;padding:0 0 20px 0;margin:0;z-index:9999 !important;box-shadow: 1px 4px 8px #888888;}
 .magento_close{position: absolute;
 width: 22px;
 height: 22px;
@@ -1285,15 +1289,16 @@ top: -10px;
 background: url(http://retaildeal.biz/skin/frontend/base/default/images/tm/ajaxpro/btn_remove.png) no-repeat 0 0;
 cursor: pointer;
 text-align: left;
+z-index:9999;
 text-indent: -9999px;}
 
 .liki_intro_popup
 {
-	width: 95%;
+	width: 780px;
 	float: left; 
 	padding: 0 0 12px 0; 
 	background: #ffffff;
-	margin:0 20px 0 20px;
+	margin:10px 10px;
 	border-bottom:1px solid #ddd;
 }
 .liki_intro_page

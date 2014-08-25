@@ -64,9 +64,11 @@ if ($slides = $this->getSlider()->getSlides()) :
                 </div>
             </div>
         </div>
-        <div style="float:left;margin:0;cursor:pointer;" onclick="OpenModeless();">
-        <img src="http://retaildeal.biz/skin/frontend/argento/default/images/banner_right.png" alt="" />
+        <!-- Liki Ext Start -->
+        <div style="float:left;margin:0;cursor:pointer;">
+       <img src="http://retaildeal.biz/skin/frontend/argento/default/images/banner_right.png" alt="" onclick="return showForm('liki_intro_popup')" />
         </div>
+        <!-- Liki Ext End -->
 		</div>
         <script type="text/javascript" charset="utf-8">
         var new_glider = new Glider('easyslideslider-<?php echo $easyslide_id; ?>', {

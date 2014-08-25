@@ -32,6 +32,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
 <link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
 <!--[if lt IE 7]>
 <script type="text/javascript">
 //<![CDATA[
@@ -45,57 +46,34 @@ if ($head = $this->getChild('argento.head')) :
     echo $head->getLinks();
 endif;
 ?>
+
 <?php echo $this->getCssJsHtml() ?>
 <?php echo $this->getChildHtml() ?>
 <?php echo $this->helper('core/js')->getTranslatorScript() ?>
 <?php echo $this->getIncludes() ?>
+<!-- Changes by liki ext -->
 <script type="text/javascript" src="http://retaildeal.biz/js/prototype/window.js"></script>
 <link rel="shortcut icon" href="http://retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
 
-<script>
-		  function showPopup(sUrl) {
-		  oPopup = new Window({
-		  id:'popup_window',
-		  className: 'magento',
-		  url: sUrl,
-		  width: 800,
-		  height: 325,
-		 // height: 413,
-		  minimizable: false,
-		  maximizable: false,
-		  showEffectOptions: {
-			  duration: 0.4
-		  },
-		  hideEffectOptions:{
-			  duration: 0.4
-		  },
-		  destroyOnClose: true
-		  });
-		  oPopup.setZIndex(100);
-		  oPopup.showCenter(true);
-	  }
-
-	  function closePopup() {
-		  Windows.close('popup_window');
-	  }
-</script>
 <script type="text/javascript">
-        function OpenModeless () {
-            if (window.showModelessDialog) {        // Internet Explorer
-                showModelessDialog ("http://retaildeal.biz/liki_intro/index.phtml", window, "dialogWidth:800px; dialogHeight:335px; resizable:yes;");
-            } 
-            else {
-                window.open ("http://retaildeal.biz/liki_intro/index.phtml", "","width=800, height=335, alwaysRaised=yes");
-            }
-        }
-		/*function remove_error(id,req_id){		
-			var items = document.getElementsByClassName('validation-advice');
-			var i, len;
-			for (i = 0, len = items.length; i < len; i++) 
-			{
-    			items[i].innerHTML = "&nbsp;";
-			}
-			document.getElementById(id).style.border='1px solid #ddd';
-			document.getElementById(id).style.background='1px solid #fafafa';
-		}*/
+function showForm(id){
+	win = new Window({
+		title: "Introducing LeaseItKeepIt",
+		zIndex:3000,
+		destroyOnClose: true,
+		recenterAuto:false,
+		resizable: false,
+		width:800,
+		height:300,
+		minimizable: true,
+		maximizable: false,
+		draggable: true});
+win.setContent(id, false, false);
+win.showCenter();
+}
+function close_popup(){
+	document.getElementById( 'liki_intro_popup' ).style.display = 'none';
+	  };
 </script>
+<div id="liki_intro_popup" style="display:none"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('liki_intro')->toHtml()?></div>
+<!-- Changes by liki ext End -->

@@ -28,9 +28,14 @@
     <h1><?php echo $this->__('Checkout') ?></h1>
 </div>
 <!-- Changes by liki ext start -->
-<?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
-   <?php //echo $this->getChildHtml('form_before') ?>
-   <!-- Changes by liki ext end -->
+<?php
+    $lastUrl = Mage::getSingleton('core/session')->getLastUrl();
+    if (preg_match("#http://retaildeal.biz/CreditApplication/Payment/cancel/#", $lastUrl)) {
+        echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>You have canceled your order</span></li></ul></li></ul>";
+    }
+?>
+<?php $this->getLayout()->getMessagesBlock()->setMessages(Mage::getSingleton('tag/session')->getMessages(true)); ?>
+<!-- Changes by liki ext end -->
 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
 <ol class="opc" id="checkoutSteps">
@@ -38,7 +43,7 @@
 <?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif; $i++ ?>
     <li id="opc-<?php echo $_stepId ?>" class="section<?php echo !empty($_stepInfo['allow'])?' allow':'' ?><?php echo !empty($_stepInfo['complete'])?' saved':'' ?>">
     <!-- Changes by liki ext start -->
-    <?php /*if($_stepId == 'payment')
+    <?php if($_stepId == 'payment')
 	{
 		$custom_style_ht = 'style="height:50px"';
 		$custom_style_margin_no = 'style="margin-top:11px"';
@@ -49,21 +54,21 @@
 		$custom_style_ht = '';
 		$custom_style_margin_no = '';
 		$custom_style_margin_text = '';
-	}*/
+	}
 	?>
-        <div class="step-title" <?php //echo $custom_style_ht ?>>
-            <span <?php //echo $custom_style_margin_no ?> class="number"><?php echo $i ?></span>
-            <h2 <?php //echo $custom_style_margin_text ?>><?php echo $_stepInfo['label'] ?></h2>
+        <div class="step-title" <?php echo $custom_style_ht ?>>
+            <span <?php echo $custom_style_margin_no ?> class="number"><?php echo $i ?></span>
+            <h2 <?php echo $custom_style_margin_text ?>><?php echo $_stepInfo['label'] ?></h2>
             <a href="#"><?php echo $this->__('Edit') ?></a>
-            <?php //if($_stepId == 'payment'){ ?>
-                <!--<div class="chkout_btn" style="float: left;height: 33px;padding: 0 6px 0 6px;margin: 7px; margin-left:50px;cursor:pointer;" onclick="OpenModeless();">
-                    <a style="float:left; margin-top:4px; display:block">
-                        <span style="float:left;font-size:12px;font-weight:bold;margin-top:4px;color:#333;">Featuring</span>
-                        <img src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; margin-left:6px;margin-top:-3px;" width="45px">
+            <?php if($_stepId == 'payment'){ ?>
+                <div class="chkout_btn" style="float: left;height: 32px;padding: 0 10px 0 10px;margin: 8px; margin-left:50px;cursor:pointer;" onclick="return showForm('liki_intro_popup')">
+                    <a style="float:left;display:block;padding-right:0;">
+                        <span style="float:left;font-size:12px;font-weight:bold;color:#333;line-height:32px;">Featuring</span>
+                        <img src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;margin-top:0;" width="45px">
                     </a>
-                </div>-->
-            <?php //} ?>
-	    <!-- Changes by liki ext end -->
+                </div>
+            <?php } ?>
+            <!-- Changes by liki ext end -->
         </div>
         <div id="checkout-step-<?php echo $_stepId ?>" class="step a-item" style="display:none;">
             <?php echo $this->getChildHtml($_stepId) ?>

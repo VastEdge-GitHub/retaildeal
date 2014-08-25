@@ -106,13 +106,12 @@
                         ?>
                         <div <?php echo $style_liki_maindiv; ?>>
                         	<div style="float:left; width:100%; color: #000; font-size:1.5em; font-weight:bold;">
-                            	<!--<span style="float:left; margin-top: 14px;font-weight:normal;margin-right: 10px;">or</span>-->
                                 <span style="float:left; margin-top: 0;font-size:30px;font-weight:normal;font-family: lato-bold;">
 									<?php echo $_product->getLikiPrice(); ?>
 								</span>
                                 <span style="float:left; margin-top: 0;font-size:30px;font-weight:normal;font-family: lato-bold;">/mo.</span>
-                                <!--<img src="http://retaildeal.biz/skin/frontend/base/default/images/btn41.png" alt="" style="float:left;" />-->
-                                <div class="chkout_btn" style="float:left;background-repeat:no-repeat;height:33px;padding:0 6px 0 6px;margin-left:12px;margin-top:-11px;" onclick="OpenModeless();">
+                                
+                                <div class="chkout_btn" style="float:left;background-repeat:no-repeat;height:33px;padding:0 6px 0 6px;margin-left:12px;margin-top:-11px;" onclick="return showForm('liki_intro_popup')">
                                 <a style="float:left; margin-top:4px;cursor:pointer;">
 									<span style="float:left;font-size:12px;font-weight:bold;margin-top:4px;color:#1d1d1d;">
                                     	Financing by
@@ -120,10 +119,10 @@
                                     <span style="float:left;margin-left:6px;margin-top:-3px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/amazon_import_products/liki_img/leaseit_keepit.png',sizingMethod='scale');">
                                     	<img src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" width="45px" />
                                     </span>
-                                	<!--<img src="/amazon_import_products/liki_img/leaseit_keepit.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; margin-left:6px;margin-top:-3px;"  width="45px"/>-->
+                                	
 								</a>
                                 </div>
-                                <!--<img src="http://retaildeal.biz/skin/frontend/base/default/images/btn42.png" alt="" style="float:left;" />-->
+                                
 							</div>
                         </div>
                         <!--LIKI price div ends-->
