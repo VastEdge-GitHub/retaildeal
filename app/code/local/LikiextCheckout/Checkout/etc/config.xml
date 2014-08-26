@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<global>
+	   <blocks>
+		  <checkout>
+			<rewrite>
+			   <onepage_shipping>LikiextCheckout_Checkout_Block_Onepage_Shipping</onepage_shipping>
+			 </rewrite>
+		  </checkout>
+	   </blocks>
+	</global>
+</config>

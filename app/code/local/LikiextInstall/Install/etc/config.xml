@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<global>
+	   <models>
+		  <install>
+			<rewrite>
+			   <installer_db_mysql4>LikiextInstall_Install_Model_Installer_Db_Mysql4</installer_db_mysql4>
+			 </rewrite>
+		  </install>
+	   </models>
+	</global>
+</config>

@@ -1,0 +1,141 @@
+<?php
+if ($slides = $this->getSlider()->getSlides()) :
+    $slider = $this->getSlider();
+    $width = $slider['width'];
+    $height = $slider['height'];
+    $easyslide_id = $slider['easyslide_id'];
+?>
+    <?php if ($slider['slider_type'] == '0') : ?>
+    	<div style="float:left;width:730px;background: #fff url(http://retaildeal.biz/skin/frontend/argento/argento/images/easyslider_bg.gif) no-repeat 50% 100%;">
+        <div class="easyslideslider-id" id="easyslideslider-<?php echo $easyslide_id; ?>" style='position: relative;float:left; <?php echo "width:".$width."px; height:".$height."px"; ?>'>
+            <div class="scroller" style='<?php echo "width:".$width."px; height:".$height."px"; ?>'>
+                <div class="content">
+                    <?php $i = 0; foreach ($slides as $slide): ?>
+                        <div class="section" id="section<?php echo ++$i ?>" style="width:<?php echo $width ?>px; height:<?php echo $height ?>px">
+                            <a href="<?php echo $slide['target'] ?>">
+                                <?php
+                                    if (strncmp($slide['url'],'http', 4) == 0) {
+                                        $image_src = $slide['url'];
+                                    } else {
+                                        $image_src = Mage::getBaseUrl('media') . 'easyslide/' . $slide['url'];
+                                    }
+                                ?>
+                                <img src="<?php echo $image_src; ?>" alt="<?php echo $this->escapeHtml($slide['image']) ?>"/>
+                            </a>
+							<?php //echo "hello";
+//				 $vPath = $slide['target'];
+//		echo $slide['target'];
+//		 echo $vPath."<br>";
+//    $oRewrite = Mage::getModel('core/url_rewrite')
+//                    ->setStoreId(Mage::app()->getStore()->getId())
+//                    ->loadByRequestPath($vPath);
+//					$iProductId = $oRewrite->getProductId();
+//					 $oProduct = Mage::getModel('catalog/product')->load($iProductId);
+//					 $abc = $oProduct->getLikiPrice();
+//					  echo $abc;
+//				echo $oProduct->getPrice();
+//				echo $oProduct[_calculatePrice:protected]."<br>";
+//				print_r($oProduct);
+//					echo "<br>";
+//					
+					 ?>
+                            <?php if (!empty($slide['description'])) : ?>
+                                <div class="easyslidedescription <?php echo $this->getDescriptionClassName($slide['desc_pos']); ?> <?php echo $this->getBackgroundClassName($slide['background']); ?>"><?php echo $slide['description']; ?></div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <div class="easyslidecontrolwr">
+                <div class="easyslidercontrol">
+                <?php if ($this->getSlider()->getControlsType() == 'number'):
+                    $slcount = count($slides);
+
+                    for ($i = 0; $i < $slcount; $i++):
+                        echo '<a href="#section'.($i+1).'" title="Slide '.($i+1).'" class="easyslidedirect">'.($i+1).'</a>';
+                    endfor;
+                else: ?>
+                    <a href="#" class="easyslideprev" title="Previous"></a>
+                    <a href="#" class="easyslidestop" title="Stop"></a>
+                    <a href="#" class="easyslideplay" title="Play"></a>
+                    <a href="#" class="easyslidenext" title="Next"></a>
+                <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <!-- Liki Ext Start -->
+        <div style="float:left;margin:0;cursor:pointer;">
+       <img src="http://retaildeal.biz/skin/frontend/argento/default/images/banner_right.png" alt="" onclick="return showForm('liki_intro_popup')" />
+        </div>
+        <!-- Liki Ext End -->
+		</div>
+        <script type="text/javascript" charset="utf-8">
+        var new_glider = new Glider('easyslideslider-<?php echo $easyslide_id; ?>', {
+            duration     : <?php echo $slider['duration'];?>,
+            autoGlide    : <?php echo (int)$slider['autoglide'];?>,
+            frequency    : <?php echo $slider['frequency'];?>,
+            effectType   : '<?php echo $slider['effect']; ?>'
+        });
+        </script>
+    <?php elseif ($slider['slider_type'] == '1') : ?>
+        <?php
+            if (!Mage::registry('tm.load.jquery')) :
+                echo $this->getLayout()->getBlock('tm.load.jquery')->toHtml();
+                Mage::register('tm.load.jquery', 1);
+                ?>
+                <script type="text/javascript">
+                    if (typeof jQuery === 'undefined') {
+                        alert('jQuery library is not found. Please enable it from Easyslider configuration');
+                    }
+                </script>
+                <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.nivo.slider.js'); ?>"></script>
+                <?php
+            endif;
+        ?>
+        <?php $theme = 'theme-' . $slider['theme'] ?>
+        <div class="slider-wrapper <?php echo $theme ?>">
+            <div id="slider-<?php echo $easyslide_id; ?>" class="nivoSlider">
+                <?php $i = 0; foreach ($slides as $slide): ?>
+                    <a href="<?php echo $slide['target'] ?>">
+                        <?php
+                            if (strncmp($slide['url'],'http', 4) == 0) {
+                                $image_src = $slide['url'];
+                            } else {
+                                $image_src = Mage::getBaseUrl('media') . 'easyslide/' . $slide['url'];
+                            }
+                        ?>
+                        <img src="<?php echo $image_src; ?>" alt="<?php echo $this->escapeHtml($slide['image']) ?>" <?php if (!empty($slide['description'])) : ?> title="#htmlcaption<?php echo $i; ?>" <?php endif; ?> />
+                    </a>
+                    <?php $i++; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <?php $i = 0; foreach ($slides as $slide): ?>
+            <?php if (!empty($slide['description'])) : ?>
+                <div class="nivo-html-caption" id="htmlcaption<?php echo $i; ?>"><?php echo $slide['description'] ?></div>
+            <?php endif; $i++;?>
+        <?php endforeach; ?>
+
+        <?php $nivoEffect = implode(',', $slider['nivoeffect']); ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                jQuery('#slider-<?php echo $easyslide_id; ?>').nivoSlider({
+                    'effect': '<?php echo $nivoEffect ?>',
+                    'slices': <?php echo $slider['slices'] ?>, // For slice animations
+                    'boxCols': <?php echo $slider['boxCols'] ?>, // For box animations
+                    'boxRows': <?php echo $slider['boxRows'] ?>, // For box animations
+                    'animSpeed': <?php echo $slider['animSpeed'] ?>, // Slide transition speed
+                    'pauseTime': <?php echo $slider['pauseTime'] ?>, // How long each slide will show
+                    'directionNav': <?php echo $slider['directionNav'] ?>, // Next & Prev navigation
+                    'controlNav': <?php echo $slider['controlNav'] ?>, // 1,2,3... navigation
+                    'pauseOnHover': <?php echo $slider['pauseOnHover'] ?>, // Stop animation while hovering
+                    'manualAdvance': <?php echo $slider['manualAdvance'] ?>, // Force manual transitions
+                    'prevText': '<?php echo Mage::helper('easyslide')->__('Prev') ?>',
+                    'nextText': '<?php echo Mage::helper('easyslide')->__('Next') ?>'
+                });
+            });
+        </script>
+    <?php endif; ?>
+<?php endif; ?>
