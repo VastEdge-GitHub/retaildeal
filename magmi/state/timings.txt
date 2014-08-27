@@ -2,41 +2,41 @@
 TIMING CATEGORY:db
 --------------------------------
 Phase:beforeImport
-- Class:Magmi_CSVDataSource :0.0001 - Class:Magmi_OptimizerPlugin :0.0012 
+- Class:Magmi_CSVDataSource :0.0001 - Class:Magmi_OptimizerPlugin :0.0011 
 Phase:indb
-- Class:Magmi_ProductImportEngine :2.0771 - Class:ItemIndexer :1.9553 - Class:ImageAttributeItemProcessor :0.1214 - Class:Magmi_ReindexingPlugin :0.0007 
+- Class:Magmi_ProductImportEngine :3.2024 - Class:ItemIndexer :3.0685 - Class:ImageAttributeItemProcessor :0.1333 - Class:Magmi_ReindexingPlugin :0.001 
 Phase:startImport
 - Class:Magmi_ProductImportEngine :0.0002 - Class:Magmi_CSVDataSource :0.0001 
 Phase:processColumnList
 - Class:Magmi_ProductImportEngine :0.0001 - Class:ImageAttributeItemProcessor :0.0001 - Class:Magmi_DefaultAttributeItemProcessor :0.0001 
 Phase:processItemBeforeId
-- Class:Magmi_ProductImportEngine :0.3961 - Class:GenericMapperProcessor :0.7908 - Class:ImageAttributeItemProcessor :0.2276 - Class:ItemIndexer :0.2112 - Class:CustomOptionsItemProcessor :0.2099 - Class:ProductDeleter :0.206 - Class:Magmi_DefaultAttributeItemProcessor :0.2071 
+- Class:Magmi_ProductImportEngine :0.6345 - Class:GenericMapperProcessor :1.2453 - Class:ImageAttributeItemProcessor :0.3626 - Class:ItemIndexer :0.3368 - Class:CustomOptionsItemProcessor :0.3354 - Class:ProductDeleter :0.3296 - Class:Magmi_DefaultAttributeItemProcessor :0.3315 
 Phase:processItemAfterId
-- Class:Magmi_ProductImportEngine :0.4605 - Class:GenericMapperProcessor :0.2428 - Class:ImageAttributeItemProcessor :0.2718 - Class:ItemIndexer :0.2238 - Class:CustomOptionsItemProcessor :0.6356 - Class:ProductDeleter :0.2299 - Class:Magmi_DefaultAttributeItemProcessor :0.2538 
+- Class:Magmi_ProductImportEngine :0.7211 - Class:GenericMapperProcessor :0.3725 - Class:ImageAttributeItemProcessor :0.4191 - Class:ItemIndexer :0.3448 - Class:CustomOptionsItemProcessor :0.9811 - Class:ProductDeleter :0.3538 - Class:Magmi_DefaultAttributeItemProcessor :0.4012 
 Phase:processItemAfterImport
-- Class:Magmi_ProductImportEngine :0.0001 
+- Class:Magmi_ProductImportEngine :0.0008 - Class:ItemIndexer :0.0005 
 Phase:endImport
 
 Phase:afterImport
-- Class:EmailReportPlugin :0.0267 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 
+- Class:EmailReportPlugin :0.0569 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 
 TIMING CATEGORY:global
 --------------------------------
 Phase:beforeImport
-- Class:Magmi_CSVDataSource :0.0001 - Class:Magmi_OptimizerPlugin :0.0012 
+- Class:Magmi_CSVDataSource :0.0001 - Class:Magmi_OptimizerPlugin :0.0011 
 Phase:startImport
 - Class:Magmi_ProductImportEngine :0.0002 - Class:Magmi_CSVDataSource :0.0001 
 Phase:processColumnList
 - Class:Magmi_ProductImportEngine :0.0001 - Class:ImageAttributeItemProcessor :0.0001 - Class:Magmi_DefaultAttributeItemProcessor :0.0001 
 Phase:processItemBeforeId
-- Class:Magmi_ProductImportEngine :0.3961 - Class:GenericMapperProcessor :0.7908 - Class:ImageAttributeItemProcessor :0.2276 - Class:ItemIndexer :0.2112 - Class:CustomOptionsItemProcessor :0.2099 - Class:ProductDeleter :0.206 - Class:Magmi_DefaultAttributeItemProcessor :0.2071 
+- Class:Magmi_ProductImportEngine :0.6345 - Class:GenericMapperProcessor :1.2453 - Class:ImageAttributeItemProcessor :0.3626 - Class:ItemIndexer :0.3368 - Class:CustomOptionsItemProcessor :0.3354 - Class:ProductDeleter :0.3296 - Class:Magmi_DefaultAttributeItemProcessor :0.3315 
 Phase:processItemAfterId
-- Class:Magmi_ProductImportEngine :0.4605 - Class:GenericMapperProcessor :0.2428 - Class:ImageAttributeItemProcessor :0.2718 - Class:ItemIndexer :0.2238 - Class:CustomOptionsItemProcessor :0.6356 - Class:ProductDeleter :0.2299 - Class:Magmi_DefaultAttributeItemProcessor :0.2538 
+- Class:Magmi_ProductImportEngine :0.7211 - Class:GenericMapperProcessor :0.3725 - Class:ImageAttributeItemProcessor :0.4191 - Class:ItemIndexer :0.3448 - Class:CustomOptionsItemProcessor :0.9811 - Class:ProductDeleter :0.3538 - Class:Magmi_DefaultAttributeItemProcessor :0.4012 
 Phase:processItemAfterImport
-- Class:Magmi_ProductImportEngine :0.0001 
+- Class:Magmi_ProductImportEngine :0.0008 - Class:ItemIndexer :0.0005 
 Phase:endImport
 
 Phase:afterImport
-- Class:EmailReportPlugin :0.0267 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 
+- Class:EmailReportPlugin :0.0569 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 
 TIMING CATEGORY:line
 --------------------------------
 Phase:processItemBeforeId
@@ -48,4 +48,4 @@ Phase:processItemAfterImport
 Phase:endImport
 
 Phase:afterImport
-- Class:EmailReportPlugin :0.0267 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 
+- Class:EmailReportPlugin :0.0569 - Class:Magmi_ImportUrlPlugin :0.0001 - Class:GenericMapperProcessor :0.0002 

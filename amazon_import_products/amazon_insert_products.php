@@ -518,8 +518,8 @@ function insert_products($file_name,$cat_id)
 							if(!getimagesize($prod_img_url)){return $prod_count;}
 							if(!getimagesize($prod_thumbimg_url)){return $prod_count;}
 							if(!getimagesize($prod_smlimg_url)){return $prod_count;}
-							if(preg_replace('/\s+/', ' ', trim($content_arr[41])) == '1'){$prod_amazonprime = 'Yes';}		// IsEligibleForSuperSaverShipping
-							else{$prod_amazonprime = 'No';}
+							if(preg_replace('/\s+/', ' ', trim($content_arr[41])) == '1'){$prod_amazonprime = 'Amazon Prime';}		// IsEligibleForSuperSaverShipping
+							else{$prod_amazonprime = 'Not Amazon Prime';}
 							$amazon_asin				= preg_replace('/\s+/', ' ', trim($content_arr[0]));				// ASIN
 							$amazon_local 				= 'us';
 							$amazon_ean 				= preg_replace('/\s+/', ' ', trim($content_arr[12]));				// EAN
@@ -580,8 +580,8 @@ function insert_products($file_name,$cat_id)
 							$liki_disc			= '15';														// 15%
 							$liki_price			= ($liki_disc/100)*$prod_price;								// LIKI price calculation
 							$liki_price			= number_format($liki_price, 2, '.', ',');					// Value upto 2 decimals
-							$liki_price_text	= "$".$liki_price;
-							$prod_likidesc		= "LeaseItKeepIt Price : $".$liki_price." per month";							
+							$liki_price			= "$".$liki_price;
+							$prod_likidesc		= "LeaseItKeepIt Price : ".$liki_price." per month";							
 							$new_sku			.= $prod_sku.",";			// Pushing all new SKUs in global variable to disable/delete old magento products
 										
 							echo gmdate('Y-m-d H:i:s')."----> New Product \n";
@@ -596,9 +596,9 @@ function insert_products($file_name,$cat_id)
 							$prod_thumbimg_ext	= pathinfo($prod_thumbimg_url, PATHINFO_EXTENSION);
 							$prod_smlimg_ext 	= pathinfo($prod_smlimg_url, PATHINFO_EXTENSION);
 							// Defining path where images are to be temporarily stored
-							$img				= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'.'.$prod_img_ext;
-							$thumbimg			= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_thumbimg_name.'.'.$prod_thumbimg_ext;
-							$smlimg				= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'.'.$prod_smlimg_ext;
+							$img				= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$prod_sku.'.'.$prod_img_ext;
+							$thumbimg			= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_thumbimg_name.'_'.$prod_sku.'.'.$prod_thumbimg_ext;
+							$smlimg				= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_'.$prod_sku.'.'.$prod_smlimg_ext;
 							// Temporarily storing images
 							file_put_contents($img, file_get_contents($prod_img_url));
 							file_put_contents($thumbimg, file_get_contents($prod_thumbimg_url));
@@ -608,14 +608,30 @@ function insert_products($file_name,$cat_id)
 							$main_image			= $img;									// Image to be used for LIKI text
 							$small_image		= $smlimg;								// Image to be used for LIKI text
 							$bottom_image		= $base_url_magento.'amazon_import_products/liki_img/cache/imagefilledrectangle.jpg';	// Path of the rectangle image created
-							$liki_price_img		= "$".$liki_price;						// LIKI price to be watermarked on image
-							main($main_image, $bottom_image, $liki_price_img, 'main');
-							main($small_image, $bottom_image, $liki_price_img, 'small');
-							$new_main_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_liki.'.$prod_img_ext;	// Path of new LIKI image
-							$new_smail_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_liki.'.$prod_smlimg_ext;	// Path of new LIKI image
+							main($main_image, $bottom_image, $liki_price, 'main');
+							main($small_image, $bottom_image, $liki_price, 'small');
+							$new_main_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$prod_sku.'_liki.'.$prod_img_ext;	// Path of new LIKI image
+							$new_smail_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_'.$prod_sku.'_liki.'.$prod_smlimg_ext;	// Path of new LIKI image
 							echo gmdate('Y-m-d H:i:s')."----> New images converted \n";
+							
+							echo gmdate('Y-m-d H:i:s')."----> Checking SKU in custom URL rewrite table \n";
+
+							$qcheck_rewrite		= "select `url_rewrite_id` from `custom_rewrite_check` where `prod_sku` = '".$prod_sku."' ";
+							$rcheck_rewrite		= mysql_query($rcheck_rewrite);
+							$rowcheck_rewrite	= mysql_fetch_array($rcheck_rewrite);
+							$count_rewrite		= mysql_num_rows($rowcheck_rewrite);
+							if($count_rewrite == 1)
+							{
+								$old_rewrite_id		= $rowget_rewriteid['url_rewrite_id'];
+								$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` = '".$old_rewrite_id."' ";
+								$rdel_rewriteid		= mysql_query($qdel_rewriteid);
+							}
+							elseif($count_rewrite > 1)
+							{
+								return $prod_count;
+							}
 							//fwrite($main_file,"store,websites,attribute_set,type,category_ids,sku,name,image,small_image,thumbnail,amazon_prime,liki_desription,vastedge_meta_robots,price,weight,standard_shipping,status,visibility,tax_class_id,wp_amazon_sync,wp_amazon_use_categories,description,short_description,wp_amazon_local,wp_amazon_asin,wp_amazon_ean,wp_amazon_offer_condition,wp_amazon_offer_price_type,wp_amazon_offer_price,wp_amazon_offer_currency,wp_amazon_offers_list_url,wp_amazon_product_url,wp_amazon_reviews_url,liki_price,qty,min_qty,use_config_min_qty,is_qty_decimal,backorders,min_sale_qty,use_config_min_sale_qty,max_sale_qty,use_config_max_sale_qty,is_in_stock,use_config_manage_stock,product_name,store_id,product_type_id".PHP_EOL);
-							fwrite($mainfile_fh,'"admin"|"base"|"Default"|"simple"|"'.$prod_categoryid.'"|"'.$prod_sku.'"|"'.utf8_encode($prod_name).'"|"'.$new_main_img.'"|"'.$new_smail_img.'"|"'.$new_smail_img.'"|"'.$prod_amazonprime.'"|"'.$prod_likidesc.'"|"'.$meta_tag_robot.'"|"'.$prod_price.'"|"'.$prod_weight.'"|"'.$standard_shipping.'"|"'.$prod_status.'"|"'.$prod_visibility.'"|"'.$prod_tax_class.'"|"'.$amazon_sync.'"|"'.$amazon_use_categories.'"|"'.utf8_encode($prod_desc).'"|"'.utf8_encode($prod_shortdesc).'"|"'.$amazon_local.'"|"'.$amazon_asin.'"|"'.$amazon_ean.'"|"'.$amazon_offer_condition.'"|"'.$amazon_offer_price_type.'"|"'.$amazon_offer_price.'"|"'.$amazon_offer_currency.'"|"'.$amazon_offers_list_url.'"|"'.$amazon_product_url.'"|"'.$amazon_reviews_url.'"|"'.$liki_price_text.'"|"'.$prod_qty.'"|"0"|"1"|"0"|"0"|"0"|"1"|"10000"|"1"|"'.$prod_instock.'"|"1"|"'.utf8_encode($prod_name).'"|"0"|"simple"'.PHP_EOL);
+							fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace("^"," ",utf8_encode($prod_name)).'^|^'.$new_main_img.'^|^'.$new_smail_img.'^|^'.$new_smail_img.'^|^'.$prod_amazonprime.'^|^'.str_replace("^"," ",$prod_likidesc).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.str_replace("^"," ",utf8_encode($prod_desc)).'^|^'.utf8_encode($prod_shortdesc).'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace("^"," ",$amazon_offers_list_url).'^|^'.str_replace("^"," ",$amazon_product_url).'^|^'.str_replace("^"," ",$amazon_reviews_url).'^|^'.str_replace("^"," ",$liki_price).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace("^"," ",utf8_encode($prod_name)).'^|^0^|^simple^'.PHP_EOL);
 						}	// End of Product Qunatity check
 					}		// End of Weight loop
 				}			// End of Price Range loop

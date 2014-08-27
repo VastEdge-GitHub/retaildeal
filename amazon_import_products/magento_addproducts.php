@@ -23,7 +23,32 @@
 	$mageFilename		= $base_url_magento.'app/Mage.php';
 	require_once $mageFilename;
 	$app				= Mage::app('default');
+
+	$pCollection 		= Mage::getSingleton('index/indexer')->getProcessesCollection(); 
+	foreach ($pCollection as $process) {
+	  $process->setMode(Mage_Index_Model_Process::MODE_MANUAL)->save();
+	}
+	Mage::register("isSecureArea", 1);
 	
+	$custom_hostname="localhost";
+	$custom_username="bn_magento";
+	$custom_password="fbeee979d3";
+	$custom_dbName="bitnami_magento";
+	if($custom_conn=mysql_connect($custom_hostname,$custom_username,$custom_password)){
+		/////*****\\\\\
+		echo gmdate('Y-m-d H:i:s')."----> MySQL connection successful \n";
+		/////*****\\\\\	
+	}
+	else{
+		/////*****\\\\\
+		echo gmdate('Y-m-d H:i:s')."----> Unable to establish MySQL conection \n";
+		/////*****\\\\\		
+	}
+	mysql_select_db($custom_dbName, $custom_conn);
+
+	$q_create_table	= "CREATE TABLE IF NOT EXISTS `custom_rewrite_check` ( `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto increment id', `url_rewrite_id` int(11) NOT NULL COMMENT 'Value from table: core_url_rewrite', `prod_sku` varchar(64) NOT NULL COMMENT 'SKU of product', PRIMARY KEY (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
+	$r_create_table	= mysql_query($q_create_table);
+
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Getting all old products started \n";
 	/////*****\\\\\
@@ -46,6 +71,7 @@
 	echo gmdate('Y-m-d H:i:s')."----> Getting all old products completed \n";
 	/////*****\\\\\
 	
+	$files_process	= glob($base_url_magento.'amazon_import_products/csv_file/*'); // get all file names
 	$flag			= 'true';
 	$file_main		= 0;
 	$file_sub		= 0;
@@ -239,7 +265,7 @@
 	}
 	fclose($file_newsku);
 	/////*****\\\\\
-	echo gmdate('Y-m-d H:i:s')."----> Comparing old and new skus \n";
+	echo gmdate('Y-m-d H:i:s')."----> Comparing old ( ".count($content_oldsku_arr)." ) and new ( ".count($content_newsku_arr)." ) skus \n";
 	/////*****\\\\\
 	$disbaled_skus	= '';
 	for($c=0;$c<count($old_sku_arr);$c++)
@@ -250,7 +276,18 @@
 			{
 				$sku			= $old_sku_arr[$c];
 				$disbaled_skus	.= $sku.",";
-				$product_id		= Mage::getModel('catalog/product')->loadByAttribute('sku',$sku)->getId();
+				/////*****\\\\\
+				echo gmdate('Y-m-d H:i:s')."----> Product SKU = ".$sku."\n";
+				/////*****\\\\\
+				try
+				{
+					$product_id		= Mage::getModel('catalog/product')->loadByAttribute('sku',$sku)->getId();
+				}
+				catch(Exception $e)
+				{
+					echo gmdate('Y-m-d H:i:s')."----> Unable to load product  \n";
+					echo $e->getMessage()."\n";
+				}
 				$my_product		= Mage::getModel('catalog/product')->load($product_id); 
 				$my_product_url	= $my_product->getProductUrl();
 				$cats 			= $my_product->getCategoryIds();
@@ -262,46 +299,68 @@
 						$cat_url = Mage::getModel('catalog/category')->load($category_id)->getUrl();
 					}
 				}
-				
+				echo gmdate('Y-m-d H:i:s')."----> Product ID (".$product_id.") and SKU (".$sku.") \n";
+				echo gmdate('Y-m-d H:i:s')."----> Product (".$product_id.") URL (".$my_product_url.") and Category URL (".$cat_url.") \n";
 				$mediaApi = Mage::getModel("catalog/product_attribute_media_api");
 				$items = $mediaApi->items($product_id);
 				$attributes = $my_product->getTypeInstance()->getSetAttributes();
 				$gallery = $attributes['media_gallery'];
-				echo gmdate('Y-m-d H:i:s')."----> Deleting old images \n";
+				echo gmdate('Y-m-d H:i:s')."----> Getting old product images \n";
+				$img_arr = array();
 				foreach($items as $item)
 				{
-					if ($gallery->getBackend()->getImage($my_product, $item['file']))
-					{
-						$gallery->getBackend()->removeImage($my_product, $item['file']);
-					}
+					echo gmdate('Y-m-d H:i:s')."----> Image : ".$item['file']." \n";
+					array_push($img_arr,$item['file']);
 				}
-				echo gmdate('Y-m-d H:i:s')."----> Old images deleted \n";
-				Mage::getModel("catalog/product")->load($product_id)->delete();
-				echo gmdate('Y-m-d H:i:s')."----> Old product deleted \n";				
+				echo gmdate('Y-m-d H:i:s')."----> Deleting old product (".$product_id.") \n";
+				try
+				{
+					Mage::getModel("catalog/product")->load($product_id)->delete();
+					echo gmdate('Y-m-d H:i:s')."----> Old product deleted \n";
+					for($imgCount=0;$imgCount<count($img_arr);$imgCount++){unlink($base_url_magento."media/catalog/product".$img_arr[$imgCount]);}
+				}
+				catch(Exception $e)
+				{
+					echo gmdate('Y-m-d H:i:s')."----> Unable to delete old product (".$product_id.") because:  \n";
+					echo $e->getMessage()."\n";
+				}
 			}
 			catch(Exception $e)
 			{
-				echo gmdate('Y-m-d H:i:s')."----> Unable to delete old product. \n";
-				Mage::log($e->getMessage());
+				echo gmdate('Y-m-d H:i:s')."----> Delete product(".$product_id.") failed because:  \n";
+				echo $e->getMessage()."\n";
 			}
+			try
+			{
+				$prod_url_arr 	= explode("/",$my_product_url);
+				$prod_url_count	= count($prod_url_arr);
+				$prod_url		= $prod_url_arr[$prod_url_count-1];
+				$cat_url_arr 	= explode("/",$cat_url);
+				$cat_url_count	= count($cat_url_arr);
+				$category_url	= $cat_url_arr[$cat_url_count-1];
+				echo gmdate('Y-m-d H:i:s')."---->  Creating redirect url from (".$prod_url.") to (".$category_url."). \n";
+				Mage::getModel('core/url_rewrite')
+					->setIsSystem(1)
+					->setStoreId(1)   
+					->setOptions('RP')  //301 redirect perm
+					->setTargetPath($category_url)
+					->setRequestPath($prod_url)
+					->save();
+				echo gmdate('Y-m-d H:i:s')."----> Redirect url created. \n";
+			}
+			catch(Exception $e)
+			{
+				echo gmdate('Y-m-d H:i:s')."----> Unable to create redirect url because:  \n";
+				echo $e->getMessage()."\n";
+			}
+			$qget_rewriteid		= "select `url_rewrite_id` from `core_url_rewrite` where `request_path` = '".$prod_url."' && `target_path` = '".$category_url."' ";
+			$rget_rewriteid		= mysql_query($qget_rewriteid);
+			$rowget_rewriteid	= mysql_fetch_array($rget_rewriteid);
+			$rewrite_id			= $rowget_rewriteid['url_rewrite_id'];
+			
+			$qadd_rewriteid		= "insert into `custom_rewrite_check` ( `url_rewrite_id`, `prod_sku` ) values ( '".$rewrite_id."', '".$sku."')";
+			$radd_rewriteid		= mysql_query($qadd_rewriteid);
 		}
-	}
-	try
-	{
-		echo gmdate('Y-m-d H:i:s')."----> Creating redirect url. \n";
-		$results = Mage::getModel('enterprise_urlrewrite/url_rewrite')
-			->setStoreId($store_id)
-			->setOptions('RP')
-			->setIdentifier($my_product_url)
-			->setTargetPath($cat_url)
-			->setDescription('')
-			->save();
-		echo gmdate('Y-m-d H:i:s')."----> Redirect url created. \n";
-	}
-	catch(Exception $e)
-	{
-		echo gmdate('Y-m-d H:i:s')."----> Unable to create redirect url. \n";
-		Mage::log($e->getMessage());
 	}
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Old products deleted \n";
@@ -318,9 +377,8 @@
 	}
 	catch(Exception $e)
 	{
-		Mage::log($e->getMessage());
 		echo gmdate('Y-m-d H:i:s')."----> Image cache clearance failed because: \n";
-		echo $e->getMessage();
+		echo $e->getMessage()."\n";
 	}
 	try
 	{
@@ -331,9 +389,8 @@
 	}
 	catch(Exception $e)
 	{
-		Mage::log($e->getMessage());
 		echo gmdate('Y-m-d H:i:s')."----> All caches clearance failed because: \n";
-		echo $e->getMessage();
+		echo $e->getMessage()."\n";
 	}
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Cache cleared \n";
@@ -352,9 +409,8 @@
 	catch(Exception $e)
 	{
 		
-		Mage::log($e->getMessage());
 		echo gmdate('Y-m-d H:i:s')."----> Reindex failed because: \n";
-		echo $e->getMessage();
+		echo $e->getMessage()."\n";
 	}
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Magento script completed \n";

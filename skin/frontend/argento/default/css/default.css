@@ -373,7 +373,8 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 #narrow-by-list dt { color: #000; }
 #narrow-by-list dd { padding-left: 7px; margin: 3px 0 9px; color: #757578; line-height: 1.7em; }
 #narrow-by-list dd li { padding-left: 14px; background: url(../images/common.gif) no-repeat -588px -21px; }
-#narrow-by-list a { color: #023761; text-decoration: none; }
+/*#narrow-by-list a { color: #023761; text-decoration: none; }*/
+#narrow-by-list a { color: #023761; text-decoration: none; text-transform:capitalize;}
 #narrow-by-list a:hover { text-decoration: underline; }
 /* >>> layered navigation */
 
