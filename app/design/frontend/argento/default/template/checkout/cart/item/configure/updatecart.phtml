@@ -33,8 +33,8 @@
         <label for="qty"><?php echo $this->__('Qty:') ?></label>
         <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
         <?php endif; ?>
-	<!-- Changes by liki ext start -->
-        <button type="button" title="<?php echo $buttonTitle ?>" style="padding: 3px 15px 11px 11px !important;" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+	<!-- Changes by liki ext -->
+        <button type="button" title="<?php echo $buttonTitle ?>" style="padding: 3px 10px 11px 9px !important;" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
         <!-- Changes by liki ext end -->
 	<?php echo $this->getChildHtml('', true, true) ?>
     </div>

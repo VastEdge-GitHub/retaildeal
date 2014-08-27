@@ -3,18 +3,27 @@
 </div>
 <div class="block-content">
    <form id="oar_widget_orders_and_returns_form" action="<?php echo $this->getActionUrl() ?>" method="post" class="search-form" name="guest_post">
-<!-- changes by likiext -->	<div class="oar_widget_orders_and_returns_form">
-	<h2 class="order_return">Orders and Returns</h2> <!-- changes by likiext end-->
+	<!-- changes by likiext -->
+		<div class="oar_widget_orders_and_returns_form">
+		<h2 class="order_return">Orders and Returns</h2>
+	<!-- changes by likiext end --> 
        <ul class="form-alt">
-<!-- changes by likiext -->   <li style="clear:both;float:left;margin:10px 0 10px 0;"> <!-- changes by likiext end-->
+		<!-- changes by likiext -->
+		<li style="clear:both;float:left;margin:10px 0 10px 0;">
+		<!-- changes by likiext end -->
                <div class="input-box" style="float:left;width:150px;">
+			   <!-- changes by likiext -->
                    <label for="oar_order_id" class="required"><?php echo Mage::helper('sales')->__('Order ID') ?> <em><span style="color:#f00;">*</span></em></label>
+				   <!-- changes by likiext end -->
                </div>
                <div class="input-box" style="float:left;width:305px;">
-                   <input type="text" class="input-text required-entry" id="oar_order_id" name="oar_order_id" style="width:300px;" onkeydown="remove_error('oar_order_id', 'advice-required-entry-oar_order_id')" />
+                   <!-- changes by likiext -->
+				   	<input type="text" class="input-text required-entry" id="oar_order_id" name="oar_order_id" style="width:300px;" onkeydown="remove_error('oar_order_id', 'advice-required-entry-oar_order_id')" />
+				<!-- changes by likiext end-->
                </div>
-           </li>
-<!-- changes by likiext -->        <li style="clear:both;float:left;margin:5px 0 15px 0;">
+         </li>
+		<!-- changes by likiext -->
+		<li style="clear:both;float:left;margin:5px 0 15px 0;">
         <div class="input-box" style="font-size:12px;"> <!-- changes by likiext end-->
 <!-- changes by likiext -->                  <?php echo Mage::helper('sales')->__('Enter the billing last name and Email/ZIP as in the order billing address') ?>. <!-- changes by likiext end-->
                 </div>
