@@ -1,32 +1,5 @@
-
 <?php
-/**
- * Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @category    Mage
- * @package     Mage_Checkout
- * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- */
-
-
-class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
+class LikiextCheckout_Checkout_OnepageController extends Mage_Checkout_Controller_Action
 {
     protected $_sectionUpdateFunctions = array(
         'payment-method'  => '_getPaymentMethodsHtml',
@@ -306,7 +279,8 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
      * save checkout billing address
      */
 	
-     //Code Changed by LIKI 
+     //Changes by LIKI Ext Start
+	 //Reason of change: Customized SaveBillingAction()
 	  public function saveBillingAction()
 	  {
 		if ($this->_expireAjax()) {
@@ -349,75 +323,32 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
 		
 			$this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
 		}
-	  }
-//    public function saveBillingAction()
-//    {
-//        if ($this->_expireAjax()) {
-//            return;
-//        }
-//        if ($this->getRequest()->isPost()) {
-////            $postData = $this->getRequest()->getPost('billing', array());
-////            $data = $this->_filterPostData($postData);
-//            $data = $this->getRequest()->getPost('billing', array());
-//            $customerAddressId = $this->getRequest()->getPost('billing_address_id', false);
-//
-//            if (isset($data['email'])) {
-//                $data['email'] = trim($data['email']);
-//            }
-//            $result = $this->getOnepage()->saveBilling($data, $customerAddressId);
-//
-//            if (!isset($result['error'])) {
-//                /* check quote for virtual */
-//                if ($this->getOnepage()->getQuote()->isVirtual()) {
-//                    $result['goto_section'] = 'payment';
-//                    $result['update_section'] = array(
-//                        'name' => 'payment-method',
-//                        'html' => $this->_getPaymentMethodsHtml()
-//                    );
-//                } elseif (isset($data['use_for_shipping']) && $data['use_for_shipping'] == 1) {
-//                    $result['goto_section'] = 'shipping_method';
-//                    $result['update_section'] = array(
-//                        'name' => 'shipping-method',
-//                        'html' => $this->_getShippingMethodsHtml()
-//                    );
-//
-//                    $result['allow_sections'] = array('shipping');
-//                    $result['duplicateBillingInfo'] = 'true';
-//                } else {
-//                    $result['goto_section'] = 'shipping';
-//                }
-//            }
-//
-//            $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
-//        }
-//    }
-
-//LIKI Code End
+	  }  //LIKI Code End
 
 	
     /**
      * Shipping address save action
      */
-    public function saveShippingAction()
-    {
-        if ($this->_expireAjax()) {
-            return;
-        }
-        if ($this->getRequest()->isPost()) {
-            $data = $this->getRequest()->getPost('shipping', array());
-            $customerAddressId = $this->getRequest()->getPost('shipping_address_id', false);
-            $result = $this->getOnepage()->saveShipping($data, $customerAddressId);
-
-            if (!isset($result['error'])) {
-                $result['goto_section'] = 'shipping_method';
-                $result['update_section'] = array(
-                    'name' => 'shipping-method',
-                    'html' => $this->_getShippingMethodsHtml()
-                );
-            }
-            $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
-        }
-    }
+	public function saveShippingAction()
+	{
+		if ($this->_expireAjax()) {
+		return;
+		}
+		if ($this->getRequest()->isPost()) {
+		$data = $this->getRequest()->getPost('shipping', array());
+		$customerAddressId = $this->getRequest()->getPost('shipping_address_id', false);
+		$result = $this->getOnepage()->saveShipping($data, $customerAddressId);
+		
+		if (!isset($result['error'])) {
+		$result['goto_section'] = 'payment';
+		$result['update_section'] = array(
+		'name' => 'payment-method',
+		'html' => $this->_getPaymentMethodsHtml()
+		);
+		}
+		$this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
+		}
+	}
 
     /**
      * Shipping method save action
@@ -639,3 +570,4 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
             || !Mage::helper('checkout')->isCustomerMustBeLogged();
     }
 }
+?>
