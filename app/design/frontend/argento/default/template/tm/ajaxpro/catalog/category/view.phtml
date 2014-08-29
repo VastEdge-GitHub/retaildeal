@@ -1,0 +1,126 @@
+<?php if (!Mage::getStoreConfig('ajax_pro/catalogCategoryView/enabled')) {
+    return;
+}?>
+<?php $toolbarPagerBlock  = $this->getLayout()->getBlock('product_list_toolbar_pager');
+
+    if (!$toolbarPagerBlock || !$toolbarPagerBlock->getCollection()) {
+        return;
+    }
+
+    $_url = $toolbarPagerBlock->getUrl(
+        'catalog/category/view', array(
+        '_current' => true,
+        '_escape'  => false,
+//        '_use_rewrite' => true,
+        '_query'   => array($toolbarPagerBlock->getPageVarName() => '.page.')
+    ));
+?>
+<script type="text/javascript">
+//<![CDATA[
+    Event.observe(window, 'load', function() {
+        if (AjaxPro.toolbar) {
+            return;
+        }
+
+        AjaxPro.toolbar = function(){
+            var _currentPage = <?php echo $toolbarPagerBlock->getCurrentPage();?>,
+                _totalNum = <?php echo $toolbarPagerBlock->getTotalNum()?>,
+                _limit = <?php echo $toolbarPagerBlock->getLimit();?>,
+                _url = "<?php echo $_url;?>"
+            ;
+
+            return {
+                isEnd: function () {
+                    if ( _totalNum <= _limit * _currentPage) {
+                        return true;
+                    }
+                    return false;
+                },
+                request: function() {
+                    if (AjaxPro.message.visible()) {
+                        return;
+                    }
+                    if (AjaxPro.toolbar.isEnd()) {
+                        return;
+                    }
+                    AjaxPro.request({
+                        'url'    : _url.replace('.page.', _currentPage + 1),
+                        'method' : 'get'
+                    });
+                },
+                incCurrentPage: function() {
+                    _currentPage++;
+                }
+            }
+        }();
+        <?php if ('scroll' === Mage::getStoreConfig('ajax_pro/catalogCategoryView/type')) :?>
+
+        Event.observe(window, 'scroll', function() {
+
+            var scrollOffsets = document.viewport.getScrollOffsets(),
+            dimensions = document.viewport.getDimensions();
+
+            var currentTopPosition = scrollOffsets[1] + dimensions.height,
+            elementTopPosition = $$('.toolbar-bottom').last().offsetTop;
+
+            if (elementTopPosition > currentTopPosition || Ajax.activeRequestCount > 0) {
+
+                return;
+            }
+
+            AjaxPro.toolbar.request();
+        });
+        <?php else : $title = $this->__('More Products');?>
+        AjaxPro.toolbar.addButton = function() {
+
+            if ($('ajaxpro-scrolling-button')) {
+                return;
+            }
+			// Changes by Liki ext Start
+			// Reason for Change: Disabled "More Products" when there are no further products after current page.
+			var custom_currentpage = <?php echo $toolbarPagerBlock->getCurrentPage();?>;
+			var custom_totalnum = <?php echo $toolbarPagerBlock->getTotalNum()?>;
+			var custom_limit = <?php echo $toolbarPagerBlock->getLimit();?>;
+
+			var custom_maxpage = Math.ceil(custom_totalnum/custom_limit);
+			if(custom_maxpage != custom_currentpage)
+			{
+				$$('.toolbar-bottom').last().insert({
+					'before': '<button id="ajaxpro-scrolling-button" type="button" title="<?php echo $title ?>" class="button" style="width:120px;"><span><span><?php echo $title ?></span></span></button>'
+				});
+			}
+			//Changes by Liki ext End
+            Event.observe($('ajaxpro-scrolling-button'), 'click', AjaxPro.toolbar.request);
+            return true;
+        };
+
+        AjaxPro.toolbar.addButton();
+        AjaxPro.observe('addObservers', AjaxPro.toolbar.addButton);
+        <?php endif?>
+
+        AjaxPro.observe('onComplete:catalog:category:view', function(e) {
+            var r = e.memo.response;
+            if (!r.custom['product_list']) {
+                return false;
+            }
+            $$('.pager .pages').invoke('hide');
+            var el = $('ajaxpro-scrolling-button');
+            if (!el) {
+                el = $$('.toolbar-bottom').last();
+            }
+            if (el) {
+                var html = r.custom['product_list'];
+                el.insert({'before': html});
+                html.extractScripts().map(function(script) {
+                    return window.eval(script);
+                });
+
+                AjaxPro.toolbar.incCurrentPage();
+                if (AjaxPro.toolbar.isEnd() && $('ajaxpro-scrolling-button')) {
+                    $('ajaxpro-scrolling-button').hide();
+                }
+            }
+        });
+     });
+//]]>
+</script>
