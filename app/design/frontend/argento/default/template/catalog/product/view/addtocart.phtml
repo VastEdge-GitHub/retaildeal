@@ -32,9 +32,11 @@
         <label for="qty"><?php echo $this->__('Qty:') ?></label>
         <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
         <?php endif; ?>
+		
 	<!-- Changes by liki ext start -->
-        <button style="border-radius:7px; box-shadow:inherit; height:27px; background:transparent url(/skin/frontend/argento/default/images/bkg_button.gif) 0 0 no-repeat; background-position:100% -170px; padding-right: 27px; margin-top:2px" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+        <button style="border-radius:7px; box-shadow:inherit; height:27px; background:transparent url(/skin/frontend/argento/default/images/bkg_button.gif) 0 0 no-repeat; background-position:100% -170px; padding-right: 27px; margin-top:2px" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="if(qty_check()){productAddToCartForm.submit(this)}"><span><span><?php echo $buttonTitle ?></span></span></button>
         <!-- Changes by liki ext end -->
 	<?php echo $this->getChildHtml('', true, true) ?>
     </div>
 <?php endif; ?>
+    
