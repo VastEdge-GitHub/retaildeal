@@ -1,5 +1,8 @@
 <?php
+//LIKI Code Start
+//Reason of change:Removing the shipping method From Checkout process
 class LikiextCheckout_Checkout_Block_Onepage extends LikiextCheckout_Checkout_Block_Onepage_Abstract
+//LIKI Code END
 {
     /**
      * Get 'one step checkout' step data

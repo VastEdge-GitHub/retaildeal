@@ -1,64 +1,23 @@
 <?php
-class LikiextCheckout_Checkout_Block_Onepage_Shipping extends LikiextCheckout_Checkout_Block_Onepage_Abstract
+//LIKI Code Start
+//Reason of change:Removing the shipping method From Checkout process
+include('app/code/core/Mage/Checkout/Block/Onepage/Shipping.php');
+class LikiextCheckout_Checkout_Block_Onepage_Shipping extends Mage_Checkout_Block_Onepage_Shipping
+//LIKI code End
 {
-    /**
-     * Sales Qoute Shipping Address instance
-     *
-     * @var Mage_Sales_Model_Quote_Address
-     */
-    protected $_address = null;
-
     /**
      * Initialize shipping address step
      */
     protected function _construct()
     {
-	//Changes by LIKI Ext Start
-	//Reason of change: Changed the Label of Shipping Information to Shipping Address
+	//changes done by LIKI code
+	//Reason of change: Change the Label of Shipping Information to Shipping Address
         $this->getCheckout()->setStepData('shipping', array(
             'label'     => Mage::helper('checkout')->__('Shipping Address'),
             'is_show'   => $this->isShow()
-	//LIKI code END
+			//LIKI code END
         ));
 
-        parent::_construct();
-    }
-
-    /**
-     * Return checkout method
-     *
-     * @return string
-     */
-    public function getMethod()
-    {
-        return $this->getQuote()->getCheckoutMethod();
-    }
-
-    /**
-     * Return Sales Quote Address model (shipping address)
-     *
-     * @return Mage_Sales_Model_Quote_Address
-     */
-    public function getAddress()
-    {
-        if (is_null($this->_address)) {
-            if ($this->isCustomerLoggedIn()) {
-                $this->_address = $this->getQuote()->getShippingAddress();
-            } else {
-                $this->_address = Mage::getModel('sales/quote_address');
-            }
-        }
-
-        return $this->_address;
-    }
-
-    /**
-     * Retrieve is allow and show block
-     *
-     * @return bool
-     */
-    public function isShow()
-    {
-        return !$this->getQuote()->isVirtual();
+       // parent::_construct();
     }
 }

@@ -1,23 +1,7 @@
 <?php
-class LikiextInstall_Install_Model_Installer_Db_Mysql4 extends Mage_Install_Model_Installer_Db_Abstract
+include('app/code/core/Mage/Install/Model/Installer/Db/Mysql4.php');
+class LikiextInstall_Install_Model_Installer_Db_Mysql4 extends Mage_Install_Model_Installer_Db_Mysql4
 {
-    /**
-     * Retrieve DB server version
-     *
-     * @return string (string version number | 'undefined')
-     */
-    public function getVersion()
-    {
-        $version  = $this->_getConnection()
-            ->fetchOne('SELECT VERSION()');
-        $version    = $version ? $version : 'undefined';
-        $match = array();
-        if (preg_match("#^([0-9\.]+)#", $version, $match)) {
-            $version = $match[0];
-        }
-        return $version;
-    }
-
     /**
      * Check InnoDB support
      *
