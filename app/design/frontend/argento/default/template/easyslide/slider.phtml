@@ -1,3 +1,40 @@
+<style>
+@font-face {
+    font-family: condensed ;
+    src: url(skin/frontend/argento/default/fonts/MyriadPro-Cond.ttf);
+}
+@font-face {
+    font-family: condensed ;
+    src: url(skin/frontend/argento/default/fonts/MyriadPro-Cond.eot);
+}
+@font-face {
+    font-family: condensed ;
+    src: url(skin/frontend/argento/default/fonts/MyriadPro-Cond.otf);
+}
+@font-face {
+    font-family: condensed ;
+    src: url(skin/frontend/argento/default/fonts/MyriadPro-Cond.svg);
+}
+@font-face {
+    font-family: boldcondensed ;
+    src: url(skin/frontend/argento/default/fonts/MyriadPro-BoldCond.ttf);
+}
+MyriadPro-Cond.ttf
+
+@font-face {
+    font-family: boldcondensed ;
+    src: url(skin/frontend/argento/default/fonts/MyriadPro-BoldCond.eot);
+}
+@font-face {
+    font-family: boldcondensed ;
+    src: url(skin/frontend/argento/default/fonts/MyriadPro-BoldCond.otf);
+}
+@font-face {
+    font-family: boldcondensed ;
+    src: url(skin/frontend/argento/default/fonts/MyriadPro-BoldCond.svg);
+}
+
+</style>
 <?php
 if ($slides = $this->getSlider()->getSlides()) :
     $slider = $this->getSlider();
@@ -32,17 +69,28 @@ if ($slides = $this->getSlider()->getSlides()) :
 					$oProduct = Mage::getModel('catalog/product')->load($iProductId);
 					$monthly_price = $oProduct->getLikiPrice();
 					$total_price = $oProduct->getPrice();
-					$total_price = sprintf ("%.2f", $total_price);
+					$total_price = round($total_price, 2);
+					//$total_price = sprintf ("%.2f", $total_price);
 					if($monthly_price !='' && $total_price != '')
 					{
-					  echo "<a href=". $vPath."><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 12px;color: #ffffff;
-font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;margin:0 0 0 10px;'>Lease new for less than</div>";
-					  echo "<div style='position: absolute;z-index: 999999;top: 134px;left: 287px;font-size: 25px;color: #ffffff;
-font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>".$monthly_price."</b></span><span style='font-size:13px;float:left;margin:1px 0 0 5px;'>per</span></div>";
-					  echo "<div style='position: absolute;z-index: 999999;top: 158px;left: 287px;font-size: 25px;color: #ffffff;
-font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;margin:0 0 0 10px;'><b>month!</b></div>";
-					  echo "<div style='position: absolute;z-index: 999999;top: 194px;left: 287px;font-size: 12px;color: #ffffff;
-font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;margin:0 0 0 10px;'><span style='float:left;'>Buy for</span><span style='float:left;margin:0 0 0 10px;'>$".$total_price."</span></div></a>";
+					  echo "<a href=". $vPath."><div style='position:absolute; top:-25px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 23px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Lease new for</div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+font-family:boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>".$monthly_price."</b></span><span style='font-family:condensed;font-size:23px;float:left;margin:1px 0 0 5px;'>per</span></div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 190px;left: 287px;font-size: 45px;color: #ffffff;
+font-family: boldcondensed;margin:0 0 0 10px;'><b>month!</b></div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 23px;color: #ffffff;
+font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'>Buy for</span><span style='float:left;margin:0 0 0 10px;'>$".$total_price."</span></div></div></a>";
+					}
+					else
+					{
+						 echo "<a href=". $vPath."><div style='position:absolute; top:-5px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 20px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Lease new for less than</div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$36</b></span><span style='font-family:condensed;font-size:23px;float:left;margin:1px 0 0 5px;'>per</span></div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 190px;left: 287px;font-size: 45px;color: #ffffff;
+font-family: boldcondensed;margin:0 0 0 10px;'><b>month!</b></div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 12px;color: #ffffff;
+font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><span style='float:left;margin:0 0 0 10px;'></span></div></div></a>";
+					
 					}
 					 ?>
 					 <!-- LIKI CODE END -->
