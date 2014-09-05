@@ -4,9 +4,12 @@
 	   <models>
 		  <sales>
 			<rewrite>
-			   <service_quote>LikiextSales_Sales_Model_Service_Quote</service_quote>
+			<service_quote>LikiextCheckout_Sales_Model_Service_Quote</service_quote>
 			 </rewrite>
 		  </sales>
 	   </models>
 	</global>
 </config>
+
+
+

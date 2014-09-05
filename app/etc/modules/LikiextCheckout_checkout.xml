@@ -1,9 +1,15 @@
 <?xml version = "1.0"?>
    <config>
       <modules>
-        <LikiextCheckout_checkout>
+        <LikiextCheckout_Checkout>
             <active>true</active>
             <codePool>local</codePool>
-         </LikiextCheckout_checkout>
+         </LikiextCheckout_Checkout>
+		 
+        <LikiextCheckout_Sales>
+            <active>true</active>
+            <codePool>local</codePool>
+         </LikiextCheckout_Sales>
        </modules>
     </config>
+
