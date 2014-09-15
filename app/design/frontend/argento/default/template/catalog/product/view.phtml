@@ -178,8 +178,14 @@
 			alert('Enter quantity in the cart');
 			return false;
 			}
+			if (!/^\d+$/.test(product_qty))
+			{
+        	alert('Enter valid quantity in the cart');
+			return false;
+    		}
 			else{return true;}
 		}
+		//window.location.assign("http://www.w3schools.com");
 		// Code Added by LIKIExt Ends
         var productAddToCartForm = new VarienForm('product_addtocart_form');
         productAddToCartForm.submit = function(button, url) {
