@@ -9,7 +9,7 @@ session_start();
 		mysql_select_db($custom_dbName, $custom_conn);
 		$uname=trim($_POST['un']);
 		$pswd=trim($_POST['pw']);
-		$sql = "SELECT * FROM `custom_magmi_user` WHERE `username`='rdadmin' and `password`='newinstance123$'";
+		$sql = "SELECT * FROM `custom_magmi_user` WHERE `username`= '".$uname."' and `password`='".$pswd."'";
 		$result=mysql_query($sql);
 		$data='0';
 		while($row = mysql_fetch_array($result))
@@ -21,10 +21,10 @@ session_start();
 				$_SESSION['magmi_status']=$data;
 			}
 		}
-			echo $data;
+		echo $data;
 	}
 	else
 	{
-		echo "could not connect to database";
+		echo "There has been some error. Please try again later!";
 	}
 ?>
