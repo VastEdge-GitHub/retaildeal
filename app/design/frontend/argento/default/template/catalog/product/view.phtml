@@ -51,9 +51,6 @@
 </style>
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
-<script type="text/javascript">
-    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
-</script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <div class="product-view">
     <div class="product-essential">
@@ -178,12 +175,17 @@
 			alert('Enter quantity in the cart');
 			return false;
 			}
+			if (!/^\d+$/.test(product_qty))
+			{
+        	alert('Enter valid quantity in the cart');
+			return false;
+    		}
 			else{return true;}
 		}
 		// Code Added by LIKIExt Ends
         var productAddToCartForm = new VarienForm('product_addtocart_form');
         productAddToCartForm.submit = function(button, url) {
-            if (this.validator.validate()) {
+            if (this.validator.validate()) { 
                 var form = this.form;
                 var oldUrl = form.action;
 
@@ -243,3 +245,27 @@
         <?php echo $this->getChildHtml('upsell_products') ?>
     </div>
 </div>
+<?php $custom_description = $this->getProduct()->getDescription(); ?>
+<?php $custom_description_content = $this->helper('catalog/output')->productAttribute($this->getProduct(), $custom_description, 'description'); ?>
+<!-- Changes by LIKI Ext Starts
+	Reason of Change: Changes made to add Product Description by correcting html contents of description. -->
+<script type="text/javascript" src="/amazon_import_products/js/htmlparser.js"></script>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+	window.onload = desc_modify();
+	function desc_modify()
+	{
+		var content = encodeURIComponent("<?php echo addslashes(preg_replace('#<script(.*?)>(.*?)</script>#is', '', $custom_description_content)); ?>");
+		content = content.replace(/^\s+|\s+$/g,'');
+		var content_new = '';
+		content_new = HTMLtoXML(content);
+		content_new = content_new.replace(/^\s+|\s+$/g,'');
+		content_new = decodeURIComponent(content_new);
+		if(document.getElementById('custom_description'))
+		{
+			document.getElementById('custom_description').innerHTML = content_new;
+		}
+		
+	}
+</script>
+<!-- Changes by LIKI Ext Ends -->
