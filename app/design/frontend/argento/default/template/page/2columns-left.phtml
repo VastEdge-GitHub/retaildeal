@@ -17,7 +17,7 @@
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
  * needs please refer to http://www.magentocommerce.com for more information.
- *
+ * Codnitive.expand(parent);
  * @category    design
  * @package     base_default
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
@@ -47,7 +47,11 @@
                     <?php echo $this->getChildHtml('global_messages') ?>
                     <?php echo $this->getChildHtml('content') ?>
                 </div>
-                <div class="col-left sidebar"><?php echo $this->getChildHtml('left') ?></div>
+<!--LIKI Code Start-->			<?php $currentUrl = Mage::helper('core/url')->getCurrentUrl(); 
+								//echo $currentUrl;?>
+														
+<!--LIKI Code End-->               
+			 <div class="col-left sidebar"><?php echo $this->getChildHtml('left') ?></div>
             </div>
         </div>
         <?php echo $this->getChildHtml('footer') ?>
@@ -57,4 +61,27 @@
 </div>
 <?php echo $this->getAbsoluteFooter() ?>
 </body>
+<?php 
+	$custom_cat_head=trim($_GET['type']);
+
+	if($custom_cat_head=="Appliances"){$li_custom_class = 'level0 nav-1 first parent collapsible';}
+	if($custom_cat_head=="Automotive"){$li_custom_class = 'level0 nav-2 parent collapsible';}
+	if($custom_cat_head=="Baby Products"){$li_custom_class = 'level0 nav-3 parent collapsible';}
+	if($custom_cat_head=="Computers"){$li_custom_class = 'level0 nav-4 parent collapsible';}
+	if($custom_cat_head=="Electronics"){$li_custom_class = 'level0 nav-5 parent collapsible';}
+	if($custom_cat_head=="Health"){$li_custom_class = 'level0 nav-6 parent collapsible';}
+	if($custom_cat_head=="Sports"){$li_custom_class = 'level0 nav-9 parent collapsible';}
+	if($custom_cat_head=="Jewelry"){$li_custom_class = 'level0 nav-11 parent collapsible';}
+	if($custom_cat_head != ''){
+?>
+<script type="text/javascript">
+	var class_li_name = '<?php echo $li_custom_class; ?>';
+	var custom_li = document.getElementsByClassName(class_li_name);
+	for (var i = 0; i < custom_li.length; i++) {
+		custom_li[i].getElementsByTagName("ul")[0].style.display = "block";
+        custom_li[i].getElementsByTagName("span")[0].style.backgroundPosition = "right center";
+        custom_li[i].getElementsByTagName("ul")[0].setAttribute("expanded", "1");
+	}
+</script>
+<?php } ?>
 </html>
