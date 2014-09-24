@@ -1,3 +1,23 @@
+<!-- Changes by LIKI Ext Start -->
+<style>
+@font-face {
+    font-family: 'condensed';
+    src: url('skin/frontend/argento/default/fonts/MyriadPro-Cond.eot');
+    src: url('skin/frontend/argento/default/fonts/MyriadPro-Cond.eot?#iefix')
+             format('embedded-opentype'),
+         url('skin/frontend/argento/default/fonts/MyriadPro-Cond.woff') format('woff'),
+         url('skin/frontend/argento/default/fonts/MyriadPro-Cond.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'boldcondensed';
+    src: url('skin/frontend/argento/default/fonts/MyriadPro-BoldCond.eot');
+    src: url('skin/frontend/argento/default/fonts/MyriadPro-BoldCond.eot?#iefix')
+             format('embedded-opentype'),
+         url('skin/frontend/argento/default/fonts/MyriadPro-BoldCond.woff') format('woff'),
+         url('skin/frontend/argento/default/fonts/MyriadPro-BoldCond.ttf') format('truetype');
+}
+</style>
+<!-- Changes by LIKI Ext End -->
 <?php
 if ($slides = $this->getSlider()->getSlides()) :
     $slider = $this->getSlider();
@@ -22,23 +42,42 @@ if ($slides = $this->getSlider()->getSlides()) :
                                 ?>
                                 <img src="<?php echo $image_src; ?>" alt="<?php echo $this->escapeHtml($slide['image']) ?>"/>
                             </a>
-							<?php //echo "hello";
-//				 $vPath = $slide['target'];
-//		echo $slide['target'];
-//		 echo $vPath."<br>";
-//    $oRewrite = Mage::getModel('core/url_rewrite')
-//                    ->setStoreId(Mage::app()->getStore()->getId())
-//                    ->loadByRequestPath($vPath);
-//					$iProductId = $oRewrite->getProductId();
-//					 $oProduct = Mage::getModel('catalog/product')->load($iProductId);
-//					 $abc = $oProduct->getLikiPrice();
-//					  echo $abc;
-//				echo $oProduct->getPrice();
-//				echo $oProduct[_calculatePrice:protected]."<br>";
-//				print_r($oProduct);
-//					echo "<br>";
-//					
+<!-- Changes Done by LIKI -->							
+							<?php 
+				 $vPath = $slide['target'];
+    $oRewrite = Mage::getModel('core/url_rewrite')
+                    ->setStoreId(Mage::app()->getStore()->getId())
+                    ->loadByRequestPath($vPath);
+					$iProductId = $oRewrite->getProductId();
+					$oProduct = Mage::getModel('catalog/product')->load($iProductId);
+					$monthly_price = $oProduct->getLikiPrice();
+					$total_price = $oProduct->getPrice();
+					$total_price = round($total_price, 2);
+					//$total_price = sprintf ("%.2f", $total_price);
+					$_coreHelper = $this->helper('core');
+					if($monthly_price !='' && $total_price != '')
+					{
+					  echo "<a href=". $vPath."><div style='position:absolute; top:-25px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 23px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Lease new for</div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+font-family:boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>".$monthly_price."</b></span><span style='font-family:condensed;font-size:23px;float:left;margin:1px 0 0 5px;'>per</span></div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 190px;left: 287px;font-size: 45px;color: #ffffff;
+font-family: boldcondensed;margin:0 0 0 10px;'><b>month!</b></div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 23px;color: #ffffff;
+font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'>Buy for</span><span style='float:left;margin:0 0 0 5px;'>".$_coreHelper->currency($total_price, true, true)."</span></div></div></a>";
+					}
+					else
+					{
+						 echo "<a href=". $vPath."><div style='position:absolute; top:-5px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 20px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Lease new for less than</div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$36</b></span><span style='font-family:condensed;font-size:23px;float:left;margin:1px 0 0 5px;'>per</span></div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 190px;left: 287px;font-size: 45px;color: #ffffff;
+font-family: boldcondensed;margin:0 0 0 10px;'><b>month!</b></div>";
+					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 12px;color: #ffffff;
+font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><span style='float:left;margin:0 0 0 5px;'></span></div></div></a>";
+					
+					}
 					 ?>
+					 <!-- LIKI CODE END -->
                             <?php if (!empty($slide['description'])) : ?>
                                 <div class="easyslidedescription <?php echo $this->getDescriptionClassName($slide['desc_pos']); ?> <?php echo $this->getBackgroundClassName($slide['background']); ?>"><?php echo $slide['description']; ?></div>
                             <?php endif; ?>
@@ -66,7 +105,7 @@ if ($slides = $this->getSlider()->getSlides()) :
         </div>
         <!-- Liki Ext Start -->
         <div style="float:left;margin:0;cursor:pointer;">
-       <img src="http://retaildeal.biz/skin/frontend/argento/default/images/banner_right.png" alt="" onclick="return showForm('liki_intro_popup')" />
+       <img src="/skin/frontend/argento/default/images/banner_right.png" alt="" onclick="return showForm('liki_intro_popup')" />
         </div>
         <!-- Liki Ext End -->
 		</div>

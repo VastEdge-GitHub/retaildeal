@@ -15,6 +15,26 @@
         '_query'   => array($toolbarPagerBlock->getPageVarName() => '.page.')
     ));
 ?>
+<!--Changes by Liki Ext Start-->
+<!--Reason of Change: To make pagination function properly on click of "More Products" button-->
+<script type="text/javascript">
+function _custom(_limit,_currentPage,_totalNum)
+{
+	var array = document.getElementsByClassName('amount');
+	var _limitpage = _limit*_currentPage;
+	if(_limitpage>_totalNum)
+	{
+		array[0].innerHTML = "Items 1 to " + (_totalNum) + " of " +_totalNum;
+		array[1].innerHTML = "Items 1 to " + (_totalNum) + " of " +_totalNum;
+	}
+	else
+	{
+		array[0].innerHTML = "Items 1 to " + (_limitpage) + " of " +_totalNum;
+		array[1].innerHTML = "Items 1 to " + (_limitpage) + " of " +_totalNum;
+	}
+}
+</script>
+<!--Changes by Liki Ext End-->
 <script type="text/javascript">
 //<![CDATA[
     Event.observe(window, 'load', function() {
@@ -50,6 +70,10 @@
                 },
                 incCurrentPage: function() {
                     _currentPage++;
+					//Changes by Liki Ext Start
+					//Reason of Change: To make pagination function properly on click of "More Products" button
+					_custom(_limit ,_currentPage ,_totalNum);
+					//Changes by Liki Ext End
                 }
             }
         }();
@@ -76,8 +100,7 @@
             if ($('ajaxpro-scrolling-button')) {
                 return;
             }
-			// Changes by Liki ext Start
-			// Reason for Change: Disabled "More Products" when there are no further products after current page.
+			//Changes by Liki ext Start
 			var custom_currentpage = <?php echo $toolbarPagerBlock->getCurrentPage();?>;
 			var custom_totalnum = <?php echo $toolbarPagerBlock->getTotalNum()?>;
 			var custom_limit = <?php echo $toolbarPagerBlock->getLimit();?>;
