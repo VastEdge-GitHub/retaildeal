@@ -1,0 +1,70 @@
+<?php
+
+//LIKi Changes 
+//Reason:Style changes
+$_helper           =  Mage::helper('catalogsearch');
+$_value            = $_helper->getEscapedQueryText();
+$_currentCategory  = Mage::getSingleton('core/app')->getRequest()->getParam('cat');
+$_currentAttribute = Mage::getSingleton('core/app')->getRequest()->getParam('attr');
+$_filterType       = $this->getFilterType();
+$_url              = $this->getAjaxUrl();
+?>
+<style>
+.nav .UI-NAV-INPUT{padding:0 !important}
+</style>
+<form style="position:inherit; width:315px; float:right; padding:15px 0 4px 20px; height:37px" class="searchautocomplete UI-SEARCHAUTOCOMPLETE" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get"
+    data-tip="<?php echo $this->__(Mage::getStoreConfig('searchautocomplete/general/tip')) ?>"
+    data-url="<?php echo $_url ?>"
+    data-minchars="<?php echo Mage::getStoreConfig('searchautocomplete/general/min_chars') ?>"
+    data-delay="<?php echo Mage::getStoreConfig('searchautocomplete/general/delay') ?>">
+	<!--LIKI Code Start
+	Reason : Commented the Dropdown of categories
+	-->
+	<!--<div class="nav" style="width:70px;height:36px; margin-right:1px; background:#f6f6f6;">
+	<?php if ($_filterType == 'category'): ?>
+        <div class="nav-search-in" style="position:relative; float:left; width:100%">
+            <span class="category-fake UI-CATEGORY-TEXT" style="height: 29px; width: 49px; overflow: hidden; padding: 7px 0 0 5px; float: left; text-align:left; border-radius:0; border-right: 0; background:#f6f6f6;"><span><?php echo $this->__('All') ?></span></span>
+            <span class="nav-down-arrow" style="float: left; height: 18px; position: absolute; top: 8px; left: 52px; background: url('/skin/frontend/argento/default/chosen/chosen-sprite.png') no-repeat 0 0; width: 13px;"></span>
+            <select style="width=65px" name="cat" class="category UI-CATEGORY">
+                <option value="0"><?php echo $this->__('All') ?></option>
+                <?php foreach ($this->getCategories() as $_category): ?>
+                <option style="width:50px; overflow: hidden;" value="<?php echo $_category->getId() ?>" <?php if ($_currentCategory == $_category->getId()): ?>selected<?php endif ?>>
+                    <?php echo $_category->getName() ?>
+                </option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <?php elseif ($_filterType == 'attribute'): ?>
+            <!--<div class="nav-search-in" style="position:relative; float:left; width:100%">
+                <span style="height: 36px;" class="category-fake UI-CATEGORY-TEXT"><?php echo $this->__('All') ?></span>
+                <span  class="nav-down-arrow"></span>
+                <select name="attr" class="category UI-CATEGORY">
+				<div style="width: 60px" title="">
+                    <option value="0"><?php echo $this->__('All') ?></option>
+                    <?php foreach ($this->getAttributes() as $_code => $_name): ?>
+                    <option value="<?php echo $_code ?>" <?php if ($_currentAttribute == $_code): ?>selected<?php endif ?>>
+                        <?php echo $_name ?>
+                    </option>
+                    <?php endforeach ?>
+					</div>-->
+                </select>
+            </div>
+        <?php endif ?>
+	
+	</div>-->
+	<!--LIKI Code End-->
+    <!--<label for="search"><?php echo $this->__('Search') ?></label>-->
+    <div class="nav" style="width:270px;height:36px; float:left; background:#f6f6f6;">
+        <div class="nav-input UI-NAV-INPUT" >
+            <input style="width: 97%;opacity: 1;color: #7f7f7f;" class="input-text UI-SEARCH" type="text" autocomplete="off" name="<?php echo $_helper->getQueryParamName() ?>" value="<?php echo $_helper->getEscapedQueryText() ?>" maxlength="<?php echo $_helper->getMaxQueryLength() ?>" />
+        </div>
+
+        <div class="searchautocomplete-loader UI-LOADER" style="display:none;"></div>
+
+    </div>
+    <div class="nav-submit-button">
+        <button style="background: url(/skin/frontend/argento/default/images/search_btn_trans.png);background-color:#ff851e;border-radius:0px;height:38px;" type="submit" title="<?php echo $this->__('Go') ?>" class="button"><?php //echo $this->__('Go') ?></button>
+    </div>
+    <div style="display: none; position:relative;top: 42px;left:75px;" class="searchautocomplete-placeholder UI-PLACEHOLDER"></div>
+</form>
+<!--LIKI Code End-->
