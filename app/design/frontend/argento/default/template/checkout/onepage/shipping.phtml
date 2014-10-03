@@ -129,9 +129,9 @@
                     <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></li>
                 <?php endif;?>
                 </ul>
-				<!-- Changes by Liki Ext Start -->
+						<!-- Changes by Liki Ext Start -->
 						<!-- Reason of Change: "* Required Fields" was required at this form -->
-						<p class="required"><?php echo $this->__('* Required Fields') ?></p>
+						<p class="required" style=" position: relative; left: -5px; top: 50px; "><?php echo $this->__('* Required Fields') ?></p>
 						<!-- Changes by Liki Ext End -->
             </fieldset>
         </li>
@@ -142,8 +142,8 @@
     <div class="buttons-set" id="shipping-buttons-container">
 	<!-- Changes by Liki Ext Start -->
 	<!-- Reason of Change: "* Required Fields" was not required here -->
-<!--        <p class="required"><?php //echo $this->__('* Required Fields') ?></p>
--->	<!-- Changes by Liki Ext End -->
+	<!-- <p class="required"><?php //echo $this->__('* Required Fields') ?></p>-->
+	<!-- Changes by Liki Ext End -->
         <p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
         <button type="button" class="button" title="<?php echo $this->__('Continue') ?>" onclick="shipping.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
         <span id="shipping-please-wait" class="please-wait" style="display:none;">
