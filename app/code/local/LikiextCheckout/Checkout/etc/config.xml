@@ -4,9 +4,27 @@
 	   <blocks>
 		  <checkout>
 			<rewrite>
+			<onepage>LikiextCheckout_Checkout_Block_Onepage</onepage>
+			<onepage_progress>LikiextCheckout_Checkout_Block_Onepage_Progress</onepage_progress>
 			   <onepage_shipping>LikiextCheckout_Checkout_Block_Onepage_Shipping</onepage_shipping>
+			    <onepage_abstract>LikiextCheckout_Checkout_Block_Onepage_Abstract</onepage_abstract>
 			 </rewrite>
 		  </checkout>
 	   </blocks>
 	</global>
+	<frontend>
+		<routers>
+			<checkout>
+				<args>
+					<modules>
+						<likiextCheckout before="Mage_Checkout">LikiextCheckout_Checkout</likiextCheckout>
+					</modules>
+				</args>
+			</checkout>
+		</routers>
+	</frontend>	
 </config>
+
+
+
+

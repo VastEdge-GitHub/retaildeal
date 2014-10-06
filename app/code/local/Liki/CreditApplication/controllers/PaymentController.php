@@ -32,6 +32,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$this->renderLayout();
 		}	*/
 		//LIKI code start
+		//Reason of change: Make cancel action URL working
 		public function cancelAction()
 		{
 		$session = Mage::getSingleton('checkout/session');
@@ -40,7 +41,6 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 		if ($session->getLastRealOrderId()) {
 			$incrementId = $session->getLastRealOrderId();
 			if (empty($incrementId)) {
-				//$session->addError($this->__('You have cancelled the order'));
 				$this->_redirect('checkout/onepage');
 				return;
 			}
@@ -64,12 +64,11 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 				}
 			}
 			$cart->save();
-			//$session->addError($this->__('You have cancelled your order'));
 		}
 		$this->_redirect('checkout/onepage/');
 		}
-		//liki code End
-	
+
+		//Reason of change: Encode all data and remove single quotes
 		//Prepare Parameters For Liki Post Data
 		private function prepareLikiPostParameters(){		
 			// Retrieve order
@@ -89,55 +88,77 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$Order['MagentoOrderId']=$order->getEntityId();
 			$Order['CreateDate']=date("M d, Y");
 
-			// Code Added by LIKIext
 			$shipping_cost=$order->getShippingAmount();
-			// End of code by LIKIext
-
 			foreach ($items as $value)
-			  {
-				$Item['MerchantProductId']= $value->getProductId();
-				$Item['MerchantProductDescription']=$value->getName();
+			{
+				$Item['MerchantProductId']=$value->getProductId();
+				$productname = $value->getName();
+//				$productname = urlencode($value->getName());
+				$Item['MerchantProductDescription']=$productname;
+//				$Item['Amount']=urlencode($value->getPrice());
 				$Item['Amount']=$value->getPrice();
+//				$Product['ReferenceID']=urlencode($value->getSku());
 				$Product['ReferenceID']=$value->getSku();
 				$Item["ProductDefinition"]=$Product;
-				// Code Added by LIKIext
+//				$Item['ShippingCost']=urlencode($shipping_cost);
 				$Item['ShippingCost']=$shipping_cost;
-				// End of code by LIKIext
 				$item[] =$Item;
-			  }
+			}
 			$Order['OrderItem']=$item;
 			
 			$shippingAddress=$order->getShippingAddress()->getData();
 			$billingAddress=$order->getBillingAddress()->getData();
 			$customerId = $order->customer_id;
-			$Customer['FirstName']=$shippingAddress['firstname'];		
-			$Customer['LastName']=$shippingAddress['lastname'];		
-			$Customer['EmailAddress']=$shippingAddress['email'];	
-			//Mage::helper('core')->decrypt($encrypted_data);
+//			$fisrtname=urlencode($shippingAddress['firstname']);
+			$fisrtname=$shippingAddress['firstname'];
+			$Customer['FirstName']=str_replace("&","and",$fisrtname);
+//			$lastname=urlencode($shippingAddress['lastname']);
+			$lastname=$shippingAddress['lastname'];
+			$Customer['LastName']=str_replace("&","and",$lastname);	
+//			$email=urlencode($shippingAddress['email']);
+			$email=$shippingAddress['email'];
+			$Customer['EmailAddress']=str_replace("&","and",$email);
 			$LIKI['MerchantCustomerId']=$order->customer_id;
 			$Customer['LIKI']=$LIKI;
 			$Address = array();
 			$PhoneNumber = array();
 			if($shippingAddress['address_type']=='shipping')
 			{
-				$AddressShipping['Street1']=$shippingAddress['street'];
-				$AddressShipping['PostalCode']=$shippingAddress['postcode'];
-				$AddressShipping['City']=$shippingAddress['city'];
+//				$street=urlencode($shippingAddress['street']);
+				$street=$shippingAddress['street'];
+				$AddressShipping['Street1']=str_replace("&","and",$street);
+//				$postcode=urlencode($shippingAddress['postcode']);
+				$postcode=$shippingAddress['postcode'];
+				$AddressShipping['PostalCode']=str_replace("&","and",$postcode);
+//				$city=urlencode($shippingAddress['city']);
+				$city=$shippingAddress['city'];
+				$AddressShipping['City']=str_replace("&","and",$city);
 				$AddressShipping['Type']='Shipping';
 				$region = Mage::getModel('directory/region')->load($shippingAddress['region_id']);
-				$AddressShipping['State']=$region['code'];	
+//				$AddressShipping['State']=urlencode($shippingAddress['code']);	
+				$AddressShipping['State']=str_replace("&","and",$shippingAddress['code']);	
 				$HomePhoneNumber['Type']='Home';
-				$HomePhoneNumber['Number']=$shippingAddress['telephone'];
+//				$HomePhoneNumber['Number']=urlencode($shippingAddress['telephone']);
+				$HomePhoneNumber['Number']=str_replace("&","and",$shippingAddress['telephone']);
 				array_push($Address, $AddressShipping);
 			}
 			if($billingAddress['address_type']=='billing')
 			{
-				$BillingAddress['Street1']=$shippingAddress['street'];
-				$BillingAddress['PostalCode']=$shippingAddress['postcode'];
-				$BillingAddress['City']=$shippingAddress['city'];
+//				$street=urlencode($shippingAddress['street']);
+				$street=$shippingAddress['street'];
+				$BillingAddress['Street1']=str_replace("&","and",$street);
+//				$postcode=urlencode($shippingAddress['postcode']);
+				$postcode=$shippingAddress['postcode'];
+				$BillingAddress['PostalCode']=str_replace("&","and",$postcode);
+//				$city=urlencode($shippingAddress['city']);
+				$city=$shippingAddress['city'];
+				$BillingAddress['City']=str_replace("&","and",$city);
 				$BillingAddress['Type']='billing';
-				$regionBilling = Mage::getModel('directory/region')->load($billingAddress['region_id']);
-				$BillingAddress['State']=$regionBilling['code'];	
+				$regionBilling = Mage::getModel('directory/region')->load($BillingAddress['region_id']);
+//				$code=urlencode($shippingAddress['code']);
+				$code=$shippingAddress['code'];
+				$BillingAddress['State']=str_replace("&","and",$code);	
+				//LIKI Code End
 				array_push($Address, $BillingAddress);
 			}
 			array_push($PhoneNumber, $HomePhoneNumber);
@@ -146,7 +167,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$likipayment['Customer']=$Customer;
 			$likipayment['Order']=$Order;
 			
-			Mage::Log($Customer);	
+			Mage::Log($Customer);
 			return $likipayment;	
 		}	
 		

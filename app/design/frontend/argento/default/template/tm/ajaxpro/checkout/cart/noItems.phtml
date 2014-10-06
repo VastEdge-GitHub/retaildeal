@@ -1,0 +1,12 @@
+<div class="page-title">
+    <h1><?php echo $this->__('Shopping Cart is Empty') ?></h1>
+</div>
+<div class="cart-empty">
+    <?php // echo $this->getChildHtml('checkout_cart_empty_widget'); ?>
+    <p><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+	<!--Changes by LIKI Ext Start-->
+	<!--Reason of Change: Changes did because After removing all products from drop down at right side of search,then it was displaying shopping cart pop up.In that shopping cart pop-up, 'here' hyperlink was not clickable and was not redirected to homepage.-->
+    <p><?php echo $this->__('Click <a href="%s">here</a> to continue shopping.', $this->getContinueShoppingUrl()) ?></p>
+	<!--Changes by LIKI Ext End-->
+    <?php // echo $this->getChildHtml('shopping.cart.table.after'); ?>
+</div>
