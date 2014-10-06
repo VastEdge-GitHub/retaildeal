@@ -68,7 +68,14 @@ function check_liki_price()
     <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
 </div>
 <div class="buttons-set" id="payment-buttons-container">
+<<<<<<< HEAD
+<!--Changes By Liki ext Start-->
+<!-- Reason of Change: "* Required Fields" text was not required at Payment Information during Checkout-->
+   <!-- <p class="required"><?php /*echo $this->__('* Required Fields')*/ ?></p>-->
+<!--Changes By Liki ext End-->
+=======
     <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+>>>>>>> master
     <p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
     <!-- Changes made by liki ext -->
     <button type="button" class="button" onclick="if( check_liki_price() ) {payment.save();}"><span><span><?php echo $this->__('Continue') ?></span></span></button>
