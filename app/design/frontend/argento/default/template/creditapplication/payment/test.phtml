@@ -1,0 +1,46 @@
+ <form action="test1" id="theForm" method="post">
+<?php
+	$families = array
+  (
+	  "0"=>array
+		  (
+		  "Peter"=>"35","Ben"=>"37","Joe"=>"43"
+		  ),
+	  "1"=>array
+		  (
+		 "Peter"=>"35","Ben"=>"37","Joe"=>"43"
+		  ),
+	  "2"=>array
+		  (
+		 "Peter"=>"111","Ben"=>"37","Joe"=>"43"
+		  )
+  );
+  // Mage::Log($families);
+  // Mage::Log($families[2]["Peter"]);
+  
+$session= Mage::getSingleton('checkout/session');
+$T2=array();
+$T3=array("t1");
+foreach($session->getQuote()->getAllItems() as $item)
+{
+	$T1=array("productid"=>$item->getProductId(),"productsku"=>$item->getSku(),"productname"=>$item->getName());
+	array_push($T2,$T1);
+}
+array_push($T3,$T2);
+Mage::Log($T3);
+?>
+	<input name="person[0][first_name]" value="john" />
+	<input name="person[0][last_name]" value="smith" />
+
+	<input name="person[1][first_name]" value="jane" />
+	<input name="person[1][last_name]" value="jones" />
+	<input type="submit" name="b1">
+</ul>
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+    var theForm = new VarienForm('theForm', true);
+ 
+//]]>   
+</script>
