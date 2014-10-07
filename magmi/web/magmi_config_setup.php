@@ -34,12 +34,12 @@ if (!$eplconf->hasSection("PLUGINS_DATASOURCES"))
 ?>
 <!-- MAGMI UPLOADER -->
 <?php $zipok=class_exists("ZipArchive");?>
-<div class="container_12">
+<div class="container_12" style="display:none">
 	<div class="grid_12 subtitle">
 		<span>Update Magmi</span>
 	</div>
 </div>
-<div class="container_12">
+<div class="container_12" style="display:none">
 <?php if($zipok){?>
 <form method="post" enctype="multipart/form-data"
 		action="magmi_upload.php">
@@ -66,7 +66,7 @@ if (!$eplconf->hasSection("PLUGINS_DATASOURCES"))
 </div>
 
 <!--  PLUGIN UPLOADER -->
-<div class="container_12">
+<div class="container_12" style="display:none">
 	<form method="post" enctype="multipart/form-data"
 		action="plugin_upload.php">
 		<div class="grid_12 col">

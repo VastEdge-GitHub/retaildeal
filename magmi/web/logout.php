@@ -1,9 +1,15 @@
 <?php
 session_start();
+ob_start();
 if(isset($_SESSION['magmi_admin']) || isset($_SESSION['magmi_status']))
 {	
 	unset($_SESSION['magmi_admin']);
 	unset($_SESSION['magmi_status']);
+<<<<<<< HEAD
+	header("Location: /magmi/web/admin_login.php");
+}
+?>
+=======
 <<<<<<< HEAD
 	header("Location: admin_login.php");
 exit(0);
@@ -26,3 +32,4 @@ exit(0);
 
 </head>
 <body>Redirecting...</body>
+>>>>>>> master
