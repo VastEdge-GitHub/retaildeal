@@ -38,8 +38,23 @@
 .block-layered-nav .block-content .m-filter-item-list{max-height:300px;overflow-y:auto;}
 .block-layered-nav .block-content #narrow-by-list dt,.block-layered-nav .block-content #narrow-by-list dd{float:left;width:100%}
 </style>
+<<<<<<< HEAD
 <!--LIKI Code End-->
 <?php if($this->canShowBlock()): ?>
+=======
+
+<?php if($this->canShowBlock()): ?>
+<!--LIKI Code START-->
+<?php 
+	$currentUrl = Mage::helper('core/url')->getCurrentUrl();
+	$currentUrl=explode("?",$currentUrl); 
+	
+if($currentUrl[0]=="http://ec2-54-68-254-141.us-west-2.compute.amazonaws.com/catalogsearch/result/")
+{}
+else
+{
+?>
+>>>>>>> master
 <div class="block block-layered-nav">
     <div class="block-title">
         <span><span><?php echo $this->__('Shop By') ?></span></span>
@@ -64,4 +79,9 @@
         <?php endif; ?>
     </div>
 </div>
+<<<<<<< HEAD
+=======
+<?php } ?>
+<!--LIKI COde END-->
+>>>>>>> master
 <?php endif; ?>
