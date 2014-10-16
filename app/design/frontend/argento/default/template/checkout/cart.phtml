@@ -60,18 +60,16 @@
                     <?php endif ?>
                     <div class="col-unit-price"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></div>
                     <div class="cart-qty"><?php echo $this->__('Qty') ?></div>
-                    <div class="col-total-price"><?php 
-			//Changes by LIKI Ext Start	
-			echo $this->__('SubTotal') 
-			//Changes by LIKI Ext End
-			?></div>
+                    <div class="col-total-price"><?php echo $this->__('Subtotal') ?></div>
                 </div>
             </div>
             <ol id="products-cart-list" class="products-list cart-list">
                 <?php foreach($this->getItems() as $_item): ?>
-                	<!--Changes by LIKI Ext Start-->
                     <!--LIKI prcie div starts-->
+					<!--Changes by LIKI Ext Start-->
+					<!--Reason of Change: Changes did because When the product quantity was not available ,it displayed an error message.Then leaseitkeepit price box moved down with error 								                      message.-->
                     <div style="position:absolute; margin-left:455px; margin-top:45px; font-size:7px;background: #eaeaea;border-radius: 7px; text-align:center; width:140px">
+					<!--Changes by LIKI Ext End-->
                         <div style="float:left; color: #000; font-size:1.5em; font-weight:bold; padding:5px; text-align:center">
                             <span style="font-weight:normal;">or&nbsp;&nbsp;</span>
                             <span>
@@ -87,8 +85,10 @@
                         </div>
                     </div>
                     <!--LIKI prcie div ends-->
-                    <!--Changes by LIKI Ext End-->
+					<!--Changes by LIKI Ext Start-->
+					<!--Reason of Change: Changes did because When the product quantity was not available ,it displayed an error message.Then leaseitkeepit price box moved down with error message.-->
                     <?php echo $this->getItemHtml($_item) ?>
+					<!--Changes by LIKI Ext End-->
                 <?php endforeach ?>
             </ol>
             <script type="text/javascript">

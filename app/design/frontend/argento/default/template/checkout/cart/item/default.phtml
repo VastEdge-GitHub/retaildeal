@@ -63,10 +63,16 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                     <?php endforeach; ?>
                 </dl>
                 <?php endif;?>
+				<?php  ?>
                 <?php if ($messages = $this->getMessages()): ?>
-                <?php foreach ($messages as $message): ?>
-                    <p class="item-msg <?php echo $message['type'] ?>">* <?php echo $message['text'] ?></p>
-                <?php endforeach; ?>
+				<!--LIKI Code Start
+					Reason: When we update the qty of a product to more than 10000 then a error msg displays that maximum qty of a product is 10000.but when we decrese/reduce the qty of a product to less than 10000 and that qty is also not available in our stock then this error is still displayed and another error are also displayed that requested amount of qty is not available in our store.so i have changed the <p> tag position, previously it is in the foreach loop and i have changed it to outside from loop.
+				-->
+				<?php foreach ($messages as $message):   ?>
+                   
+			  	<?php endforeach; ?>
+				<p style=" " class="item-msg <?php echo $message['type'] ?>">* <?php echo $message['text'] ?></p>
+				<!--LIKI Code End-->
                 <?php endif; ?>
                 <?php if ($addtInfoBlock = $this->getProductAdditionalInformationBlock()):?>
                     <?php echo $addtInfoBlock->setItem($_item)->toHtml() ?>
@@ -344,5 +350,6 @@ function check_delete(del_url)
 	var t = confirm('Are you sure you would like to remove this item from the shopping cart?');
 	if(t){window.location = del_url;}
 }
+
 </script>
 <!-- Changes by LIKI Ext Ends -->
