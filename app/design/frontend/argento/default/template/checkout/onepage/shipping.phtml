@@ -100,7 +100,10 @@
                         <div class="field">
                             <label for="shipping:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                             <div class="input-box">
-                                <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="shipping[postcode]" id="shipping:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" onchange="shipping.setSameAsBilling(false);" />
+							<!-- Changes by Liki Ext Start -->
+							<!-- Reason of Change: "validation on zip number by changing class name -->
+                                <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="shipping[postcode]" id="shipping:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text required-entry validate-length  maximum-length-6 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" onchange="shipping.setSameAsBilling(false);" />
+							<!-- Changes by Liki Ext End -->
                             </div>
                         </div>
                         <div class="field">
@@ -128,7 +131,13 @@
                             </div>
                         </div>
                     </li>
-                <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
+               
+                </ul>
+						 
+						
+            </fieldset>
+        </li>
+		<?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
                     <li class="control">
                         <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" onchange="shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="shipping:save_in_address_book"><?php echo $this->__('Save in address book') ?>
 						</label>
@@ -136,16 +145,14 @@
                 <?php else:?>
                     <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></li>
                 <?php endif;?>
-                </ul>
-						<!-- Changes by Liki Ext Start -->
-						<!-- Reason of Change: "* Required Fields" was required at this form -->
-						<p class="required" style=" position: relative; left: -5px; top: 50px; "><?php echo $this->__('* Required Fields') ?></p>
-						<!-- Changes by Liki Ext End -->
-            </fieldset>
-        </li>
+				
         <li class="control">
             <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Use Billing Address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" /><label for="shipping:same_as_billing"><?php echo $this->__('Use Billing Address') ?></label>
         </li>
+		<!-- Changes by Liki Ext Start -->
+						<!-- Reason of Change: "* Required Fields" was required at this form -->
+						<p class="required" style=" position: relative; left: -5px; top: 20px; "><?php echo $this->__('* Required Fields') ?></p>
+						<!-- Changes by Liki Ext End -->
     </ul>
     <div class="buttons-set" id="shipping-buttons-container">
 	<!-- Changes by Liki Ext Start -->
