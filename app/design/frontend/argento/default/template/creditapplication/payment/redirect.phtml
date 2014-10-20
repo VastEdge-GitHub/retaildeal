@@ -1,0 +1,36 @@
+ <?php
+/**
+ * Redirect view file
+ * @category    View
+ * @package     Nisys Liki Payment
+ 
+ */
+?>
+
+<?php
+// Get Liki Payment Details
+$likipayment = Mage::registry( 'likipayment' );
+?>
+<div style="float:left;width:100%;">
+    <div style="background: #eeeeee;background: -moz-linear-gradient(top, #eeeeee 0%, #d1d0d0 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#d1d0d0));background: -webkit-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);background: -o-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);background: -ms-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);	background: linear-gradient(to bottom, #eeeeee 0%,#d1d0d0 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#d1d0d0',GradientType=0 );padding:30px 0 38px 0;	margin-top:50px;text-align:center;border-radius:10px;font-weight:bold;margin-left: auto;box-shadow: 0 0 10px #888888;margin-right: auto;width: 420px;	border-radius: 10px;height:90px;">
+    	<!--<div style="float:left;width:90px;">
+    		<img width="60px" alt="Redirecting..." title="Redirecting..." src="/amazon_import_products/liki_img/loading_icon.gif" alt="" style="float:left;padding-left:30px;" />
+        </div>-->
+        <div style="float:left;width:380px;padding:0 20px 0 20px;">
+    		<p style="text-align:justify;font-family:calibri;font-weight:bold;font-size:29px;margin: 0 0 35px 0;padding: 0;line-height: 20px;"><img width="30px" alt="Redirecting..." title="Redirecting..." src="/amazon_import_products/liki_img/loading_icon.gif" alt="" style="float:left;" /><span style="float:left;padding:3px 0 0 10px;">Processing...</span> <!--<a style="color:	#0029A3;text-decoration:underline;" href="javascript:document.likipayment.submit();">click here</a>--></p><br />
+			<p style="font-size:18px;text-align:justify;margin: 0;padding: 0;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif !important;font-weight:normal;line-height: 24px;">Don't click your Back button!</p>
+            <p style="font-size:18px;text-align:justify;margin: 0;padding: 0;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif !important;font-weight:normal;line-height: 24px;">If you've been here for a while, <a style="color:	#0029A3;text-decoration:underline;" href="javascript:document.likipayment.submit();">click here</a></p>
+       </div>
+    </div>
+</div>
+<form name="likipayment" method="post" action="<?php echo $likipayment['liki_payment_url']; ?>">
+	<input type="hidden" name="requestString" value='<?php echo urlencode(json_encode($likipayment)); ?>'>
+	
+</form>
+
+ <script type="text/javascript">
+ //Changes made by LikiExt
+ setTimeout(function(){
+	document.likipayment.submit();
+ }, 500);
+ </script>
