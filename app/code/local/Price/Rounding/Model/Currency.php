@@ -45,7 +45,7 @@ class Price_Rounding_Model_Currency extends Mage_Directory_Model_Currency{
       return $price;
     }
     elseif ($rate = $this->getRate($toCurrency)) {
-       return ($price*$rate)- 1.01;
+       return ceil($price*$rate)- 1.01;
     }
     throw new Exception(Mage::helper('directory')->__('Undefined rate from "%s-%s".', $this->getCode(), $toCurrency->getCode()));
  }
