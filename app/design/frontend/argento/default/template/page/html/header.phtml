@@ -27,6 +27,9 @@
  * @var Mage_Page_Block_Html_Header $this
  */
 ?>
+<!-- Changes by liki ext -->
+<div id="liki_intro_popup" style="display:none"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('liki_intro')->toHtml()?></div>
+<!-- Changes by liki ext End -->
 <div class="top-toolbar-container">
     <div class="top-toolbar">
         <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_links')->toHtml() ?>
