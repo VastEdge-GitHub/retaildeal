@@ -67,7 +67,6 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 		}
 		$this->_redirect('checkout/onepage/');
 		}
-
 		//Reason of change: Encode all data and remove single quotes
 		//Prepare Parameters For Liki Post Data
 		private function prepareLikiPostParameters(){		
@@ -87,7 +86,6 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$likipayment['MerchantSession']=$MerchantSession;
 			$Order['MagentoOrderId']=$order->getEntityId();
 			$Order['CreateDate']=date("M d, Y");
-
 			$shipping_cost=$order->getShippingAmount();
 			foreach ($items as $value)
 			{
@@ -96,8 +94,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 //				$productname = urlencode($value->getName());
 				$Item['MerchantProductDescription']=$productname;
 //				$Item['Amount']=urlencode($value->getPrice());
-				$qty=$value['qty_ordered'];
-				$Item['Amount']=($value->getPrice() * $qty);
+				$Item['Amount']=$value->getPrice();
 //				$Product['ReferenceID']=urlencode($value->getSku());
 				$Product['ReferenceID']=$value->getSku();
 				$Item["ProductDefinition"]=$Product;
@@ -137,7 +134,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 				$AddressShipping['Type']='Shipping';
 				$region = Mage::getModel('directory/region')->load($shippingAddress['region_id']);
 //				$AddressShipping['State']=urlencode($shippingAddress['code']);	
-				$AddressShipping['State']=str_replace("&","and",$region['code']);	
+				$AddressShipping['State']=str_replace("&","and",$shippingAddress['code']);	
 				$HomePhoneNumber['Type']='Home';
 //				$HomePhoneNumber['Number']=urlencode($shippingAddress['telephone']);
 				$HomePhoneNumber['Number']=str_replace("&","and",$shippingAddress['telephone']);
@@ -155,10 +152,10 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 				$city=$shippingAddress['city'];
 				$BillingAddress['City']=str_replace("&","and",$city);
 				$BillingAddress['Type']='billing';
-				$regionBilling = Mage::getModel('directory/region')->load($billingAddress['region_id']);
+				$regionBilling = Mage::getModel('directory/region')->load($BillingAddress['region_id']);
 //				$code=urlencode($shippingAddress['code']);
 				$code=$shippingAddress['code'];
-				$BillingAddress['State']=str_replace("&","and",$regionBilling['code']);	
+				$BillingAddress['State']=str_replace("&","and",$code);	
 				//LIKI Code End
 				array_push($Address, $BillingAddress);
 			}
