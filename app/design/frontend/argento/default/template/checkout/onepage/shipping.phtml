@@ -120,7 +120,11 @@
 							<!--LIKI Code Start
 						Reason:change the validation class to avoid alpha values and greater than 10 Digits value
 						-->
+<<<<<<< HEAD
+                                <input type="text" name="shipping[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry validate-length minimum-length-10 maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="shipping:telephone" onchange="shipping.setSameAsBilling(false);" />
+=======
                                 <input type="text" name="shipping[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry validate-length  maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="shipping:telephone" onchange="shipping.setSameAsBilling(false);" />
+>>>>>>> master
 							<!--LIKI Code End-->	
                             </div>
                         </div>
@@ -134,10 +138,14 @@
 <<<<<<< HEAD
                 </ul>
 =======
+<<<<<<< HEAD
+                </ul>
+=======
                
                 </ul>
 						 
 						
+>>>>>>> master
 >>>>>>> master
             </fieldset>
         </li>
@@ -154,11 +162,16 @@
             <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Use Billing Address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" /><label for="shipping:same_as_billing"><?php echo $this->__('Use Billing Address') ?></label>
         </li>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 		</ul>
     <div class="buttons-set" id="shipping-buttons-container">
 	<!-- Changes by Liki Ext Start -->
 	<!-- Reason of Change: "* Required Fields" need to be placed here -->
 	 <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+<<<<<<< HEAD
+=======
 =======
 		<!-- Changes by Liki Ext Start -->
 						<!-- Reason of Change: "* Required Fields" was required at this form -->
@@ -169,6 +182,7 @@
 	<!-- Changes by Liki Ext Start -->
 	<!-- Reason of Change: "* Required Fields" was not required here -->
 	<!-- <p class="required"><?php //echo $this->__('* Required Fields') ?></p>-->
+>>>>>>> master
 >>>>>>> master
 	<!-- Changes by Liki Ext End -->
         <p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
