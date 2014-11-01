@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+   <config>
+     <modules>
+       <Price_Rounding>
+         <active>true</active>
+         <codePool>local</codePool>
+         <depends>
+           <Mage_Directory/>
+         </depends>
+       </Price_Rounding>
+     </modules>
+   </config>

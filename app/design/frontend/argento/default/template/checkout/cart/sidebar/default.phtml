@@ -35,11 +35,21 @@
     <?php else: ?>
         <span class="product-image"><img src="<?php echo $this->getProductThumbnail()->resize(50, 50)->setWatermarkSize('30x10'); ?>" width="50" height="50" alt="<?php echo $this->escapeHtml($this->getProductName()) ?>" /></span>
     <?php endif; ?>
-    <div class="product-details">
-	<!--LIKI Code start
-		Reason : if we add quantity of a product that is exceed from stock then in the checkout/cart page proceed to checkout and continue shopping button is not visible but when i delete that product still they are not visible.so i have made changes here for that.  
+	 <div class="product-details">
+		<!--LIKI Code start
+		Reason : if we add quantity of a product that is exceed from stock then in the checkout/cart page proceed to checkout and continue shopping button is not visible but when i delete that product still they are not visible. So changes are made accordingly.
 	-->
+		<?php
+		$urlString = Mage::helper('core/url')->getCurrentUrl();
+$url = Mage::getSingleton('core/url')->parseUrl($urlString);
+$path = $url->getPath();
+			if($path == '/checkout/cart/updatePost/' || $path=='/checkout/cart/')
+			{ 
+		?> 
         <a title="<?php echo $this->__('Remove This Item') ?>" onclick="check_delete('<?php echo $this->getDeleteUrl()?>')" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
+		<?php } else { ?>
+		<a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove This Item') ?>" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?') ?>');" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
+		<?php } ?>
 		<!--LIKI Code END-->
         <?php if ($isVisibleProduct): ?>
         <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo $this->__('Edit item') ?>" class="btn-edit"><?php echo $this->__('Edit item')?></a>
