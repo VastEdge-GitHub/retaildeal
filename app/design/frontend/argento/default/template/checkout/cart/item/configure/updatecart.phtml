@@ -40,10 +40,17 @@ margin-top: 5px !important;}
         <?php if (!$_product->isGrouped()): ?>
         <button type="button" title="<?php echo $buttonTitle ?>" style="margin-right:140px !important;float:right;padding: 3px 10px 11px 9px !important;" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
 		<label for="qty"><?php echo $this->__('Qty:') ?></label>
+<<<<<<< HEAD
 		<!-- Changes by liki ext start -->
 		<!--REASON: Add some validation class in inputbox such as required-entry,validate-number,validate-greater-than-zero, validate-digits -->
         <input style="float:right;" type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty validate-digits" />
         <?php endif; ?>
+=======
+        <input style="float:right;" type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty" />
+        <?php endif; ?>
+	<!-- Changes by liki ext -->
+        
+>>>>>>> master
         <!-- Changes by liki ext end -->
 	<?php echo $this->getChildHtml('', true, true) ?>
     </div>

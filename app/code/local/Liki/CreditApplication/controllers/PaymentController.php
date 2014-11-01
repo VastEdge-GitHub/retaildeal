@@ -32,6 +32,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$this->renderLayout();
 		}	*/
 		//LIKI code start
+		//Reason of change: Make cancel action URL working
 		public function cancelAction()
 		{
 		$session = Mage::getSingleton('checkout/session');
@@ -40,7 +41,6 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 		if ($session->getLastRealOrderId()) {
 			$incrementId = $session->getLastRealOrderId();
 			if (empty($incrementId)) {
-				//$session->addError($this->__('You have cancelled the order'));
 				$this->_redirect('checkout/onepage');
 				return;
 			}
@@ -64,13 +64,9 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 				}
 			}
 			$cart->save();
-			//$session->addError($this->__('You have cancelled your order'));
 		}
 		$this->_redirect('checkout/onepage/');
 		}
-		//liki code End
-		
-		//LIKI Code start
 		//Reason of change: Encode all data and remove single quotes
 		//Prepare Parameters For Liki Post Data
 		private function prepareLikiPostParameters(){		
@@ -90,25 +86,20 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$likipayment['MerchantSession']=$MerchantSession;
 			$Order['MagentoOrderId']=$order->getEntityId();
 			$Order['CreateDate']=date("M d, Y");
-
-			// Code Added by LIKIext
 			$shipping_cost=$order->getShippingAmount();
-			// End of code by LIKIext
 			foreach ($items as $value)
 			{
 				$Item['MerchantProductId']=$value->getProductId();
-				$productname = urlencode($value->getName());
-				//echo $productname;
+				$productname = $value->getName();
+//				$productname = urlencode($value->getName());
 				$Item['MerchantProductDescription']=$productname;
-				//echo "<br>".$Item['MerchantProductDescription'];
-				//$Item['MerchantProductDescription']=$value->getName();
-				$Item['Amount']=urlencode($value->getPrice());
-				$Product['ReferenceID']=urlencode($value->getSku());
+//				$Item['Amount']=urlencode($value->getPrice());
+				$Item['Amount']=$value->getPrice();
+//				$Product['ReferenceID']=urlencode($value->getSku());
+				$Product['ReferenceID']=$value->getSku();
 				$Item["ProductDefinition"]=$Product;
-				//echo "<br>".$Item["ProductDefinition"];
-				// Code Added by LIKIext
-				$Item['ShippingCost']=urlencode($shipping_cost);
-				// End of code by LIKIext
+//				$Item['ShippingCost']=urlencode($shipping_cost);
+				$Item['ShippingCost']=$shipping_cost;
 				$item[] =$Item;
 			}
 			$Order['OrderItem']=$item;
@@ -116,58 +107,55 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$shippingAddress=$order->getShippingAddress()->getData();
 			$billingAddress=$order->getBillingAddress()->getData();
 			$customerId = $order->customer_id;
-			$fisrtname=urlencode($shippingAddress['firstname']);
-			$Customer['FirstName']=$fisrtname;
-			//$Customer['FirstName']=$shippingAddress['firstname'];
-			$lastname=urlencode($shippingAddress['lastname']);
-			$Customer['LastName']=$lastname;	
-			//$Customer['LastName']=$shippingAddress['lastname'];
-			$email=urlencode($shippingAddress['email']);
-			$Customer['EmailAddress']=$email;
-			//$Customer['EmailAddress']=$shippingAddress['email'];	
-			//Mage::helper('core')->decrypt($encrypted_data);
+//			$fisrtname=urlencode($shippingAddress['firstname']);
+			$fisrtname=$shippingAddress['firstname'];
+			$Customer['FirstName']=str_replace("&","and",$fisrtname);
+//			$lastname=urlencode($shippingAddress['lastname']);
+			$lastname=$shippingAddress['lastname'];
+			$Customer['LastName']=str_replace("&","and",$lastname);	
+//			$email=urlencode($shippingAddress['email']);
+			$email=$shippingAddress['email'];
+			$Customer['EmailAddress']=str_replace("&","and",$email);
 			$LIKI['MerchantCustomerId']=$order->customer_id;
 			$Customer['LIKI']=$LIKI;
 			$Address = array();
 			$PhoneNumber = array();
 			if($shippingAddress['address_type']=='shipping')
 			{
-				$street=urlencode($shippingAddress['street']);
-				$AddressShipping['Street1']=$street;
-				//$AddressShipping['Street1']=$shippingAddress['street'];
-				$postcode=urlencode($shippingAddress['postcode']);
-				$AddressShipping['PostalCode']=$postcode;
-				//$AddressShipping['PostalCode']=$shippingAddress['postcode'];
-				$city=urlencode($shippingAddress['city']);
-				$AddressShipping['City']=$city;
-				//$AddressShipping['City']=$shippingAddress['city'];
+//				$street=urlencode($shippingAddress['street']);
+				$street=$shippingAddress['street'];
+				$AddressShipping['Street1']=str_replace("&","and",$street);
+//				$postcode=urlencode($shippingAddress['postcode']);
+				$postcode=$shippingAddress['postcode'];
+				$AddressShipping['PostalCode']=str_replace("&","and",$postcode);
+//				$city=urlencode($shippingAddress['city']);
+				$city=$shippingAddress['city'];
+				$AddressShipping['City']=str_replace("&","and",$city);
 				$AddressShipping['Type']='Shipping';
 				$region = Mage::getModel('directory/region')->load($shippingAddress['region_id']);
-				//$code=urlencode($shippingAddress['code']);
-				//$AddressShipping['State']=$code;
-				$AddressShipping['State']=urlencode($shippingAddress['code']);	
+//				$AddressShipping['State']=urlencode($shippingAddress['code']);	
+				$AddressShipping['State']=str_replace("&","and",$shippingAddress['code']);	
 				$HomePhoneNumber['Type']='Home';
-				//$telephone=urlencode($shippingAddress['telephone']);
-				//$HomePhoneNumber['Number']=$telephone;
-				$HomePhoneNumber['Number']=urlencode($shippingAddress['telephone']);
+//				$HomePhoneNumber['Number']=urlencode($shippingAddress['telephone']);
+				$HomePhoneNumber['Number']=str_replace("&","and",$shippingAddress['telephone']);
 				array_push($Address, $AddressShipping);
 			}
 			if($billingAddress['address_type']=='billing')
 			{
-				$street=urlencode($shippingAddress['street']);
-				$BillingAddress['Street1']=$street;
-				//$BillingAddress['Street1']=$shippingAddress['street'];
-				$postcode=urlencode($shippingAddress['postcode']);
-				$BillingAddress['PostalCode']=$postcode;
-				//$BillingAddress['PostalCode']=$shippingAddress['postcode'];
-				$city=urlencode($shippingAddress['city']);
-				$BillingAddress['City']=$city;
-				//$BillingAddress['City']=$shippingAddress['city'];
+//				$street=urlencode($shippingAddress['street']);
+				$street=$shippingAddress['street'];
+				$BillingAddress['Street1']=str_replace("&","and",$street);
+//				$postcode=urlencode($shippingAddress['postcode']);
+				$postcode=$shippingAddress['postcode'];
+				$BillingAddress['PostalCode']=str_replace("&","and",$postcode);
+//				$city=urlencode($shippingAddress['city']);
+				$city=$shippingAddress['city'];
+				$BillingAddress['City']=str_replace("&","and",$city);
 				$BillingAddress['Type']='billing';
-				$regionBilling = Mage::getModel('directory/region')->load($billingAddress['region_id']);
-				$code=urlencode($shippingAddress['code']);
-				$BillingAddress['State']=$code;	
-				//$BillingAddress['State']=$shippingAddress['code'];	
+				$regionBilling = Mage::getModel('directory/region')->load($BillingAddress['region_id']);
+//				$code=urlencode($shippingAddress['code']);
+				$code=$shippingAddress['code'];
+				$BillingAddress['State']=str_replace("&","and",$code);	
 				//LIKI Code End
 				array_push($Address, $BillingAddress);
 			}

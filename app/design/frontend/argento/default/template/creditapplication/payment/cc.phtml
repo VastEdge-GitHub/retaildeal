@@ -1,0 +1,78 @@
+ <?php
+
+// Get Liki response Details
+$likiResponse = Mage::registry( 'likiResponse' );
+?>
+
+<form action="processCreditCard" id="theForm" method="post">
+<div class="page-title">
+    <h1><?php echo $this->__('The final step is to process your down payment in the amount of $') . $likiResponse['DownPaymentAmount'] ?></h1>
+</div>
+<input type="hidden" name="down_payment_amount" value="<?php echo $likiResponse['DownPaymentAmount']; ?>">
+<input type="hidden" name="loan_id" value="<?php echo $likiResponse['LoanId']; ?>">	
+<input type="hidden" name="credit_app_id" value="<?php echo $likiResponse['CreditAppId']; ?>">	
+<input type="hidden" name="order_amount" value="<?php echo $likiResponse['OrderAmount']; ?>">	
+
+<ul class="form-list" id="payment_form" >
+	<li>
+		<label class="required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
+		<div class="input-box">
+			<select id="cc_type" name="cc_Type" class="validate-select">
+					<option value=""><?php echo $this->__('--Please Select--')?></option>
+				<?php 
+				   foreach($this->getCcAvailableTypes() as $ccType => $value) 
+					{
+					   echo '<option value="'. $ccType .'">'. $value .'</option>';
+					}
+				?>
+			</select>
+		</div>
+	</li>
+	 <li id="cc_type_exp_div">
+        <label  class="required"><em>*</em><?php echo $this->__('Credit Card Number') ?></label>
+        <div class="input-box">
+            <input type="text" name="cc_number" id="cc_number" title="<?php echo $this->__('Credit Card Number') ?>" class="validate-cc-number validate-cc-type required-entry validate-digits" />
+		
+        </div>
+    </li>
+	 <li id="cc_type_exp_div">
+        <label for="expiration" class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+        <div class="input-box">
+			<table >
+				<tr>
+					<td ">
+						<select   style="width:100px" id="cc_exp_month" name="cc_exp_month" class="validate-select">
+							<?php 
+							   foreach($this->getCcMonths() as $months => $value) 
+								{
+								   echo '<option value="'. ($months == 0 ? '' : $months) .'">'. $value .'</option>';
+								}
+							?>				
+						</select>
+					</td>
+					<td>
+						<select style="width:100px" id="expiration_yr" name="cc_exp_year" class="validate-select">
+						<?php 
+						   foreach($this->getCcYears() as $years => $value) 
+							{
+							   echo '<option value="'. ($years == 0 ? '' : $years) .'">'. $value .'</option>';
+							}
+						?>	
+					</select>	
+					</td>					
+				</tr>			  
+			</table>	
+        </div>
+    </li>
+	 
+</ul>	 
+	<button type="submit" class="button"><span><span>Continue</span></span></button>
+</ul>
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+    var theForm = new VarienForm('theForm', true);
+ 
+//]]>   
+</script>
