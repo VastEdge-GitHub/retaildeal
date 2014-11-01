@@ -1,7 +1,11 @@
 <?php
 set_include_path(get_include_path() . PATH_SEPARATOR . "../inc");
-ini_set("display_errors", 1);
-ini_set("error_reporting", E_ALL);
+//LIKI Code Start
+//Reason of Change : Hide the warnings alerts
+//ini_set("display_errors", 0);
+//ini_set("error_reporting", E_ALL);
+error_reporting(0); 
+//LIKI Code End
 ini_set("magic_quotes_gpc", 0);
 require_once ("magmi_version.php");
 session_start();

@@ -2156,3 +2156,4 @@ position: relative;
 .dialog .title_window {
   -moz-user-select:none;
 }
+.main .col-main .product-view .product-collateral .padder{overflow-x:scroll;}

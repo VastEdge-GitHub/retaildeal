@@ -17,7 +17,7 @@
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
  * needs please refer to http://www.magentocommerce.com for more information.
- *
+ * Codnitive.expand(parent);
  * @category    design
  * @package     base_default
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
@@ -29,12 +29,14 @@
  * Template for Mage_Page_Block_Html
  */
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
 <head>
 <?php echo $this->getChildHtml('head') ?>
 </head>
 <body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+
 <?php echo $this->getChildHtml('after_body_start') ?>
 <div class="wrapper">
     <?php //echo $this->getChildHtml('global_notices') ?>
@@ -47,7 +49,10 @@
                     <?php echo $this->getChildHtml('global_messages') ?>
                     <?php echo $this->getChildHtml('content') ?>
                 </div>
-                <div class="col-left sidebar"><?php echo $this->getChildHtml('left') ?></div>
+				<!--LIKI Code Start-->
+                <?php $currentUrl = Mage::helper('core/url')->getCurrentUrl(); ?>
+                <!--LIKI Code End-->
+			 <div class="col-left sidebar"><?php echo $this->getChildHtml('left') ?></div>
             </div>
         </div>
         <?php echo $this->getChildHtml('footer') ?>

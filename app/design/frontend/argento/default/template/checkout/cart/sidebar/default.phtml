@@ -40,12 +40,11 @@
 		Reason : if we add quantity of a product that is exceed from stock then in the checkout/cart page proceed to checkout and continue shopping button is not visible but when i delete that product still they are not visible. So changes are made accordingly.
 	-->
 		<?php
-			$Custommain_Url		= Mage::helper('core/url')->getCurrentUrl(); 
-			$Custom_url			= explode('/',$Custommain_Url);
-			$Custom_count		= count($Custom_url);
-			$Custom_path		= $Custom_url[$Custom_count-3]."/".$Custom_url[$Custom_count-2];
-			if($Custom_path == 'checkout/cart')
-			{
+		$urlString = Mage::helper('core/url')->getCurrentUrl();
+$url = Mage::getSingleton('core/url')->parseUrl($urlString);
+$path = $url->getPath();
+			if($path == '/checkout/cart/updatePost/' || $path=='/checkout/cart/')
+			{ 
 		?> 
         <a title="<?php echo $this->__('Remove This Item') ?>" onclick="check_delete('<?php echo $this->getDeleteUrl()?>')" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
 		<?php } else { ?>

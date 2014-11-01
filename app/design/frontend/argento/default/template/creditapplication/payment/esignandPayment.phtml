@@ -1,0 +1,142 @@
+ <?php
+
+// Get Liki Payment Details
+$orderdetail = Mage::registry( 'orderdetail' );
+?>
+<table  >
+  <tbody>
+    <tr>
+      <th colspan="2" >
+        <h2 id="Step4:E-signUI-Congratulations!" style="text-align: center;">Congratulations!</h2>
+        <p>You're Approved with a Credit Limit of $<?php echo $orderdetail['creditLimit']; ?></p>
+      </th>
+    </tr>
+    <tr>
+      <td class="confluenceTd">Payment Amount</td>
+      <td class="confluenceTd">
+        <?php echo $orderdetail['paymentAmount']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td class="confluenceTd">
+        <p>No. of Monthly Payments to Keep it</p>
+      </td>
+      <td class="confluenceTd">
+        <?php echo $orderdetail['noOfMothlyPayment']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td class="confluenceTd">Down Payment</td>
+      <td class="confluenceTd">
+        <?php echo $orderdetail['downPayment']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="confluenceTd">
+        </br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">
+        <strong>Shopping Cart</strong>
+      </td>
+      <td colspan="1" class="confluenceTd"> </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">
+        <u>Description</u>
+      </td>
+      <td colspan="1" class="confluenceTd">
+        <u>Price</u>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">
+      <?php echo $orderdetail['productDescription']; ?>
+    </td>
+      <td colspan="1" class="confluenceTd">
+      <?php echo $orderdetail['productPrice']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">Shipping</td>
+      <td colspan="1" class="confluenceTd">
+        <?php echo $orderdetail['productShipping']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">Total</td>
+      <td colspan="1" class="confluenceTd">
+        <?php echo $orderdetail['productTotalPrice']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd"> </td>
+      <td colspan="1" class="confluenceTd"> </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">Lease Agreement</td>
+      <td colspan="1" class="confluenceTd"> </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd"> </td>
+      <td colspan="1" class="confluenceTd"> </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">E-sign</td>
+      <td colspan="1" class="confluenceTd"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<table >
+  <tbody>
+    <tr>
+      <th class="highlight-yellow confluenceTh" colspan="2" data-highlight-colour="yellow">
+        <p>The final step is to process your down payment in the</p>
+        <p>amount of $<?php echo $orderdetail['productTotalPrice']; ?> and E-sign your Lease Agreement.</p>
+      </th>
+    </tr>
+    <tr>
+      <td class="confluenceTd">Credit Card Type</td>
+      <td class="confluenceTd">
+        <?php echo $orderdetail['creditCardType']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td class="confluenceTd">Credit Card Number</td>
+      <td class="confluenceTd">
+        <?php echo $orderdetail['creditCardNumber']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td class="confluenceTd">Expiration Date</td>
+      <td class="confluenceTd">
+        <?php echo $orderdetail['expirationDate']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">Security Code</td>
+      <td colspan="1" class="confluenceTd">
+        <?php echo $orderdetail['securityCode']; ?>
+    </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd"> </td>
+      <td colspan="1" class="confluenceTd"> </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="confluenceTd">Lease Agreement</td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd"> </td>
+      <td colspan="1" class="confluenceTd"> </td>
+    </tr>
+    <tr>
+      <td colspan="1" class="confluenceTd">E-sign</td>
+      <td colspan="1" class="confluenceTd">
+        <input type="text" id="esing" ></input>
+      </td>
+    </tr>
+  </tbody>
+</table>

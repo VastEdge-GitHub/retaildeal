@@ -34,7 +34,10 @@
         echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>You have canceled your order</span></li></ul></li></ul>";
     }
 ?>
-<?php $this->getLayout()->getMessagesBlock()->setMessages(Mage::getSingleton('tag/session')->getMessages(true)); ?>
+<!-- Changes by Liki ext Start -->
+<!-- Reason of Change: Error message of invalid username or password was not displaying -->
+<?php //$this->getLayout()->getMessagesBlock()->setMessages(Mage::getSingleton('tag/session')->getMessages(true)); ?>
+<!-- Changes by Liki ext End -->
 <!-- Changes by liki ext end -->
 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
@@ -67,6 +70,7 @@
                         <img src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;margin-top:0;" width="45px">
                     </a>
                 </div>
+				
             <?php } ?>
             <!-- Changes by liki ext end -->
         </div>

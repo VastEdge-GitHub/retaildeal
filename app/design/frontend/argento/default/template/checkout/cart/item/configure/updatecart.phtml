@@ -24,17 +24,22 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-
+<style>
+.add-to-cart .validation-advice{ float: left !important;
+margin-left: 38px !important;
+margin-top: 5px !important;}
+</style>
 <?php $_product = $this->getProduct(); ?>
 <?php $buttonTitle = $this->__('Update Cart'); ?>
 <?php if ($_product->isSaleable()): ?>
-    <div class="add-to-cart">
+    <div style="float:left;width:322px !important" class="add-to-cart">
         <?php if (!$_product->isGrouped()): ?>
-        <label for="qty"><?php echo $this->__('Qty:') ?></label>
-        <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+        <button type="button" title="<?php echo $buttonTitle ?>" style="margin-right:140px !important;float:right;padding: 3px 10px 11px 9px !important;" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+		<label for="qty"><?php echo $this->__('Qty:') ?></label>
+        <input style="float:right;" type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty" />
         <?php endif; ?>
 	<!-- Changes by liki ext -->
-        <button type="button" title="<?php echo $buttonTitle ?>" style="padding: 3px 10px 11px 9px !important;" class="button btn-cart" onclick="if(qty_check()){productAddToCartForm.submit(this)}"><span><span><?php echo $buttonTitle ?></span></span></button>
+        
         <!-- Changes by liki ext end -->
 	<?php echo $this->getChildHtml('', true, true) ?>
     </div>
