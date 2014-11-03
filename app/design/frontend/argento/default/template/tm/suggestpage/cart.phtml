@@ -17,6 +17,15 @@ if (!Mage::registry('product')) {
 <!--LIKI Code Start
 	Reason: when we Update the qty of products its display two error, to display the appropriate error we made changes here as follow:
 -->
+<<<<<<< HEAD
+<?php $flag=0; ?>
+<div>		
+<?php
+    $error_array = explode(".  ",$this->getMessagesBlock()->getGroupedHtml());
+    if(count($error_array) > 2)
+	{	$flag=2;
+		$error_custom = explode('"',$error_array[0]);
+=======
 <div>		
 <?php
 	//echo $this->getMessagesBlock()->getGroupedHtml();
@@ -28,6 +37,7 @@ if (!Mage::registry('product')) {
 		//echo $error_array[0];
 		$error_custom = explode('"',$error_array[0]);
 		//echo $error_custom[4];
+>>>>>>> RD-131/Upinder
 		if (strpos($error_custom[4],"The requested quantity for") !== false || strpos($error_custom[4],"The maximum quantity allowed for purchase is 10000") !== false) 
 		{
 			echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>".$error_array[1]."</span></li></ul></li></ul>";
@@ -37,9 +47,17 @@ if (!Mage::registry('product')) {
 			echo $error_array[0].$error_array[1];
 	}	}
 	else
+<<<<<<< HEAD
+	{	
+		echo $error_array[0];
+		$flag=strlen($error_array[0]);
+	}
+	
+=======
 	{
 		echo $error_array[0];
 	}
+>>>>>>> RD-131/Upinder
 	//$_messageCollection->clear();
 ?>
 </div>
@@ -48,7 +66,12 @@ if (!Mage::registry('product')) {
 <!--Changes By Liki Ext Start-->
 <div class="suggestpage-activity col2-set" style=" min-width: 600px; ">
 <!--Changes By Liki Ext End-->
+<<<<<<< HEAD
+   
+	<?php 
+=======
     <?php
+>>>>>>> RD-131/Upinder
 	    $_item = null;
         if ($product = Mage::registry('product')) :
             $_item = $this->getQuote()->getItemByProduct($product);
@@ -56,8 +79,12 @@ if (!Mage::registry('product')) {
     ?>
 
     <?php if ($_item) : ?>
+	<?php if($flag==128){ ?>
+	<ul class="messages"><li class="success-msg"><ul><li><span>Product was updated successfully in your shopping cart.</span></li></ul></li></ul>
+	<?php } ?>
         <ol id="suggestpage-products-list" class="mini-products-list col-1">
-            <?php //echo $this->getItemHtml($_item) ?>
+            <?php //echo $this->getItemHtml($_item) 
+			//echo $_item->getName(); ?>
         </ol>
         <script type="text/javascript">decorateList('suggestpage-products-list', 'none-recursive')</script>
     <?php endif ?>

@@ -16,7 +16,7 @@ $public_key				= "AKIAJI5XSRBH6TEPCM2A";
 $private_key   			= "62ivalcpr1CSa3+zBIbYepSV7uuDun0cNnrp8wIS";
 $region       			= "com"; // or "CA" or "DE" etc.
 
-for($n=0;$n<1;$n++)
+for($n=0;$n<3;$n++)
 {
 	$mage_cat_info_array	= array();
 	$browsenode_info_array	= array();

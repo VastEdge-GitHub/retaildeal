@@ -108,7 +108,7 @@
 								</span>
                                 <span style="float:left; margin-top: 0;font-size:30px;font-weight:normal;font-family: lato-bold;">/mo.</span>
                                 
-                                <div class="chkout_btn" style="float:left;background-repeat:no-repeat;height:33px;padding:0 6px 0 6px;margin-left:12px;margin-top:-11px;" onclick="return showForm('liki_intro_popup')">
+                                <div id="chkout_btn_id" class="chkout_btn" style="float:left;background-repeat:no-repeat;height:33px;padding:0 6px 0 6px;margin-left:12px;margin-top:-11px;" onClick="return showForm('liki_intro_popup')">
                                 <a style="float:left; margin-top:4px;cursor:pointer;">
 									<span style="float:left;font-size:12px;font-weight:bold;margin-top:4px;color:#1d1d1d;">
                                     	Financing by
@@ -165,25 +165,6 @@
     </form>
     <script type="text/javascript">
     //<![CDATA[
-	// Code Added by LIKIExt Starts
-		function qty_check()
-		{
-			var product_qty = document.getElementById('qty').value;
-			product_qty = product_qty.replace(/^\s+|\s+$/g,'');
-			if(product_qty == 0 || product_qty == '')
-			{
-			alert('Enter quantity in the cart');
-			return false;
-			}
-			if (!/^\d+$/.test(product_qty))
-			{
-        	alert('Enter valid quantity in the cart');
-			return false;
-    		}
-			else{return true;}
-		}
-		//window.location.assign("http://www.w3schools.com");
-		// Code Added by LIKIExt Ends
         var productAddToCartForm = new VarienForm('product_addtocart_form');
         productAddToCartForm.submit = function(button, url) {
             if (this.validator.validate()) { 
