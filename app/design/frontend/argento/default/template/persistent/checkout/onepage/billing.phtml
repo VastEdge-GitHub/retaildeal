@@ -110,7 +110,10 @@
                     <div class="field">
                         <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                         <div class="input-box">
-                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
+						<!-- Changes by Liki Ext Start -->
+						<!-- Reason of Change: "validation on zip number by changing class name -->
+                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text required-entry validate-length  maximum-length-6 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
+						<!-- Changes by Liki Ext End -->
                         </div>
                     </div>
                     <div class="field">
@@ -125,9 +128,9 @@
                         <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
                         <div class="input-box">
 						<!--LIKI Code Start
-						Reason:change the validation class to avoid alpha values and greater than 10 Digits value
+						Reason:change the validation class to avoid alpha values and should be 10 Digits value
 						-->
-                            <input type="text" name="billing[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry validate-length  maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="billing:telephone" />
+                            <input type="text" name="billing[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry validate-length minimum-length-10 maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="billing:telephone" />
 							<!--LIKI Code End-->
                         </div>
                     </div>
@@ -138,7 +141,7 @@
                         </div>
                     </div>
                 </li>
-                <?php if(!$this->isCustomerLoggedIn()): ?>
+				<?php if(!$this->isCustomerLoggedIn()): ?>
 
         <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
         <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
@@ -177,22 +180,19 @@
                 </li>
                 <?php echo $this->getChildHtml('persistent.remember.me'); ?>
                 <?php endif; ?>
-                <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-                    <li class="control">
-                        <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
-                    </li>
-                <?php else:?>
-                    <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
-                <?php endif; ?>
                 <?php echo $this->getChildHtml('form.additional.info'); ?>
-			<!-- Changes by Liki Ext Start -->
-			<!-- Reason of Change: "* Required Fields" was required at this form -->
-			<p class="required" style=" position: relative; left: -5px; top: 73px; "><?php echo $this->__('* Required Fields') ?></p>
-			<!-- Changes by Liki Ext End -->
             </ul>
             <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
         </fieldset>
      </li>
+                <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
+                    <li class="control">
+                        <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
+                    </li>
+					
+                <?php else:?>
+                    <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
+                <?php endif; ?>
     <?php if ($this->canShip()): ?>
         <li class="control">
             <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1"<?php if ($this->isUseBillingAddressForShipping()) {?> checked="checked"<?php }?> title="<?php echo  $this->__('Ship to this address') ?>" onclick="$('shipping:same_as_billing').checked = true;" class="radio" /><label for="billing:use_for_shipping_yes"><?php echo  $this->__('Ship to this address') ?></label></li>
@@ -200,16 +200,20 @@
             <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_no" value="0"<?php if (!$this->isUseBillingAddressForShipping()) {?> checked="checked"<?php }?> title="<?php echo $this->__('Ship to different address') ?>" onclick="$('shipping:same_as_billing').checked = false;" class="radio" /><label for="billing:use_for_shipping_no"><?php echo $this->__('Ship to different address') ?></label>
         </li>
     <?php endif; ?>
+			
     </ul>
     <?php if (!$this->canShip()): ?>
         <input type="hidden" name="billing[use_for_shipping]" value="1" />
     <?php endif; ?>
     <div class="buttons-set" id="billing-buttons-container">
-<!-- Changes by Liki Ext Start -->
-<!-- Reason of Change: "* Required Fields" was not required -->
-<!--        <p class="required"><?php //echo $this->__('* Required Fields') ?></p> -->
-<!-- Changes by Liki Ext End -->
-        <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+	<!-- Changes by Likiext Start -->
+	<!-- Reason of Cahnge: "* Required Fields" need to be placed here-->
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+	<!-- Changes by Likiext End -->
+    <!--Changes by Likiext Start -->
+	<!--Reason of Cahnge: "analytischk_b() use for segment io tracking-->
+      <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save(); analytischk_b()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+    <!-- Changes by Likiext End -->
         <span class="please-wait" id="billing-please-wait" style="display:none;">
             <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
         </span>
@@ -239,3 +243,18 @@
     }
 //]]>
 </script>
+<!---Changes By Liki Ext Start--->
+<!--- start for segment io tracking---->
+<script type="text/javascript">
+function analytischk_b()
+{
+analytics.track('Cart', {
+  UserId: '<?php echo customer_Id; ?>',
+  SessionId: '<?php echo Session_Id; ?>',
+  MagentoOrderId: '<?php echo Order_Id; ?>',
+  LikiOrderId: '...',
+  Action: 'SpecifiesBillingInformation'
+});
+}
+</script>
+<!---- end for segment io tracking---->
