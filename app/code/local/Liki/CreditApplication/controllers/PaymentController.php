@@ -41,7 +41,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 		if ($session->getLastRealOrderId()) {
 			$incrementId = $session->getLastRealOrderId();
 			if (empty($incrementId)) {
-				$this->_redirect('checkout/onepage/');
+				$this->_redirect('checkout/onepage/payment');
 				return;
 			}
 			$order = Mage::getModel('sales/order')->loadByIncrementId($session->getLastRealOrderId());
@@ -67,6 +67,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 		}
 		$this->_redirect('checkout/onepage/');
 		}
+
 		//Reason of change: Encode all data and remove single quotes
 		//Prepare Parameters For Liki Post Data
 		private function prepareLikiPostParameters(){		
@@ -86,6 +87,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$likipayment['MerchantSession']=$MerchantSession;
 			$Order['MagentoOrderId']=$order->getEntityId();
 			$Order['CreateDate']=date("M d, Y");
+
 			$shipping_cost=$order->getShippingAmount();
 			foreach ($items as $value)
 			{
@@ -94,7 +96,8 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 //				$productname = urlencode($value->getName());
 				$Item['MerchantProductDescription']=$productname;
 //				$Item['Amount']=urlencode($value->getPrice());
-				$Item['Amount']=$value->getPrice();
+				$qty=$value['qty_ordered'];
+				$Item['Amount']=($value->getPrice() * $qty);
 //				$Product['ReferenceID']=urlencode($value->getSku());
 				$Product['ReferenceID']=$value->getSku();
 				$Item["ProductDefinition"]=$Product;
@@ -143,7 +146,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 				$AddressShipping['Type']='Shipping';
 				$region = Mage::getModel('directory/region')->load($shippingAddress['region_id']);
 //				$AddressShipping['State']=urlencode($shippingAddress['code']);	
-				$AddressShipping['State']=str_replace("&","and",$shippingAddress['code']);	
+				$AddressShipping['State']=str_replace("&","and",$region['code']);	
 				$HomePhoneNumber['Type']='Home';
 //				$HomePhoneNumber['Number']=urlencode($shippingAddress['telephone']);
 				$HomePhoneNumber['Number']=str_replace("&","and",$shippingAddress['telephone']);
@@ -161,10 +164,10 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 				$city=$shippingAddress['city'];
 				$BillingAddress['City']=str_replace("&","and",$city);
 				$BillingAddress['Type']='billing';
-				$regionBilling = Mage::getModel('directory/region')->load($BillingAddress['region_id']);
+				$regionBilling = Mage::getModel('directory/region')->load($billingAddress['region_id']);
 //				$code=urlencode($shippingAddress['code']);
 				$code=$shippingAddress['code'];
-				$BillingAddress['State']=str_replace("&","and",$code);	
+				$BillingAddress['State']=str_replace("&","and",$regionBilling['code']);	
 				//LIKI Code End
 				array_push($Address, $BillingAddress);
 			}
