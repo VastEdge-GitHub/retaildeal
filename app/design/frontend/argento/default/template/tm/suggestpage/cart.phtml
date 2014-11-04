@@ -13,10 +13,18 @@ if (!Mage::registry('product')) {
 }
 // ajaxpro compatibility
 ?>
+<<<<<<< HEAD
 <!--- end segmentio --->
 <!--LIKI Code Start
 	Reason: when we Update the qty of products its display two error, to display the appropriate error we made changes here as follow:
 -->
+=======
+
+<!--LIKI Code Start
+	Reason: when we Update the qty of products its display two error, to display the appropriate error we made changes here as follow:
+-->
+<<<<<<< HEAD
+>>>>>>> master
 <?php $flag=0; ?>
 <div>		
 <?php
@@ -24,6 +32,22 @@ if (!Mage::registry('product')) {
     if(count($error_array) > 2)
 	{	$flag=2;
 		$error_custom = explode('"',$error_array[0]);
+<<<<<<< HEAD
+=======
+=======
+<div>		
+<?php
+	//echo $this->getMessagesBlock()->getGroupedHtml();
+    $error_array = explode(".",$this->getMessagesBlock()->getGroupedHtml());
+	//print_r($error_array);
+	//echo $error_array['type']; 	
+    if(count($error_array) > 2)
+	{	
+		//echo $error_array[0];
+		$error_custom = explode('"',$error_array[0]);
+		//echo $error_custom[4];
+>>>>>>> RD-131/Upinder
+>>>>>>> master
 		if (strpos($error_custom[4],"The requested quantity for") !== false || strpos($error_custom[4],"The maximum quantity allowed for purchase is 10000") !== false) 
 		{
 			echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>".$error_array[1]."</span></li></ul></li></ul>";
@@ -33,11 +57,23 @@ if (!Mage::registry('product')) {
 			echo $error_array[0].$error_array[1];
 	}	}
 	else
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 	{	
 		echo $error_array[0];
 		$flag=strlen($error_array[0]);
 	}
 	
+<<<<<<< HEAD
+=======
+=======
+	{
+		echo $error_array[0];
+	}
+>>>>>>> RD-131/Upinder
+>>>>>>> master
 	//$_messageCollection->clear();
 ?>
 </div>
@@ -46,8 +82,17 @@ if (!Mage::registry('product')) {
 <!--Changes By Liki Ext Start-->
 <div class="suggestpage-activity col2-set" style=" min-width: 600px; ">
 <!--Changes By Liki Ext End-->
+<<<<<<< HEAD
    
 	<?php 
+=======
+<<<<<<< HEAD
+   
+	<?php 
+=======
+    <?php
+>>>>>>> RD-131/Upinder
+>>>>>>> master
 	    $_item = null;
         if ($product = Mage::registry('product')) :
             $_item = $this->getQuote()->getItemByProduct($product);

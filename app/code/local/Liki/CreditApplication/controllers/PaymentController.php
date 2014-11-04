@@ -67,7 +67,6 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 		}
 		$this->_redirect('checkout/onepage/');
 		}
-
 		//Reason of change: Encode all data and remove single quotes
 		//Prepare Parameters For Liki Post Data
 		private function prepareLikiPostParameters(){		
@@ -87,7 +86,6 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$likipayment['MerchantSession']=$MerchantSession;
 			$Order['MagentoOrderId']=$order->getEntityId();
 			$Order['CreateDate']=date("M d, Y");
-
 			$shipping_cost=$order->getShippingAmount();
 			foreach ($items as $value)
 			{
