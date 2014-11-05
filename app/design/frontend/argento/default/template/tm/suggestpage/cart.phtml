@@ -13,11 +13,18 @@ if (!Mage::registry('product')) {
 }
 // ajaxpro compatibility
 ?>
+<<<<<<< HEAD
+<!--- end segmentio --->
+<!--LIKI Code Start
+	Reason: when we Update the qty of products its display two error, to display the appropriate error we made changes here as follow:
+-->
+=======
 
 <!--LIKI Code Start
 	Reason: when we Update the qty of products its display two error, to display the appropriate error we made changes here as follow:
 -->
 <<<<<<< HEAD
+>>>>>>> master
 <?php $flag=0; ?>
 <div>		
 <?php
@@ -25,6 +32,8 @@ if (!Mage::registry('product')) {
     if(count($error_array) > 2)
 	{	$flag=2;
 		$error_custom = explode('"',$error_array[0]);
+<<<<<<< HEAD
+=======
 =======
 <div>		
 <?php
@@ -38,6 +47,7 @@ if (!Mage::registry('product')) {
 		$error_custom = explode('"',$error_array[0]);
 		//echo $error_custom[4];
 >>>>>>> RD-131/Upinder
+>>>>>>> master
 		if (strpos($error_custom[4],"The requested quantity for") !== false || strpos($error_custom[4],"The maximum quantity allowed for purchase is 10000") !== false) 
 		{
 			echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>".$error_array[1]."</span></li></ul></li></ul>";
@@ -48,16 +58,22 @@ if (!Mage::registry('product')) {
 	}	}
 	else
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 	{	
 		echo $error_array[0];
 		$flag=strlen($error_array[0]);
 	}
 	
+<<<<<<< HEAD
+=======
 =======
 	{
 		echo $error_array[0];
 	}
 >>>>>>> RD-131/Upinder
+>>>>>>> master
 	//$_messageCollection->clear();
 ?>
 </div>
@@ -70,8 +86,13 @@ if (!Mage::registry('product')) {
    
 	<?php 
 =======
+<<<<<<< HEAD
+   
+	<?php 
+=======
     <?php
 >>>>>>> RD-131/Upinder
+>>>>>>> master
 	    $_item = null;
         if ($product = Mage::registry('product')) :
             $_item = $this->getQuote()->getItemByProduct($product);
@@ -113,7 +134,10 @@ if (!Mage::registry('product')) {
             <div class="actions">
                 <button onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>');" class="btn-suggest-page btn-suggest-cart" title="<?php echo $this->__('Edit Your Cart') ?>" type="button"><span><span><?php echo $this->__('Edit your Cart') ?></span></span></button>
                 <?php if ($_cartQty && $this->isPossibleOnepageCheckout()) : ?>
-                    <button onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')" class="btn-suggest-page btn-suggest-checkout" title="<?php echo $this->__('Checkout') ?>" type="button"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+    <!---Changes By Liki Ext Start--->
+   <!--- start for segment io tracking---->
+                    <button onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>'); analytischk()" class="btn-suggest-page btn-suggest-checkout" title="<?php echo $this->__('Checkout') ?>" type="button"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+     <!----- End of liki change here ----->
                 <?php endif; ?>
             </div>
         </div>
@@ -127,7 +151,10 @@ if (!Mage::registry('product')) {
                  </span>
                  <img src="/amazon_import_products/liki_img/leaseit_keepit.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; margin-left:8px;margin-top:1px;" width="60">
             </div>-->
-            <a href="/liki_introduction/" target="_blank">
+			<!--LIKI Code Start
+				Reason: displaying a underline of achor tag so, text-decoration has set none of anchor tag -->
+            <a style="text-decoration:none;" href="/liki_introduction/" target="_blank">
+			<!--LIKI Code End-->
 			<!--Changes By Liki Ext Start-->
             <div class="chkout_btn" style="float: left;height: 33px;padding: 0 6px 0 6px;cursor:pointer;width:120px;margin:15px;" >
 			<!--Changes By Liki Ext end-->

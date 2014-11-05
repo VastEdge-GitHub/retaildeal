@@ -111,7 +111,7 @@
                         <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                         <div class="input-box">
 						<!-- Changes by Liki Ext Start -->
-						<!-- Reason of Change: "validation on zip number by changing class name -->
+						<!-- Reason of Change: "validation on zip number by changing class name  -->
                             <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text required-entry validate-length  maximum-length-6 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
 						<!-- Changes by Liki Ext End -->
                         </div>
