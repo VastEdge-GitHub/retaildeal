@@ -32,10 +32,14 @@
 ?>
 <div class="header-cart dropdown">
     <div class="block-title">
+<<<<<<< HEAD
 <!-- Changes By Liki Ext Start -->
 <!-- Reason of Change: To make 'item in the cart' dropdown clickable in Safari -->
         <span class="summary" onclick="initCartPopup(event);">
 <!-- Changes By Liki Ext End -->
+=======
+        <span class="summary">
+>>>>>>> master
             <?php $_cartQty = $this->getSummaryCount() ?>
             <?php if ($_cartQty == 1): ?>
                 <?php echo '<span class="summary-qty">1</span>' ?>
@@ -75,6 +79,7 @@
 </div>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 //Changes By Liki Ext Start
 //Reason of Change: To make 'item in the cart' dropdown clickable in Safari
 	function initCartPopup(event) {
@@ -88,4 +93,22 @@
 	}
 	window.onclick = destroyPopup;
 //Changes By Liki Ext End
+=======
+function initCartPopup() {
+    $$('.header-cart .summary')[0].observe('click', function(event) {
+        $('header-cart-content').toggle();
+		//Changes By Liki Ext Start
+		event.stopPropagation();
+		//Changes By Liki Ext End
+    });
+};
+//Changes By Liki Ext Start
+function destroyPopup()
+{
+ document.getElementById("header-cart-content").style.display = "none";
+}
+window.onclick = destroyPopup;
+//Changes By Liki Ext End
+initCartPopup();
+>>>>>>> master
 </script>

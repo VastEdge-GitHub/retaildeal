@@ -74,7 +74,7 @@
          * @param string $searchType type of search
          * @return mixed simpleXML object
          */
-        public function searchProducts($search, $category, $searchType, $pgnum = "1", $minPrice, $maxPrice)
+        public function searchProducts($search, $category, $searchType, $pgnum = "1", $minPrice, $maxPrice, $title)
         {            
             switch($searchType) 
             {
@@ -84,6 +84,7 @@
 													"MinimumPrice"	=> $minPrice,
 													"MaximumPrice"	=> $maxPrice,
 													"ItemPage"		=> $pgnum,
+													//"Title"			=> $title,
 													"Sort"			=> "salesrank",
                                                     "ResponseGroup" => "Large");
                                 break;            

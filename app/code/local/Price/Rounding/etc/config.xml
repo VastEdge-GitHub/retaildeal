@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <config>
+   <modules>
+     <Price_Rounding>
+       <version>0.1.0</version>
+     </Price_Rounding>
+   </modules>
+ <global>
+   <models>
+     <directory>
+       <rewrite>
+         <currency>Price_Rounding_Model_Currency</currency>
+       </rewrite>
+     </directory>
+   </models>
+ </global>
+ </config>

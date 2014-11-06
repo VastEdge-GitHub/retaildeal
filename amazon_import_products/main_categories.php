@@ -58,8 +58,8 @@
 				$minPrice 	= '165100';				// $1651
 				$maxPrice 	= '250000';				// $2500
 			}
-			if($cat_array[$n] == 'Appliances'){$max_pages = 5;}
-			if($cat_array[$n] == 'Automotive'){$max_pages = 5;}
+			if($cat_array[$n] == 'Appliances'){$max_pages = 10;}
+			if($cat_array[$n] == 'Automotive'){$max_pages = 10;}
 			$count_error	= '0';
 			$pageNum		= 1;
 			$lastPage 		= $max_pages;
@@ -68,12 +68,12 @@
 				$chk_exception		= '';
 
 	/////*****\\\\\
-	echo gmdate('Y-m-d H:i:s')."----> Amazon Import Started \n";
+	echo gmdate('Y-m-d H:i:s')."----> Amazon Import Started for Title = ".$cat_array[$n]." || Page No. = ".$pageNum." || Min Price = ".$minPrice." \n";
 	/////*****\\\\\
 												
 				try
 				{
-					$result = $obj->searchProducts($browsenodes_array[$n],$cat_array[$n],"BrowseNode",$pageNum,$minPrice,$maxPrice);
+					$result = $obj->searchProducts($browsenodes_array[$n],$cat_array[$n],"BrowseNode",$pageNum,$minPrice,$maxPrice,$cat_array[$n]);
 				}
 				catch(Exception $e)
 				{
@@ -81,7 +81,7 @@
 					
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> ".$chk_exception ." for: \n";
-	echo "BN ID - ".$browsenodes_array[$n]." || Cat Name - ".$cat_array[$n]." || Page No. - ".$pageNum." || Min Price - ".$minPrice." || Max Price - ".$maxPrice."++++++++++++ \n";
+	echo "Error Count - ".$count_error." || BN ID - ".$browsenodes_array[$n]." || Cat Name - ".$cat_array[$n]." || Page No. - ".$pageNum." || Min Price - ".$minPrice." || Max Price - ".$maxPrice."++++++++++++ \n";
 	/////*****\\\\\
 										
 					if($chk_exception == 'Invalid xml response.')
@@ -126,7 +126,7 @@
 	/////*****\\\\\	
 	echo gmdate('Y-m-d H:i:s')."----> XML to CSV Completed \n";
 	/////*****\\\\\
-	
+					$count_error = 0;
 					$pageNum++;				
 				}
 			}
