@@ -1,5 +1,5 @@
 <?php
-include('app/code/core/Mage/Core/Model/Email/Template.php');
+include_once('app/code/core/Mage/Core/Model/Email/Template.php');
 class LikiextCore_Core_Model_Email_Template extends Mage_Core_Model_Email_Template
 {
 

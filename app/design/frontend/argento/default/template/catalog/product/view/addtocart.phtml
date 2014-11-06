@@ -1,3 +1,7 @@
+<style>
+.add-to-cart .validation-advice {
+margin-right: 3px;}
+</style>
 <?php
 /**
  * Magento
@@ -39,7 +43,7 @@ margin-top: 5px !important;}
 		<!-- Changes by liki ext start -->
 		<!--REASON: Add some validation class in inputbox such as required-entry,validate-number,validate-greater-than-zero -->
 	   <label for="qty"><?php echo $this->__('Qty:') ?></label>
-	    <input style="float:right" type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty" />
+	    <input style="float:right" type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty validate-digits" />
 		
 		<?php endif; ?>
         

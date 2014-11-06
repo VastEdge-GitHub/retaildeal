@@ -41,7 +41,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 		if ($session->getLastRealOrderId()) {
 			$incrementId = $session->getLastRealOrderId();
 			if (empty($incrementId)) {
-				$this->_redirect('checkout/onepage');
+				$this->_redirect('checkout/onepage/payment');
 				return;
 			}
 			$order = Mage::getModel('sales/order')->loadByIncrementId($session->getLastRealOrderId());
@@ -118,6 +118,15 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$Customer['LastName']=str_replace("&","and",$lastname);	
 //			$email=urlencode($shippingAddress['email']);
 			$email=$shippingAddress['email'];
+			
+			//Code Added by LikiExt
+			//reason: When user email is blank then payment gateway gives the error. So we can not send blank value of emailid to payment gateway.
+ 			if($email=='')
+			{
+				$email = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+			}
+			//LIKI Code end
+			
 			$Customer['EmailAddress']=str_replace("&","and",$email);
 			$LIKI['MerchantCustomerId']=$order->customer_id;
 			$Customer['LIKI']=$LIKI;

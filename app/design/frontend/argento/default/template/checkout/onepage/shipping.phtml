@@ -154,6 +154,7 @@
 	<!-- Reason of Change: "* Required Fields" need to be placed here -->
 	 <p class="required"><?php echo $this->__('* Required Fields') ?></p>
 	<!-- Changes by Liki Ext End -->
+<<<<<<< HEAD
 	
 	<!--LIKI Code start 
 	reason: RD-158-When user cancel the order it should redirect to payment information tab so we have made changes in design.
@@ -174,6 +175,11 @@
     <!-----liki segment change end here------->
 	<!--LIKI Code End-->
         <span id="shipping-please-wait" class="please-wait" style="display:none;">
+=======
+        <p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+     <button type="button" class="button" title="<?php echo $this->__('Continue') ?>" onclick="shipping.save();"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+         <span id="shipping-please-wait" class="please-wait" style="display:none;">
+>>>>>>> master
             <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
         </span>
     </div>

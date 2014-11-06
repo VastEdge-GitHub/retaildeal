@@ -16,7 +16,6 @@
     include($base_url_magento."amazon_import_products/amazon_api_class.php");
     include($base_url_magento."amazon_import_products/amazon_parse_xml.php");
 	include($base_url_magento."app/Mage.php");
-   	include($base_url_magento."amazon_import_products/amazon_insert_products.php");
 	global $chk_exception;	
 
     $obj				= new AmazonProductAPI();
@@ -34,6 +33,7 @@
 	$cat_array				= array();
 	$browsenodes_array		= array();
 	$cat_id_arr				= array();
+	$sub_cat_name			= array();
 	$file_count				= 0;
 	
 	/////*****\\\\\
@@ -125,6 +125,7 @@
 						array_push($browsenodes_array,$amazon_id);
 						array_push($cat_array,$cat_name);
 						array_push($cat_id_arr,$prod_cat_ids);
+						array_push($sub_cat_name,trim($data['name']));
 					}
 				}
 			}
@@ -159,12 +160,12 @@
 				$chk_exception		= '';
 
 	/////*****\\\\\
-	echo gmdate('Y-m-d H:i:s')."----> Amazon Import Started \n";
+	echo gmdate('Y-m-d H:i:s')."----> Amazon Import Started for Title = ".$sub_cat_name[$n]." || Page No. = ".$pageNum." || Min Price = ".$minPrice." \n";
 	/////*****\\\\\
 												
 				try
 				{
-					$result = $obj->searchProducts($browsenodes_array[$n],$cat_array[$n],"BrowseNode",$pageNum,$minPrice,$maxPrice);
+					$result = $obj->searchProducts($browsenodes_array[$n],$cat_array[$n],"BrowseNode",$pageNum,$minPrice,$maxPrice,$sub_cat_name[$n]);
 				}
 				catch(Exception $e)
 				{
@@ -216,7 +217,7 @@
 	/////*****\\\\\	
 	echo gmdate('Y-m-d H:i:s')."----> XML to CSV Completed \n";
 	/////*****\\\\\
-	
+					$count_error = 0;
 					$pageNum++;				
 				}
 			}
