@@ -39,11 +39,7 @@
     <li id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
         <fieldset>
             <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
-             <!--LIKI Code Start
-				Reason:change the height of UL Tag because there is a big gap(white spaces) in Save in addressbook and Ship to this Address checkbox
-						-->
-			<ul style="height: 395px;">
-			<!--LIKI Code End-->
+            <ul>
                 <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setForceUseCustomerRequiredAttributes(!$this->isCustomerLoggedIn())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
                 <li class="fields">
                     <div class="field">
@@ -125,10 +121,10 @@
                         <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
                         <div class="input-box">
 						<!--LIKI Code Start
-						Reason:change the validation class to avoid alpha values and greater than 10 Digits value
+						Reason:change the validation class to avoid alpha values and Less than 10 Digits value
 						-->
-                            <input type="text" name="billing[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry validate-length  maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="billing:telephone" />
-							<!--LIKI Code End-->
+                            <input type="text" name="billing[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry validate-length minimum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="billing:telephone" />
+						<!--LIKI Code End-->
                         </div>
                     </div>
                     <div class="field">
@@ -187,7 +183,7 @@
                 <?php echo $this->getChildHtml('form.additional.info'); ?>
 			<!-- Changes by Liki Ext Start -->
 			<!-- Reason of Change: "* Required Fields" was required at this form -->
-			<p class="required" style=" position: relative; left: -5px; top: 73px; "><?php echo $this->__('* Required Fields') ?></p>
+			<p class="required"><?php echo $this->__('* Required Fields') ?></p>
 			<!-- Changes by Liki Ext End -->
             </ul>
             <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>

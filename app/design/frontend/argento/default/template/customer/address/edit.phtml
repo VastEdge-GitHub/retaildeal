@@ -60,7 +60,15 @@
 					<!--LIKI Code Start
 						Reason: Maximum and minimum 10 digits validation on Telephone fields and all digits must be numeric 
 					-->
+<<<<<<< HEAD
                         <input type="text" name="telephone" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text validate-length minimum-length-10 maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" />
+=======
+<<<<<<< HEAD
+                        <input type="text" name="telephone" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text validate-length minimum-length-10 maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" />
+=======
+                        <input type="text" name="telephone" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text validate-length maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" />
+>>>>>>> master
+>>>>>>> master
 						<!--LIKI Code End-->
                     </div>
                 </div>

@@ -91,7 +91,7 @@ if (!Mage::registry('product')) {
                 <?php if ($_cartQty && $this->isPossibleOnepageCheckout()) : ?>
     <!---Changes By Liki Ext Start--->
    <!--- start for segment io tracking---->
-                    <button onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>'); analytischk()" class="btn-suggest-page btn-suggest-checkout" title="<?php echo $this->__('Checkout') ?>" type="button"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+                    <button onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>');" class="btn-suggest-page btn-suggest-checkout" title="<?php echo $this->__('Checkout') ?>" type="button"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
      <!----- End of liki change here ----->
                 <?php endif; ?>
             </div>
