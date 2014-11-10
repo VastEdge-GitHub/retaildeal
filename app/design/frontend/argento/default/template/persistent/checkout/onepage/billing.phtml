@@ -25,6 +25,8 @@
  */
 /** @var Mage_Checkout_Block_Onepage_Billing $this */
 ?>
+<!-- Change by liki ext  -->
+<!-- Reason: For segmentio tracking -->
 <?php
 if(Mage::getSingleton('customer/session')->isLoggedIn()) {
      $customerData = Mage::getSingleton('customer/session')->getCustomer();
@@ -48,7 +50,7 @@ analytics.track('Cart', {
 });
 </script>
 <?php } ?>
-<!--- start for segment io tracking---->
+<!-- start for segment io tracking  -->
 <script type="text/javascript">
 
 analytics.track('Cart', {
@@ -61,9 +63,9 @@ analytics.track('Cart', {
 });
 
 </script>
-<!----Change by liki ext ---->
-<!---Reason: For segmentio tracking---->
-<!----- End liki ext for segment io ----------->  
+<!-- Change by liki ext  -->
+<!-- Reason: For segmentio tracking -->
+<!-- End liki ext for segment io --->  
 
 <form id="co-billing-form" action="">
 <fieldset>
@@ -283,8 +285,8 @@ analytics.track('Cart', {
     }
 //]]>
 </script>
-<!---Changes By Liki Ext Start--->
-<!--- start for segment io tracking---->
+<!-- Changes By Liki Ext Start -->
+<!-- start for segment io tracking -->
 <script type="text/javascript">
 function analytischk_b()
 {
@@ -297,4 +299,4 @@ analytics.track('Cart', {
 });
 }
 </script>
-<!---- end for segment io tracking---->
+<!-- end for segment io tracking -->

@@ -32,8 +32,8 @@
  */
 /** @var $this Mage_Checkout_Block_Onepage_Login */
 ?>
-<!----Change by liki ext ---->
-<!---Reason: For segmentio tracking---->
+<!-- Change by liki ext -->
+<!-- Reason: For segmentio tracking -->
 <?php
 if(Mage::getSingleton('customer/session')->isLoggedIn()) {
      $customerData = Mage::getSingleton('customer/session')->getCustomer();
@@ -47,7 +47,7 @@ if(Mage::getSingleton('customer/session')->isLoggedIn()) {
     $Order_Id = $order;
  }
 ?>
-<!----- End liki ext for segment io ----------->  
+<!-- End liki ext for segment io -->  
 
 <div class="col2-set<?php if (!$this->helper('customer')->isRegistrationAllowed() && !$this->getQuote()->isAllowedGuestCheckout()) echo ' login-only' ?>">
     <?php echo $this->getChildHtml('login_before')?>
@@ -170,7 +170,7 @@ if(Mage::getSingleton('customer/session')->isLoggedIn()) {
     </script>
 <?php endif; ?>
 
-<!--- start for segment io tracking---->
+<!-- start for segment io tracking -->
 <script type="text/javascript">
 function analytischk_l()
 {
@@ -185,8 +185,8 @@ analytics.track('Cart', {
 
 }
 </script>
-<!---- end for segment io tracking---->
-<!--- start for segment io tracking---->
+<!-- end for segment io tracking -->
+<!-- start for segment io tracking -->
 <script type="text/javascript">
 function analytischk_r()
 {
@@ -201,4 +201,4 @@ analytics.track('Cart', {
 
 }
 </script>
-<!---- end for segment io tracking---->
+<!-- end for segment io tracking -->

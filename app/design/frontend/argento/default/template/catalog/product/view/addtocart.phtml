@@ -1,6 +1,7 @@
 <style>
 .add-to-cart .validation-advice {
-margin-right: 3px;}
+margin-right: -24px;
+text-align: left;}
 </style>
 <?php
 /**
@@ -32,23 +33,90 @@ margin-right: 3px;}
 margin-left: 38px !important;
 margin-top: 5px !important;}
 </style>
+<!-- edite for segent io -->
+<?php $_helper 		= $this->helper('catalog/output'); ?>
+        <?php $_product 	= $this->getProduct();
+              $cur_product  = $_product->getName();// Current product name  ?>
+ <!------ end here ---->
+
+<!-- Change by liki ext  -->
+<!-- Reason: For segmentio tracking -->
+<?php
+if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+     $customerData = Mage::getSingleton('customer/session')->getCustomer();
+     $customer_Id = $customerData->getId();
+ }
+ $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
+  	 $Session_Id = $sessionId;
+	 $Session_Id; 
+ if($order = Mage::getSingleton('checkout/session')->getLastOrderId());{
+ //$OrderId = $order->getIncrementId();
+    $Order_Id = $order;
+ }
+?>
+<!-- End liki ext for segment io --->          
+<!--  start segmentio script  -->
+<!-- start for segment io tracking -->
+<script type="text/javascript">
+function analytischk_ad()
+{
+analytics.track('Currentprod', {
+  UserId: '<?php echo $customer_Id; ?>',
+  SessionId: '<?php echo $Session_Id; ?>',
+  MagentoOrderId: '<?php echo $Order_Id; ?>',
+  LikiOrderId: '...',	
+  Action: 'AddToCart',
+  Product: '<?php echo $cur_product; ?>'
+});
+}
+</script>
+ 
+<!-- End of liki changa here -->
 <?php $_product = $this->getProduct(); ?>
 <?php $buttonTitle = $this->__('Add to Cart'); ?>
 <?php if($_product->isSaleable()): ?>
     <div style="float:left;width:322px !important" class="add-to-cart">
        
 		<?php if(!$_product->isGrouped()): ?>
-		 <button style="margin-right:125px !important;float:right; border-radius:7px; box-shadow:inherit; height:27px; background:transparent url(/skin/frontend/argento/default/images/bkg_button.gif) 0 0 no-repeat; background-position:100% -170px; padding-right: 27px; margin-top:2px" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
-        
-		<!-- Changes by liki ext start -->
-		<!--REASON: Add some validation class in inputbox such as required-entry,validate-number,validate-greater-than-zero -->
-	   <label for="qty"><?php echo $this->__('Qty:') ?></label>
-	    <input style="float:right" type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty validate-digits" />
+		 <button style="margin-right:125px !important;float:right; border-radius:7px; box-shadow:inherit; height:27px; background:transparent url(/skin/frontend/argento/default/images/bkg_button.gif) 0 0 no-repeat; background-position:100% -170px; padding-right: 27px; margin-top:2px" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this); analytischk_ad();"><span><span><?php echo $buttonTitle ?></span></span></button>
 		
+	   <label for="qty"><?php echo $this->__('Qty:') ?></label>
+	   <!-- Changes by liki ext start -->
+		<!--REASON: Add some validation class in inputbox such as required-entry,validate-number,validate-greater-than-zero validate-digits-range digits-range-1-<?php //if echo $stocklevel; ?>-->
+	   		<?php $currentUrl = Mage::helper('core/url')->getCurrentUrl();
+				$url = Mage::getSingleton('core/url')->parseUrl($currentUrl);
+				$path = $url->getPath();
+				$path=explode('/',$path);
+				$oRewrite = Mage::getModel('core/url_rewrite')
+                    ->setStoreId(Mage::app()->getStore()->getId())
+                    ->loadByRequestPath($path[1]);
+					 $iProductId = $oRewrite->getProductId();
+					 $model = Mage::getModel('catalog/product'); 
+				$_product = $model->load($iProductId); 
+				$stocklevel = (int)Mage::getModel('cataloginventory/stock_item')
+                	->loadByProduct($_product)->getQty();
+					?>
+					<!-- Changes by liki ext start -->
+		<!--REASON: Add some validation class in inputbox such as required-entry,validate-number,validate-greater-than-zero -->
+	    <input style="float:right" type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty validate-digits " />
+		
+
+    
 		<?php endif; ?>
         
         <!-- Changes by liki ext end -->
 	<?php echo $this->getChildHtml('', true, true) ?>
     </div>
 <?php endif; ?>
-    
+    <script type="text/javascript">
+	
+		function test()
+		{
+			var qty= document.getElementById('qty').value;
+			//alert(qty);
+			if(qty>1)
+			{
+				//alert('123');
+			}
+		}
+</script>
