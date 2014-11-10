@@ -24,6 +24,8 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
+
 <form action="" id="co-shipping-form">
     <ul class="form-list">
     <?php if ($this->customerHasAddresses()): ?>
@@ -102,7 +104,7 @@
                             <div class="input-box">
 							<!-- Changes by Liki Ext Start -->
 							<!-- Reason of Change: "validation on zip number by changing class name -->
-                                <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="shipping[postcode]" id="shipping:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text required-entry validate-length  maximum-length-6 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" onchange="shipping.setSameAsBilling(false);" />
+                                <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="shipping[postcode]" id="shipping:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text required-entry validate-digits-range digits-range-1-999999 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" onchange="shipping.setSameAsBilling(false);" />
 							<!-- Changes by Liki Ext End -->
                             </div>
                         </div>
@@ -152,9 +154,26 @@
 	<!-- Reason of Change: "* Required Fields" need to be placed here -->
 	 <p class="required"><?php echo $this->__('* Required Fields') ?></p>
 	<!-- Changes by Liki Ext End -->
-        <p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
-     <button type="button" class="button" title="<?php echo $this->__('Continue') ?>" onclick="shipping.save();"><span><span><?php echo $this->__('Continue') ?></span></span></button>
-         <span id="shipping-please-wait" class="please-wait" style="display:none;">
+	
+	<!--LIKI Code start 
+	reason: RD-158-When user cancel the order it should redirect to payment information tab so we have made changes in design.
+	-->
+	<?php
+	$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
+	$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
+	$path = $url->getPath();
+    if (preg_match("#/CreditApplication/Payment/cancel/#", $path)) {?>
+	<!--Remove back link-->
+		<?php } else{?>
+		
+		<p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+		<?php } ?>
+    <!-- Changes by Likiext Start -->
+	<!-- Reason of Cahnge: "analytischk_s() use for segment io tracking-->
+        <button id="shipping_continue" type="button" class="button" title="<?php echo $this->__('Continue') ?>" onclick="shipping.save();test_shipping(this.id);"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+    <!-----liki segment change end here------->
+	<!--LIKI Code End-->
+        <span id="shipping-please-wait" class="please-wait" style="display:none;">
             <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
         </span>
     </div>
@@ -171,3 +190,25 @@
     var shippingRegionUpdater = new RegionUpdater('shipping:country_id', 'shipping:region', 'shipping:region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'shipping:postcode');
 //]]>
 </script>
+<!---Changes By Liki Ext Start--->
+<!--- start for segment io tracking---->
+<script type="text/javascript">
+//New function for RD-158
+function test(id)
+{
+	<?php
+	$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
+	$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
+	$path = $url->getPath();
+    if (preg_match("#/CreditApplication/Payment/cancel/#", $path)) {?>
+		setTimeout(function(){document.getElementById("opc-shipping").className = "section allow";
+		document.getElementById("opc-billing").className = "section allow";
+		document.getElementById("checkout-step-shipping").style.display = "none";
+		},1000);
+	
+	}	
+<?php } ?>	
+}
+</script>
+
+<!---- end for segment io tracking---->
