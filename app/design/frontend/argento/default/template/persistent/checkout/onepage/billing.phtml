@@ -25,46 +25,6 @@
  */
 /** @var Mage_Checkout_Block_Onepage_Billing $this */
 ?>
-<?php
-if(Mage::getSingleton('customer/session')->isLoggedIn()) {
-     $customerData = Mage::getSingleton('customer/session')->getCustomer();
-     $customer_Id = $customerData->getId();
- }
- $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
-  	 $Session_Id = $sessionId;
-	 $Session_Id; 
- if($order = Mage::getSingleton('checkout/session')->getLastOrderId());{
- //$OrderId = $order->getIncrementId();
-    $Order_Id = $order;
- }
-?>
-<?php
-if(Mage::getSingleton('customer/session')->isLoggedIn()) {?>
-<script type="text/javascript">
-analytics.track('Cart', {
-  UserId: 'Alreadylogin',
-  Action: 'SelectsCheckoutPath',
-  CheckoutMethod: 'Login'
-});
-</script>
-<?php } ?>
-<!--- start for segment io tracking---->
-<script type="text/javascript">
-
-analytics.track('Cart', {
-  UserId: '<?php echo $customer_Id; ?>',
-  SessionId: '<?php echo $Session_Id; ?>',
-  MagentoOrderId: '<?php echo $Order_Id; ?>',
-  LikiOrderId: '...',
-  Action: 'SelectsCheckoutPath',
-  CheckoutMethod: 'Login'
-});
-
-</script>
-<!----Change by liki ext ---->
-<!---Reason: For segmentio tracking---->
-<!----- End liki ext for segment io ----------->  
-
 <form id="co-billing-form" action="">
 <fieldset>
     <ul class="form-list">
@@ -151,8 +111,8 @@ analytics.track('Cart', {
                         <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                         <div class="input-box">
 						<!-- Changes by Liki Ext Start -->
-						<!-- Reason of Change: "validation on zip number by changing class name -->
-                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text required-entry validate-digits-range digits-range-1-999999 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
+						<!-- Reason of Change: "validation on zip number by changing class name  -->
+                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text required-entry validate-length  maximum-length-6 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
 						<!-- Changes by Liki Ext End -->
                         </div>
                     </div>
@@ -250,10 +210,7 @@ analytics.track('Cart', {
 	<!-- Reason of Cahnge: "* Required Fields" need to be placed here-->
         <p class="required"><?php echo $this->__('* Required Fields') ?></p>
 	<!-- Changes by Likiext End -->
-    <!--Changes by Likiext Start -->
-	<!--Reason of Cahnge: "analytischk_b() use for segment io tracking-->
-      <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save(); analytischk_b()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
-    <!-- Changes by Likiext End -->
+        <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
         <span class="please-wait" id="billing-please-wait" style="display:none;">
             <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
         </span>
@@ -283,18 +240,3 @@ analytics.track('Cart', {
     }
 //]]>
 </script>
-<!---Changes By Liki Ext Start--->
-<!--- start for segment io tracking---->
-<script type="text/javascript">
-function analytischk_b()
-{
-analytics.track('Cart', {
-  UserId: '<?php echo $customer_Id; ?>',
-  SessionId: '<?php echo $Session_Id; ?>',
-  MagentoOrderId: '<?php echo $Order_Id; ?>',
-  LikiOrderId: '...',
-  Action: 'SpecifiesBillingInformation'
-});
-}
-</script>
-<!---- end for segment io tracking---->
