@@ -24,8 +24,8 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<!---Changes By Liki Ext Start--->
-<!--- start for segment io tracking---->
+<!-- Changes By Liki Ext Start -->
+<!-- start for segment io tracking -->
 <?php $cur_method = $mcode = Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance()->getTitle(); ?>
 <?php
 if(Mage::getSingleton('customer/session')->isLoggedIn()) {
@@ -40,7 +40,8 @@ if(Mage::getSingleton('customer/session')->isLoggedIn()) {
     $Order_Id = $order;
  }
 ?>
-<!----- End liki ext for segment io ----------->  
+
+<!-- End liki ext for segment io -->  
 <script type="text/javascript">
 analytics.track('Cart', {
   UserId: '<?php echo $customer_Id; ?>',
@@ -51,8 +52,7 @@ analytics.track('Cart', {
   PaymentMethod: '<?php echo $cur_method ;?>'
 });
 </script>
-<!---- End segment io here----->
-
+<!-- End segment io here -->
 <?php echo $this->getChildHtml('items_before'); ?>
 <div id="checkout-review-table-wrapper">
     <table class="data-table" id="checkout-review-table">
