@@ -1,20 +1,3 @@
-<!----Change by liki ext ---->
-<!---Reason: For segmentio tracking---->
-<?php
-if(Mage::getSingleton('customer/session')->isLoggedIn()) {
-     $customerData = Mage::getSingleton('customer/session')->getCustomer();
-     $customer_Id = $customerData->getId();
- }
- $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
-  	 $Session_Id = $sessionId;
-	 $Session_Id; 
- if($order = Mage::getSingleton('checkout/session')->getLastOrderId());{
- //$OrderId = $order->getIncrementId();
-    $Order_Id = $order;
- }
-?>
-<!----- End liki ext for segment io ---------> 
-
 <?php
 // ajaxpro compatibility
 if (!Mage::registry('product')) {
@@ -108,11 +91,7 @@ if (!Mage::registry('product')) {
                 <?php if ($_cartQty && $this->isPossibleOnepageCheckout()) : ?>
     <!---Changes By Liki Ext Start--->
    <!--- start for segment io tracking---->
-<<<<<<< HEAD
-                    <button onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>'); analytischk()" class="btn-suggest-page btn-suggest-checkout" title="<?php echo $this->__('Checkout') ?>" type="button"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
-=======
                     <button onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>');" class="btn-suggest-page btn-suggest-checkout" title="<?php echo $this->__('Checkout') ?>" type="button"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
->>>>>>> master
      <!----- End of liki change here ----->
                 <?php endif; ?>
             </div>
@@ -141,21 +120,3 @@ if (!Mage::registry('product')) {
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-<!---Changes By Liki Ext Start--->
-<!--- start for segment io tracking---->
-<script type="text/javascript">
-function analytischk()
-{
-analytics.track('Cart', {
-  UserId: '<?php echo $customer_Id; ?>',
-  SessionId: '<?php echo $Session_Id; ?>',
-  MagentoOrderId: '<?php echo $Order_Id; ?>',
-  LikiOrderId: '...',
-  Action: 'StartsCheckout'
-});
-}
-</script>
-<!---- end for segment io here---->
-=======
->>>>>>> master

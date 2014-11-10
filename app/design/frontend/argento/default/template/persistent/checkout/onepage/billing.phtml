@@ -150,20 +150,10 @@ analytics.track('Cart', {
                     <div class="field">
                         <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                         <div class="input-box">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 48043303cccfdc78ddef9435a5f5702bd86ac6fc
 						<!-- Changes by Liki Ext Start -->
 						<!-- Reason of Change: "validation on zip number by changing class name -->
                             <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text required-entry validate-digits-range digits-range-1-999999 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
 						<!-- Changes by Liki Ext End -->
-<<<<<<< HEAD
-=======
-                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
->>>>>>> master
-=======
->>>>>>> 48043303cccfdc78ddef9435a5f5702bd86ac6fc
                         </div>
                     </div>
                     <div class="field">
@@ -256,10 +246,6 @@ analytics.track('Cart', {
         <input type="hidden" name="billing[use_for_shipping]" value="1" />
     <?php endif; ?>
     <div class="buttons-set" id="billing-buttons-container">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 48043303cccfdc78ddef9435a5f5702bd86ac6fc
 	<!-- Changes by Likiext Start -->
 	<!-- Reason of Cahnge: "* Required Fields" need to be placed here-->
         <p class="required"><?php echo $this->__('* Required Fields') ?></p>
@@ -268,16 +254,6 @@ analytics.track('Cart', {
 	<!--Reason of Cahnge: "analytischk_b() use for segment io tracking-->
       <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save(); analytischk_b()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
     <!-- Changes by Likiext End -->
-<<<<<<< HEAD
-=======
-<!-- Changes by Liki Ext Start -->
-<!-- Reason of Change: "* Required Fields" was not required -->
-<!--        <p class="required"><?php //echo $this->__('* Required Fields') ?></p> -->
-<!-- Changes by Liki Ext End -->
-        <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
->>>>>>> master
-=======
->>>>>>> 48043303cccfdc78ddef9435a5f5702bd86ac6fc
         <span class="please-wait" id="billing-please-wait" style="display:none;">
             <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
         </span>
@@ -307,10 +283,6 @@ analytics.track('Cart', {
     }
 //]]>
 </script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 48043303cccfdc78ddef9435a5f5702bd86ac6fc
 <!---Changes By Liki Ext Start--->
 <!--- start for segment io tracking---->
 <script type="text/javascript">
@@ -325,10 +297,4 @@ analytics.track('Cart', {
 });
 }
 </script>
-<<<<<<< HEAD
 <!---- end for segment io tracking---->
-=======
->>>>>>> master
-=======
-<!---- end for segment io tracking---->
->>>>>>> 48043303cccfdc78ddef9435a5f5702bd86ac6fc
