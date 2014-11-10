@@ -48,7 +48,6 @@ if(Mage::getSingleton('customer/session')->isLoggedIn()) {
  }
 ?>
 <!-- End liki ext for segment io -->  
-
 <div class="col2-set<?php if (!$this->helper('customer')->isRegistrationAllowed() && !$this->getQuote()->isAllowedGuestCheckout()) echo ' login-only' ?>">
     <?php echo $this->getChildHtml('login_before')?>
     <div class="col-1">
@@ -182,7 +181,6 @@ analytics.track('Cart', {
   Action: 'SelectsCheckoutPath',
   CheckoutMethod: 'Login'
 });
-
 }
 </script>
 <!-- end for segment io tracking -->
@@ -198,7 +196,6 @@ analytics.track('Cart', {
   Action: 'SelectsCheckoutPath',
   CheckoutMethod: 'Register'
 });
-
 }
 </script>
 <!-- end for segment io tracking -->

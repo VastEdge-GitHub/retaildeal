@@ -40,6 +40,7 @@ if(Mage::getSingleton('customer/session')->isLoggedIn()) {
     $Order_Id = $order;
  }
 ?>
+
 <!-- End liki ext for segment io -->  
 <script type="text/javascript">
 analytics.track('Cart', {
@@ -52,7 +53,6 @@ analytics.track('Cart', {
 });
 </script>
 <!-- End segment io here -->
-
 <?php echo $this->getChildHtml('items_before'); ?>
 <div id="checkout-review-table-wrapper">
     <table class="data-table" id="checkout-review-table">
