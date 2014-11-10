@@ -31,6 +31,12 @@
  * @see Mage_Checkout_Block_Onepage_Payment_Methods
  */
 ?>
+<!--- start for segment io tracking---->
+<script type="text/javascript">
+analytics.track('Cart', {
+  Action: 'SpecifiesShippingInformation'
+});
+</script>
 <dl class="sp-methods" id="checkout-payment-method-load">
 <?php
     $methods = $this->getMethods();
@@ -58,7 +64,7 @@
 		}
 		if($_code == 'CreditApplication')
 		{
-			$custom_logo = '<img onclick="return showForm(\'liki_intro_popup\')" src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="margin:-7px 0  0 20px; cursor:pointer" width="45px">';
+			$custom_logo = '<img onclick="return showForm(\'liki_intro_popup\')" src="'.$this->getSkinUrl('images/liki_btn.png').'" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="margin:-7px 0  0 20px; cursor:pointer" width="45px">';
 			$custom_checked = 'checked="checked"';
 		}
 		else
