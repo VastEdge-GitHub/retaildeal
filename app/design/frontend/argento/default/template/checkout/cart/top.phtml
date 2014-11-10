@@ -30,9 +30,28 @@
  * @see Mage_Checkout_Block_Cart_Sidebar
  */
 ?>
+<!-- Change by liki ext -->
+<!-- Reason: For segmentio tracking -->
+<?php
+if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+     $customerData = Mage::getSingleton('customer/session')->getCustomer();
+     $customer_Id = $customerData->getId();
+ }
+ $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
+  	 $Session_Id = $sessionId;
+	 $Session_Id; 
+ if($order = Mage::getSingleton('checkout/session')->getLastOrderId());{
+ //$OrderId = $order->getIncrementId();
+    $Order_Id = $order;
+ }
+?>
+<!-- End liki ext for segment io -->
 <div class="header-cart dropdown">
     <div class="block-title">
-        <span class="summary">
+<!-- Changes By Liki Ext Start -->
+<!-- Reason of Change: To make 'item in the cart' dropdown clickable in Safari -->
+        <span class="summary" onclick="initCartPopup(event);">
+<!-- Changes By Liki Ext End -->
             <?php $_cartQty = $this->getSummaryCount() ?>
             <?php if ($_cartQty == 1): ?>
                 <?php echo '<span class="summary-qty">1</span>' ?>
@@ -45,8 +64,8 @@
         <button type="button"
             title="<?php echo $this->__('Checkout') ?>"
             class="button"
-            onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"
-        ><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+            onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>');analytischk()"
+        ><span><span><?php echo $this->__('Checkout') ?></span></span></button>           <!----- analytischk() edite for segentio on 31-10-014-------->
     </div>
     <?php $_items = $this->getItems() ?>
     <ol id="header-cart-content" class="dropdown-menu pull-right mini-products-list" style="display:none;">
@@ -72,20 +91,32 @@
 </div>
 
 <script type="text/javascript">
-function initCartPopup() {
-    $$('.header-cart .summary')[0].observe('click', function(event) {
-        $('header-cart-content').toggle();
-		//Changes By Liki Ext Start
-		event.stopPropagation();
-		//Changes By Liki Ext End
-    });
-};
 //Changes By Liki Ext Start
-function destroyPopup()
-{
- document.getElementById("header-cart-content").style.display = "none";
-}
-window.onclick = destroyPopup;
+//Reason of Change: To make 'item in the cart' dropdown clickable in Safari
+	function initCartPopup(event) {
+			$('header-cart-content').toggle();
+			event.stopPropagation();
+	}
+	
+	function destroyPopup()
+	{
+	 document.getElementById("header-cart-content").style.display = "none";
+	}
+	window.onclick = destroyPopup;
 //Changes By Liki Ext End
-initCartPopup();
 </script>
+
+<!-- start for segment io tracking -->
+<script type="text/javascript">
+function analytischk()
+{
+analytics.track('Cart', {
+  UserId: '<?php echo $customer_Id; ?>',
+  SessionId: '<?php echo $Session_Id; ?>',
+  MagentoOrderId: '<?php echo $Order_Id; ?>',
+  LikiOrderId: '...',
+  Action: 'StartsCheckout'
+});
+}
+</script>
+<!-- end for segment io -->
