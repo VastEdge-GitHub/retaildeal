@@ -25,8 +25,6 @@
  */
 /** @var Mage_Checkout_Block_Onepage_Billing $this */
 ?>
-<!-- Change by liki ext  -->
-<!-- Reason: For segmentio tracking -->
 <?php
 if(Mage::getSingleton('customer/session')->isLoggedIn()) {
      $customerData = Mage::getSingleton('customer/session')->getCustomer();
@@ -39,7 +37,7 @@ if(Mage::getSingleton('customer/session')->isLoggedIn()) {
  //$OrderId = $order->getIncrementId();
     $Order_Id = $order;
  }
-?>
+ ?>
 <?php
 if(Mage::getSingleton('customer/session')->isLoggedIn()) {?>
 <script type="text/javascript">
@@ -50,9 +48,8 @@ analytics.track('Cart', {
 });
 </script>
 <?php } ?>
-<!-- start for segment io tracking  -->
+<!--- start for segment io tracking---->
 <script type="text/javascript">
-
 analytics.track('Cart', {
   UserId: '<?php echo $customer_Id; ?>',
   SessionId: '<?php echo $Session_Id; ?>',
@@ -62,9 +59,10 @@ analytics.track('Cart', {
   CheckoutMethod: 'Login'
 });
 </script>
-<!-- Change by liki ext  -->
-<!-- Reason: For segmentio tracking -->
-<!-- End liki ext for segment io --->  
+<!----Change by liki ext ---->
+<!---Reason: For segmentio tracking---->
+<!----- End liki ext for segment io ----------->  
+
 <form id="co-billing-form" action="">
 <fieldset>
     <ul class="form-list">
@@ -226,7 +224,10 @@ analytics.track('Cart', {
         </fieldset>
      </li>
                 <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-                    <li class="control">
+					<!-- Changes by Liki Ext Start -->
+					<!-- Reason of Change: RD-203, To improve look of billing information form for already registered android user -->
+                    <li class="control" id="add_book" >
+					<!-- Changes by Liki Ext End -->
                         <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
                     </li>
 					
@@ -234,13 +235,15 @@ analytics.track('Cart', {
                     <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
                 <?php endif; ?>
     <?php if ($this->canShip()): ?>
-        <li class="control">
+		<!-- Changes by Liki Ext Start -->
+		<!-- Reason of Change: RD-203, To improve look of billing information form for new android user -->
+        <li class="control" id="same_add" >
+		<!-- Changes by Liki Ext End -->
             <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1"<?php if ($this->isUseBillingAddressForShipping()) {?> checked="checked"<?php }?> title="<?php echo  $this->__('Ship to this address') ?>" onclick="$('shipping:same_as_billing').checked = true;" class="radio" /><label for="billing:use_for_shipping_yes"><?php echo  $this->__('Ship to this address') ?></label></li>
-        <li class="control">
+        <li class="control" >
             <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_no" value="0"<?php if (!$this->isUseBillingAddressForShipping()) {?> checked="checked"<?php }?> title="<?php echo $this->__('Ship to different address') ?>" onclick="$('shipping:same_as_billing').checked = false;" class="radio" /><label for="billing:use_for_shipping_no"><?php echo $this->__('Ship to different address') ?></label>
         </li>
     <?php endif; ?>
-			
     </ul>
     <?php if (!$this->canShip()): ?>
         <input type="hidden" name="billing[use_for_shipping]" value="1" />
@@ -283,8 +286,8 @@ analytics.track('Cart', {
     }
 //]]>
 </script>
-<!-- Changes By Liki Ext Start -->
-<!-- start for segment io tracking -->
+<!---Changes By Liki Ext Start--->
+<!--- start for segment io tracking---->
 <script type="text/javascript">
 function analytischk_b()
 {
@@ -297,4 +300,37 @@ analytics.track('Cart', {
 });
 }
 </script>
-<!-- end for segment io tracking -->
+<!-- Changes by Liki Ext Start -->
+<!-- Reason of Change: RD-203, To improve look of billing information form for new android user -->
+<script type="text/javascript">
+function get_url()
+{
+	var curr_url = window.location.href;
+	var check_url = curr_url.lastIndexOf("register");
+	if(check_url != -1)
+	{
+		document.getElementById("same_add").setAttribute("id", "same_bill_add");
+	}
+}
+get_url();
+</script>
+<script type="text/javascript">
+document.getElementById("add_book").setAttribute("id", "add_book_bill");
+function get_sel_val()
+{ 
+	var displayValue = document.getElementById('billing-new-address-form').style.display;
+	if(displayValue == 'none')
+	{
+		 document.getElementById("add_book_bill").setAttribute("id", "add_book");
+		 document.getElementById("billing-new-address-form").style.display = "block";	
+	}
+	else
+	{
+		document.getElementById("billing-new-address-form").style.display = "none";
+		document.getElementById("add_book").setAttribute("id", "add_book_bill");
+	}
+}
+document.getElementById("billing-address-select").onchange = function() {get_sel_val()};
+</script>
+<!-- Changes by Liki Ext End -->
+<!---- end for segment io tracking---->
