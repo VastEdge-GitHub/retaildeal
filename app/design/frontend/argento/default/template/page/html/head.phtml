@@ -79,3 +79,14 @@ function close_popup(){
 </script>
 <div id="liki_intro_popup" style="display:none"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('liki_intro')->toHtml()?></div>
 <!-- Changes by liki ext End -->
+<!-- change by liki
+	Reason: for Adroll SEO -->
+<?php 
+if($_product = Mage::registry('current_product')){
+  $products_ID = $_product->getId();
+}
+?>
+<script type="text/javascript">
+adroll_custom_data = {"product_id": "<?php echo $products_ID;?>"};
+</script>
+<!--end liki for Adroll-->
