@@ -1,0 +1,153 @@
+<!-- Change by liki ext -->
+<!-- Reason: For segmentio tracking -->
+<?php
+if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+     $customerData = Mage::getSingleton('customer/session')->getCustomer();
+     $customer_Id = $customerData->getId();
+ }
+ $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
+  	 $Session_Id = $sessionId;
+	 $Session_Id; 
+ if($order = Mage::getSingleton('checkout/session')->getLastOrderId());{
+ //$OrderId = $order->getIncrementId();
+    $Order_Id = $order;
+ }
+?>
+<!-- End liki ext for segment io ---> 
+
+<?php
+// ajaxpro compatibility
+if (!Mage::registry('product')) {
+   	$productId = Mage::getSingleton('checkout/session')->getSuggestpageProductId();
+	   if ($productId) {
+       $product = Mage::getModel('catalog/product')
+            ->setStoreId(Mage::app()->getStore()->getId())
+            ->load($productId);
+        if ($product->getId()) {
+            Mage::register('product', $product);
+        }
+    }
+}
+// ajaxpro compatibility
+?>
+<!-- end segmentio -->
+<!-- LIKI Code Start
+	Reason: when we Update the qty of products its display two error, to display the appropriate error we made changes here as follow:
+-->
+<?php $flag=0; ?>
+<div>		
+<?php
+    $error_array = explode(".  ",$this->getMessagesBlock()->getGroupedHtml());
+    if(count($error_array) > 2)
+	{	$flag=2;
+		$error_custom = explode('"',$error_array[0]);
+		if (strpos($error_custom[4],"The requested quantity for") !== false || strpos($error_custom[4],"The maximum quantity allowed for purchase is 10000") !== false) 
+		{
+			echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>".$error_array[1]."</span></li></ul></li></ul>";
+		}
+		else
+		{
+			echo $error_array[0].$error_array[1];
+	}	}
+	else
+	{	
+		echo $error_array[0];
+		$flag=strlen($error_array[0]);
+	}
+	
+	//$_messageCollection->clear();
+?>
+</div>
+<!--LIKI Code End-->			
+		
+<!--Changes By Liki Ext Start-->
+<div class="suggestpage-activity col2-set" style=" min-width: 600px; ">
+<!--Changes By Liki Ext End-->   
+	<?php 
+	    $_item = null;
+        if ($product = Mage::registry('product')) :
+            $_item = $this->getQuote()->getItemByProduct($product);
+        endif;
+    ?>
+
+    <?php if ($_item) : ?>
+	<?php if($flag==128){ ?>
+	<ul class="messages"><li class="success-msg"><ul><li><span>Product was updated successfully in your shopping cart.</span></li></ul></li></ul>
+	<?php } ?>
+        <ol id="suggestpage-products-list" class="mini-products-list col-1">
+            <?php //echo $this->getItemHtml($_item) 
+			//echo $_item->getName(); ?>
+        </ol>
+        <script type="text/javascript">decorateList('suggestpage-products-list', 'none-recursive')</script>
+    <?php endif ?>
+	<!--Changes By Liki Ext Start-->
+    <div class="col-2<?php echo $_item ? '' : ' col-wide' ?>" style="width:100%;">
+        <div class="cartinfo" style="float: left; width: 70%;">
+	<!--Changes By Liki Ext End-->
+            <div class="totals">
+                <p class="subtotal">
+                    <?php if (method_exists($this, 'canApplyMsrp') && $this->canApplyMsrp()): ?>
+                        <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+                    <?php else: ?>
+                        <span class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+                        <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                            <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </p>
+                <?php $_cartQty = (int) $this->getSummaryCount() ?>
+                <?php if ($_cartQty==1): ?>
+                    <p class="amount"><?php echo $this->__('There is <a href="%s">1 item</a> in your cart.', $this->getUrl('checkout/cart')) ?></p>
+                <?php else: ?>
+                    <p class="amount"><?php echo $this->__('There are <a href="%s">%s items</a> in your cart.', $this->getUrl('checkout/cart'), $_cartQty) ?></p>
+                <?php endif ?>
+            </div>
+            <div class="actions">
+                <button onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>');" class="btn-suggest-page btn-suggest-cart" title="<?php echo $this->__('Edit Your Cart') ?>" type="button"><span><span><?php echo $this->__('Edit your Cart') ?></span></span></button>
+                <?php if ($_cartQty && $this->isPossibleOnepageCheckout()) : ?>
+    <!---Changes By Liki Ext Start--->
+   <!--- start for segment io tracking---->
+                    <button onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>'); analytischk()" class="btn-suggest-page btn-suggest-checkout" title="<?php echo $this->__('Checkout') ?>" type="button"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+     <!----- End of liki change here ----->
+                <?php endif; ?>
+            </div>
+        </div>
+		<!--Changes By Liki Ext Start-->
+        <div style="float:right;width:25%;">
+		<!--Changes By Liki Ext End-->
+        	
+        	<!--<div class="addtocart_btn_suggestpage">
+            	<span style="float:left;font-size:18px;font-weight:bold;margin-top:13px;color:#1d1d1d;">
+                     Featuring
+                 </span>
+                 <img src="/amazon_import_products/liki_img/leaseit_keepit.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; margin-left:8px;margin-top:1px;" width="60">
+            </div>-->
+			<!--LIKI Code Start
+				Reason: displaying a underline of achor tag so, text-decoration has set none of anchor tag -->
+            <a style="text-decoration:none;" href="/liki_introduction/" target="_blank">
+			<!--LIKI Code End-->
+			<!--Changes By Liki Ext Start-->
+            <div class="chkout_btn" style="float: left;height: 33px;padding: 0 6px 0 6px;cursor:pointer;width:120px;margin:15px;" >
+			<!--Changes By Liki Ext end-->
+                 <span style="float:left;font-size: 12px;font-weight:bold;margin-top: 8px;color:#333;">Featuring</span>
+                  <img src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; margin-left:6px;margin-top:1px;" width="45px">
+            </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Changes By Liki Ext Start -->
+<!-- start for segment io tracking -->
+<script type="text/javascript">
+function analytischk()
+{
+analytics.track('Cart', {
+  UserId: '<?php echo $customer_Id; ?>',
+  SessionId: '<?php echo $Session_Id; ?>',
+  MagentoOrderId: '<?php echo $Order_Id; ?>',
+  LikiOrderId: '...',
+  Action: 'StartsCheckout'
+});
+}
+</script>
+<!-- end for segment io here -->

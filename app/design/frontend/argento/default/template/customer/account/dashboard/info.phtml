@@ -24,6 +24,12 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<?php $MagentoCID = $this->htmlEscape($this->getCustomer()->getId()); ?><br /> 
+     
+<script type="text/javascript">
+analytics.alias('<?php echo $MagentoCID; ?>');
+</script>
+
 <div class="col2-set">
 <!-- changes by likiext -->
     <div class="col-1" style="width:100%;"> 
@@ -35,7 +41,7 @@
             </div>
             <div class="box-content">
                 <p>
-                    <?php echo $this->htmlEscape($this->getCustomer()->getName()) ?><br />
+                    <?php echo $this->htmlEscape($this->getCustomer()->getName()) ?><br />                          
                     <?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?><br />
                     <a href="<?php echo $this->getChangePasswordUrl() ?>"><?php echo $this->__('Change Password') ?></a>
                 </p>

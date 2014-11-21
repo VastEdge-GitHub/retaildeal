@@ -46,15 +46,17 @@ if ($head = $this->getChild('argento.head')) :
     echo $head->getLinks();
 endif;
 ?>
-
 <?php echo $this->getCssJsHtml() ?>
 <?php echo $this->getChildHtml() ?>
 <?php echo $this->helper('core/js')->getTranslatorScript() ?>
 <?php echo $this->getIncludes() ?>
-<!-- Changes by liki ext -->
-<script type="text/javascript" src="http://retaildeal.biz/js/prototype/window.js"></script>
-<link rel="shortcut icon" href="http://retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
 
+<!-- Changes by liki ext -->
+<!-- Changes by Liliext Start -->
+<!-- Reason of Change: To defer parsing of javascript  -->
+<script type="text/javascript" src="http://retaildeal.biz/js/prototype/window.js" defer="defer"></script>
+<!-- Changes by Liliext End -->
+<link rel="shortcut icon" href="http://retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
 <script type="text/javascript">
 function showForm(id){
 	win = new Window({
@@ -77,3 +79,14 @@ function close_popup(){
 </script>
 <div id="liki_intro_popup" style="display:none"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('liki_intro')->toHtml()?></div>
 <!-- Changes by liki ext End -->
+<!-- change by liki
+	Reason: for Adroll SEO -->
+<?php 
+if($_product = Mage::registry('current_product')){
+  $products_ID = $_product->getId();
+}
+?>
+<script type="text/javascript">
+adroll_custom_data = {"product_id": "<?php echo $products_ID;?>"};
+</script>
+<!--end liki for Adroll-->
