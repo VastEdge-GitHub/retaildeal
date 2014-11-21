@@ -1,8 +1,5 @@
-<<<<<<< HEAD
- <?php
-=======
+
 <?php
->>>>>>> master
 /**
 * Magento
 *
@@ -148,7 +145,7 @@ class Mage_Firstdataglobalgateway_Model_Firstdataglobalgateway extends Mage_Paym
 					break;
 					
 				case self::RESPONSE_CODE_DECLINED:
-<<<<<<< HEAD
+
 					// comment by liki 20/Nov/2014 Reason: change the payment decline message.
 					//$error = Mage::helper('paygate')->__('Payment authorization transaction has been declined. ' . "\n$text");
 					$error = Mage::helper('paygate')->__('Your card was declined.Please choose an alternative payment method.');
@@ -160,13 +157,11 @@ class Mage_Firstdataglobalgateway_Model_Firstdataglobalgateway extends Mage_Paym
 					//$error = Mage::helper('paygate')->__('Payment authorization error. ' . "\n$text");
 					$error = Mage::helper('paygate')->__('Your card was declined.Please choose an alternative payment method.');
 					// end liki 
-=======
 					$error = Mage::helper('paygate')->__('Payment authorization transaction has been declined. ' . "\n$text");
 					break;
 					
 				default:
 					$error = Mage::helper('paygate')->__('Payment authorization error. ' . "\n$text");
->>>>>>> master
 					break;
 			}
 		} else {
@@ -775,10 +770,6 @@ class Mage_Firstdataglobalgateway_Model_Firstdataglobalgateway extends Mage_Paym
 			//$wsdl = 'https://api.globalgatewaye4.firstdata.com/transaction/wsdl';
 			$wsdl = 'https://api.globalgatewaye4.firstdata.com/transaction/v11/wsdl';
 		}
-<<<<<<< HEAD
-=======
-		
->>>>>>> master
 		$trxnProperties = array_merge($cardDetails, array(
 		  "User_Name"			=> $username,
 		  "ExactID"				=> $gatewayId,
