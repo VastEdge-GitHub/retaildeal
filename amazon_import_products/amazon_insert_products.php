@@ -532,7 +532,7 @@ function merge_logo($top_image, $logo, $liki, $imgtype, $resize)
 }
 ///// CREATING LIKI IMAGE ENDS \\\\\	
 
-function insert_products($file_name,$cat_id)
+function insert_products($file_name,$cat_id,$cat_name)
 {
 	global $base_url_magento;
 	global $prod_count;
@@ -600,6 +600,10 @@ function insert_products($file_name,$cat_id)
 								$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_itemweight));	// Weight from PackageDimensions
 								$prod_categoryid	= preg_replace('/\s+/', ' ', trim($cat_id));				// Magento Category ID
 								$prod_root_cat_id	= explode(",",trim($prod_categoryid));						// Magento Category ID
+								
+								$prod_category_name	= $cat_name;												// Magento Category Name			
+								$prod_root_cat_name	= $cat_name[$prod_categoryid];
+								
 								if(count($prod_root_cat_id) == 1){$prod_categoryid = $prod_root_cat_id[0];}		// Main category
 								else{$prod_categoryid = $prod_root_cat_id[1];}									// Sub Category
 								$prod_status		= '1';														// 1 = Enabled, 2 = Disabled
@@ -697,74 +701,86 @@ function insert_products($file_name,$cat_id)
 								//// Standard Shipping Calculation Ends \\\\
 								
 								$prod_price 		= $prod_price+$standard_shipping;							// Final Price = MSRP+Shipping Cost	
-								$liki_disc			= '15';														// 15%
-								$liki_price			= ($liki_disc/100)*$prod_price;								// LIKI price calculation
-								$liki_price			= number_format($liki_price, 2, '.', ',');					// Value upto 2 decimals
-								$liki_price			= "$".$liki_price;
-								$prod_likidesc		= "LeaseItKeepIt Price : ".$liki_price." per month";							
-								$new_sku			.= $prod_sku.",";			// Pushing all new SKUs in global variable to disable/delete old magento products
-											
-								echo gmdate('Y-m-d H:i:s')."----> New Product \n";
-								echo gmdate('Y-m-d H:i:s')."----> Getting new images \n";
-								
-								// Getting name of images
-								$prod_img_name 		= pathinfo($prod_img_url, PATHINFO_FILENAME);
-								$prod_thumbimg_name	= pathinfo($prod_thumbimg_url, PATHINFO_FILENAME);
-								$prod_smlimg_name 	= pathinfo($prod_smlimg_url, PATHINFO_FILENAME);
-								// Getting extension of images
-								$prod_img_ext 		= pathinfo($prod_img_url, PATHINFO_EXTENSION);
-								$prod_thumbimg_ext	= pathinfo($prod_thumbimg_url, PATHINFO_EXTENSION);
-								$prod_smlimg_ext 	= pathinfo($prod_smlimg_url, PATHINFO_EXTENSION);
-								// Defining path where images are to be temporarily stored
-								$img				= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$prod_sku.'.'.$prod_img_ext;
-								$thumbimg			= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_thumbimg_name.'_'.$prod_sku.'.'.$prod_thumbimg_ext;
-								$smlimg				= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_'.$prod_sku.'.'.$prod_smlimg_ext;
-								// Temporarily storing images
-								file_put_contents($img, file_get_contents($prod_img_url));
-								file_put_contents($thumbimg, file_get_contents($prod_thumbimg_url));
-								file_put_contents($smlimg, file_get_contents($prod_smlimg_url));
-								echo gmdate('Y-m-d H:i:s')."----> Converting new images \n";
-						
-								$main_image			= $img;									// Image to be used for LIKI text
-								$small_image		= $smlimg;								// Image to be used for LIKI text
-								$bottom_image		= $base_url_magento.'amazon_import_products/liki_img/cache/imagefilledrectangle.jpg';	// Path of the rectangle image created
-								main($main_image, $bottom_image, $liki_price, 'main');
-								main($small_image, $bottom_image, $liki_price, 'small');
-								$new_main_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$prod_sku.'_liki.'.$prod_img_ext;	// Path of new LIKI image
-								$new_smail_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_'.$prod_sku.'_liki.'.$prod_smlimg_ext;	// Path of new LIKI image
-								echo gmdate('Y-m-d H:i:s')."----> New images converted \n";
-								
-								echo gmdate('Y-m-d H:i:s')."----> Checking SKU in custom URL rewrite table \n";
-	
-								$qcheck_rewrite		= "select * from `custom_rewrite_check` where `prod_sku` = '".$prod_sku."' ";
-								$rcheck_rewrite		= mysql_query($qcheck_rewrite);
-								$count_rewrite		= mysql_num_rows($rcheck_rewrite);
-								echo gmdate('Y-m-d H:i:s')."----> Count = ".$count_rewrite." and Error = ".mysql_error()."\n";
-								if($count_rewrite > 0)
+								if($prod_price <= '2500')
 								{
-									while($rowcheck_rewrite	= mysql_fetch_array($rcheck_rewrite))
+									$liki_disc			= '15';														// 15%
+									$liki_price			= ($liki_disc/100)*$prod_price;								// LIKI price calculation
+									$liki_price			= number_format($liki_price, 2, '.', ',');					// Value upto 2 decimals
+									$liki_price			= "$".$liki_price;
+									$prod_likidesc		= "LeaseItKeepIt Price : ".$liki_price." per month";							
+									$new_sku			.= $prod_sku.",";			// Pushing all new SKUs in global variable to disable/delete old magento products
+												
+									echo gmdate('Y-m-d H:i:s')."----> New Product \n";
+									echo gmdate('Y-m-d H:i:s')."----> Getting new images \n";
+									
+									// Getting name of images
+									$prod_img_name 		= pathinfo($prod_img_url, PATHINFO_FILENAME);
+									$prod_thumbimg_name	= pathinfo($prod_thumbimg_url, PATHINFO_FILENAME);
+									$prod_smlimg_name 	= pathinfo($prod_smlimg_url, PATHINFO_FILENAME);
+									// Getting extension of images
+									$prod_img_ext 		= pathinfo($prod_img_url, PATHINFO_EXTENSION);
+									$prod_thumbimg_ext	= pathinfo($prod_thumbimg_url, PATHINFO_EXTENSION);
+									$prod_smlimg_ext 	= pathinfo($prod_smlimg_url, PATHINFO_EXTENSION);
+									// Defining path where images are to be temporarily stored
+									$img				= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$prod_sku.'.'.$prod_img_ext;
+									$thumbimg			= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_thumbimg_name.'_'.$prod_sku.'.'.$prod_thumbimg_ext;
+									$smlimg				= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_'.$prod_sku.'.'.$prod_smlimg_ext;
+									// Temporarily storing images
+									file_put_contents($img, file_get_contents($prod_img_url));
+									file_put_contents($thumbimg, file_get_contents($prod_thumbimg_url));
+									file_put_contents($smlimg, file_get_contents($prod_smlimg_url));
+									echo gmdate('Y-m-d H:i:s')."----> Converting new images \n";
+							
+									$main_image			= $img;									// Image to be used for LIKI text
+									$small_image		= $smlimg;								// Image to be used for LIKI text
+									$bottom_image		= $base_url_magento.'amazon_import_products/liki_img/cache/imagefilledrectangle.jpg';	// Path of the rectangle image created
+									main($main_image, $bottom_image, $liki_price, 'main');
+									main($small_image, $bottom_image, $liki_price, 'small');
+									$new_main_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$prod_sku.'_liki.'.$prod_img_ext;	// Path of new LIKI image
+									$new_smail_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_'.$prod_sku.'_liki.'.$prod_smlimg_ext;	// Path of new LIKI image
+									echo gmdate('Y-m-d H:i:s')."----> New images converted \n";
+									
+									echo gmdate('Y-m-d H:i:s')."----> Checking SKU in custom URL rewrite table \n";
+		
+									$qcheck_rewrite		= "select * from `custom_rewrite_check` where `prod_sku` = '".$prod_sku."' ";
+									$rcheck_rewrite		= mysql_query($qcheck_rewrite);
+									$count_rewrite		= mysql_num_rows($rcheck_rewrite);
+									echo gmdate('Y-m-d H:i:s')."----> Count = ".$count_rewrite." and Error = ".mysql_error()."\n";
+									if($count_rewrite > 0)
 									{
-										$old_rewrite_id		= $rowcheck_rewrite['url_rewrite_id'];
-										$custom_id			= $rowcheck_rewrite['id'];
-																				
-										echo gmdate('Y-m-d H:i:s')."----> Rewrite exists of product = ".$prod_sku." with URL Rewrite id = ".$old_rewrite_id." and Custom Rewrite id = ".$custom_id." \n";
-										$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` = '".$old_rewrite_id."' ";
-										$rdel_rewriteid		= mysql_query($qdel_rewriteid);
-										$qdel_customid		= "delete from `custom_rewrite_check` where `id` = '".$custom_id."' ";
-										$rdel_customid		= mysql_query($qdel_customid);
+										while($rowcheck_rewrite	= mysql_fetch_array($rcheck_rewrite))
+										{
+											$old_rewrite_id		= $rowcheck_rewrite['url_rewrite_id'];
+											$custom_id			= $rowcheck_rewrite['id'];
+																					
+											echo gmdate('Y-m-d H:i:s')."----> Rewrite exists of product = ".$prod_sku." with URL Rewrite id = ".$old_rewrite_id." and Custom Rewrite id = ".$custom_id." \n";
+											$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` = '".$old_rewrite_id."' ";
+											$rdel_rewriteid		= mysql_query($qdel_rewriteid);
+											$qdel_customid		= "delete from `custom_rewrite_check` where `id` = '".$custom_id."' ";
+											$rdel_customid		= mysql_query($qdel_customid);
+										}
 									}
-								}
-								$prod_count++;
-								
-								$search_spcl_chars	= array("PHP_EOL","|","^","\r\n","\r","\n");
-								$replace_spcl_chars	= array(" ",","," "," "," "," ");
-								
-								$mainfile_fh		= fopen($base_url_magento.'var/import/main_file_import_new.csv', 'a');	//fwrite($main_file,"store,websites,attribute_set,type,category_ids,sku,name,image,small_image,thumbnail,amazon_prime,liki_desription,vastedge_meta_robots,price,weight,standard_shipping,status,visibility,tax_class_id,wp_amazon_sync,wp_amazon_use_categories,description,short_description,wp_amazon_local,wp_amazon_asin,wp_amazon_ean,wp_amazon_offer_condition,wp_amazon_offer_price_type,wp_amazon_offer_price,wp_amazon_offer_currency,wp_amazon_offers_list_url,wp_amazon_product_url,wp_amazon_reviews_url,liki_price,qty,min_qty,use_config_min_qty,is_qty_decimal,backorders,min_sale_qty,use_config_min_sale_qty,max_sale_qty,use_config_max_sale_qty,is_in_stock,use_config_manage_stock,product_name,store_id,product_type_id,sales_rank,manufacturer".PHP_EOL);
-								fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_main_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.$prod_amazonprime.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_likidesc,'"'),'"')).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_desc,'"'),'"'))).'^|^'.utf8_encode($prod_shortdesc).'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_offers_list_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_product_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_reviews_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($liki_price,'"'),'"')).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^0^|^simple^|^'.$prod_salesrank.'^|^'.$prod_brand.'^'.PHP_EOL);
-								fclose($mainfile_fh);
-							}	// End of Stopword list check
-						}		// End of Product Qunatity check
-					}			// End of Weight loop
+									$prod_count++;
+									
+									$search_spcl_chars	= array("PHP_EOL","|","^","\r\n","\r","\n");
+									$replace_spcl_chars	= array(" ",","," "," "," "," ");
+									
+									$mainfile_fh		= fopen($base_url_magento.'var/import/main_file_import_new.csv', 'a');	//fwrite($main_file,"store,websites,attribute_set,type,category_ids,sku,name,image,small_image,thumbnail,amazon_prime,liki_desription,vastedge_meta_robots,price,weight,standard_shipping,status,visibility,tax_class_id,wp_amazon_sync,wp_amazon_use_categories,description,short_description,wp_amazon_local,wp_amazon_asin,wp_amazon_ean,wp_amazon_offer_condition,wp_amazon_offer_price_type,wp_amazon_offer_price,wp_amazon_offer_currency,wp_amazon_offers_list_url,wp_amazon_product_url,wp_amazon_reviews_url,liki_price,qty,min_qty,use_config_min_qty,is_qty_decimal,backorders,min_sale_qty,use_config_min_sale_qty,max_sale_qty,use_config_max_sale_qty,is_in_stock,use_config_manage_stock,product_name,store_id,product_type_id,sales_rank,manufacturer".PHP_EOL);
+						//## Reason : Update the meta keyword and meta description. so edite code after $prod_brand and before .PHP_EOL .								
+									$_category = Mage::getModel('catalog/category')->load($prod_categoryid);		//Magento Product Category name
+									$category_Name = $_category->getName();
+									$parentCategoryId = $_category->getParentId();
+								/*	if($parentCategoryId != 2){                                                      // Remove for meta keywords.
+									$parentCategory   = Mage::getModel('catalog/category')->load($parentCategoryId); //Magento Parent Category name
+									$parent_Name	  =	$parentCategory->getName();	} */
+								fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_main_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.$prod_amazonprime.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_likidesc,'"'),'"')).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_desc,'"'),'"'))).'^|^'.utf8_encode($prod_shortdesc).'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_offers_list_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_product_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_reviews_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($liki_price,'"'),'"')).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^0^|^simple^|^'.$prod_salesrank.'^|^'.$prod_brand.
+		'^|^'.'Shop '.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).' at RetailDeal with LeaseItKeepIt flexible payment option^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).',shop '.strtolower($category_Name).' on monthly installments, LIKI, rent to own, lease to own, buy now pay later, low monthly payments^'.PHP_EOL);
+									
+									fclose($mainfile_fh);
+								}	// End of Stopword list check
+							}		// End of Product Qunatity check
+						}			// End of Weight loop
+					}				// End $2500 price check loop
 				}				// End of Price Range loop
 			}					// End of Shiping Detail products loop
 		}						// End of leaving header line loop

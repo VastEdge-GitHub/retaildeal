@@ -76,7 +76,7 @@
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Stopword list created \n";
 	/////*****\\\\\
-
+	
 	$files_process	= glob($base_url_magento.'amazon_import_products/csv_file/*'); // get all file names
 	$flag			= 'true';
 	$filecount_flag	= 'true';
@@ -101,9 +101,11 @@
 				if($new_mainfile == 1)
 				{
 					$main_fh		= fopen($base_url_magento.'var/import/main_file_import_new.csv', 'w');
-					fwrite($main_fh,'^store^|^websites^|^attribute_set^|^type^|^category_ids^|^sku^|^name^|^image^|^small_image^|^thumbnail^|^amazon_prime^|^liki_desription^|^vastedge_meta_robots^|^price^|^weight^|^standard_shipping^|^status^|^visibility^|^tax_class_id^|^wp_amazon_sync^|^wp_amazon_use_categories^|^description^|^short_description^|^wp_amazon_local^|^wp_amazon_asin^|^wp_amazon_ean^|^wp_amazon_offer_condition^|^wp_amazon_offer_price_type^|^wp_amazon_offer_price^|^wp_amazon_offer_currency^|^wp_amazon_offers_list_url^|^wp_amazon_product_url^|^wp_amazon_reviews_url^|^liki_price^|^qty^|^min_qty^|^use_config_min_qty^|^is_qty_decimal^|^backorders^|^min_sale_qty^|^use_config_min_sale_qty^|^max_sale_qty^|^use_config_max_sale_qty^|^is_in_stock^|^use_config_manage_stock^|^product_name^|^store_id^|^product_type_id^|^sales_rank^|^manufacturer^'.PHP_EOL);
+					fwrite($main_fh,'^store^|^websites^|^attribute_set^|^type^|^category_ids^|^sku^|^name^|^image^|^small_image^|^thumbnail^|^amazon_prime^|^liki_desription^|^vastedge_meta_robots^|^price^|^weight^|^standard_shipping^|^status^|^visibility^|^tax_class_id^|^wp_amazon_sync^|^wp_amazon_use_categories^|^description^|^short_description^|^wp_amazon_local^|^wp_amazon_asin^|^wp_amazon_ean^|^wp_amazon_offer_condition^|^wp_amazon_offer_price_type^|^wp_amazon_offer_price^|^wp_amazon_offer_currency^|^wp_amazon_offers_list_url^|^wp_amazon_product_url^|^wp_amazon_reviews_url^|^liki_price^|^qty^|^min_qty^|^use_config_min_qty^|^is_qty_decimal^|^backorders^|^min_sale_qty^|^use_config_min_sale_qty^|^max_sale_qty^|^use_config_max_sale_qty^|^is_in_stock^|^use_config_manage_stock^|^product_name^|^store_id^|^product_type_id^|^sales_rank^|^manufacturer^|^meta_description^|^meta_keyword^'.PHP_EOL);
 					fclose($main_fh);
 				}
+	/*change by liki fo meta keywords and description : meta_keywords meta_description */	
+			
 				$new_mainfile = 0;
 				$ext = pathinfo($file, PATHINFO_EXTENSION);
 				$file_count++;
@@ -194,7 +196,6 @@
 		{
 			$flag = 'false';
 		}
-		
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Main Flag: ".$flag_main.", Sub Flag: ".$flag_sub." and Flag: ".$flag." \n";
 	echo gmdate('Y-m-d H:i:s')."----> File Count: ".$file_count." and Flag: ".$flag." \n";
@@ -339,6 +340,7 @@
 				echo gmdate('Y-m-d H:i:s')."----> Delete product(".$product_id.") failed because:  \n";
 				echo $e->getMessage()."\n";
 			}
+
 			try
 			{
 				$prod_url_arr 	= explode("/",$my_product_url);
