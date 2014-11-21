@@ -1,4 +1,3 @@
-<!-- Changes by LIKI Ext Start -->
 <style>
 @font-face {
     font-family: 'condensed';
@@ -17,7 +16,6 @@
          url('skin/frontend/argento/default/fonts/MyriadPro-BoldCond.ttf') format('truetype');
 }
 </style>
-<!-- Changes by LIKI Ext End -->
 <?php
 if ($slides = $this->getSlider()->getSlides()) :
     $slider = $this->getSlider();
@@ -44,38 +42,45 @@ if ($slides = $this->getSlider()->getSlides()) :
                             </a>
 <!-- Changes Done by LIKI -->							
 							<?php 
-				 $vPath = $slide['target'];
-    $oRewrite = Mage::getModel('core/url_rewrite')
-                    ->setStoreId(Mage::app()->getStore()->getId())
-                    ->loadByRequestPath($vPath);
-					$iProductId = $oRewrite->getProductId();
-					$oProduct = Mage::getModel('catalog/product')->load($iProductId);
-					$monthly_price = $oProduct->getLikiPrice();
-					$total_price = $oProduct->getPrice();
-					$total_price = round($total_price, 2);
-					//$total_price = sprintf ("%.2f", $total_price);
-					$_coreHelper = $this->helper('core');
-					if($monthly_price !='' && $total_price != '')
-					{
-					  echo "<a href=". $vPath."><div style='position:absolute; top:-25px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 23px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Lease new for</div>";
-					  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
-font-family:boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>".$monthly_price."</b></span><span style='font-family:condensed;font-size:23px;float:left;margin:1px 0 0 5px;'>per</span></div>";
-					  echo "<div style='position: absolute;z-index: 999999;top: 190px;left: 287px;font-size: 45px;color: #ffffff;
-font-family: boldcondensed;margin:0 0 0 10px;'><b>month!</b></div>";
-					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 23px;color: #ffffff;
-font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'>Buy for</span><span style='float:left;margin:0 0 0 5px;'>".$_coreHelper->currency($total_price, true, true)."</span></div></div></a>";
-					}
-					else
-					{
-						 echo "<a href=". $vPath."><div style='position:absolute; top:-5px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 20px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Lease new for less than</div>";
-					  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
-font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$36</b></span><span style='font-family:condensed;font-size:23px;float:left;margin:1px 0 0 5px;'>per</span></div>";
-					  echo "<div style='position: absolute;z-index: 999999;top: 190px;left: 287px;font-size: 45px;color: #ffffff;
-font-family: boldcondensed;margin:0 0 0 10px;'><b>month!</b></div>";
+							//Changes by Likiext Start
+							//Reason of Change: RD-137, To change text on banner and to change the link on clicking of banner
+							
+							// $vPath = $slide['target'];
+//    $oRewrite = Mage::getModel('core/url_rewrite')
+//                    ->setStoreId(Mage::app()->getStore()->getId())
+//                    ->loadByRequestPath($vPath);
+//					$iProductId = $oRewrite->getProductId();
+//					$oProduct = Mage::getModel('catalog/product')->load($iProductId);
+//					$monthly_price = $oProduct->getLikiPrice();
+//					$total_price = $oProduct->getPrice();
+//					$total_price = round($total_price, 2);
+//					//$total_price = sprintf ("%.2f", $total_price);
+//					$_coreHelper = $this->helper('core');
+					
+						
+							echo "<a style='text-decoration:none;' href=". $vPath."><div style='position:absolute; top:-5px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>";
+							if( $slide['target'] == 'catalogsearch/result/?q=grill')
+							{
+								echo "Grills Starting at </div>";
+						  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$16</b></span><span style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'>/month</span></div>";
+							}
+							if( $slide['target'] == 'computers/tablets.html')
+							{
+								echo "Tablets Starting at </div>";
+						  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$15</b></span><span style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'>/month</span></div>";
+							}
+							if( $slide['target'] == 'electronics/television-video.html')
+							{
+								echo "Televisions Starting at </div>";
+						  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$28</b></span><span style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'>/month</span></div>";
+							}
 					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 12px;color: #ffffff;
 font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><span style='float:left;margin:0 0 0 5px;'></span></div></div></a>";
 					
-					}
+					//Changes by Likiext End
 					 ?>
 					 <!-- LIKI CODE END -->
                             <?php if (!empty($slide['description'])) : ?>
