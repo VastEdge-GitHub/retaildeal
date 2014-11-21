@@ -40,8 +40,8 @@
               <!--LIKI Code Start
 				Reason:change the height of UL Tag because there is a big gap(white spaces) in Save in addressbook and use billing Address checkbox
 						-->
-			    <ul style="height: 374px;">
-				<!--LIKI Code End-->
+<!--			    <ul style="height: 374px;">
+-->				<ul style="height: 500px;"><!--LIKI Code End-->
                     <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress())->setFieldIdFormat('shipping:%s')->setFieldNameFormat('shipping[%s]')->setFieldParams('onchange="shipping.setSameAsBilling(false)"')->toHtml() ?></li>
                     <li class="fields">
                         <div class="fields">
