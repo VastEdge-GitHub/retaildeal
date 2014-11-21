@@ -80,12 +80,9 @@ analytics.track('Cart', {
              <!--LIKI Code Start
 				Reason:change the height of UL Tag because there is a big gap(white spaces) in Save in addressbook and Ship to this Address checkbox
 						-->
-<<<<<<< HEAD
 		<ul style="height: 550px;"><!--LIKI Code End-->
-=======
 <!--			<ul style="height: 395px;">
 -->			<ul style="height: 500px;"><!--LIKI Code End-->
->>>>>>> 4cef3f0004201a979da12559b6f45846813f67f7
                 <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setForceUseCustomerRequiredAttributes(!$this->isCustomerLoggedIn())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
                 <li class="fields">
                     <div class="field">
