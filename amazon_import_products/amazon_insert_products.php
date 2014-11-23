@@ -577,8 +577,9 @@ function insert_products($file_name,$cat_id,$cat_name)
 				$content_lowestnewprice		= str_replace(",","",$content_lowestnewprice);
 			
 				$prod_sku 					= preg_replace('/\s+/', ' ', trim($content_arr[0]));						// ASIN
-				if($content_listprice == ''){$prod_price = preg_replace('/\s+/', ' ', trim($content_lowestnewprice));} // If "ListPrice" else "LowestNewPrice"
-				else{$prod_price = preg_replace('/\s+/', ' ', trim($content_listprice));}
+				$prod_price = preg_replace('/\s+/', ' ', trim($content_lowestnewprice));
+				/*if($content_listprice == ''){$prod_price = preg_replace('/\s+/', ' ', trim($content_lowestnewprice));} // If "ListPrice" else "LowestNewPrice"
+				else{$prod_price = preg_replace('/\s+/', ' ', trim($content_listprice));}*/
 				if($prod_price >= '50' && $prod_price <= '2500')
 				{
 					if(trim($content_itemweight) != '' || trim($content_itemweight) <= 0)
