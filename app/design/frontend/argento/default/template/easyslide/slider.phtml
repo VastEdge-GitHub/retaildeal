@@ -45,7 +45,7 @@ if ($slides = $this->getSlider()->getSlides()) :
 							//Changes by Likiext Start
 							//Reason of Change: RD-137, To change text on banner and to change the link on clicking of banner
 							
-							// $vPath = $slide['target'];
+//				 $vPath = $slide['target'];
 //    $oRewrite = Mage::getModel('core/url_rewrite')
 //                    ->setStoreId(Mage::app()->getStore()->getId())
 //                    ->loadByRequestPath($vPath);
@@ -54,12 +54,11 @@ if ($slides = $this->getSlider()->getSlides()) :
 //					$monthly_price = $oProduct->getLikiPrice();
 //					$total_price = $oProduct->getPrice();
 //					$total_price = round($total_price, 2);
-//					//$total_price = sprintf ("%.2f", $total_price);
+					//$total_price = sprintf ("%.2f", $total_price);
 //					$_coreHelper = $this->helper('core');
-					
-						
-							echo "<a style='text-decoration:none;' href=". $vPath."><div style='position:absolute; top:-5px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>";
-							if( $slide['target'] == 'catalogsearch/result/?q=grill')
+
+						 echo "<a style='text-decoration:none;' href=". $vPath."><div style='position:absolute; top:-5px; width:100%'><div style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>";
+						 if( $slide['target'] == 'catalogsearch/result/?q=grill')
 							{
 								echo "Grills Starting at </div>";
 						  echo "<div style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
@@ -79,8 +78,7 @@ if ($slides = $this->getSlider()->getSlides()) :
 							}
 					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 12px;color: #ffffff;
 font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><span style='float:left;margin:0 0 0 5px;'></span></div></div></a>";
-					
-					//Changes by Likiext End
+					 //Changes by Likiext Start
 					 ?>
 					 <!-- LIKI CODE END -->
                             <?php if (!empty($slide['description'])) : ?>
