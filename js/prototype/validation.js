@@ -486,8 +486,8 @@ Validation.addAllThese([
     ['validate-alphanum', 'Please use only letters (a-z or A-Z) or numbers (0-9) only in this field. No spaces or other characters are allowed.', function(v) {
                 return Validation.get('IsEmpty').test(v) || /^[a-zA-Z0-9]+$/.test(v)
             }],
-    ['validate-alphanum-with-spaces', 'Please use only letters (a-z or A-Z), numbers (0-9) or spaces only in this field.', function(v) {
-                    return Validation.get('IsEmpty').test(v) || /^[a-zA-Z0-9 ]+$/.test(v)
+    ['validate-alphanum-with-spaces', 'Please use only letters (a-z or A-Z) or spaces only in this field.', function(v) {
+                    return Validation.get('IsEmpty').test(v) || /^[a-zA-Z ]+$/.test(v)
             }],
     ['validate-street', 'Please use only letters (a-z or A-Z) or numbers (0-9) or spaces and # only in this field.', function(v) {
                 return Validation.get('IsEmpty').test(v) ||  /^[ \w]{3,}([A-Za-z]\.)?([ \w]*\#\d+)?(\r\n| )[ \w]{3,}/.test(v)
