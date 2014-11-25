@@ -43,12 +43,25 @@ analytics.track('Cart', {
 <script>
 function check_liki_price()
 {
+	//RD-220
+	//Reason: When choosing LIKI option please select a single product. 
+	
 	var quoteBaseGrandTotal = <?php echo (float)$this->getQuoteBaseGrandTotal(); ?>;
 	var option_newcase = document.getElementsByTagName("input");
 	var option_newcase_value;
 	for(var i = 0; i < option_newcase.length; i++){
 		if(option_newcase[i].checked){
 			option_newcase_value = option_newcase[i].value;
+		}
+	}
+	if(option_newcase_value == 'CreditApplication')
+	{
+		var item = '<?php echo $cartItemsCount = Mage::helper('checkout/cart')->getCart()->getItemsCount();?>';
+		var item_qty = '<?php echo $totalQuantity = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();?>';	
+		if(item > 1 || item_qty > 1)
+		{ 
+			alert('When choosing LeaseItKeepIt option please select a single product.'); 
+			return false;
 		}
 	}
 	if(option_newcase_value == 'CreditApplication' && quoteBaseGrandTotal < 100)

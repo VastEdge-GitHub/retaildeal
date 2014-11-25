@@ -31,13 +31,12 @@
  * @see Mage_Checkout_Block_Onepage_Payment_Methods
  */
 ?>
-<!-- start for segment io tracking -->
+<!--- start for segment io tracking---->
 <script type="text/javascript">
 analytics.track('Cart', {
   Action: 'SpecifiesShippingInformation'
 });
 </script>
-
 <dl class="sp-methods" id="checkout-payment-method-load">
 <?php
     $methods = $this->getMethods();
@@ -65,7 +64,7 @@ analytics.track('Cart', {
 		}
 		if($_code == 'CreditApplication')
 		{
-			$custom_logo = '<img onclick="return showForm(\'liki_intro_popup\')" src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="margin:-7px 0  0 20px; cursor:pointer" width="45px">';
+			$custom_logo = '<img onclick="return showForm(\'liki_intro_popup\')" src="'.$this->getSkinUrl('images/liki_btn.png').'" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="margin:-7px 0  0 20px; cursor:pointer" width="45px">';
 			$custom_checked = 'checked="checked"';
 		}
 		else
@@ -74,9 +73,21 @@ analytics.track('Cart', {
 			$custom_checked = '';
 		}
 	?>
+
         <input <?php echo $custom_checked; ?> <?php echo $custom_disabled; ?> id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
     <!-- Changes by liki ext end -->
-    <?php else: ?>
+    <?php else: 
+		if($_code == 'CreditApplication')
+		{
+			$custom_logo = '<img onclick="return showForm(\'liki_intro_popup\')" src="'.$this->getSkinUrl('images/liki_btn.png').'" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="margin:-7px 0  0 20px; cursor:pointer" width="45px">';
+			$custom_checked = 'checked="checked"';
+		}
+		else
+		{
+			$custom_logo = '';
+			$custom_checked = '';
+		}
+	?>
         <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
         <?php $oneMethod = $_code; ?>
     <?php endif; ?>
