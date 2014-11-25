@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Magento
  *
@@ -28,11 +28,16 @@
     <h1><?php echo $this->__('Checkout') ?></h1>
 </div>
 <!-- Changes by liki ext start -->
+<script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
 <?php
     $lastUrl = Mage::getSingleton('core/session')->getLastUrl();
-    if (preg_match("#http://retaildeal.biz/CreditApplication/Payment/cancel/#", $lastUrl)) {
-        echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>You have canceled your order</span></li></ul></li></ul>";
+	$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
+	$path = $url->getPath();
+    if (preg_match("#/CreditApplication/Payment/cancel/#", $path)) {
+        echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>Please select a payment method.</span></li></ul></li></ul>";
     }
+
 ?>
 <!-- Changes by Liki ext Start -->
 <!-- Reason of Change: Error message of invalid username or password was not displaying -->
@@ -59,15 +64,21 @@
 		$custom_style_margin_text = '';
 	}
 	?>
-        <div class="step-title" <?php echo $custom_style_ht ?>>
+        <div onclick="test_step('<?php echo $i; ?>')" class="step-title" <?php echo $custom_style_ht ?>>
             <span <?php echo $custom_style_margin_no ?> class="number"><?php echo $i ?></span>
             <h2 <?php echo $custom_style_margin_text ?>><?php echo $_stepInfo['label'] ?></h2>
             <a href="#"><?php echo $this->__('Edit') ?></a>
             <?php if($_stepId == 'payment'){ ?>
                 <div class="chkout_btn" style="float: left;height: 32px;padding: 0 10px 0 10px;margin: 8px; margin-left:50px;cursor:pointer;" onclick="return showForm('liki_intro_popup')">
-                    <a style="float:left;display:block;padding-right:0;">
-                        <span style="float:left;font-size:12px;font-weight:bold;color:#333;line-height:32px;">Featuring</span>
-                        <img src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;margin-top:0;" width="45px">
+                   <!--LIKI Code Start
+						Reason: displaying a underline of anchor tag so, text-decoration has set none of anchor tag -->
+				    <a style="text-decoration:none;float:left;display:block;padding-right:0;">
+					<!--LIKI Code End-->
+					<!-- Changes by Likiext Start -->
+					<!-- Reason of Change: RD-203: To iprove look of checkout process forms -->
+                        <span id="chk_liki_spam" style="float:left;font-size:12px;font-weight:bold;color:#333;line-height:32px;">Featuring</span>
+                        <img id="chkout_liki_img" src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;" width="45px">
+					<!-- Changes by Likiext End -->	
                     </a>
                 </div>
 				
@@ -80,6 +91,32 @@
     </li>
 <?php endforeach ?>
 </ol>
+<!--LIKI Code start 
+reason: RD-158-When user cancel the order it should redirect to payment information tab so we have made changes in design.
+-->
+<?php  
+		if (preg_match("#/CreditApplication/Payment/cancel/#", $path)) {?>
+			<script type="text/javascript">
+				document.getElementById("opc-payment").className = "section allow active";
+				document.getElementById("checkout-step-payment").style.display = "block";
+				document.getElementById("opc-billing").className = "section";
+				document.getElementById("checkout-step-billing").style.display = "none";
+				document.getElementById("opc-shipping").className = "section allow";
+			</script>
+		 <?php } ?>
+		<script type="text/javascript">
+		function test_step(step)
+		{
+			if(step=='2'){
+			document.getElementById("opc-payment").className = "section";
+			document.getElementById("checkout-step-payment").style.display = "none";
+			document.getElementById("opc-billing").className = "section allow";
+		
+			}
+		}
+		</script>
+<!--LIKI Code End
+-->
 <script type="text/javascript">
 //<![CDATA[
     var accordion = new Accordion('checkoutSteps', '.step-title', true);
