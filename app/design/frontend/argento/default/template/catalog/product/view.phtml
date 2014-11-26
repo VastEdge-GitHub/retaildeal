@@ -47,8 +47,14 @@
 /*.product-view .product-shop .add-to-cart .qty { margin:3px 5px 0 0;height:19px;}*/
 .product-view .product-shop .add-to-cart .qty { margin:3px 5px 0 0;height:19px;text-align:center;}
 .product-view .add-to-cart-wrapper{padding-left:0;}
-
 </style>
+<!-- change by liki 
+     Reason: Get the product id for adroll -->
+<script type="text/javascript">
+adroll_custom_data = {"product_id": "<?php echo $products_ID;?>"};
+</script>
+<!--end liki for Adroll-->
+
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
