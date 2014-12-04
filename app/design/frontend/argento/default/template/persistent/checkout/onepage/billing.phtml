@@ -27,31 +27,18 @@
 ?>
 
 
-<?php   //edite on 28--nov 014 mixapanel for get the  distnict id
-				 $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
-
-		 $cookibe   = Mage::getModel('core/cookie')->get($name);
-		 $last   = count($cookibe);
-		 $mix = $cookibe['mp_7ab3099d5b55b2e51761d8ef0ec985ca_mixpanel'];
-		 $distinct_id = explode(",",$mix);
-		 $distinct_id = explode(":",$distinct_id[0]);
-		 $distinct_id = explode('"',$distinct_id[1]);
-		 $distnict_ID = $distinct_id[1];
-	/*	 $distnict_ID = $cookibe['ajs_anonymous_id'];
-		 $distnict_ID = explode('"',$distnict_ID);
-		 $distnict_ID = $distnict_ID[1]; */
+<?php   
+		//edite on 28--nov 014 mixapanel for get the  distnict id
 		$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
 		$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
 		$path = $url->getPath();
-		 //echo "without registered".$distnict_ID;
-	//end here 
 		 $customerData = Mage::getSingleton('customer/session')->getCustomer();
 		 $customer_Id = $customerData->getId();
 		 $email = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
 	 ?>
 		<?php
      if($path=='/checkout/onepage/index/') { echo $distnict_ID."/n";
-		//echo "<br>".$customer_Id."/n";?>
+		?>
         <script type="text/javascript">
         analytics.track('Cart', {
           UserId: 'Alreadylogin',
@@ -67,8 +54,6 @@
 		{  
 			$customerData = Mage::getSingleton('customer/session')->getCustomer();
 			$customer_Id = $customerData->getId();
-			//echo $distnict_ID."/n";
-			//echo $customer_Id."/n"; 
 			?>
 			<script type="text/javascript">
 				document.onreadystatechange = function () {
@@ -80,17 +65,9 @@
 				 else if (state == 'complete')
 				 {
 					 <!-- edite on 28--nov 014 mixapanel -->
-					
-    				//var anonId = mixpanel.get_distinct_id();
-					//console.log("D-ID -> " + anonId);
 					console.log(3);
 					analytics.alias('<?php echo $customer_Id;?>');	
 					console.log(4);
-					
-					//analytics.alias("'" +anonId + "'", '<?php echo $customer_Id;?>');	
-					//analytics.alias({ previousId: anonId, userId: "<?php echo $customer_Id;?>" });
-					//analytics.flush();
-					
 				<!-- end here -->
 				  }
 				  
