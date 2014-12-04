@@ -1,10 +1,10 @@
 <?php
 /**
  * Magento
- * 
+ *
  * NOTICE OF LICENSE
- * 
- * This source   file is subject to the Academic Free License (AFL 3.0)
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
  * that is bundled with this package in the file LICENSE_AFL.txt.
  * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/afl-3.0.php
@@ -25,40 +25,58 @@
  */
 /** @var Mage_Checkout_Block_Onepage_Billing $this */
 ?>
-<?php
-if(Mage::getSingleton('customer/session')->isLoggedIn()) {
-     $customerData = Mage::getSingleton('customer/session')->getCustomer();
-     $customer_Id = $customerData->getId();
- }
- $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
-  	 $Session_Id = $sessionId;
-	 $Session_Id; 
- if($order = Mage::getSingleton('checkout/session')->getLastOrderId());{
- //$OrderId = $order->getIncrementId();
-    $Order_Id = $order;
- }
- ?>
-<?php
-if(Mage::getSingleton('customer/session')->isLoggedIn()) {?>
-<script type="text/javascript">
-analytics.track('Cart', {
-  UserId: 'Alreadylogin',
-  Action: 'SelectsCheckoutPath',
-  CheckoutMethod: 'Login'
-});
-</script>
-<?php } ?>
-<!--- start for segment io tracking---->
-<script type="text/javascript">
-analytics.track('Cart', {
-  UserId: '<?php echo $customer_Id; ?>',
-  SessionId: '<?php echo $Session_Id; ?>',
-  MagentoOrderId: '<?php echo $Order_Id; ?>',
-  LikiOrderId: '...',
-  Action: 'SelectsCheckoutPath',
-  CheckoutMethod: 'Login'
-});
-</script>
+
+
+<?php   
+		//edite on 28--nov 014 mixapanel for get the  distnict id
+		$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
+		$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
+		$path = $url->getPath();
+		 $customerData = Mage::getSingleton('customer/session')->getCustomer();
+		 $customer_Id = $customerData->getId();
+		 $email = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+	 ?>
+		<?php
+     if($path=='/checkout/onepage/index/') { echo $distnict_ID."/n";
+		?>
+        <script type="text/javascript">
+        analytics.track('Cart', {
+          UserId: 'Alreadylogin',
+          Action: 'SelectsCheckoutPath',
+          CheckoutMethod: 'Login'
+        });
+        </script>
+        <?php } ?>
+      
+	<?php 
+      
+		if($path=='/customer/account/createpost/')
+		{  
+			$customerData = Mage::getSingleton('customer/session')->getCustomer();
+			$customer_Id = $customerData->getId();
+			?>
+			<script type="text/javascript">
+				document.onreadystatechange = function () {
+				var state = document.readyState;
+				 if (state == 'interactive')
+				 {
+					 console.log("not loaded");
+				 }
+				 else if (state == 'complete')
+				 {
+					 <!-- edite on 28--nov 014 mixapanel -->
+					console.log(3);
+					analytics.alias('<?php echo $customer_Id;?>');	
+					console.log(4);
+				<!-- end here -->
+				  }
+				  
+				};
+ 			</script>
+    <?php	
+	}
+  ?>
+
 <!----Change by liki ext ---->
 <!---Reason: For segmentio tracking---->
 <!----- End liki ext for segment io ----------->  
@@ -77,12 +95,10 @@ analytics.track('Cart', {
     <li id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
         <fieldset>
             <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
-             <!--LIKI Code Start
-				Reason:change the height of UL Tag because there is a big gap(white spaces) in Save in addressbook and Ship to this Address checkbox
-						-->
-		<ul style="height: 550px;"><!--LIKI Code End-->
-<!--			<ul style="height: 395px;">
--->			<ul style="height: 500px;"><!--LIKI Code End-->
+		<!-- Changes by Likiext Start -->
+		<!-- Reason of Change: RD-203, To improve look of billing information form. -->
+		<ul>
+		<!-- Changes by Likiext End -->
                 <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setForceUseCustomerRequiredAttributes(!$this->isCustomerLoggedIn())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
                 <li class="fields">
                     <div class="field">
@@ -225,10 +241,7 @@ analytics.track('Cart', {
         </fieldset>
      </li>
                 <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-					<!-- Changes by Liki Ext Start -->
-					<!-- Reason of Change: RD-203, To improve look of billing information form for already registered android user -->
-                    <li class="control" id="add_book" >
-					<!-- Changes by Liki Ext End -->
+                    <li class="control">
                         <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
                     </li>
 					
@@ -236,10 +249,7 @@ analytics.track('Cart', {
                     <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
                 <?php endif; ?>
     <?php if ($this->canShip()): ?>
-		<!-- Changes by Liki Ext Start -->
-		<!-- Reason of Change: RD-203, To improve look of billing information form for new android user -->
-        <li class="control" id="same_add" >
-		<!-- Changes by Liki Ext End -->
+        <li class="control">
             <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1"<?php if ($this->isUseBillingAddressForShipping()) {?> checked="checked"<?php }?> title="<?php echo  $this->__('Ship to this address') ?>" onclick="$('shipping:same_as_billing').checked = true;" class="radio" /><label for="billing:use_for_shipping_yes"><?php echo  $this->__('Ship to this address') ?></label></li>
         <li class="control" >
             <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_no" value="0"<?php if (!$this->isUseBillingAddressForShipping()) {?> checked="checked"<?php }?> title="<?php echo $this->__('Ship to different address') ?>" onclick="$('shipping:same_as_billing').checked = false;" class="radio" /><label for="billing:use_for_shipping_no"><?php echo $this->__('Ship to different address') ?></label>
@@ -281,7 +291,6 @@ analytics.track('Cart', {
                     billingRememberMe[0].hide();
                 } else if ($('login:register') && ($('login:register').checked || $('login:register').type == 'hidden')) {
                     billingRememberMe[0].show();
-					analytics.alias('<?php echo $MagentoCID; ?>'); 
                 }
             }
         });
@@ -294,7 +303,7 @@ analytics.track('Cart', {
 function analytischk_b()
 {
 analytics.track('Cart', {
-  UserId: '<?php echo $customer_Id; ?>',
+  UserId: '<?php echo $distnict_ID; ?>',
   SessionId: '<?php echo $Session_Id; ?>',
   MagentoOrderId: '<?php echo $Order_Id; ?>',
   LikiOrderId: '...',
@@ -302,37 +311,4 @@ analytics.track('Cart', {
 });
 }
 </script>
-<!-- Changes by Liki Ext Start -->
-<!-- Reason of Change: RD-203, To improve look of billing information form for new android user -->
-<script type="text/javascript">
-function get_url()
-{
-	var curr_url = window.location.href;
-	var check_url = curr_url.lastIndexOf("register");
-	if(check_url != -1)
-	{
-		document.getElementById("same_add").setAttribute("id", "same_bill_add");
-	}
-}
-get_url();
-</script>
-<script type="text/javascript">
-document.getElementById("add_book").setAttribute("id", "add_book_bill");
-function get_sel_val()
-{ 
-	var displayValue = document.getElementById('billing-new-address-form').style.display;
-	if(displayValue == 'none')
-	{
-		 document.getElementById("add_book_bill").setAttribute("id", "add_book");
-		 document.getElementById("billing-new-address-form").style.display = "block";	
-	}
-	else
-	{
-		document.getElementById("billing-new-address-form").style.display = "none";
-		document.getElementById("add_book").setAttribute("id", "add_book_bill");
-	}
-}
-document.getElementById("billing-address-select").onchange = function() {get_sel_val()};
-</script>
-<!-- Changes by Liki Ext End -->
 <!---- end for segment io tracking---->
