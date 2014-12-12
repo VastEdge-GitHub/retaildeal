@@ -8,6 +8,12 @@
 			 </rewrite>
 		  </catalog>
 	   </helpers>
-	<blocks><catalog><rewrite><product_list_toolbar>LikiextCatalog_Catalog_Block_Product_List_Toolbar</product_list_toolbar></rewrite></catalog></blocks>	
+	<blocks><catalog>
+			<rewrite>
+				<product_list_toolbar>LikiextCatalog_Catalog_Block_Product_List_Toolbar</product_list_toolbar>
+				<product_list_random>LikiextCatalog_Catalog_Block_Product_List_Random</product_list_random>
+			</rewrite>
+		</catalog>
+	</blocks>	
 	</global>
 </config>
