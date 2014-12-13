@@ -1,3 +1,22 @@
+<!-- Changes by Likiext Start -->
+<!-- Reason of Change: RD-214 To make liki popup resizable at mobile  -->
+<style>
+@media (max-width: 767px)
+ {
+	.dialog{height:190px !important; width:264px !important; left:10% !important; top:8% !important;} 
+	.dialog_content{height:150px !important; width:264px !important;}
+}
+@media (max-width: 480px)
+ {
+	.dialog{height:308px !important;width:264px !important; left:10% !important; top:20% !important;}
+	.dialog_content{height:265px !important; width:264px !important;}
+	/* .liki_intro_popup {width:30px !important;} */ 
+	.custom_inner_text{width:30px; !important}
+	.custom_popup_liki_img{width:100 !important;} 
+}
+</style>
+<!-- Changes by Likiext End -->
+
 <?php
 /**
  * Magento
@@ -52,21 +71,25 @@ endif;
 <?php echo $this->getIncludes() ?>
 
 <!-- Changes by liki ext -->
-<!-- Changes by Liliext Start -->
+<!-- Changes by Likiext Start -->
 <!-- Reason of Change: To defer parsing of javascript  -->
 <script type="text/javascript" src="http://retaildeal.biz/js/prototype/window.js" defer="defer"></script>
-<!-- Changes by Liliext End -->
+<!-- Changes by Likiext End -->
 <link rel="shortcut icon" href="http://retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
 <script type="text/javascript">
 function showForm(id){
 	win = new Window({
 		title: "Introducing LeaseItKeepIt",
 		zIndex:3000,
-		destroyOnClose: true,
+		<!-- Changes by Likiext Start -->
+		<!-- Reason of Change: To open popup on liki click after once closed -->
+		destroyOnClose: false,
+		<!-- Changes by Likiext End -->
 		recenterAuto:false,
 		resizable: false,
 		width:800,
 		height:300,
+		showEffect:Element.show,
 		minimizable: true,
 		maximizable: false,
 		draggable: true});
@@ -75,6 +98,46 @@ win.showCenter();
 }
 function close_popup(){
 	document.getElementById( 'liki_intro_popup' ).style.display = 'none';
-	  };
+	  };	  
 </script>
-<!-- Changes by liki ext End -->
+<!-- start Mixpanel -->
+<!-- Change by liki ext -->
+<!-- Reason: For Get the distnict id from mix panel -->
+<?php
+	if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+     $customerData = Mage::getSingleton('customer/session')->getCustomer();
+     $customer_Id = $customerData->getId(); ?>
+	 <script type="text/javascript">
+        analytics.identify({userId: '<?php echo $customer_Id;?>'});
+    </script>
+	<?php
+    }
+ 	$visitorData = Mage::getSingleton('core/session')->getVisitorData();
+    $visito_id = $visitorData['visitor_id']; 
+	session_start();  
+	if(isset($_SESSION['views']))
+		$_SESSION['views'] = $_SESSION['views']+ 1;
+	else
+		$_SESSION['views'] = 1;
+	 $v_count = $_SESSION['views']; 
+	if($visito_id !='' && $v_count < 3)
+	 {
+	 ?>
+<script type="text/javascript">
+ document.onreadystatechange = function () {
+ var state = document.readyState;
+	 if (state == 'interactive')
+	 {
+	 console.log("not loaded");
+	 }
+	 else if (state == 'complete')
+	 { 
+	 analytics.track('Demo Visitor', {
+	 visitor: '<?php echo $visito_id; ?>',
+	 Action: 'Retaildeal visitor'});
+	  }
+	};
+</script>
+<?php 
+	 }             // End here for mixpanel
+?>                                     
