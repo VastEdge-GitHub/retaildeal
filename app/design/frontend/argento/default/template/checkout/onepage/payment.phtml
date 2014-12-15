@@ -60,7 +60,7 @@ function check_liki_price()
 		var item_qty = '<?php echo $totalQuantity = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();?>';	
 		if(item > 1 || item_qty > 1)
 		{ 
-			alert('When choosing LeaseItKeepIt option please select a single product.'); 
+			alert('Sorry! LeaseItKeepIt currently only accepts one product per order. They hope to change that soon.'); 
 			return false;
 		}
 	}
@@ -88,11 +88,6 @@ function check_liki_price()
     <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
 </div>
 <div class="buttons-set" id="payment-buttons-container">
-<!--Changes By Liki ext Start-->
-<!-- Reason of Change: "* Required Fields" text was not required at Payment Information during Checkout-->
-   <!-- <p class="required"><?php /*echo $this->__('* Required Fields')*/ ?></p>-->
-<!--Changes By Liki ext End-->
-
 <!--LIKI Code start 
 reason: RD-158-When user cancel the order it should redirect to payment information tab so we have made changes in design.
 -->
