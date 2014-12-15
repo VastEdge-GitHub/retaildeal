@@ -61,10 +61,13 @@
 			{
 				if($amazon_id != '1' && $amazon_id != '')						// Only categories with browsenode values
 				{		
-					if($data['level'] == 3)										// Only sub-categories upto level 3
+				if($data['level'] >= 3)										// Only sub-categories upto level 3
 					{
-						$parent_name_arr	= explode("/",$data['url_path']);
-						$parent_name		= $parent_name_arr[0];
+						$parent_name_arr	= explode("/",$data['url_path']);						
+						$parent_name_count	= count($parent_name_arr);
+						$parent_name		= $parent_name_arr[$parent_name_count -2];  // For get oarent catgory edit by liki on 25-Nov-014
+					 if($parent_name != 'and-more')
+					    {
 						if($parent_name == 'appliances')
 						{
 							$cat_name		= $cat_array_namings[0];
@@ -119,6 +122,7 @@
 						{
 							$cat_name 		= $cat_array_namings[10];
 							$cat_id 		= $cat_id_arr_ids[10];
+						 }
 						}
 						$cat_info 	= $data['name']."||".$data['entity_id']."||".$data['parent_id']."||".$data['path']."||".$data['level']."||".$data['children_count']."||".$amazon_id."||".$data['is_active'];
 						$prod_cat_ids = $cat_id.",".$data['entity_id'];
