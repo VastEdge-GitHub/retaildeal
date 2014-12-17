@@ -37,7 +37,7 @@
 		 $email = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
 	 ?>
 		<?php
-     if($path=='/checkout/onepage/index/') { echo $distnict_ID."/n";
+     if($path=='/checkout/onepage/index/') {
 		?>
         <script type="text/javascript">
         analytics.track('Cart', {
@@ -303,11 +303,7 @@
 function analytischk_b()
 {
 analytics.track('Cart', {
-  UserId: '<?php echo $distnict_ID; ?>',
-  SessionId: '<?php echo $Session_Id; ?>',
-  MagentoOrderId: '<?php echo $Order_Id; ?>',
-  LikiOrderId: '...',
-  Action: 'SpecifiesBillingInformation'
+   Action: 'SpecifiesBillingInformation'
 });
 }
 </script>
