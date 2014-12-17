@@ -1,10 +1,18 @@
 <!--LIKI Code Start
 	Reason: To remove the underline from categories and display the undersline on hover event
 -->
-<style>
+<!-- Change for onpage SEO -->
+<!-- Reason of Change: RD-193, Mobile Browser Optimization -->
+<style type="text/css">
  #sidebar-nav .block-content a{text-decoration:none}
 #sidebar-nav .collapsible a:hover{text-decoration:underline}
+@media (max-width: 480px)
+{
+	#sidenav_title { font-size: 0.9em !important; }
+	#sidenav_content { font-size: 0.9em !important; padding: 0px !important; }
+}
 </style>
+<!-- Change End -->
 <!--LIKI Code End-->
 <?php
 /**
@@ -37,10 +45,10 @@
 ?>
 <?php if ($categories = $this->getCategoriesNavMenu()): ?>
 <div id="sidebar-nav" class="block sidebar-nav-left <?php echo $this->getBlockAlias() ?>">
-    <div class="block-title">
+    <div class="block-title" id="sidenav_title">
     	<strong><span><?php echo $this->__($this->getTitle()) ?></span></strong> 
     </div>
-    <div class="block-content">
+    <div class="block-content" id="sidenav_content">
         <ul id="sidebar-nav-menu">
         <?php if ($this->showHome()): ?>
             <li class="<?php echo $this->getHomeClasses() ?>">

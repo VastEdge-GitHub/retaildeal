@@ -1,4 +1,5 @@
 <!-- Changes by LIKI Ext Start -->
+<!-- Changes Start for onpage SEO to remove html errors -->
 <!-- Reason of Change: RD-193, To shrink size of right side banner and make text visible on slides -->
 <style type="text/css">
 @font-face {
@@ -19,25 +20,33 @@
 }
 @media (max-width: 979px)
 {
-    .slide_text { font-size:24px !important; top:113px !important; left:300px !important; margin:0 !important; }
-	.slide_amnt { font-size:34px !important; top:145px !important; left:300px !important; margin:0 !important; }
+    .slide_text { font-size:24px !important; top:113px !important; left:320px !important; margin:0 !important; }
+	.slide_amnt { font-size:34px !important; top:145px !important; left:320px !important; margin:0 !important; }
 	.slide_mnth { font-size:22px !important; }
 }
 @media (max-width: 767px)
 {
-	.slide_text { font-size:24px !important; top:100px !important; left:210px !important; margin:0 !important; }
-	.slide_amnt { font-size:34px !important; top:132px !important; left:210px !important; margin:0 !important; }
+	.slide_text { font-size:24px !important; top:100px !important; left:220px !important; margin:0 !important; }
+	.slide_amnt { font-size:34px !important; top:140px !important; left:220px !important; margin:0 !important; }
 	.slide_mnth { font-size:22px !important; }
+}
+@media (max-width: 720px)
+{
+	.slide_text { font-size:20px !important; top:100px !important; left:255px !important; margin:0 !important; }
+	.slide_amnt { font-size:32px !important; top:140px !important; left:255px !important; margin:0 !important; }
+	.slide_mnth { font-size:20px !important; }
 }
 @media (max-width: 480px)
 {
 	#banner_rt { display:none; }
 	#slider_main_div { width: 215px !important; }
-	.slide_text { font-size:12px !important; top:47px !important; left:120px !important; margin:0 !important; }
-	.slide_amnt { font-size:20px !important; top:65px !important; left:120px !important; margin:0 !important; }
-	.slide_mnth { font-size:15px !important; }
+	.slide_text { font-size:11px !important; top:47px !important; left:127px !important; margin:0 !important; }
+	.slide_amnt { font-size:19px !important; top:70px !important; left:127px !important; margin:0 !important; }
+	.slide_mnth { font-size:14px !important; }
 }
+
 </style>
+<!-- Changes for onpage SEO End -->
 <!-- Changes by LIKI Ext End -->
 <?php
 if ($slides = $this->getSlider()->getSlides()) :
@@ -67,45 +76,57 @@ if ($slides = $this->getSlider()->getSlides()) :
 							<?php 
 							//Changes by Likiext Start
 							//Reason of Change: RD-137, To change text on banner and to change the link on clicking of banner
-							
-//				 $vPath = $slide['target'];
-//    $oRewrite = Mage::getModel('core/url_rewrite')
-//                    ->setStoreId(Mage::app()->getStore()->getId())
-//                    ->loadByRequestPath($vPath);
-//					$iProductId = $oRewrite->getProductId();
-//					$oProduct = Mage::getModel('catalog/product')->load($iProductId);
-//					$monthly_price = $oProduct->getLikiPrice();
-//					$total_price = $oProduct->getPrice();
-//					$total_price = round($total_price, 2);
-					//$total_price = sprintf ("%.2f", $total_price);
-//					$_coreHelper = $this->helper('core');
-
-						 echo "<a style='text-decoration:none;' href=". $vPath."><div style='position:absolute; top:-5px; width:100%'><div class='slide_text' style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>";
-						 if( $slide['target'] == 'catalogsearch/result/?q=grill')
+							//if($i < 4)
+							//{
+							echo "<a style='text-decoration:none;' href=". $vPath."><div style='position:absolute; top:-5px; width:100%'>";
+							if( $slide['target'] == 'catalogsearch/result/?q=grill')
 							{
-								echo "Grills Starting at </div>";
+								echo "<div class='slide_text' style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Grills Starting at </div>";
 						  echo "<div class='slide_amnt' style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
 	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$16</b></span>
-	<span class='slide_mnth' style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'>/month</span></div>";
+	     <span class='slide_mnth' style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'>/month</span></div>";
 							}
-							if( $slide['target'] == 'computers/tablets.html')
+							if( $slide['target'] == 'electronics/computers/tablets.html')
 							{
-								echo "Tablets Starting at </div>";
+								echo "<div class='slide_text' style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Tablets Starting at </div>";
 						  echo "<div class='slide_amnt' style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
 	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$15</b></span>
 	<span class='slide_mnth' style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'>/month</span></div>";
 							}
 							if( $slide['target'] == 'electronics/television-video.html')
 							{
-								echo "Televisions Starting at </div>";
+								echo "<div class='slide_text' style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Televisions Starting at </div>";
 						  echo "<div class='slide_amnt' style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
 	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b>$28</b></span>
 	<span class='slide_mnth' style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'>/month</span></div>";
 							}
+							if( $slide['target'] == 'appliances/beverage-refrigerators.html')
+							{
+								echo "<div class='slide_text' style='position: absolute;z-index: 999999;top: 203px;left: 348px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Appliances </div>";
+						  echo "<div class='slide_amnt' style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b></b></span>
+	<span class='slide_mnth' style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'></span></div>";
+							}
+							if( $slide['target'] == 'electronics/computers/laptops.html')
+							{
+								echo "<div class='slide_text' style='position: absolute;z-index: 999999;top: 152px;left: 340px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Laptops </div>";
+						  echo "<div class='slide_amnt' style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b></b></span>
+	<span class='slide_mnth' style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'></span></div>";
+							}
+							if( $slide['target'] == 'electronics/video-game-consoles-accessories.html')
+							{
+								echo "<div class='slide_text' style='position: absolute;z-index: 999999;top: 90px;left: 173px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Video Game Console</div>";
+						  echo "<div class='slide_amnt' style='position: absolute;z-index: 999999;top: 150px;left: 287px;font-size: 45px;color: #ffffff;
+	font-family: boldcondensed;float:left;margin:0 0 0 10px;'><span style='float:left;'><b></b></span>
+	<span class='slide_mnth' style='font-family:condensed;font-size:32px;float:left;margin:1px 0 0 5px;'></span></div>";
+							}
+
 					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 12px;color: #ffffff;
 font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><span style='float:left;margin:0 0 0 5px;'></span></div></div></a>";
-					 //Changes by Likiext End
-					 ?>
+					
+					//Changes by Likiext End
+					//} ?>
 					 <!-- LIKI CODE END -->
                             <?php if (!empty($slide['description'])) : ?>
                                 <div class="easyslidedescription <?php echo $this->getDescriptionClassName($slide['desc_pos']); ?> <?php echo $this->getBackgroundClassName($slide['background']); ?>"><?php echo $slide['description']; ?></div>
@@ -133,7 +154,10 @@ font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><spa
             </div>
         </div>
         <!-- Liki Ext Start -->
-        <div style="float:left;margin:0;cursor:pointer;">
+		<!-- Changes by Likiext Start -->
+		<!-- Reason of Change: RD-193, To make banner at right side invisible -->
+        <div class="likibannerright" style="float:left;margin:0;cursor:pointer;">
+		<!-- Changes by Likiext End -->
        <img id="banner_rt" src="/skin/frontend/argento/default/images/banner_right.png" alt="" onclick="return showForm('liki_intro_popup')" />
         </div>
         <!-- Liki Ext End -->
