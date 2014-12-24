@@ -1210,10 +1210,13 @@ tr.summary-details-excluded { font-style:italic; }
 /* Footer ================================================================================ */
 .footer { border:1px solid #ddd; padding:10px; }
 .footer p { text-align:right; }
-.footer address { text-align:right; }
+.footer address { text-align:left; }
+.footer_inner address{text-align:left !important;width:51% !important;}
+.footer .amazon_disclaimer{text-align:left;font-size:10px;width:100%;float:left;margin-top:5px;}
 .footer ul {}
 .footer ul li { display:inline; }
 .footer-container .bottom-container { text-align:center; }
+.footer_inner{float:left;width:100%;}
 /* ======================================================================================= */
 
 
@@ -1328,3 +1331,5 @@ text-indent: -9999px;}
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#86aecc', endColorstr='#d4e4ef',GradientType=0 ); /* IE6-9 */	
 }
 .category-products .price-box .price, .regular-price .price, .price-from .price-label, .price-to .price-label{font-family:lato-bold;font-size:18px;}
+
+
