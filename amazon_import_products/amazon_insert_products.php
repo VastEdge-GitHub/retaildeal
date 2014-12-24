@@ -580,8 +580,19 @@ session_start();
 							$content_offerprice		    = str_replace(",","",$content_offerprice);  
 							
 							$prod_sku 					= preg_replace('/\s+/', ' ', trim($content_arr[0])); 						// ASIN
-							if($content_offerprice == ''){$prod_price = preg_replace('/\s+/', ' ', trim($content_listprice));} // If "offerprice" else "LowestNewPrice"
-							else{$prod_price = preg_replace('/\s+/', ' ', trim($content_offerprice));}
+							if($content_offerprice == '' || $content_offerprice == 1)
+							{	
+								if($content_listprice == '')
+								{
+									$prod_price = preg_replace('/\s+/', ' ', trim($content_lowestnewprice));
+								}
+								else
+								{
+									$prod_price = preg_replace('/\s+/', ' ', trim($content_listprice));
+								} 																	
+							}
+							else{
+								$prod_price = preg_replace('/\s+/', ' ', trim($content_offerprice));}
 			                
 							if($prod_price >= '50' && $prod_price <= '2500')
 							{
@@ -601,7 +612,8 @@ session_start();
 										} 
 										if($stopword_check != 1)															// If Stopword does not exists
 										{
-											$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_itemweight));	// Weight from PackageDimensions
+										if($content_weight == ''){$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_itemweight));}
+										else{$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_weight));}
 											$prod_categoryid	= preg_replace('/\s+/', ' ', trim($cat_id));				// Magento Category ID
 											$prod_root_cat_id	= explode(",",trim($prod_categoryid));						// Magento Category ID
 											$prod_category_name	= $cat_name;												// Magento Category Name			
@@ -652,9 +664,18 @@ session_start();
 											$amazon_ean 				= preg_replace('/\s+/', ' ', trim($content_arr[12]));				// EAN
 											$amazon_offer_condition		= 'new';
 											$amazon_offer_price_type	= 'low';
-											$amazon_offer_price 		= $content_offerprice;
-											if($content_offerprice == ''){$amazon_offer_price = $content_listprice;}
-											else{$amazon_offer_price = $content_offerprice;}				// If "offerprice" else "ListPrice" 
+											if($content_offerprice == '' || $content_offerprice == 1) 
+											 {
+												if($content_listprice == '')
+												{
+													$amazon_offer_price = preg_replace('/\s+/', ' ', trim($content_lowestnewprice));
+												}
+												else
+												{
+													$amazon_offer_price = preg_replace('/\s+/', ' ', trim($content_listprice));
+												} 																	
+											}
+											else{$amazon_offer_price = preg_replace('/\s+/', ' ', trim($content_offerprice));}
 											$amazon_offer_currency 		= 'USD';
 											$amazon_offers_list_url 	= preg_replace('/\s+/', ' ', trim($content_arr[3]));				// AllOffersURL
 											$amazon_product_url 		= preg_replace('/\s+/', ' ', trim($content_arr[1]));				// DetailPageURL
@@ -702,11 +723,10 @@ session_start();
 												break;
 											}
 											//// Standard Shipping Calculation Ends \\\\
-											$prod_price_without_shipping = $prod_price;										//MSRP
 											$prod_price 		= $prod_price+$standard_shipping;							// Final Price = MSRP+Shipping Cost	
 											if($prod_price <= '2500')
 											 {
-												$prod_tax = ($prod_price_without_shipping * 8.3)/100;						//Calculating tax price over amazon price
+												$prod_tax = ($prod_price * 8.3)/100;						//Calculating tax price over amazon price
 												$price_with_tax_shipping = $prod_tax+$prod_price;							//Price included Tax and shipping
 												$liki_disc			= '15';														// 15%
 												$liki_price			= ($liki_disc/100)*$price_with_tax_shipping;				// LIKI price calculation
@@ -779,7 +799,7 @@ session_start();
 												$parentCategoryId = $_category->getParentId();
 											
 											fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_main_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.$prod_amazonprime.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_likidesc,'"'),'"')).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_desc,'"'),'"'))).'^|^'.utf8_encode($prod_shortdesc).'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_offers_list_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_product_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_reviews_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($liki_price,'"'),'"')).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^0^|^simple^|^'.$prod_salesrank.'^|^'.$prod_brand.
-					'^|^'.'Buy rent-to-own '.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).' now and pay later with affordable monthly payments. We stock up with more than 10,000 products from leading brands.^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).',shop '.strtolower($category_Name).' on monthly installments, LIKI, rent to own, lease to own, buy now pay later, low monthly payments^'.PHP_EOL);
+					'^|^'.'Buy rent-to-own'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'now and pay later with affordable monthly payments. We stock up with more than 10,000 products from leading brands^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).',shop '.strtolower($category_Name).' on monthly installments, LIKI, rent to own, lease to own, buy now pay later, low monthly payments^'.PHP_EOL);
 												
 												fclose($mainfile_fh);
 											}	// End of Stopword list check
