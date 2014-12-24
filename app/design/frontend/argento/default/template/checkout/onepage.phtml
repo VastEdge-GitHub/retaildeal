@@ -1,3 +1,13 @@
+<style>
+@media (max-width: 480px)
+ {
+	.chkout_btn { padding: 0 3px 0 3px !important; margin-left: -8px !important; }
+	#chk_liki_spam { font-size: 9px !important; }
+	.opc h2 { font-size: 9px !important; margin-left: -5px !important; margin-right: 16px !important; }
+	.product-name { font-size: 0.8em !important; }
+	#chk_edit { font-size: 10px !important; padding-right: 0px !important; }
+}
+</style>
 <?php
 /**
  * Magento
@@ -39,10 +49,6 @@
     }
 
 ?>
-<!-- Changes by Liki ext Start -->
-<!-- Reason of Change: Error message of invalid username or password was not displaying -->
-<?php //$this->getLayout()->getMessagesBlock()->setMessages(Mage::getSingleton('tag/session')->getMessages(true)); ?>
-<!-- Changes by Liki ext End -->
 <!-- Changes by liki ext end -->
 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
@@ -67,7 +73,7 @@
         <div onclick="test_step('<?php echo $i; ?>')" class="step-title" <?php echo $custom_style_ht ?>>
             <span <?php echo $custom_style_margin_no ?> class="number"><?php echo $i ?></span>
             <h2 <?php echo $custom_style_margin_text ?>><?php echo $_stepInfo['label'] ?></h2>
-            <a href="#"><?php echo $this->__('Edit') ?></a>
+            <a id="chk_edit" href="#"><?php echo $this->__('Edit') ?></a>
             <?php if($_stepId == 'payment'){ ?>
                 <div class="chkout_btn" style="float: left;height: 32px;padding: 0 10px 0 10px;margin: 8px; margin-left:50px;cursor:pointer;" onclick="return showForm('liki_intro_popup')">
                    <!--LIKI Code Start
