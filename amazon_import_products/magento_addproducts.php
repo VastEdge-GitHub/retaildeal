@@ -348,7 +348,15 @@
 				$prod_url		= $prod_url_arr[$prod_url_count-1];
 				$cat_url_arr 	= explode("/",$cat_url);
 				$cat_url_count	= count($cat_url_arr);
-				$category_url	= $cat_url_arr[$cat_url_count-2]."/".$cat_url_arr[$cat_url_count-1];
+				$category_url   = '';
+			for($i= 3; $i<$cat_url_count; $i++) 
+				 {    
+				$category_url1 =$cat_url_arr[$i]."/";
+				$category_url = $category_url.$category_url1;		   
+				 }
+				$category_url = rtrim($category_url,'/');
+			//	$category_url	= $cat_url_arr[$cat_url_count-2]."/".$cat_url_arr[$cat_url_count-1];                      edite on 26--DEC-014 for urlrewrite
+			
 				echo gmdate('Y-m-d H:i:s')."---->  Creating redirect url from (".$prod_url.") to (".$category_url."). \n";
 				Mage::getModel('core/url_rewrite')
 					->setIsSystem(1)
