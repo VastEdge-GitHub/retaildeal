@@ -74,17 +74,18 @@
          * @param string $searchType type of search
          * @return mixed simpleXML object
          */
-        public function searchProducts($search, $category, $searchType, $pgnum = "1", $minPrice, $maxPrice, $title)
+        public function searchProducts($search, $category, $searchType, $pgnum = "1",$Manufacturer,$Keywords, $minPrice, $maxPrice, $title)
         {            
-            switch($searchType) 
+            switch($searchType)   
             {
                 case "BrowseNode" :	$parameters = array("Operation" => "ItemSearch",
                                                     "BrowseNode"    => $search,
                                                     "SearchIndex"   => $category,
+													"Manufacturer"	=> $Manufacturer,
+													"Keywords"		=> $Keywords,
 													"MinimumPrice"	=> $minPrice,
 													"MaximumPrice"	=> $maxPrice,
 													"ItemPage"		=> $pgnum,
-													//"Title"			=> $title,
 													"Sort"			=> "salesrank",
                                                     "ResponseGroup" => "Large");
                                 break;            
