@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * Redirect view file
  * @category    View
@@ -6,11 +6,11 @@
  
  */
 ?>
-
+ 
 <?php
 // Get Liki Payment Details
-$likipayment = Mage::registry( 'likipayment' );
-?>
+$likipayment = Mage::registry( 'likipayment' );?>
+
 <div style="float:left;width:100%;">
     <div style="background: #eeeeee;background: -moz-linear-gradient(top, #eeeeee 0%, #d1d0d0 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#d1d0d0));background: -webkit-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);background: -o-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);background: -ms-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);	background: linear-gradient(to bottom, #eeeeee 0%,#d1d0d0 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#d1d0d0',GradientType=0 );padding:30px 0 38px 0;	margin-top:50px;text-align:center;border-radius:10px;font-weight:bold;margin-left: auto;box-shadow: 0 0 10px #888888;margin-right: auto;width: 420px;	border-radius: 10px;height:90px;">
     	<!--<div style="float:left;width:90px;">
@@ -27,7 +27,26 @@ $likipayment = Mage::registry( 'likipayment' );
 	<input type="hidden" name="requestString" value='<?php echo urlencode(json_encode($likipayment)); ?>'>
 	
 </form>
-
+<script type="text/javascript">
+				document.onreadystatechange = function () {
+				var state = document.readyState;
+				 if (state == 'interactive')
+				 {
+					 console.log("not loaded");
+				 }
+				 else if (state == 'complete')
+				 {
+					 <!-- edite on 28--nov 014 mixapanel -->
+					console.log(3);
+				analytics.track('Cart',{
+					UserId: '<?php echo $customer_Id; ?>',
+					Action: 'PlacesOrder/StartsLeaseApplication'}); 
+					console.log(4);
+				<!-- end here -->
+				  }
+				  
+				};
+ 			</script>
  <script type="text/javascript">
  //Changes made by LikiExt
  setTimeout(function(){
