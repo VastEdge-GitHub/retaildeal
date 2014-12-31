@@ -761,6 +761,23 @@ Validation.addAllThese([
                 });
                 return result;
             }],
+	['validate-text', 'Field length can not exceed 20 characters.', function (v, elm) {
+	 //LIKI Code End																	
+                var reMax = new RegExp(/^maximum-length-[0-9]+$/);
+                var reMin = new RegExp(/^minimum-length-[0-9]+$/);
+                var result = true;
+                $w(elm.className).each(function(name, index) {
+                    if (name.match(reMax) && result) {
+                       var length = name.split('-')[2];
+                       result = (v.length <= length);
+                    }
+                    if (name.match(reMin) && result && !Validation.get('IsEmpty').test(v)) {
+                        var length = name.split('-')[2];
+                        result = (v.length >= length);
+                    }
+                });
+                return result;
+            }],
      ['validate-percents', 'Please enter a number lower than 100.', {max:100}],
      ['required-file', 'Please select a file', function(v, elm) {
          var result = !Validation.get('IsEmpty').test(v);
