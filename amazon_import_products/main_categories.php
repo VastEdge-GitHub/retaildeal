@@ -62,6 +62,8 @@
 			if($cat_array[$n] == 'Automotive'){$max_pages = 10;}
 			$count_error	= '0';
 			$pageNum		= 1;
+			$Manufacturer   = "";
+			$Keywords		= "";
 			$lastPage 		= $max_pages;
 			while($pageNum <= $lastPage)
 			{
@@ -73,7 +75,7 @@
 												
 				try
 				{
-					$result = $obj->searchProducts($browsenodes_array[$n],$cat_array[$n],"BrowseNode",$pageNum,$minPrice,$maxPrice,$cat_array[$n]);
+					$result = $obj->searchProducts($browsenodes_array[$n],$cat_array[$n],"BrowseNode",$pageNum,$Manufacturer,$Keywords,$minPrice,$maxPrice,$cat_array[$n]);
 				}
 				catch(Exception $e)
 				{
