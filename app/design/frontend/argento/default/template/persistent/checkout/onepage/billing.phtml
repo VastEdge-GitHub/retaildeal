@@ -37,7 +37,8 @@
 		 $email = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
 	 ?>
 		<?php
-     if($path=='/checkout/onepage/index/') { echo $distnict_ID."/n";
+		
+     if($path=='/checkout/onepage/index/') {
 		?>
         <script type="text/javascript">
         analytics.track('Cart', {
@@ -76,11 +77,6 @@
     <?php	
 	}
   ?>
-
-<!----Change by liki ext ---->
-<!---Reason: For segmentio tracking---->
-<!----- End liki ext for segment io ----------->  
-
 <form id="co-billing-form" action="">
 <fieldset>
     <ul class="form-list">
@@ -95,10 +91,7 @@
     <li id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
         <fieldset>
             <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
-		<!-- Changes by Likiext Start -->
-		<!-- Reason of Change: RD-203, To improve look of billing information form. -->
 		<ul>
-		<!-- Changes by Likiext End -->
                 <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setForceUseCustomerRequiredAttributes(!$this->isCustomerLoggedIn())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
                 <li class="fields">
                     <div class="field">
@@ -120,14 +113,14 @@
                 <li class="wide">
                     <label for="billing:street1" class="required"><em>*</em><?php echo $this->__('Address') ?></label>
                     <div class="input-box">
-                        <input type="text" title="<?php echo $this->__('Street Address') ?>" name="billing[street][]" id="billing:street1" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" class="input-text <?php echo $_streetValidationClass ?>" />
+                        <input type="text" title="<?php echo $this->__('Street Address') ?>" name="billing[street][]" id="billing:street1" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" class="input-text required-entry validate-text maximum-length-20 <?php echo $_streetValidationClass ?>" />
                     </div>
                 </li>
         <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
         <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
                 <li class="wide">
                     <div class="input-box">
-                        <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="billing[street][]" id="billing:street<?php echo $_i ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($_i)) ?>" class="input-text <?php echo $_streetValidationClass ?>" />
+                        <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="billing[street][]" id="billing:street<?php echo $_i ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($_i)) ?>" class="input-text validate-text maximum-length-20 <?php echo $_streetValidationClass ?>" />
                     </div>
                 </li>
         <?php endfor; ?>
@@ -143,7 +136,7 @@
                     <div class="field">
                         <label for="billing:city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
                         <div class="input-box">
-                            <input type="text" title="<?php echo $this->__('City') ?>" name="billing[city]" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="billing:city" />
+                            <input type="text" title="<?php echo $this->__('City') ?>" name="billing[city]" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>" class="input-text required-entry validate-text maximum-length-20 <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="billing:city" />
                         </div>
                     </div>
                     <div class="field">
@@ -182,11 +175,9 @@
                     <div class="field">
                         <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
                         <div class="input-box">
-						<!--LIKI Code Start
-						Reason:change the validation class to avoid alpha values and should be 10 Digits value
-						-->
+						<!--LIKI Code Start Reason:change the validation class to avoid alpha values and should be 10 Digits value -->
                             <input type="text" name="billing[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry validate-length minimum-length-10 maximum-length-10 validate-number <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="billing:telephone" />
-							<!--LIKI Code End-->
+						<!--LIKI Code End-->
                         </div>
                     </div>
                     <div class="field">
@@ -263,8 +254,6 @@
 	<!-- Changes by Likiext Start -->
 	<!-- Reason of Cahnge: "* Required Fields" need to be placed here-->
         <p class="required"><?php echo $this->__('* Required Fields') ?></p>
-	<!-- Changes by Likiext End -->
-    <!--Changes by Likiext Start -->
 	<!--Reason of Cahnge: "analytischk_b() use for segment io tracking-->
       <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save(); analytischk_b()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
     <!-- Changes by Likiext End -->
@@ -297,18 +286,14 @@
     }
 //]]>
 </script>
-<!---Changes By Liki Ext Start--->
-<!--- start for segment io tracking---->
+<!-- Changes By Liki Ext Start -->
+<!-- start for segment io tracking -->
 <script type="text/javascript">
 function analytischk_b()
 {
 analytics.track('Cart', {
-  UserId: '<?php echo $distnict_ID; ?>',
-  SessionId: '<?php echo $Session_Id; ?>',
-  MagentoOrderId: '<?php echo $Order_Id; ?>',
-  LikiOrderId: '...',
-  Action: 'SpecifiesBillingInformation'
+   Action: 'SpecifiesBillingInformation'
 });
 }
 </script>
-<!---- end for segment io tracking---->
+<!-- end for segment io tracking -->
