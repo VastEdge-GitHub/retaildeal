@@ -37,10 +37,11 @@
         <li id="shipping-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif ?>>
             <fieldset>
                 <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
-				<!-- Changes by Likiext Start -->
-				<!-- Reason of Change: RD-203, To improve look of shiiping information form. -->
-				<ul>
-				<!-- Changes by Likiext End -->
+              <!--LIKI Code Start
+				Reason:change the height of UL Tag because there is a big gap(white spaces) in Save in addressbook and use billing Address checkbox
+						-->
+<!--			    <ul style="height: 374px;">
+-->				<ul style="height: 500px;"><!--LIKI Code End-->
                     <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress())->setFieldIdFormat('shipping:%s')->setFieldNameFormat('shipping[%s]')->setFieldParams('onchange="shipping.setSameAsBilling(false)"')->toHtml() ?></li>
                     <li class="fields">
                         <div class="fields">
@@ -54,14 +55,14 @@
                     <li class="wide">
                         <label for="shipping:street1" class="required"><em>*</em><?php echo $this->__('Address') ?></label>
                         <div class="input-box">
-                            <input type="text" title="<?php echo $this->__('Street Address') ?>" name="shipping[street][]" id="shipping:street1" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" class="input-text required-entry validate-text maximum-length-20 <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
+                            <input type="text" title="<?php echo $this->__('Street Address') ?>" name="shipping[street][]" id="shipping:street1" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" class="input-text <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
                         </div>
                     </li>
             <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
             <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
                     <li class="wide">
                         <div class="input-box">
-                            <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="shipping[street][]" id="shipping:street<?php echo $_i ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($_i)) ?>" class="input-text validate-text maximum-length-20 <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
+                            <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="shipping[street][]" id="shipping:street<?php echo $_i ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($_i)) ?>" class="input-text <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
                         </div>
                     </li>
             <?php endfor; ?>
@@ -77,7 +78,7 @@
                         <div class="field">
                             <label for="shipping:city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
                             <div class="input-box">
-                                <input type="text" title="<?php echo $this->__('City') ?>" name="shipping[city]" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>" class="input-text required-entry validate-text maximum-length-20 <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="shipping:city" onchange="shipping.setSameAsBilling(false);" />
+                                <input type="text" title="<?php echo $this->__('City') ?>" name="shipping[city]" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="shipping:city" onchange="shipping.setSameAsBilling(false);" />
                             </div>
                         </div>
                         <div class="field">
@@ -134,14 +135,20 @@
             </fieldset>
         </li>
 		<?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-                    <li class="control" >
+					<!-- Changes by Likiext Start -->
+					<!-- Reason of Change: RD-203, To improve look of shiiping information form for already registered user -->
+                    <li class="control" id="add_book_ship" >
+					<!-- Changes by Likiext End -->
                         <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" onchange="shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="shipping:save_in_address_book"><?php echo $this->__('Save in address book') ?>
 						</label>
 						</li>
                 <?php else:?>
                     <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></li>
                 <?php endif;?>
-        <li class="control">
+		<!-- Changes by Likiext Start -->
+		<!-- Reason of Change: RD-203, To improve look of shiiping information form for already registered user -->		
+        <li class="control" id="bill_add">
+		<!-- Changes by Likiext End -->
             <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Use Billing Address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" /><label for="shipping:same_as_billing"><?php echo $this->__('Use Billing Address') ?></label>
         </li>
 		</ul>
@@ -206,4 +213,38 @@ function test(id)
 <?php } ?>	
 }
 </script>
+<!-- Changes by Likiext Start -->
+<!-- Reason of Change: RD-203, To improve look of shiiping information form for already registered user -->
+<script type="text/javascript">
+function get_ship_url()
+{
+	var curr_ship_url = window.location.href;
+	var check_ship_url = curr_ship_url.lastIndexOf("register");
+	if(check_ship_url != -1)
+	{
+		document.getElementById("bill_add").setAttribute("id", "bill_add_ship");
+	}
+}
+get_ship_url();
+</script>
+<script type="text/javascript">
+document.getElementById("add_book_ship").setAttribute("id", "ship_book_add");
+function get_sel_val_ship()
+{ 	
+	var displayValue = document.getElementById('shipping-new-address-form').style.display;
+	if(displayValue == 'none')
+	{
+		 document.getElementById("ship_book_add").setAttribute("id", "add_book_ship");
+		 document.getElementById("shipping-new-address-form").style.display = "block";	
+	}
+	else
+	{
+		document.getElementById("shipping-new-address-form").style.display = "none";
+		document.getElementById("add_book_ship").setAttribute("id", "ship_book_add");
+	}
+}
+document.getElementById("shipping-address-select").onchange = function() {get_sel_val_ship()};
+</script>
+
+<!-- Changes by Likiext End -->
 <!---- end for segment io tracking---->
