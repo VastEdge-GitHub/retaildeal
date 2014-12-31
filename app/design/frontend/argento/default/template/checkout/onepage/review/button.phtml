@@ -24,33 +24,7 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<!-- Change by liki ext -->
-<!-- Reason: For segmentio tracking -->
-<script type="text/javascript">
-</script>
-<?php
-if(Mage::getSingleton('customer/session')->isLoggedIn()) {
-     $customerData = Mage::getSingleton('customer/session')->getCustomer();
-     $customer_Id = $customerData->getId();
- }
- $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
-  	 $Session_Id = $sessionId;
-	 $Session_Id; 
- if($order = Mage::getSingleton('checkout/session')->getLastOrderId());{
- //$OrderId = $order->getIncrementId();
-    $Order_Id = $order;
- }
-?>
-
-<script type="text/javascript">
-function anlyticp()
- {
-analytics.track('Cart', {
-  Action: 'PlacesOrder/StartsLeaseApplication'
-});
- }
-</script>
-<button  type="submit" title="<?php echo $this->__('Place Order') ?>" class="button btn-checkout" onclick="review.save(); analytics.track('Cart', {UserId: '<?php echo $customer_Id; ?>', SessionId: '<?php echo $Session_Id; ?>', MagentoOrderId: '<?php echo $Order_Id; ?>', LikiOrderId: '...', Action: 'PlacesOrder/StartsLeaseApplication'});">
+<button  type="submit" title="<?php echo $this->__('Place Order') ?>" class="button btn-checkout" onclick="review.save();">
 <span><span><?php echo $this->__('Place Order') ?></span></span></button>
 
 
