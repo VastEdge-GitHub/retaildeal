@@ -82,8 +82,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$MerchantSession['SuccessURL'] = Mage::getBaseUrl().'CreditApplication/Payment/success';
 			$MerchantSession['CancelURL']   =  Mage::getBaseUrl().'CreditApplication/Payment/cancel';
 			$MerchantSession['RejectURL']   =  Mage::getBaseUrl().'CreditApplication/Payment/reject';
-			$MerchantSession['LogoURL']   =  Mage::getBaseUrl().'Logo.png';
-			
+			$MerchantSession['LogoURL']   =  Mage::getBaseUrl().'Logo.jpg';
 			$likipayment['MerchantSession']=$MerchantSession;
 			$Order['MagentoOrderId']=$order->getEntityId();
 			$Order['CreateDate']=date("M d, Y");
@@ -112,9 +111,13 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$customerId = $order->customer_id;
 //			$fisrtname=urlencode($shippingAddress['firstname']);
 			$fisrtname=$shippingAddress['firstname'];
+			$fisrtname=trim($fisrtname);
+			
 			$Customer['FirstName']=str_replace("&","and",$fisrtname);
 //			$lastname=urlencode($shippingAddress['lastname']);
 			$lastname=$shippingAddress['lastname'];
+			
+			$lastname=trim($lastname);
 			$Customer['LastName']=str_replace("&","and",$lastname);	
 //			$email=urlencode($shippingAddress['email']);
 			$email=$shippingAddress['email'];
