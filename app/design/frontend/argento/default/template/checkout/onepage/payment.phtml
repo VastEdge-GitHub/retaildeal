@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * Magento
  *
@@ -43,9 +43,7 @@ analytics.track('Cart', {
 <script>
 function check_liki_price()
 {
-	//RD-220
-	//Reason: When choosing LIKI option please select a single product. 
-	
+	//RD-220 
 	var quoteBaseGrandTotal = <?php echo (float)$this->getQuoteBaseGrandTotal(); ?>;
 	var option_newcase = document.getElementsByTagName("input");
 	var option_newcase_value;
@@ -54,16 +52,79 @@ function check_liki_price()
 			option_newcase_value = option_newcase[i].value;
 		}
 	}
+		
+		
+		var e = document.getElementById("billing-address-select");
+		if(e)
+		{
+			var billing_address_no = e.options[e.selectedIndex].value;
+			var custom_billing_address = e.options[e.selectedIndex].text;
+			if(custom_billing_address=='New Address')
+			{
+				var e 			= document.getElementById("billing-address-select");
+				var fn 			= document.getElementById("billing:firstname").value;
+				var ln			= document.getElementById("billing:lastname").value;
+				var company 	= document.getElementById("billing:company").value;
+				var street1 	= document.getElementById("billing:street1").value;
+				var street2 	= document.getElementById("billing:street2").value;
+				var city 		= document.getElementById("billing:city").value;
+				var region_id 	= document.getElementById("billing:region_id").value;
+				var postcode 	= document.getElementById("billing:postcode").value;
+				var country_id 	= document.getElementById("billing:country_id").value;
+				var telephone 	= document.getElementById("billing:telephone").value;
+				var fax 		= document.getElementById("billing:fax").value;
+				var custom_billing_address = fn+ln+company+street1+street2+city+region_id+postcode+country_id+telephone+fax;
+			}
+		}
+
+		
+		
+		var e = document.getElementById("shipping-address-select");
+		if(e)
+		{
+			var shipping_address_no = e.options[e.selectedIndex].value;
+			var custom_shipping_address = e.options[e.selectedIndex].text;
+			if(custom_shipping_address=='New Address')
+			{
+				var fn 			= document.getElementById("shipping:firstname").value;
+				var ln 			= document.getElementById("shipping:lastname").value;
+				var company 	= document.getElementById("shipping:company").value;
+				var street1 	= document.getElementById("shipping:street1").value;
+				var street2 	= document.getElementById("shipping:street2").value;
+				var city 		= document.getElementById("shipping:city").value;
+				var region_id 	= document.getElementById("shipping:region_id").value;
+				var postcode 	= document.getElementById("shipping:postcode").value;
+				var country_id 	= document.getElementById("shipping:country_id").value;
+				var telephone 	= document.getElementById("shipping:telephone").value;
+				var fax 		= document.getElementById("shipping:fax").value;
+				var custom_shipping_address = fn+ln+company+street1+street2+city+region_id+postcode+country_id+telephone+fax;
+			}
+		}
+		var off_payment_method = document.getElementsByName('payment[method]');
+		for ( var i = 0; i < off_payment_method.length; i++)
+		{
+			if(off_payment_method[i].checked)
+			{	
+				if(off_payment_method[i].value!='CreditApplication') 
+				{	
+					if(custom_shipping_address!=custom_billing_address || billing_address_no!=shipping_address_no)
+					{ 
+						alert('Billing and Shipping destinations need to be same when using the Credit Card option.');
+						return false;
+					}
+				}
+			}
+		}
 	if(option_newcase_value == 'CreditApplication')
 	{
 		var item = '<?php echo $cartItemsCount = Mage::helper('checkout/cart')->getCart()->getItemsCount();?>';
 		var item_qty = '<?php echo $totalQuantity = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();?>';	
 		if(item > 1 || item_qty > 1)
 		{ 
-			alert('When choosing LeaseItKeepIt option please select a single product.'); 
+			alert('Sorry! LeaseItKeepIt currently only accepts one product per order. They hope to change that soon.'); 
 			return false;
 		}
-	}
+	}	
 	if(option_newcase_value == 'CreditApplication' && quoteBaseGrandTotal < 100)
 	{
 		alert('Total Amount cannot be less than $100 for LIKI payment mode.');
@@ -73,6 +134,7 @@ function check_liki_price()
 	{
 		return true;
 	}
+	
 	
 }
 </script>
@@ -88,15 +150,7 @@ function check_liki_price()
     <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
 </div>
 <div class="buttons-set" id="payment-buttons-container">
-<!--Changes By Liki ext Start-->
-<!-- Reason of Change: "* Required Fields" text was not required at Payment Information during Checkout-->
-   <!-- <p class="required"><?php /*echo $this->__('* Required Fields')*/ ?></p>-->
-<!--Changes By Liki ext End-->
-
-<!--LIKI Code start 
-reason: RD-158-When user cancel the order it should redirect to payment information tab so we have made changes in design.
--->
-
+	<!--LIKI Code start Reason: RD-158 -->
     <?php
 	$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
 	$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
@@ -106,9 +160,7 @@ reason: RD-158-When user cancel the order it should redirect to payment informat
 		<!--Remove back link-->
 		<p class="back-link"><a href="#" onclick="checkout.back(); return false;"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
 		<?php } ?>
-    <!-- Changes made by liki ext -->
     <button type="button" class="button" onclick="if( check_liki_price() ) {payment.save();} test(this.id);"><span><span><?php echo $this->__('Continue') ?></span></span></button>
-    <!-- Changes made by liki ext end -->
 	<!--LIKI Code End-->
     <span class="please-wait" id="payment-please-wait" style="display:none;">
         <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
@@ -135,10 +187,7 @@ reason: RD-158-When user cancel the order it should redirect to payment informat
 //<![CDATA[
     payment.currentMethod = "<?php echo $this->getChild('methods')->getSelectedMethodCode() ?>";
 //]]>
-<!--LIKI Code start 
-//reason: function for RD-158 
--->
-
+<!--LIKI Code start Reason: RD-158 -->
 function test(id)
 {
 	<?php
@@ -155,3 +204,4 @@ function test(id)
 }
 <!--LIKI Code End-->
 </script>
+
