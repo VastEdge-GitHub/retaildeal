@@ -32,15 +32,14 @@ $likipayment = Mage::registry( 'likipayment' );?>
 				var state = document.readyState;
 				 if (state == 'interactive')
 				 {
-					 console.log("not loaded");
+					 analytics.track('Cart',{
+					UserId: '<?php echo $customer_Id; ?>',
+					Action: 'PlacesOrder/StartsLeaseApplication'});
 				 }
 				 else if (state == 'complete')
 				 {
 					 <!-- edite on 28--nov 014 mixapanel -->
-					console.log(3);
-				analytics.track('Cart',{
-					UserId: '<?php echo $customer_Id; ?>',
-					Action: 'PlacesOrder/StartsLeaseApplication'}); 
+					 
 					console.log(4);
 				<!-- end here -->
 				  }
