@@ -172,7 +172,7 @@
 				echo gmdate('Y-m-d H:i:s')."----> File Count: ".$file_count." \n";
 				/////*****\\\\\
 
-				if($prod_count >= 500)
+				if($prod_count >= 5000)
 				{
 					/////*****\\\\\
 					echo gmdate('Y-m-d H:i:s')."----> Magmi flag \n";
