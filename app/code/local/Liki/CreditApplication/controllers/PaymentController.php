@@ -82,7 +82,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$MerchantSession['SuccessURL'] = Mage::getBaseUrl().'CreditApplication/Payment/success';
 			$MerchantSession['CancelURL']   =  Mage::getBaseUrl().'CreditApplication/Payment/cancel';
 			$MerchantSession['RejectURL']   =  Mage::getBaseUrl().'CreditApplication/Payment/reject';
-			$MerchantSession['LogoURL']   =  Mage::getBaseUrl().'Logo.jpg';
+			$MerchantSession['LogoURL']   =  Mage::getBaseUrl().'Logo.png';
 			$likipayment['MerchantSession']=$MerchantSession;
 			$Order['MagentoOrderId']=$order->getEntityId();
 			$Order['CreateDate']=date("M d, Y");
