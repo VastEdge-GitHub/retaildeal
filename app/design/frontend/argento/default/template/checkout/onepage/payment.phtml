@@ -52,8 +52,6 @@ function check_liki_price()
 			option_newcase_value = option_newcase[i].value;
 		}
 	}
-		
-		
 		var e = document.getElementById("billing-address-select");
 		if(e)
 		{
@@ -105,6 +103,7 @@ function check_liki_price()
 		{
 			if(off_payment_method[i].checked)
 			{	
+				if(off_payment_method[i].value=='firstdataglobalgateway'){alert("We're not currently accepting credit card transactions."); return false;}
 				if(off_payment_method[i].value!='CreditApplication') 
 				{	
 					if(custom_shipping_address!=custom_billing_address || billing_address_no!=shipping_address_no)
@@ -115,16 +114,6 @@ function check_liki_price()
 				}
 			}
 		}
-	if(option_newcase_value == 'CreditApplication')
-	{
-		var item = '<?php echo $cartItemsCount = Mage::helper('checkout/cart')->getCart()->getItemsCount();?>';
-		var item_qty = '<?php echo $totalQuantity = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();?>';	
-		if(item > 1 || item_qty > 1)
-		{ 
-			alert('Sorry! LeaseItKeepIt currently only accepts one product per order. They hope to change that soon.'); 
-			return false;
-		}
-	}	
 	if(option_newcase_value == 'CreditApplication' && quoteBaseGrandTotal < 100)
 	{
 		alert('Total Amount cannot be less than $100 for LIKI payment mode.');
