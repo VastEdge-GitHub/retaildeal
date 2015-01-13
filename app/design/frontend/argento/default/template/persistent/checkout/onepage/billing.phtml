@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * Magento
  *
  * NOTICE OF LICENSE
@@ -232,10 +232,13 @@
         </fieldset>
      </li>
                 <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-                    <li class="control">
-                        <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
+				<!-- Changes by Likiext Start -->
+				<!-- Reason of Cahnge: RD-339-->
+<!--                    <li class="control">
+                        <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php //echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php //if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php //endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php //echo $this->__('Save in address book') ?></label>
                     </li>
-					
+-->				
+				<!-- Changes by Likiext End -->	
                 <?php else:?>
                     <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
                 <?php endif; ?>
@@ -250,12 +253,13 @@
     <?php if (!$this->canShip()): ?>
         <input type="hidden" name="billing[use_for_shipping]" value="1" />
     <?php endif; ?>
-    <div class="buttons-set" id="billing-buttons-container">
 	<!-- Changes by Likiext Start -->
+	<!-- Reason of Cahnge: RD-339-->
+    <div style="padding-top: 0.6em;" class="buttons-set" id="billing-buttons-container">
 	<!-- Reason of Cahnge: "* Required Fields" need to be placed here-->
         <p class="required"><?php echo $this->__('* Required Fields') ?></p>
 	<!--Reason of Cahnge: "analytischk_b() use for segment io tracking-->
-      <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save(); analytischk_b()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+      <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save(); analytischk_b();"><span><span><?php echo $this->__('Continue') ?></span></span></button>
     <!-- Changes by Likiext End -->
         <span class="please-wait" id="billing-please-wait" style="display:none;">
             <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
@@ -295,5 +299,18 @@ analytics.track('Cart', {
    Action: 'SpecifiesBillingInformation'
 });
 }
+	function getRadioVal(form, name) {
+    var val;
+    var radios = form.elements[name];
+    for (var i=0, len=radios.length; i<len; i++) {
+        if ( radios[i].checked ) { // radio checked?
+            val = radios[i].value; // if so, hold its value in val
+            window['custom_check_of_same_address']=val;
+			break; // and break out of for loop
+        	}
+    	}
+	}
+
 </script>
 <!-- end for segment io tracking -->
+
