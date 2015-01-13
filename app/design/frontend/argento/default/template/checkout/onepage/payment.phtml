@@ -103,6 +103,16 @@ function check_liki_price()
 		{
 			if(off_payment_method[i].checked)
 			{	
+				if(off_payment_method[i].value!='CreditApplication')
+				{
+					var item = '<?php echo $cartItemsCount = Mage::helper('checkout/cart')->getCart()->getItemsCount();?>';
+					var item_qty = '<?php echo $totalQuantity = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();?>';	
+					if(item > 1 || item_qty > 1)
+					{ 
+						alert('Sorry! LeaseItKeepIt currently only accepts one product per order. They hope to change that soon.'); 
+						return false;
+					}
+				}
 				if(off_payment_method[i].value=='firstdataglobalgateway'){alert("We're not currently accepting credit card transactions."); return false;}
 				if(off_payment_method[i].value!='CreditApplication') 
 				{	
