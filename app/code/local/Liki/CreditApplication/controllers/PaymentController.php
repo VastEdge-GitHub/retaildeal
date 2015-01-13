@@ -77,7 +77,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			 $likipayment['liki_payment_url'] =  Mage::getStoreConfig('payment/CreditApplication/submit_url').'/LeaseApplication/ProcessPostLeaseApplication';
 			//Now, Order has only  one product  so that $items[0] is hardcorded, it will update when multiple product will come in Order.
 		    $items = $order->getAllItems(); 
-			$MerchantSession['MerchantId'] = '11';
+			$MerchantSession['MerchantId'] = '1';
 			$MerchantSession['MerchantCustomerId'] = $order->customer_id;
 			$MerchantSession['SuccessURL'] = Mage::getBaseUrl().'CreditApplication/Payment/success';
 			$MerchantSession['CancelURL']   =  Mage::getBaseUrl().'CreditApplication/Payment/cancel';
