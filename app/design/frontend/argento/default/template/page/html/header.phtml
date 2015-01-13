@@ -27,6 +27,20 @@
  * @var Mage_Page_Block_Html_Header $this
  */
 ?>
+		<?php  if (extension_loaded ('newrelic')) { echo newrelic_get_browser_timing_header();} // RD-301 edited on 25-DEC-2014
+		?> 
+
+<?php                                                                          //edited on 10-Dec-2014 This code use to count online visitor and show in mixpanel
+     $visitor_count = Mage::getModel('log/visitor_online')->prepare()->getCollection()->count();
+	 if(!empty($visitor_count) && $visitor_count > 0)
+        {  $cnt =  $visitor_count;}	 
+	                                                                  //edited on 28-nov 014 mixapanel to get the identify
+	 $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
+	 if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+	 $customerData = Mage::getSingleton('customer/session')->getCustomer();
+	 $customer_Id = $customerData->getId(); 
+ ?>             
+<?php } ?>											
 <!-- Changes by liki ext -->
 <div id="liki_intro_popup" style="display:none"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('liki_intro')->toHtml()?></div>
 <!-- Changes by liki ext End -->
@@ -43,11 +57,13 @@
 <div class="header-container">
     <div class="header">
         <div class="logo-wrapper">
+			<!-- Changes by Likiext Start, RD-339-->
             <?php if ($this->getIsHomePage()):?>
-            <h1 class="logo"><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img height="77px" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+            <h1 class="logo"><a style="margin-left: -20px;" href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img height="77px" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
             <?php else:?>
-            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img height="77px" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <a style="margin-left: -20px;" href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img height="77px" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
             <?php endif?>
+			<!-- Changes by Likiext End -->
         </div>
         <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_callout')->toHtml() ?>
         <?php echo $this->getChildHtml('headerCart') ?>
@@ -85,9 +101,6 @@
     <?php endif; ?>
     <?php echo $this->getChildHtml('topContainer'); ?>
 </div>
-<!-- changes by likiext -->
-<?php //echo $this->getChildHtml('topMenu') ?>
-<!-- changes by likiext end -->
 
 <script type="text/javascript">
 document.observe('dom:loaded', function() {
@@ -102,4 +115,3 @@ document.observe('dom:loaded', function() {
     }
 });
 </script>
-

@@ -27,9 +27,15 @@
  * @var Mage_Page_Block_Html_Header $this
  */
 ?>
-<!-- Changes by liki ext -->
+<?php
+//edited on 28-Nov-2014 mixapanel to get the  identify
+ 		 $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
+
+if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+     $customerData = Mage::getSingleton('customer/session')->getCustomer();
+     $customer_Id = $customerData->getId(); ?>
+<?php } ?>												
 <div id="liki_intro_popup" style="display:none"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('liki_intro')->toHtml()?></div>
-<!-- Changes by liki ext End -->
 <div class="top-toolbar-container">
     <div class="top-toolbar">
         <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_links')->toHtml() ?>
@@ -42,11 +48,13 @@
 </div>
 <div class="header-container">
     <div class="header">
+		<!-- Changes by Likiext Start, RD-339-->
         <?php if ($this->getIsHomePage()):?>
-        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img height="77px" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a style="margin-left: -20px;" href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img height="77px" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
         <?php else:?>
-        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img height="77px" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+        <a style="margin-left: -20px;" href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img height="77px" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
         <?php endif?>
+		<!-- Changes by Likiext End -->
         <?php echo $this->getChildHtml('topContainer'); ?>
     </div>
 </div>
