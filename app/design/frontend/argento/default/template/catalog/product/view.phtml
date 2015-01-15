@@ -38,25 +38,29 @@
 	float: left;
 	margin-top: 11.5px;
 	font-size: 12px;
-	font-family:lato-bold;
+	font-family:Arial;
 }
+.product-view .product-shop .product-name{margin: 0 0 0;}
+.monthly-price-display span{font-family:Arial;}
+.product-view .product-shop .short-description {margin: 0 0;}
+.product-view .add-to-cart-wrapper .availability{top: -25px;}
+.or-purchase-for-text{margin-right: -14px;}
 .product-view .product-shop .add-to-cart button.button
 {
 	background-position: 99% -170px !important;padding: 3px 27px 11px 11px !important;height :25px !important;margin:3px 5px 0 0!important;
 }
-/*.product-view .product-shop .add-to-cart .qty { margin:3px 5px 0 0;height:19px;}*/
 .product-view .product-shop .add-to-cart .qty { margin:3px 5px 0 0;height:19px;text-align:center;}
 .product-view .add-to-cart-wrapper{padding-left:0;}
-</style>
-<!-- change by liki 
-     Reason: Get the product id for adroll -->
-<script type="text/javascript">
-adroll_custom_data = {"product_id": "<?php echo $products_ID;?>"};
-</script>
-<!--end liki for Adroll-->
 
-<?php $_helper = $this->helper('catalog/output'); ?>
-<?php $_product = $this->getProduct(); ?>
+</style>
+	<?php $_helper 		= $this->helper('catalog/output'); ?>
+    <?php $_product 	= $this->getProduct();
+          if($_product = Mage::registry('current_product')){
+            $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+            $prod_name   =  $_product->getName();
+            $month_price =  $_product->getLikiPrice();
+            }
+        ?>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <div class="product-view">
     <div class="product-essential">
@@ -108,14 +112,17 @@ adroll_custom_data = {"product_id": "<?php echo $products_ID;?>"};
                             if($price_len == '4'){$style_liki_maindiv = 'style="position:absolute; /*margin-left:115px;*/ margin-top:-13px; width:470px; "';}
                         ?>
                         <div <?php echo $style_liki_maindiv; ?>>
-                        	<div style="float:left; width:100%; color: #000; font-size:1.5em; font-weight:bold;">
-                                <span style="float:left; margin-top: 0;font-size:30px;font-weight:normal;font-family: lato-bold;">
+                        	<div class="monthly-price-display" style="float:left; width:100%; color: #000; font-size:1.5em; font-weight:bold;">
+                                <span  style="float:left; margin-top: 0;font-size:30px;font-weight:normal;">
 									<?php echo $_product->getLikiPrice(); ?>
 								</span>
-                                <span style="float:left; margin-top: 0;font-size:30px;font-weight:normal;font-family: lato-bold;">/mo.</span>
+                                <span style="float:left; margin-top: 0;font-size:30px;font-weight:normal;">/mo.</span>
                                 
-                                <div id="chkout_btn_id" class="chkout_btn" style="float:left;background-repeat:no-repeat;height:33px;padding:0 6px 0 6px;margin-left:12px;margin-top:-11px;" onClick="return showForm('liki_intro_popup')">
-                                <a style="float:left; margin-top:4px;cursor:pointer;">
+                                <div id="chkout_btn_id" class="chkout_btn" style="float:left;background-repeat:no-repeat;height:40px;padding:0 6px 0 6px;margin-left:12px;margin-top:-5px;" onClick="return showForm('liki_intro_popup')">
+								<!--LIKI Code Start
+									Reason: text-decoration set none for anchor tag -->
+                                <a style="text-decoration:none; float:left; margin-top:6px;cursor:pointer;">
+								<!--LIKI Code End-->
 									<span style="float:left;font-size:12px;font-weight:bold;margin-top:4px;color:#1d1d1d;">
                                     	Financing by
                                     </span>
@@ -130,7 +137,7 @@ adroll_custom_data = {"product_id": "<?php echo $products_ID;?>"};
                         </div>
                         <!--LIKI price div ends-->
                 <?php endif ?>
-				<div style="float:left;width:105px;margin-top:11px;font-weight:bold;font-size:12px;">or purchase for</div>
+				<div class="or-purchase-for-text" style="float:left;width:105px;margin-top:11px;font-weight:bold;font-size:12px;font-family:Arial;">or purchase for</div>
                 <?php echo $this->getChildHtml('product_type_data') ?>
 
                 <?php if (!$this->hasOptions()):?>
@@ -139,13 +146,11 @@ adroll_custom_data = {"product_id": "<?php echo $products_ID;?>"};
                             <?php echo $this->getChildHtml('addtocart') ?>
                         <?php endif; ?>
                     </div>
-                    <?php echo $this->getChildHtml('extra_buttons') ?>
+                    <?php echo $this->getChildHtml('extra_buttons') ?> 
                 <?php endif; ?>
 
                 <?php if (!$this->hasOptions() || !$_product->isSaleable()) : ?>
                     </div>
-                    <!--commented to remove Add To Compare-->
-                    <?php //echo $this->getChildHtml('addto') ?>
                 <?php endif ?>
 
                 <?php echo $this->getChildHtml('other');?>
@@ -236,7 +241,7 @@ adroll_custom_data = {"product_id": "<?php echo $products_ID;?>"};
 <?php $custom_description = $this->getProduct()->getDescription(); ?>
 <?php $custom_description_content = $this->helper('catalog/output')->productAttribute($this->getProduct(), $custom_description, 'description'); ?>
 <!-- Changes by LIKI Ext Starts
-	Reason of Change: Changes made to add Product Description by correcting html contents of description. -->
+	Reason of Change: Changes made to add Product Description -->
 <script type="text/javascript" src="/amazon_import_products/js/htmlparser.js"></script>
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
