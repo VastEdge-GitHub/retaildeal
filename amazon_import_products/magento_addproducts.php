@@ -279,6 +279,7 @@
 	echo gmdate('Y-m-d H:i:s')."----> Comparing old ( ".count($content_oldsku_arr)." ) and new ( ".count($content_newsku_arr)." ) skus \n";
 	/////*****\\\\\
 	$disbaled_skus	= '';
+$New_rewrite_url = fopen($base_url_magento.'amazon_import_products/New_rewrite_url.csv', 'a');
 	for($c=0;$c<count($old_sku_arr);$c++)
 	{
 		if(!in_array($old_sku_arr[$c], $new_sku_arr))
@@ -358,6 +359,8 @@
 				$category_url = rtrim($category_url,'/');
 			//	$category_url	= $cat_url_arr[$cat_url_count-2]."/".$cat_url_arr[$cat_url_count-1];                      edite on 26--DEC-014 for urlrewrite
 			
+		fwrite($New_rewrite_url,$sku."|".$prod_url."|".$category_url."|".$category_id."|".gmdate('Y-m-d H:i:s')."".PHP_EOL); // create rewrite url file	
+		
 				echo gmdate('Y-m-d H:i:s')."---->  Creating redirect url from (".$prod_url.") to (".$category_url."). \n";
 				Mage::getModel('core/url_rewrite')
 					->setIsSystem(1)
@@ -406,12 +409,12 @@
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Old rewrites deleted \n";
 	/////*****\\\\\
-	
+/*	
 	$tempfiles_del = glob($base_url_magento.'amazon_import_products/prod_sku/*'); // get all file names
 	foreach($tempfiles_del as $file){ // iterate files
 	  if(is_file($file))
 		unlink($file); // delete file
-	}
+	} */
 	
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Old products deleted \n";
