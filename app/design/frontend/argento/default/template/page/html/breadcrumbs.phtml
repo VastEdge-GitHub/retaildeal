@@ -29,32 +29,15 @@
 <div class="breadcrumbs">
     <ul>
         <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
-        
-		<!--Changes Done by LIKI-->
-        <!-- To display home in breadcrumb on September 8 --> 
 		 <?php
 		 $cat 			= Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('name', $_crumbInfo['label']);
 		 $cat_id 		= $cat->getFirstItem()->getEntityId();
 		 $category 		= Mage::getModel('catalog/category')->load($cat_id);
 		 $child_count	= $category->getChildrenCount();
-		 /*if($_crumbName=="home")
-		 {    
-		 	continue;
-		 }*/
 		 ?> 
-		 <!--LIKI Code End-->
             <li class="<?php echo $_crumbName ?>">
             <?php if($_crumbInfo['link']): ?>
-            <!-- Changes Done by LIKI -->
-            <?php if($i==1) { ?>
-			<!--LIKI Code Start
-				Reason: To remove hyperlink from IST level of category in Breadcrumbs -->
-            	<!--<a onclick="Codnitive.expandMenu(1)" href="/?type=<?php echo $_crumbInfo['label']; ?>"> <?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>-->
-				<?php echo $this->htmlEscape($_crumbInfo['label']) ?>
-			<!--LIKI Code END-->	
-            <?php } else { ?>
                <a href="<?php echo $_crumbInfo['link']; ?>"> <?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
-            <?php } ?>
             <!-- LIKI Code End -->
             <?php elseif($_crumbInfo['last']): ?>
                 <strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
