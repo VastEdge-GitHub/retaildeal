@@ -25,7 +25,7 @@
 	fclose($fh);
 	
 	$cat_array_namings		= array("Appliances","Automotive","Baby","PCHardware","Electronics","HealthPersonalCare","HomeGarden","PetSupplies","SportingGoods","Toys","Jewelry","Beauty","Kitchen","OutdoorLiving","Photo","Tools","Watches","Wireless","WirelessAccessories");		// Amazon Categories
-	$cat_id_arr_ids			= array("3559","3560","3561","3562","3564","3565","3566","3567","3568","3569","3570","3565","3566","3566","3564","3559","3564","3564","3564");																		
+	$cat_id_arr_ids			= array("3559","3560","3561","3562","3564","3565","3566","3567","3568","3569","3570","3565","3566","3566","3564","3559","3564","3564","3564","4199");																		
 	
 	
 	// Magento category IDs
@@ -120,6 +120,11 @@
 							$cat_name 		= $cat_array_namings[10];
 							$cat_id 		= $cat_id_arr_ids[10];
 						}
+						if($parent_name == 'furniture')
+						{
+							$cat_name 		= $cat_array_namings[6];
+							$cat_id 		= $cat_id_arr_ids[11];
+						}
 					  }
 						$cat_info 	= $data['name']."||".$data['entity_id']."||".$data['parent_id']."||".$data['path']."||".$data['level']."||".$data['children_count']."||".$amazon_id."||".$data['is_active'];
 						$prod_cat_ids = $cat_id.",".$data['entity_id'];
@@ -157,7 +162,7 @@
 			$file = fopen($file_name, 'r');													// Reading CSV file
 			$a=1;																		// Variable = 1 to omit 1st line(header) of CSV file
 			echo gmdate('Y-m-d H:i:s')."----> CSV processing started \n";
-			if($sub_cat_name[$n]=='Laptops' || $sub_cat_name[$n]=='Camera & Photo' || $sub_cat_name[$n]=='Video Game Consoles & Accessories')
+			if($sub_cat_name[$n]=='Laptops' || $sub_cat_name[$n]=='Camera & Photo' || $sub_cat_name[$n]=='Video Game Consoles & Accessories' || $sub_cat_name[$n]=='Furniture')
 			{
 				while(($content = fgets($file)) !== FALSE)									// Reading file line by line
 				{ 	
@@ -177,6 +182,11 @@
 							$keywords		= $content_arr[3];
 						}
 						if($Node_Name=='Video Game Consoles & Accessories' && $sub_cat_name[$n]=='Video Game Consoles & Accessories')				//Query For Video Game Consoles & Accessories
+						{
+							$manufacturer 	= $content_arr[1];
+							$keywords		= $content_arr[3];
+						}
+						if($Node_Name=='Furniture' && $sub_cat_name[$n]=='Furniture')				//Query For Furniture
 						{
 							$manufacturer 	= $content_arr[1];
 							$keywords		= $content_arr[3];
