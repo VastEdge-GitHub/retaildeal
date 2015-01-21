@@ -172,7 +172,7 @@ fclose($fh);
 
 $url 		= Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
 $mail_data	= 'Total number of products within sub-categories is: '.$abc.'. Visit following link for more details: '.$url.'amazon_import_products/detail_products.php';
-shell_exec('echo "'.$mail_data.'" | mail -s \'Products Update\' upinder@essitco.com,vivek@essitco.com,vishal@essitco.com,manoj@essitco.com');
+shell_exec('echo "'.$mail_data.'" | mail -s \'Products Update\' upinder@essitco.com,vivek@essitco.com,vishal@essitco.com,manoj@essitco.com,kailash@vastedge.com');
 /////*****\\\\\
 echo gmdate('Y-m-d H:i:s')."----> Magmi completed \n";
 /////*****\\\\\
