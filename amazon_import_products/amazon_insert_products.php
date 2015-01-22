@@ -614,6 +614,7 @@ session_start();
 										{
 										if($content_weight == ''){$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_itemweight));}
 										else{$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_weight));}
+											if($prod_weight==0)continue;
 											$prod_categoryid	= preg_replace('/\s+/', ' ', trim($cat_id));				// Magento Category ID
 											$prod_root_cat_id	= explode(",",trim($prod_categoryid));						// Magento Category ID
 											$prod_category_name	= $cat_name;												// Magento Category Name			
@@ -724,13 +725,15 @@ session_start();
 											}
 											//// Standard Shipping Calculation Ends \\\\
 											$prod_price 		= $prod_price+$standard_shipping;							// Final Price = MSRP+Shipping Cost	
+											$RD_price			= ceil($prod_price)-0.01;
 											if($prod_price <= '2500')
 											 {
-												$prod_tax = ($prod_price * 8.3)/100;						//Calculating tax price over amazon price
-												$price_with_tax_shipping = $prod_tax+$prod_price;							//Price included Tax and shipping
+												$prod_tax = ($RD_price * 8.3)/100;											//Calculating tax price over amazon price
+												$price_with_tax_shipping = $prod_tax+$RD_price;							//Price included Tax and shipping
 												$liki_disc			= '15';														// 15%
 												$liki_price			= ($liki_disc/100)*$price_with_tax_shipping;				// LIKI price calculation
 												$liki_price			= number_format($liki_price, 2, '.', ',');					// Value upto 2 decimals
+												$monthly_price      =  $liki_price;                                       //liki price without $. use for amazon price in godata feed
 												$liki_price			= "$".$liki_price;
 												$prod_likidesc		= "LeaseItKeepIt Price : ".$liki_price." per month";							
 												$new_sku			.= $prod_sku.",";			// Pushing all new SKUs in global variable to disable/delete old magento products
@@ -762,7 +765,10 @@ session_start();
 												$bottom_image		= $base_url_magento.'amazon_import_products/liki_img/cache/imagefilledrectangle.jpg';	// Path of the rectangle image                                                                                                                                                                created
 												main($main_image, $bottom_image, $liki_price, 'main');
 												main($small_image, $bottom_image, $liki_price, 'small');
+												
 												$new_main_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$price.'_'.$prod_sku.'_liki.'.									                                                $prod_img_ext;	                                                    //  Path of new LIKI image
+												
+												$amazon_raw_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$price.'_'.$prod_sku.'.'.									                                                $prod_img_ext; 
 												
 												$new_smail_img		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_'.$price.'_'.$prod_sku.'_liki.'.                                                 $prod_smlimg_ext;	                                                // Path of new LIKI image
 												
@@ -794,12 +800,11 @@ session_start();
 												$replace_spcl_chars	= array(" ",","," "," "," "," ");
 												
 												$mainfile_fh		= fopen($base_url_magento.'var/import/main_file_import_new.csv', 'a');								
-												$_category = Mage::getModel('catalog/category')->load($prod_categoryid);		//Magento Product Category name
+												$_category = Mage::getModel('catalog/category')->load($prod_categoryid);		//Magento Product Category name 
 												$category_Name = $_category->getName();
 												$parentCategoryId = $_category->getParentId();
-											
-											fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_main_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.$prod_amazonprime.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_likidesc,'"'),'"')).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_desc,'"'),'"'))).'^|^'.utf8_encode($prod_shortdesc).'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_offers_list_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_product_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_reviews_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($liki_price,'"'),'"')).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^0^|^simple^|^'.$prod_salesrank.'^|^'.$prod_brand.
-					'^|^'.'Buy rent-to-own'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'now and pay later with affordable monthly payments. We stock up with more than 10,000 products from leading brands^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).',shop '.strtolower($category_Name).' on monthly installments, LIKI, rent to own, lease to own, buy now pay later, low monthly payments^'.PHP_EOL);
+							
+							fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_main_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_raw_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.$prod_amazonprime.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_likidesc,'"'),'"')).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_desc,'"'),'"'))).'^|^'.utf8_encode($prod_shortdesc).'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_offers_list_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_product_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_reviews_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($liki_price,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($monthly_price,'"'),'"')).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^0^|^simple^|^'.$prod_salesrank.'^|^'.$prod_brand.'^|^'.'Buy rent-to-own '.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).' now and pay later with affordable monthly payments. We stock up with more than 10,000 products from leading brands^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).',shop '.strtolower($category_Name).' on monthly installments, LIKI, rent to own, lease to own, buy now pay later, low monthly payments^'.PHP_EOL);
 												
 												fclose($mainfile_fh);
 											}	// End of Stopword list check
