@@ -24,12 +24,8 @@
         	<span class="m-selected-filter-item"><?php echo $item_min[0]."&nbsp;-".$item_max[0]; ?></span>
         <?php else : ?>
 	        <?php if (!$this->getFilterOptions()->getDisableNoResultOptions() || $_item->getCount() > 0 || $_item->getMSelected()): ?>
-			<!--LIKI Code start
-				Reason : RD-156 -> remove values after decimal like if $2000.00 has been changed and now display $2000-->
-<!--	        <a href="<?php //echo $this->urlEscape($_item->getUrl()) ?>" title="<?php //echo $this->escapeHtml($_item->getLabel()) ?>"><?php //echo $this->escapeHtml($_item->getLabel()) ?></a>
--->	       		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
-	        <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>" title="<?php echo $item_min[0]."&nbsp;-".$item_max[0]; ?>"><?php echo $item_min[0]."&nbsp;-".$item_max[0]; ?></a>
-			<!--LIKI Code End-->
+       		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
+	        <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>" title="<?php if (strpos($item_min[0],'$') !== false) { echo $item_min[0]."&nbsp;-".$item_max[0]; } else{echo $this->escapeHtml($_item->getLabel());}?>"><?php if (strpos($item_min[0],'$') !== false) { echo $item_min[0]."&nbsp;-".$item_max[0]; } else{echo $this->escapeHtml($_item->getLabel());}?></a>
  <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
 	        <?php endif; ?>
         <?php endif; ?>

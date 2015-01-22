@@ -52,10 +52,8 @@ analytics.track('Cart', {
     <?php  if(!$oneMethod): 
 		if($_code == 'ccsave')
 		{
-			//$custom_disabled = 'disabled="disabled"';
 			$custom_disabled='';
 			$custom_notice='';
-			//$custom_notice = '<p style="float:left; width:100%; color:red; marin-top:5px; font-weight:normal; font-size:11px">( Online purchase via credit card is not yet implemented. However, if you\'d like to purchase now using a credit card, call us at 866-687-9147 )';
 		}
 		else
 		{
@@ -93,10 +91,10 @@ analytics.track('Cart', {
     <?php endif; ?>
         <label for="p_method_<?php echo $_code ?>"><?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
        <!-- Changes by liki ext -->
+       <!-- Custom code change and edit payment methods look and feel -->
         <?php echo $custom_logo; ?>
         <?php echo $custom_notice;  ?>
-	<!-- Changes by liki ext end -->
-    <!-- Custom code change and edit payment methods look and feel -->
+	   <!-- Changes by liki ext end -->
     </dt>
     <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
     <dd>
