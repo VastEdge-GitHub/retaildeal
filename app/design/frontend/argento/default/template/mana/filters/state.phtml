@@ -27,21 +27,19 @@
         <span><?php echo $this->__('Currently Shopping by:') ?></span>
     </div>
     <ol>
+    <!--LIKI Code start, Reason : RD-156 -->
     <?php foreach ($_filters as $_filter): ?>
     <?php if ($_html = $this->getValueHtml($_filter)) : ?>
         <?php echo $_html ?>
     <?php else : ?>
         <li>
             <a href="<?php echo $_filter->getRemoveUrl() ?>" title="<?php echo $this->__('Remove This Item') ?>" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
-            <!--LIKI Code start
-				Reason : RD-156 -> remove values after decimal like if $2000.00 has been changed and now display $2000-->
-			<!--<span class="label"><?php //echo $this->__($_filter->getName()) ?>:</span> <?php //echo $_filter->getMShowSelected() ? $this->__('not') : '' ?> <?php //echo $this->stripTags($_filter->getLabel()) ?>-->
 			<?php $item_min_max= explode("-",$this->stripTags($_filter->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
-			<span class="label"><?php echo $this->__($_filter->getName()) ?>:</span> <?php echo $_filter->getMShowSelected() ? $this->__('not') : '' ?> <?php if ($this->__($_filter->getName())=="Price"){ echo $item_min[0]."&nbsp;-".$item_max[0];} else { echo $item_min[0]."&nbsp;".$item_max[0]; } ?> 
-			<!--LIKI Code End-->      
+			<span class="label"><?php echo $this->__($_filter->getName()) ?>:</span> <?php echo $_filter->getMShowSelected() ? $this->__('not') : '' ?> <?php if ($this->__($_filter->getName())=="Price"){ echo $item_min[0]."&nbsp;-".$item_max[0];} else { echo $this->stripTags($_filter->getLabel()); } ?> 
 		 </li>
     <?php endif; ?>
     <?php endforeach; ?>
+    <!--LIKI Code End-->
     </ol>
     <?php if (!Mage::helper('mana_core')->isMageVersionEqualOrGreater('1.7') && ($_parent = $this->getParentBlock()) /*&& $_parent->getShowInFilter() != 'above_products'*/) : ?>
     <div class="actions"><a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>

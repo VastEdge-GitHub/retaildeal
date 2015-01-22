@@ -1,10 +1,10 @@
-<!-- Change by liki ext -->
-<!-- Reason: For segmentio tracking -->
+<!----Change by liki ext ---->
+<!---Reason: For segmentio tracking---->
 <?php
 if(Mage::getSingleton('customer/session')->isLoggedIn()) {
      $customerData = Mage::getSingleton('customer/session')->getCustomer();
      $customer_Id = $customerData->getId();
- }
+  }
  $sessionId = Mage::getSingleton("core/session")->getEncryptedSessionId();
   	 $Session_Id = $sessionId;
 	 $Session_Id; 
@@ -13,10 +13,7 @@ if(Mage::getSingleton('customer/session')->isLoggedIn()) {
     $Order_Id = $order;
  }
 ?>
-<!-- End liki ext for segment io ---> 
-
 <?php
-// ajaxpro compatibility
 if (!Mage::registry('product')) {
    	$productId = Mage::getSingleton('checkout/session')->getSuggestpageProductId();
 	   if ($productId) {
@@ -28,11 +25,9 @@ if (!Mage::registry('product')) {
         }
     }
 }
-// ajaxpro compatibility
-?>
-<!-- end segmentio -->
-<!-- LIKI Code Start
-	Reason: when we Update the qty of products its display two error, to display the appropriate error we made changes here as follow:
+?> 
+<!--- end segmentio --->
+<!--Reason: when we Update the qty of products its display two error, to display the appropriate error we made changes here as follow:
 -->
 <?php $flag=0; ?>
 <div>		
@@ -54,15 +49,11 @@ if (!Mage::registry('product')) {
 		echo $error_array[0];
 		$flag=strlen($error_array[0]);
 	}
-	
 	//$_messageCollection->clear();
 ?>
 </div>
-<!--LIKI Code End-->			
-		
-<!--Changes By Liki Ext Start-->
 <div class="suggestpage-activity col2-set" style=" min-width: 600px; ">
-<!--Changes By Liki Ext End-->   
+<!--Changes By Liki Ext End-->
 	<?php 
 	    $_item = null;
         if ($product = Mage::registry('product')) :
@@ -105,39 +96,21 @@ if (!Mage::registry('product')) {
             <div class="actions">
                 <button onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>');" class="btn-suggest-page btn-suggest-cart" title="<?php echo $this->__('Edit Your Cart') ?>" type="button"><span><span><?php echo $this->__('Edit your Cart') ?></span></span></button>
                 <?php if ($_cartQty && $this->isPossibleOnepageCheckout()) : ?>
-    <!---Changes By Liki Ext Start--->
-   <!--- start for segment io tracking---->
                     <button onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>'); analytischk()" class="btn-suggest-page btn-suggest-checkout" title="<?php echo $this->__('Checkout') ?>" type="button"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
-     <!----- End of liki change here ----->
                 <?php endif; ?>
             </div>
         </div>
-		<!--Changes By Liki Ext Start-->
         <div style="float:right;width:25%;">
-		<!--Changes By Liki Ext End-->
-        	
-        	<!--<div class="addtocart_btn_suggestpage">
-            	<span style="float:left;font-size:18px;font-weight:bold;margin-top:13px;color:#1d1d1d;">
-                     Featuring
-                 </span>
-                 <img src="/amazon_import_products/liki_img/leaseit_keepit.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; margin-left:8px;margin-top:1px;" width="60">
-            </div>-->
-			<!--LIKI Code Start
-				Reason: displaying a underline of achor tag so, text-decoration has set none of anchor tag -->
+			<!--Reason: displaying a underline of achor tag so, text-decoration has set none of anchor tag -->
             <a style="text-decoration:none;" href="/liki_introduction/" target="_blank">
-			<!--LIKI Code End-->
-			<!--Changes By Liki Ext Start-->
             <div class="chkout_btn" style="float: left;height: 33px;padding: 0 6px 0 6px;cursor:pointer;width:120px;margin:15px;" >
-			<!--Changes By Liki Ext end-->
-                 <span style="float:left;font-size: 12px;font-weight:bold;margin-top: 8px;color:#333;">Featuring</span>
-                  <img src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; margin-left:6px;margin-top:1px;" width="45px">
+                        <span style="float:left;font-size: 12px;font-weight:bold;margin-top: 8px;color:#333;">Featuring</span>
+                        <img src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; margin-left:6px;margin-top:1px;" width="45px">
             </div>
             </a>
         </div>
     </div>
 </div>
-<!-- Changes By Liki Ext Start -->
-<!-- start for segment io tracking -->
 <script type="text/javascript">
 function analytischk()
 {
@@ -150,4 +123,3 @@ analytics.track('Cart', {
 });
 }
 </script>
-<!-- end for segment io here -->

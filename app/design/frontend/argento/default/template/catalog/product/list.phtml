@@ -85,11 +85,6 @@
                         <?php if ($this->helper('wishlist')->isAllow()) : ?>
                             <li><a rel="nofollow" href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
                         <?php endif; ?>
-                        <!-- commente to remove compare prducts
-                        <?php //if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
-                            <li><span class="separator">|</span> <a rel="nofollow" href="<?php //echo $_compareUrl ?>" class="link-compare"><?php //echo $this->__('Add to Compare') ?></a></li>
-                        <?php //endif; ?>
-                        -->
                     </ul>
                     <?php echo Mage::helper('facebooklb')->getCategoryLikeButton($_product) ?>
                 </div>
@@ -113,10 +108,7 @@
             <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
                 <div class="prolabel-wrapper">
                     <?php echo Mage::helper('prolabels')->getLabel($_product, 'category'); ?>
-					<!-- Changes by Likiext Start -->
-					<!-- Reason of change: To specify image dimensions -->
                     <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(200); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" width="200px" height="200px" /></a>
-					<!-- Changes by Likiext End -->
                 </div>
                 <?php if (Mage::helper('core')->isModuleOutputEnabled('TM_QuickShopping')) : ?>
                     <?php echo Mage::helper('quickshopping')->getViewButton($this->__('Quick View'), $_product, $this->getMode(), null, $_productCollection); ?>
@@ -125,17 +117,6 @@
                 <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
                 <?php endif; ?>
                 <?php echo $this->getPriceHtml($_product, true) ?>
-                <!--<div class="actions">
-                    <?php //if($_product->isSaleable()): ?>
-                        <button type="button" title="<?php //echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php //echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php //echo $this->__('Add to Cart') ?></span></span></button>
-                    <?php //else: ?>
-                        <?php //if ($_product->getIsSalable()): ?>
-                            <p class="availability in-stock"><span><?php //echo $this->__('In stock') ?></span></p>
-                        <?php //else: ?>
-                            <p class="availability out-of-stock"><span><?php //echo $this->__('Out of stock') ?></span></p>
-                        <?php //endif; ?>
-                    <?php //endif; ?>
-                </div>-->
                 <p style="font-family:'Source Sans Pro',sans-serif; line-height:1.25; margin:10px 0 0 0; float:left; width:100%; " class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></p>
                 <ul class="add-to-links">
                     <?php if ($this->helper('wishlist')->isAllow()) : ?>
