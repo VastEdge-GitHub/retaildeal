@@ -614,6 +614,7 @@ session_start();
 										{
 										if($content_weight == ''){$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_itemweight));}
 										else{$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_weight));}
+											if($prod_weight==0)continue;
 											$prod_categoryid	= preg_replace('/\s+/', ' ', trim($cat_id));				// Magento Category ID
 											$prod_root_cat_id	= explode(",",trim($prod_categoryid));						// Magento Category ID
 											$prod_category_name	= $cat_name;												// Magento Category Name			
