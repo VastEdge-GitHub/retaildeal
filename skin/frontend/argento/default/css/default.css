@@ -8,7 +8,8 @@
   font-family: 'lato-bold';
   src: url('http://retaildeal.biz/amazon_import_products/liki_img/fonts/Lato-Bold.ttf') format('truetype')
 }
-body { background: #444; font: normal 12px/1.35em Verdana, Geneva, Arial, Helvetica, sans-serif; }
+body { background: #444; font: normal 12px/1.35em Arial, Helvetica; }
+body{font-family: Arial, Helvetica!important;}
 .page-popup { background: #fff; }
 
 /* Headings */
@@ -28,7 +29,7 @@ a { color: #023761; }
 small { font-size: .8em; }
 
 button.button {  }
-button.button span { height: 26px; line-height: 23px; font-size: 12px;font:bold 12px/24px Verdana, Geneva, Arial, Helvetica, sans-serif;}
+button.button span { height: 26px; line-height: 23px; font-size: 12px;font:bold 12px/24px Arial, Helvetica !important;}
 /*button.button span { height: 26px; line-height: 23px; font-size: 11px;
     text-transform: lowercase; font-family: Tahoma, Arial, Helvetica, sans-serif;
 }*/
@@ -52,7 +53,7 @@ button.btn-alt span span { padding:0 10px 0 4px; }
 .buttons-set { border: none; }
 
 .subtitle { clear:both; padding:10px 0; font-size:18px; color:#d12c01; }
-.sub-title { font-size:16px; font-weight:normal; color:#000; line-height:19px; margin:0 0 10px; }
+.sub-title { font-size:16px; font-weight:normal; color:#000; line-height:19px; margin:0 0 10px; font-family: Arial, Helvetica; }
 .sub-title .separator { font-weight:normal; }
 .sub-title a { font-size:11px; font-weight:normal; text-transform:lowercase; }
 .section-title { font-size:14px; font-weight:normal; color:#151515; margin:0 0 5px; }
@@ -99,7 +100,7 @@ textarea { width: 250px; }
 /*.page-title h1,
 .page-title h2 { font-size:2em; }*/
 .page-title h1,
-.page-title h2 { font-size:20px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif; }
+.page-title h2 { font-size:20px;font-family:Arial, Helvetica !important; }
 .page-head-alt { padding: 7px 0 8px; margin: 0 0 7px; }
 .page-head-alt h3,
 .page-head-alt h2 { font-size:24px; font-weight: normal; }
@@ -121,7 +122,7 @@ textarea { width: 250px; }
 .main,
 .footer,
 .footer-toolbar,
-.footer-cms { padding: 0 5px; width: 960px; margin: 0 auto; border: none; }
+.footer-cms { padding: 0 5px; width: 960px; margin: 0 auto; border: none; font-family: Arial, Helvetica !important;}
 
 /* header */
 .top-toolbar .links li,
@@ -131,7 +132,7 @@ textarea { width: 250px; }
 
 /* <<< top toolbar */
 .top-toolbar-container { background: #eaeaea; }
-.top-toolbar { color: #7f7f7f; font: normal .9em Tahoma, Verdana, Arial, Helvetica, sans-serif; }
+.top-toolbar { color: #7f7f7f; font: normal 12px Arial, Helvetica!important; }
 
 /* cms links */
 .header-links { margin-right: 80px; float: left; }
@@ -170,13 +171,26 @@ padding-top:0px !important;
 
 .header-callout { float: left; }
 
+							/** ########  edit for new changes ########## **/
+ 
+#sidebar-nav-menu > li { 
+list-style: none !important;
+font-family: Arial;
+font-size: 14px;
+font-weight: bold;
+}     
+.products-grid p.product-name a { font-family: Arial !important; font-size:14px !important; font-weight: normal !important; line-height:1.1;} /** comment in line no: 																																				1904 **/
+.regular-price { font-family: Arial; font-size: 16px; color: #023761; }
+#sidebar-nav-menu .arrow-left, #sidebar-nav-menu .arrow-right, #sidebar-nav-menu .plus-left, #sidebar-nav-menu .plus-right { margin: 1px 2px -3px !important;}  
+                            /**  till here **/
+
 .header-container .mobile-togglers { display: none; }
 #search_mini_form { float: right; }
 .header-container .form-search { float: right; margin: 15px 0 0 15px; position: relative; text-align: left; }
 
 .header-container .form-search label { display: none; }
 <!--.header-container .form-search input { background: #f6f6f6; width: 250px; padding: 10px 0; height: 15px; color: #757578; text-indent: 7px; }-->
-.header-container .form-search input { background: #f6f6f6; width: 250px; padding: 10px 0; height: 15px; color: #757578; text-indent: 7px; font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;font-size: 12px !important;}
+.header-container .form-search input { background: #f6f6f6; width: 250px; padding: 10px 0; height: 15px; color: #757578; text-indent: 7px; font-family: Arial;font-size: 12px !important;}
 .header-container .form-search button { background: url(../images/search_btn_trans.png) no-repeat; width: 37px; height: 37px; overflow: hidden; margin-left: -5px; background-color:#ff851e;}
 .header-container .form-search button:hover{background-color:#f17207;}
 /*.header-container .form-search button { background: url(../images/common.gif) no-repeat -307px 0; width: 37px; height: 37px; overflow: hidden; margin-left: -5px; }*/
@@ -276,7 +290,7 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 
 /* <<< navigation */
 .nav-container { background: #eaeaea; }
-#nav { margin: 0 auto; width: 960px; border: none; font-family: Arial, Helvetica, sans-serif; }
+#nav { margin: 0 auto; width: 960px; border: none; font-family: Arial, Helvetica; }
 #nav li a { padding: 11px 13px 10px; color: #272e3d; }
 #nav ul, #nav div { top: 42px; background: #fff;
   background-color: #ffffff;
@@ -305,7 +319,7 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 
 /* navigationpro */
 .nav-container { zoom: 1; }
-.nav-container .navpro { margin: 0 auto; width: 960px; border: none; font-family: Arial, Helvetica, sans-serif; }
+.nav-container .navpro { margin: 0 auto; width: 960px; border: none; font-family: Arial, Helvetica; }
 .nav-container .navpro a.level-top,
 .nav-container .navpro div.level-top a { color: #272e3d; font-size: 1.1em; }
 .nav-container .navpro .active > a.level-top,
@@ -350,7 +364,7 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 .block { border: none; font-size: 1.0em; }
 .block .block-title { border: 1px solid #ddd; padding: 8px 8px 8px;
     color: #033862; border-width: 0 0 1px;
-    font: normal 13px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font: normal 13px Arial, Helvetica;
 }
 .block .block-title strong,
 .block .block-title span { font-weight: normal; color: #000; font-size: 1.1em;}
@@ -477,7 +491,7 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 .highslide img:hover { border: 1px solid #ccc; }
 
 .product-view .product-shop .product-name { margin: 0 0 17px; }
-.product-view .product-shop .product-name h1{ font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;font-size: 21px;}
+.product-view .product-shop .product-name h1{ font-family: Arial,Helvetica;font-size: 21px;}
 .product-view .product-shop .email-friend,
 .product-view .product-shop .no-rating { float: left; font-size: 11px; margin: 0 12px 12px 0; }
 .product-view .product-shop .email-friend a,
@@ -589,7 +603,7 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 .product-view .easytabs li a {
     background: transparent url(../images/tab.gif) no-repeat 0 0; color: #023761;
     border: none; margin: 0; float: left; text-align: center;
-    font: normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font: normal 12px Arial, Helvetica;
     letter-spacing: 0.05em; text-transform: capitalize; white-space:nowrap;
     padding: 9px 14px 9px 15px; height: 34px;
 }
@@ -685,13 +699,14 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 .remember-me-popup .remember-me-popup-head { position:relative; }
 .remember-me-popup .remember-me-popup-head .remember-me-popup-close { background:url(../images/btn_window_close.gif) no-repeat; display:block; position:absolute; top:7px; right:7px; height:15px; width:15px; text-indent:-9999px; text-align: left; }
 .remember-me-popup .remember-me-popup-body { padding:10px; }
-.remember-me-popup .remember-me-popup-body a { display:inline-block; height:19px; border:1px solid #de5400; background:#f18200; padding:0 8px; font:bold 12px/19px Arial, Helvetica, sans-serif; text-align:center; text-decoration:none; white-space:nowrap; color:#fff; }
+.remember-me-popup .remember-me-popup-body a { display:inline-block; height:19px; border:1px solid #de5400; background:#f18200; padding:0 8px; font:bold 12px/19px Arial, Helvetica; text-align:center; text-decoration:none; white-space:nowrap; color:#fff; }
 /* Remember Me Popup ===================================================================== */
 
 /*.account-login .new-users,
 .account-login .registered-users { width: 47%; padding: 1% 1% 0; float: left; }*/
 .account-login .new-users,
 .account-login .registered-users { width: 44%; padding: 1% 1% 0; float: left; }
+.account-login .new-users .content h2{font-family:Arial, Helvetica; }
 /*.account-login .new-users h2,
 .account-login .registered-users h2 { border-bottom: 1px solid #e6e6e6; padding-bottom: 3px; }*/
 .account-login .new-users h2
@@ -707,7 +722,7 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 .box-account .box-head h2,
 .box-account .box-title h3,
 .box-account .box-head .h2,
-.box-account .box-title .h3 { float: left; }
+.box-account .box-title .h3 { float: left; font-family: Arial, Helvetica; }
 .box-account .box-head a,
 .box-account .box-title a { float: right; }
 .my-account .box { padding: 10px; }
@@ -954,7 +969,7 @@ button.btn-checkout span,
 button.btn-checkout span:active {
     background: transparent url(../images/bkg_button.gif) 0 0 no-repeat !important;
     display: block;
-    font: bold 15px/38px Arial, Helvetica, sans-serif !important;
+    font: bold 15px/38px Arial, Helvetica!important;
     height: 29px !important;
     text-align: center;
     white-space: nowrap;
@@ -985,7 +1000,7 @@ button.btn-checkout span span:active {
     background: transparent url(../images/bkg_button.gif) 100% 0 no-repeat !important;
     border: none;
     padding: 0 11px 0 4px !important;
-	font: bold 12px/24px Verdana, Geneva, Arial, Helvetica, sans-serif !important;
+	font: bold 12px/24px Arial, Helvetica!important;
 }
 button.btn-checkout:hover span span
 {background :transparent url(../images/bkg_button.gif) 100% -29px no-repeat !important;}
@@ -1266,7 +1281,7 @@ button.btn-checkout:hover span span
     background:url(../images/tab.gif) no-repeat 100% 1px; list-style: none; color: #023761; }
 .tab-container .tabs li .block-title { background:url(../images/tab.gif) no-repeat 0 0;
     border:none; margin:0; float:left; text-align: center; min-width: 100px;
-    font: normal 1em Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font: normal 1em Arial, Helvetica;
 }
 .tab-container .tabs,
 .tab-container .tabs li,
@@ -1528,6 +1543,14 @@ button.ajaxpro-continue-button span span,
     .event-container .event-dates { font-size: 14px }
 }
 @media (max-width: 480px) {
+	/* Change made on 10 dec */
+	.footer-cms .footer-contacts .h6 ul.icons
+	{
+		margin-left:auto !important;
+		margin-right:auto !important;
+		width:120px !important;
+	}
+   /* Change made on 10 dec end */
     img { max-width: 100%; width: auto; height: auto; }
 
     .notice-cookie .notice-inner { padding: 5px; background-image: none; }
@@ -1879,11 +1902,11 @@ button.ajaxpro-continue-button span span,
 .highslide-controls, .highslide-thumbstrip-inner{display:none !important;}
 .products-grid h2.product-name{height:51px; overflow:hidden; }
 /*.products-grid p.product-name{height:51px; overflow:hidden; }*/
-.products-grid p.product-name{height:47px; overflow:hidden;font-family: Verdana, Geneva, Arial, Helvetica, sans-serif !important;font-size:12px;}
-.std .category-products .products-grid p.product-name{height:47px; overflow:hidden;font-family: Verdana, Geneva, Arial, Helvetica, sans-serif !important;font-size:12px;}
-.products-grid p.product-name a{font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;font-size: 12px;font-weight:bold;}
+.products-grid p.product-name{height:47px; overflow:hidden;font-family: Arial !important;font-size:12px;}
+.std .category-products .products-grid p.product-name{height:47px; overflow:hidden;font-family:Arial, Helvetica!important;font-size:12px;}
+/*.products-grid p.product-name a{font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;font-size: 12px;font-weight:bold;}  add in line no 181 */
 .products-grid .product-name{height:51px; overflow:hidden; }
-.box-collateral .products-grid .price{font-weight:bold; font-size:18px;font-family:lato-bold; }
+.box-collateral .products-grid .price{font-weight:bold; font-size:18px;font-family:Arial; }
 .std .category-products .toolbar .sorter{display:none}
 .addtocart_btn_suggestpage {
 background-repeat: no-repeat !important;
@@ -1911,7 +1934,7 @@ width:170px !important;
 .liki_intro_page p{line-height:1.8em !important;margin-bottom:20px !important;}
 .liki_intro_page p a{text-decoration:underline;cursor:pointer;font-weight:bold;color:#144f91;font-size:14px;}
 .liki_intro_page p a:hover{text-decoration:underline !important;cursor:pointer;}
-.footer-cms-container .footer-cms .h6{font-family:Verdana, Geneva, Arial, Helvetica, sans-serif !important;font-size:14px !important;}
+.footer-cms-container .footer-cms .h6{font-family:Arial, Helvetica!important;font-size:14px !important;}
 #oar_widget_orders_and_returns_form ul.form-alt .input-box label{font-size:12px !important;}
 #oar_widget_orders_and_returns_form ul.form-alt .input-box select{font-size:12px !important;width:100%;padding:6px 4px;}
 .oar_widget_orders_and_returns_form
@@ -1973,6 +1996,8 @@ position: relative;
 	color: #333;
 	margin: -33px 0 0 -10px;
 	position: relative;
+	font-family: Arial, Helvetica;
+
 }
 .account-login #login-form .registered-users .content p.required
 {
@@ -1986,7 +2011,7 @@ position: relative;
 
 .dropdown-menu {height:280px; overflow:scroll;}
 
-.product-view .product-shop .add-to-cart button.button span{text-align:center;}
+.product-view .product-shop .add-to-cart button.button span{text-align:center; font-family: Arial, Helvetica;}
 
 .ajaxpro-form .messages .notice-msg{display:none !important;}
 
@@ -2099,7 +2124,7 @@ position: relative;
 
 .dialog_title {
 	float:left;
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica;
 	font-size:20px;
 	text-align:left;
 	width:100%;

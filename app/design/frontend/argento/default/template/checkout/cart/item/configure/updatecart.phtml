@@ -39,7 +39,7 @@ margin-top: 5px !important;}
 <?php if ($_product->isSaleable()): ?>
     <div style="float:left;width:322px !important" class="add-to-cart">
         <?php if (!$_product->isGrouped()): ?>
-        <button type="button" title="<?php echo $buttonTitle ?>" style="margin-right:140px !important;float:right;padding: 3px 10px 11px 9px !important;" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+        <button type="button" title="<?php echo $buttonTitle ?>" style="margin-right:140px !important;float:right;padding: 0px 10px 11px 9px !important;" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
 		<label for="qty"><?php echo $this->__('Qty:') ?></label>
 		<!-- Changes by liki ext start -->
 		<!--REASON: Add some validation class in inputbox such as required-entry,validate-number,validate-greater-than-zero, validate-digits -->
