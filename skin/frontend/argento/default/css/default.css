@@ -2157,3 +2157,62 @@ position: relative;
   -moz-user-select:none;
 }
 .main .col-main .product-view .product-collateral .padder{overflow-x:scroll;}
+
+/* <<< custom styles for About page  */
+        .about-page-content .page-title-bordered { padding: 7px 0 6px; border-bottom: 1px solid #c9deef; color: #033862; }
+        .about-page-content .subtitle-bordered { position: relative; }
+
+        .about-page-content .border-dotted { background: #fff; width: 100%; height: 4px; margin-top: -2px; border: 2px dotted #ff851e; border-width: 1px 0; position: absolute; top: 50%;  }
+        .about-page-content .subtitle-bordered .text { padding: 0 20px; position: relative; text-align: center; }
+        .about-page-content .subtitle-bordered .text p { margin: 0; padding: 0 15px; background: #fff; display: inline-block; }
+
+        .about-page-content .owner-info { padding: 15px 0 0 15px; }
+        .about-page-content .bordered-img { /*border: 5px solid #12578e;*/ padding: 5px; margin-bottom: 30px;
+            background: #12568e;
+            background: -moz-radial-gradient(center, ellipse cover, #12568e 0%, #0f82d9 52%, #12568e 100%);
+            background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #12568e), color-stop(52%, #0f82d9), color-stop(100%, #12568e));
+            background: -webkit-radial-gradient(center, ellipse cover, #12568e 0%, #0f82d9 52%, #12568e 100%);
+            background: -o-radial-gradient(center, ellipse cover, #12568e 0%, #0f82d9 52%, #12568e 100%);
+            background: -ms-radial-gradient(center, ellipse cover, #12568e 0%, #0f82d9 52%, #12568e 100%);
+            background: radial-gradient(ellipse at center, #12568e 0%, #0f82d9 52%, #12568e 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#12568e', endColorstr='#12568e', GradientType=1 );
+
+            -webkit-box-shadow: 0px 8px 8px -6px rgba(0,0,0,0.7);
+            -moz-box-shadow: 0px 8px 8px -6px rgba(0,0,0,0.7);
+            box-shadow: 0px 8px 8px -6px rgba(0,0,0,0.7); }
+        .about-page-content .bordered-img.orange-color { /*border: 5px solid #ff851e;*/
+            background: #ff740a;
+            background: -moz-radial-gradient(center, ellipse cover, #ff740a 0%, #ffbd87 52%, #ff7708 100%);
+            background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #ff740a), color-stop(52%, #ffbd87), color-stop(100%, #ff7708));
+            background: -webkit-radial-gradient(center, ellipse cover, #ff740a 0%, #ffbd87 52%, #ff7708 100%);
+            background: -o-radial-gradient(center, ellipse cover, #ff740a 0%, #ffbd87 52%, #ff7708 100%);
+            background: -ms-radial-gradient(center, ellipse cover, #ff740a 0%, #ffbd87 52%, #ff7708 100%);
+            background: radial-gradient(ellipse at center, #ff740a 0%, #ffbd87 52%, #ff7708 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff740a', endColorstr='#ff7708', GradientType=1 );
+        }
+
+        .about-page-content .arrow-title-bg { overflow: hidden; margin: 0 0 10px -40px; position: relative; }
+        .about-page-content .arrow-title-bg .text { background: #12578e; float: left; width: 94%; }
+        .about-page-content .arrow-title-bg p { margin: 0; padding: 6px 5px 6px 40px; color: #fff; }
+        .about-page-content .arrow-title-bg .arrow-right { float: left; width: 0; height: 0; border-style: solid; border-width: 14px 0 14px 19px; border-color: transparent transparent transparent #12578e; }
+        .about-page-content .arrow-title-bg.title-orange .text { background: #ff851e; }
+        .about-page-content .arrow-title-bg.title-orange .arrow-right { border-color: transparent transparent transparent #ff851e; }
+
+        @media (max-width: 768px) and (min-width: 641px) {
+            .about-page-content .arrow-title-bg .arrow-right { border-width: 14px 0 14px 14px; }
+        }
+
+        @media (max-width: 640px) {
+            .about-page-content .arrow-title-bg .arrow-right { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .about-page-content .owner-info { padding-top: 0; }
+            .about-page-content .arrow-title-bg { margin-left: 0; }
+            .about-page-content .arrow-title-bg .text { background: transparent; width: 100%; padding-bottom: 4px; border-bottom: 1px solid #023761; }
+            .about-page-content .arrow-title-bg.title-orange .text { background: transparent; border-bottom: 1px solid #ff851e; }
+            .about-page-content .arrow-title-bg p { padding: 0; color: #023761; }
+        }
+
+        /* <<< custom styles for About page  */
+
