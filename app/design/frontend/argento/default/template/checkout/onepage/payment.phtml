@@ -23,6 +23,23 @@
  * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+$quote = Mage::getSingleton('checkout/session')->getQuote();
+ //echo $quote->getItemsQty(); 
+function qty_check()
+{
+$itemsCollection = Mage::getSingleton('checkout/session')->getQuote()->getItemsCollection();
+$itemsVisible = Mage::getSingleton('checkout/session')->getQuote()->getAllVisibleItems();
+$items = Mage::getSingleton('checkout/session')->getQuote()->getAllItems(); 
+foreach($items as $item) {
+	
+if($item->getQty()>1){return 1;}
+			
+else
+{
+	return 0;
+}
+}
+}
 ?>
 
 <!--- start for segment io tracking---->
@@ -114,6 +131,28 @@ function check_liki_price()
 				}
 			}
 		}
+	if(option_newcase_value == 'CreditApplication'){
+	var qty_check = '<?php $itemsCollection = Mage::getSingleton('checkout/session')->getQuote()->getItemsCollection();
+$itemsVisible = Mage::getSingleton('checkout/session')->getQuote()->getAllVisibleItems();
+$items = Mage::getSingleton('checkout/session')->getQuote()->getAllItems();
+$qty=0; 
+foreach($items as $item) {
+	
+if($item->getQty()>1){ $qty=1;echo $qty;}
+			
+else
+{
+	
+}
+}
+ ?>';
+//alert(qty_check);
+if(qty_check==1)
+{
+	alert('We apologize but LeaseItKeepIt does not allow multiple quantity of the same item. We are working to provide this service soon.');
+return false;
+}	 
+	 }
 	if(option_newcase_value == 'CreditApplication' && quoteBaseGrandTotal < 100)
 	{
 		alert('Total Amount cannot be less than $100 for LIKI payment mode.');
