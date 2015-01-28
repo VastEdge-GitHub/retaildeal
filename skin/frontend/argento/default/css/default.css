@@ -2240,4 +2240,10 @@ position: relative;
         }
 
         /* <<< custom styles for About page  */
+		.post-entry p{text-align: justify;} /* Justify the blog content */
+		.blog-search .input-text
+		{
+			width:115px !important;
+		}
+
 
