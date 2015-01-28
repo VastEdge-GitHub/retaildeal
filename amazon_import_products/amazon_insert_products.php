@@ -1,20 +1,24 @@
-<?php
-define('THUMBNAIL_IMAGE_MAX_WIDTH', 200);
-define('THUMBNAIL_IMAGE_MAX_HEIGHT', 155);
-error_reporting(E_ALL | E_STRICT);
-session_start();
-
-			global $base_url_magento;
-			
-			$mageFilename = $base_url_magento.'app/Mage.php';
-			require_once $mageFilename;
-			$app = Mage::app('default');
+ <?php 
+		define('THUMBNAIL_IMAGE_MAX_WIDTH', 200);
+		define('THUMBNAIL_IMAGE_MAX_HEIGHT', 155);
+		
+		ini_set('default_charset', 'UTF-8');
+		header('Content-Type: text/html; charset=utf-8');
+		
+		error_reporting(E_ALL | E_STRICT);
+		session_start();
+		
+		global $base_url_magento;
+		
+		$mageFilename = $base_url_magento.'app/Mage.php';
+		require_once $mageFilename;
+		$app = Mage::app('default');
 			
 			///// Adding options in brand and color attributes \\\\\
 			function addAttributeOption($arg_attribute, $arg_value)
-			{
+			    {
 				$attr_model = Mage::getModel('catalog/resource_eav_attribute');
-				$attr = $attr_model->loadByCode('catalog_product', $arg_attribute);
+				$attr = $attr_model->loadByCode('catalog_product', $arg_attribute); 
 				$attr_id = $attr->getAttributeId();
 					
 				if(!attributeValueExists($arg_attribute, $arg_value))
@@ -596,7 +600,7 @@ session_start();
 			                
 							if($prod_price >= '50' && $prod_price <= '2500')
 							{
-								if(trim($content_itemweight) != '' || trim($content_itemweight) <= 0)
+								if(trim($content_itemweight) != '' || trim($content_itemweight) <= 0 || $prod_sku=='B00E0GRTB8'|| $prod_sku=='B00KVHEL8E'|| $prod_sku=='B00CMHWTRQ'|| $prod_sku=='B00O65HZKS'|| $prod_sku=='B002WWH5PM'|| $prod_sku=='B00J0825H4'|| $prod_sku=='B002UKHEO8'|| $prod_sku=='B00JBJ3JBI')
 								{
 									$prod_qty				= preg_replace('/\s+/', ' ', trim($content_arr[34]));
 									if($prod_qty > 0)
@@ -614,7 +618,7 @@ session_start();
 										{
 										if($content_weight == ''){$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_itemweight));}
 										else{$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_weight));}
-											if($prod_weight==0)continue;
+										if($prod_weight == 0 && ($prod_sku!='B00E0GRTB8'&& $prod_sku!='B00KVHEL8E'&& $prod_sku!='B00CMHWTRQ'&& $prod_sku!='B00O65HZKS'&& $prod_sku!='B002WWH5PM'&& $prod_sku!='B00J0825H4'&& $prod_sku!='B002UKHEO8'&& $prod_sku!='B00JBJ3JBI'))continue;
 											$prod_categoryid	= preg_replace('/\s+/', ' ', trim($cat_id));				// Magento Category ID
 											$prod_root_cat_id	= explode(",",trim($prod_categoryid));						// Magento Category ID
 											$prod_category_name	= $cat_name;												// Magento Category Name			
@@ -624,7 +628,7 @@ session_start();
 											else{$prod_categoryid = $prod_root_cat_id[1];}									// Sub Category
 											$product_cat_id		= $prod_categoryid;
 											$findme				= 'unlocked';
-											if($product_cat_id == '3651' && stripos($prod_name, $findme)===false)continue;
+											if($product_cat_id == '3651' && stripos($prod_name, $findme)===false && ($prod_sku!='B00E0GRTB8'&& $prod_sku!='B00KVHEL8E'&& $prod_sku!='B00CMHWTRQ'&& $prod_sku!='B00O65HZKS'&& $prod_sku!='B002WWH5PM'&& $prod_sku!='B00J0825H4'&& $prod_sku!='B002UKHEO8'&& $prod_sku!='B00JBJ3JBI'))continue;
 											$prod_status		= '1';														// 1 = Enabled, 2 = Disabled
 											$prod_desc			= preg_replace('/\s+/', ' ', trim($content_arr[43]));		// Product Description from EditorialReviews
 											if($content_arr[9] != ''){
@@ -804,7 +808,7 @@ session_start();
 												$category_Name = $_category->getName();
 												$parentCategoryId = $_category->getParentId();
 							
-							fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_main_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_raw_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.$prod_amazonprime.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_likidesc,'"'),'"')).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_desc,'"'),'"'))).'^|^'.utf8_encode($prod_shortdesc).'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_offers_list_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_product_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_reviews_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($liki_price,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($monthly_price,'"'),'"')).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).'^|^0^|^simple^|^'.$prod_salesrank.'^|^'.$prod_brand.'^|^'.'Buy rent-to-own '.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).' now and pay later with affordable monthly payments. We stock up with more than 10,000 products from leading brands^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,utf8_encode(ltrim(rtrim($prod_name,'"'),'"'))).',shop '.strtolower($category_Name).' on monthly installments, LIKI, rent to own, lease to own, buy now pay later, low monthly payments^'.PHP_EOL);
+							fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_name,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_main_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_raw_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.$prod_amazonprime.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_likidesc,'"'),'"')).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_desc,'"'),'"')).'^|^'.$prod_shortdesc.'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_offers_list_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_product_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_reviews_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($liki_price,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($monthly_price,'"'),'"')).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_name,'"'),'"')).'^|^0^|^simple^|^'.$prod_salesrank.'^|^'.$prod_brand.'^|^'.'Buy rent-to-own '.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_name,'"'),'"')).' now and pay later with affordable monthly payments. We stock up with more than 10,000 products from leading brands^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_name,'"'),'"')).',shop '.strtolower($category_Name).' on monthly installments, LIKI, rent to own, lease to own, buy now pay later, low monthly payments^'.PHP_EOL);
 												
 												fclose($mainfile_fh);
 											}	// End of Stopword list check
