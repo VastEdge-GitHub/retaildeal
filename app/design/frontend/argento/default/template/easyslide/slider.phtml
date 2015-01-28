@@ -1,6 +1,5 @@
 <!-- Changes by LIKI Ext Start -->
-<!-- Changes Start for onpage SEO to remove html errors -->
-<!-- Reason of Change: RD-193, To shrink size of right side banner and make text visible on slides -->
+<!-- Reason of Change: RD-193 and onpage SEO to remove html errors -->
 <style type="text/css">
 @font-face {
     font-family: 'condensed';
@@ -46,7 +45,6 @@
 }
 
 </style>
-<!-- Changes for onpage SEO End -->
 <!-- Changes by LIKI Ext End -->
 <?php
 if ($slides = $this->getSlider()->getSlides()) :
@@ -72,13 +70,12 @@ if ($slides = $this->getSlider()->getSlides()) :
                                 ?>
                                 <img src="<?php echo $image_src; ?>" alt="<?php echo $this->escapeHtml($slide['image']) ?>"/>
                             </a>
-<!-- Changes Done by LIKI -->							
 							<?php 
 							//Changes by Likiext Start
-							//Reason of Change: RD-137, To change text on banner and to change the link on clicking of banner
+							//Reason of Change: RD-137
 							//if($i < 4)
 							//{
-						/*	echo "<a style='text-decoration:none;' href=". $vPath."><div style='position:absolute; top:-5px; width:100%'>";
+							/*echo "<a style='text-decoration:none;' href=". $vPath."><div style='position:absolute; top:-5px; width:100%'>";
 							if( $slide['target'] == 'catalogsearch/result/?q=grill')
 							{
 								echo "<div class='slide_text' style='position: absolute;z-index: 999999;top: 112px;left: 287px;font-size: 32px;color: #ffffff; font-family: condensed;margin:0 0 0 10px;'>Grills Starting at </div>";
@@ -123,11 +120,10 @@ if ($slides = $this->getSlider()->getSlides()) :
 							}
 
 					  echo "<div style='position: absolute;z-index: 999999;top: 230px;left: 287px;font-size: 12px;color: #ffffff;
-font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><span style='float:left;margin:0 0 0 5px;'></span></div></div></a>";
-					*/
+font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><span style='float:left;margin:0 0 0 5px;'></span></div></div></a>";*/
+					
 					//Changes by Likiext End
 					//} ?>
-					 <!-- LIKI CODE END -->
                             <?php if (!empty($slide['description'])) : ?>
                                 <div class="easyslidedescription <?php echo $this->getDescriptionClassName($slide['desc_pos']); ?> <?php echo $this->getBackgroundClassName($slide['background']); ?>"><?php echo $slide['description']; ?></div>
                             <?php endif; ?>
@@ -153,14 +149,9 @@ font-family: condensed;margin:0 0 0 10px;'><span style='float:left;'></span><spa
                 </div>
             </div>
         </div>
-        <!-- Liki Ext Start -->
-		<!-- Changes by Likiext Start -->
-		<!-- Reason of Change: RD-193, To make banner at right side invisible -->
         <div class="likibannerright" style="float:left;margin:0;cursor:pointer;">
-		<!-- Changes by Likiext End -->
-       <img id="banner_rt" src="/skin/frontend/argento/default/images/banner_right.png" alt="" onclick="return showForm('liki_intro_popup')" />
+       <img id="banner_rt" src="/skin/frontend/argento/default/images/banner_right.png" width="196" height="300" alt="" onclick="return showForm('liki_intro_popup')" />
         </div>
-        <!-- Liki Ext End -->
 		</div>
         <script type="text/javascript" charset="utf-8">
         var new_glider = new Glider('easyslideslider-<?php echo $easyslide_id; ?>', {
