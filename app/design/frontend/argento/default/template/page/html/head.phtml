@@ -71,6 +71,20 @@ if ($head = $this->getChild('argento.head')) :
     echo $head->getLinks();
 endif;
 ?>
+<!--RD-392 Start-->
+<?php   $cur_Url = $this->helper('core/url')->getCurrentUrl();
+   if(($cur_Url == 'http://retaildeal.biz/checkout/cart/') ||($cur_Url == 'http://retaildeal.biz/checkout/cart')) 
+   {    
+ ?>
+<link rel="canonical" href="http://demo.retaildeal.biz/checkout/cart/" />
+<?php } 
+if(($cur_Url == 'http://retaildeal.biz/customer/account/login/') ||($cur_Url == 'http://retaildeal.biz/customer/account/login')) 
+   {
+?>
+<link rel="http://demo.retaildeal.biz/customer/account/login/" />
+<?php } ?>
+<!--RD-392 END-->
+
 <?php echo $this->getCssJsHtml() ?>
 <?php echo $this->getChildHtml() ?>
 <?php echo $this->helper('core/js')->getTranslatorScript() ?>
