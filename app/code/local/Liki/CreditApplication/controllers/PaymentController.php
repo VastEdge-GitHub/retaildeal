@@ -67,7 +67,40 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 		}
 		$this->_redirect('checkout/onepage/');
 		}
-
+		public function changeorderAction()
+		{
+		$session = Mage::getSingleton('checkout/session');
+		$cart = Mage::getSingleton('checkout/cart/');
+		$session->setQuoteId($session->getPaypalStandardQuoteId(true));
+		if ($session->getLastRealOrderId()) {
+			$incrementId = $session->getLastRealOrderId();
+			if (empty($incrementId)) {
+				$this->_redirect('checkout/onepage/payment');
+				return;
+			}
+			$order = Mage::getModel('sales/order')->loadByIncrementId($session->getLastRealOrderId());
+			$session->getQuote()->setIsActive(false)->save();
+			$session->clear();
+			try {
+				$order->setActionFlag(Mage_Sales_Model_Order::ACTION_FLAG_CANCEL, true);
+				$order->cancel()->save();
+			} catch (Mage_Core_Exception $e) {
+				Mage::logException($e);
+			}
+			$items = $order->getItemsCollection();
+			foreach ($items as $item) {
+				try {
+					$cart->addOrderItem($item);
+				} catch (Mage_Core_Exception $e) {
+					$session->addError($this->__($e->getMessage()));
+					Mage::logException($e);
+					continue;
+				}
+			}
+			$cart->save();
+		}
+		$this->_redirect('checkout/cart/');
+		}
 		//Reason of change: Encode all data and remove single quotes
 		//Prepare Parameters For Liki Post Data
 		private function prepareLikiPostParameters(){		
@@ -82,6 +115,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			$MerchantSession['SuccessURL'] = Mage::getBaseUrl().'CreditApplication/Payment/success';
 			$MerchantSession['CancelURL']   =  Mage::getBaseUrl().'CreditApplication/Payment/cancel';
 			$MerchantSession['RejectURL']   =  Mage::getBaseUrl().'CreditApplication/Payment/reject';
+			$MerchantSession['ChangeOrderURL']   =  Mage::getBaseUrl().'CreditApplication/Payment/changeorder';
 			$MerchantSession['LogoURL']   =  Mage::getBaseUrl().'Logo.png';
 			$likipayment['MerchantSession']=$MerchantSession;
 			$Order['MerchantOrderId']=$order->getEntityId();
