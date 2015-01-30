@@ -65,7 +65,7 @@ class Liki_CreditApplication_PaymentController extends Mage_Core_Controller_Fron
 			}
 			$cart->save();
 		}
-		$this->_redirect('checkout/onepage/');
+		$this->_redirect('checkout/cart/');
 		}
 		public function changeorderAction()
 		{
