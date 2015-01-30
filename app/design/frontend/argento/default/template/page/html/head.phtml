@@ -146,3 +146,30 @@ function close_popup(){
 <?php 
 	 }             // End here for mixpanel
 ?>                                     
+<!-- RD-404 -->	
+	<?php
+		if(Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms')
+		{
+		  $page = Mage::getSingleton('cms/page')->getIdentifier();
+		}
+		if($page == 'home')
+		{
+	?>
+<script type="text/javascript">
+		 document.onreadystatechange = function () {
+		 var state = document.readyState;
+			 if (state == 'interactive')
+			 {
+			 console.log("not loaded");
+			 }
+			 else if (state == 'complete')
+			 { 
+			  analytics.track('ArrivesAtRD', { 
+			  Action: 'ArrivesAtRD'
+			});	 
+			  }
+			};
+</script> 
+<?php
+}
+?> <!-- End RD-404--> 
