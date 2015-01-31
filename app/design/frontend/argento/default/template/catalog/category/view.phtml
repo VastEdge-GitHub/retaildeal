@@ -63,3 +63,15 @@
 <?php else: ?>
     <?php echo $this->getProductListHtml() ?>
 <?php endif; ?>
+<?php 
+   $cat_id =$_helper->categoryAttribute($_category, $_category->getId(), 'id');
+   	$cat_name = $_category->getName();
+     if($_category->getBottomDescription()!=''){
+ ?>  
+  
+<div class="page-title category-title">
+<div style="float:left; margin-top:10px; text-align:justify;">
+<?php echo $_category->getBottomDescription() ?>
+</div>
+</div>
+<?php } ?>
