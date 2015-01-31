@@ -53,6 +53,24 @@
 .product-view .add-to-cart-wrapper{padding-left:0;}
 
 </style>
+<!-- RD-404 -->
+<script type="text/javascript">
+ document.onreadystatechange = function () {
+ var state = document.readyState;
+	 if (state == 'interactive')
+	 {
+	 console.log("not loaded");
+	 }
+	 else if (state == 'complete')
+	 { 
+	  analytics.track('Arrives Product Page', { 
+	  Action: 'Arrives Product Page'
+	});	 
+	  }
+	};
+</script> 
+<!--End 404-->
+
 	<?php $_helper 		= $this->helper('catalog/output'); ?>
     <?php $_product 	= $this->getProduct();
           if($_product = Mage::registry('current_product')){
