@@ -558,7 +558,9 @@
 							trim($content_arr[$n]);
 							if($content_arr[$n] == 'BLANK'){$content_arr[$n] = '';}			// Replacing word BLANK with null
 						}
-						if($content_arr[41] == '1' || $content_arr[41] == '0')				// Only getting Shiping Detail products
+						$amazon_asin				= preg_replace('/\s+/', ' ', trim($content_arr[0]));		 // ASIN	B00O65HZKS,B00CMHWTRQ for SEO Products  
+				if($content_arr[41] == '1' || $content_arr[41] == '0' || $amazon_asin =='B00CMHWTRQ') 
+																																// Only getting Shiping Detail products 
 						{
 							$content_arr[22]			= explode(";",$content_arr[22]);		// PackageDimensions
 							$content_weight_arr			= explode(":",$content_arr[22][2]);		// Getting weight from PackageDimensions
@@ -600,7 +602,7 @@
 			                
 							if($prod_price >= '50' && $prod_price <= '2500')
 							{
-								if(trim($content_itemweight) != '' || trim($content_itemweight) <= 0 || $prod_sku=='B00E0GRTB8'|| $prod_sku=='B00KVHEL8E'|| $prod_sku=='B00CMHWTRQ'|| $prod_sku=='B00O65HZKS'|| $prod_sku=='B002WWH5PM'|| $prod_sku=='B00J0825H4'|| $prod_sku=='B002UKHEO8'|| $prod_sku=='B00JBJ3JBI')
+								if(trim($content_itemweight) != '' || trim($content_itemweight) <= 0)
 								{
 									$prod_qty				= preg_replace('/\s+/', ' ', trim($content_arr[34]));
 									if($prod_qty > 0)
@@ -618,7 +620,7 @@
 										{
 										if($content_weight == ''){$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_itemweight));}
 										else{$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_weight));}
-										if($prod_weight == 0 && ($prod_sku!='B00E0GRTB8'&& $prod_sku!='B00KVHEL8E'&& $prod_sku!='B00CMHWTRQ'&& $prod_sku!='B00O65HZKS'&& $prod_sku!='B002WWH5PM'&& $prod_sku!='B00J0825H4'&& $prod_sku!='B002UKHEO8'&& $prod_sku!='B00JBJ3JBI'))continue;
+										if($prod_weight == 0)continue;
 											$prod_categoryid	= preg_replace('/\s+/', ' ', trim($cat_id));				// Magento Category ID
 											$prod_root_cat_id	= explode(",",trim($prod_categoryid));						// Magento Category ID
 											$prod_category_name	= $cat_name;												// Magento Category Name			
@@ -628,7 +630,7 @@
 											else{$prod_categoryid = $prod_root_cat_id[1];}									// Sub Category
 											$product_cat_id		= $prod_categoryid;
 											$findme				= 'unlocked';
-											if($product_cat_id == '3651' && stripos($prod_name, $findme)===false && ($prod_sku!='B00E0GRTB8'&& $prod_sku!='B00KVHEL8E'&& $prod_sku!='B00CMHWTRQ'&& $prod_sku!='B00O65HZKS'&& $prod_sku!='B002WWH5PM'&& $prod_sku!='B00J0825H4'&& $prod_sku!='B002UKHEO8'&& $prod_sku!='B00JBJ3JBI'))continue;
+											if($product_cat_id == '3651' && stripos($prod_name, $findme)===false)continue;
 											$prod_status		= '1';														// 1 = Enabled, 2 = Disabled
 											$prod_desc			= preg_replace('/\s+/', ' ', trim($content_arr[43]));		// Product Description from EditorialReviews
 											if($content_arr[9] != ''){
