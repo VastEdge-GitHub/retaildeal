@@ -1395,10 +1395,10 @@ text-indent: -9999px;}
 
 @media only screen and (min-width: 650px) and (max-width: 800px){
  .abt_us{
-	margin-left: 50px;
+	margin-left: 20px;
  }
  
-	 .info{	margin-left: 0px;
+	 .info{	margin-left: 20px;
 		margin-right: 0px;
 	 }
 	 
@@ -1410,8 +1410,8 @@ text-indent: -9999px;}
 	 .link_contacts{
 		margin-top: 0px;
 	 }
-	.footer-cms .footer-links li.last, .footer-cms .footer-contacts{
+	/*.footer-cms .footer-links li.last, .footer-cms .footer-contacts{
 		margin-left: 18px!important;
-	}
+	}*/
 
 } 
