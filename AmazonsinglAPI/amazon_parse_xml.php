@@ -1,9 +1,9 @@
 <?php
-function xml_to_csv_conversion($xml,$csvfile)
-{		 
-	$f = fopen($csvfile, 'w'); 
-		
-	$Asin_Tag_name="sku";
+function xml_to_csv_conversion($xml,$csv_filename)
+ {
+	$f = fopen($csv_filename, 'w');
+
+	$Asin_Tag_name="ASIN";
 	$DetailPageURL_Tag_name="DetailPageURL";
 	$technical_detail_Tag_name="Description";
 	$All_offer_url_Tag_name="All_Offer_Url";
@@ -13,7 +13,7 @@ function xml_to_csv_conversion($xml,$csvfile)
 	$LargeImage_Tag_name="LargeImage";
 	$Binding_Tag_name="Binding";
 	$Brand_Tag_name="Brand";
-	$CatalogNumberList_Tag_name="CatalogNumberList"; 
+	$CatalogNumberList_Tag_name="CatalogNumberList";
 	$Color_Tag_name="Color";
 	$EAN_Tag_name="EAN";
 	$EANListElement_Tag_name="EANListElement";
@@ -31,7 +31,7 @@ function xml_to_csv_conversion($xml,$csvfile)
 	$ProductGroup_Tag_name="ProductGroup";
 	$ProductTypeName_Tag_name="ProductTypeName";
 	$Publisher_Tag_name="Publisher";
-	$SKU_Tag_name="sku";
+	$SKU_Tag_name="SKU";
 	$Studio_Tag_name="Studio";
 	$Title_Tag_name="Title";
 	$UPC_Tag_name="UPC";
@@ -45,74 +45,9 @@ function xml_to_csv_conversion($xml,$csvfile)
 	$PercentageSaved_Tag_name="PercentageSaved";
 	$Availability_Tag_name="Availability";
 	$IsEligibleForSuperSaverShipping_Tag_name="IsEligibleForSuperSaverShipping";
-	$in_stock="is_in_stock";
-	$EditorialReviews_Tag_name= "description";
-	$qty					  = "qty";
-	/*
-	$Asin_Tag_name=$xml->Items->Item->ASIN->getName();
-	$DetailPageURL_Tag_name=$xml->Items->Item->DetailPageURL->getName();
-	$technical_detail_Tag_name=$xml->Items->Item->ItemLinks->ItemLink->Description->getname();
-	$All_offer_url_Tag_name="All_Offer_Url";
-	$SalesRank_Tag_name=$xml->Items->Item->SalesRank->getName();
-	$SmallImage_Tag_name=$xml->Items->Item->SmallImage->getName();
-	$MediumImage_Tag_name=$xml->Items->Item->MediumImage->getName();
-	$LargeImage_Tag_name=$xml->Items->Item->LargeImage->getName();
-	$Binding_Tag_name=$xml->Items->Item->ItemAttributes->Binding->getName();
-	$Brand_Tag_name=$xml->Items->Item->ItemAttributes->Brand->getName();
-	$CatalogNumberList_Tag_name=$xml->Items->Item->ItemAttributes->CatalogNumberList->getName();
-	$Color_Tag_name=$xml->Items->Item->ItemAttributes->Color->getName();
-	$EAN_Tag_name=$xml->Items->Item->ItemAttributes->EAN->getName();
-	$EANListElement_Tag_name=$xml->Items->Item->ItemAttributes->EANList->EANListElement->getName();
-	$Feature_Tag_name=$xml->Items->Item->ItemAttributes->Feature->getName();
-	$ItemDimensions_Tag_name=$xml->Items->Item->ItemAttributes->ItemDimensions->getName();
-	$Label_Tag_name=$xml->Items->Item->ItemAttributes->Label->getName();
-	$ListPrice_Tag_name=$xml->Items->Item->ItemAttributes->ListPrice->getName();
-	if($ListPrice_Tag_name==NULL)
-	{
-	 $ListPrice_Tag_name=$xml->Items->Item[1]->ItemAttributes->ListPrice->getName();
-	}
-	$Manufacturer_Tag_name=$xml->Items->Item->ItemAttributes->Manufacturer->getName();
-	$Model_Tag_name=$xml->Items->Item->ItemAttributes->Model->getName();
-	$MPN_Tag_name=$xml->Items->Item->ItemAttributes->MPN->getName();
-	$NumberOfItems_Tag_name=$xml->Items->Item->ItemAttributes->NumberOfItems->getName();
-	$PackageDimensions_Tag_name=$xml->Items->Item->ItemAttributes->PackageDimensions->getName();
-	$PackageQuantity_Tag_name=$xml->Items->Item->ItemAttributes->PackageQuantity->getName();
-	$PartNumber_Tag_name=$xml->Items->Item->ItemAttributes->PartNumber->getName();
-	$ProductGroup_Tag_name=$xml->Items->Item->ItemAttributes->ProductGroup->getName();
-	$ProductTypeName_Tag_name=$xml->Items->Item->ItemAttributes->ProductTypeName->getName();
-	$Publisher_Tag_name=$xml->Items->Item->ItemAttributes->Publisher->getName();
-	$SKU_Tag_name=$xml->Items->Item->ItemAttributes->SKU->getName();
-	$i=0;
-	while($SKU_Tag_name==NULL)
-	{
-		$SKU_Tag_name=$xml->Items->Item[$i]->ItemAttributes->SKU->getName();
-		$i++;
-	}
-	$Studio_Tag_name=$xml->Items->Item->ItemAttributes->Studio->getName();
-	$Title_Tag_name=$xml->Items->Item->ItemAttributes->Title->getName();
-	$UPC_Tag_name=$xml->Items->Item->ItemAttributes->UPC->getName();
-	$Warranty_Tag_name=$xml->Items->Item->ItemAttributes->Warranty->getName();
-	$LowestNewPrice_Tag_name=$xml->Items->Item->OfferSummary->LowestNewPrice->getName();
-	$TotalNew_Tag_name=$xml->Items->Item->OfferSummary->TotalNew->getName();
-	$TotalCollectible_Tag_name=$xml->Items->Item->OfferSummary->TotalCollectible->getName();
-	$TotalRefurbished_Tag_name=$xml->Items->Item->OfferSummary->TotalRefurbished->getName();
-	$Price_Tag_name=$xml->Items->Item->Offers->Offer->OfferListing->Price->getName();
-	$Price_Tag_name="Offer".$Price_Tag_name;
-	$AmountSaved_Tag_name=$xml->Items->Item->Offers->Offer->OfferListing->AmountSaved->getName();
-	if($AmountSaved_Tag_name==NULL)
-	{
-		$AmountSaved_Tag_name=$xml->Items->Item[1]->Offers->Offer->OfferListing->AmountSaved->getName();
-	}
-	$PercentageSaved_Tag_name=$xml->Items->Item->Offers->Offer->OfferListing->PercentageSaved->getName();
-	if($PercentageSaved_Tag_name==NULL)
-	{
-		$PercentageSaved_Tag_name=$xml->Items->Item[1]->Offers->Offer->OfferListing->PercentageSaved->getName();
-	}
-	$Availability_Tag_name=$xml->Items->Item->Offers->Offer->OfferListing->Availability->getName();
-	$IsEligibleForSuperSaverShipping_Tag_name=$xml->Items->Item->Offers->Offer->OfferListing->IsEligibleForSuperSaverShipping->getName();
-	$CustomerReviews_Tag_name=$xml->Items->Item->CustomerReviews->getName();
-	$EditorialReviews_Tag_name=$xml->Items->Item->EditorialReviews->getName(); 
-	*/
+	$CustomerReviews_Tag_name="CustomerReviews";
+	$EditorialReviews_Tag_name="EditorialReviews";
+	
 	fwrite($f,$Asin_Tag_name."|".$DetailPageURL_Tag_name."|".$technical_detail_Tag_name."|".$All_offer_url_Tag_name."|".$SalesRank_Tag_name."|".$SmallImage_Tag_name."|".$MediumImage_Tag_name."|".$LargeImage_Tag_name."|".$Binding_Tag_name."|".$Brand_Tag_name."|".$CatalogNumberList_Tag_name."|".$Color_Tag_name."|".$EAN_Tag_name."|".$EANListElement_Tag_name."|".$Feature_Tag_name."|".$ItemDimensions_Tag_name."|".$Label_Tag_name."|".$ListPrice_Tag_name."|".$Manufacturer_Tag_name."|".$Model_Tag_name."|".$MPN_Tag_name."|".$NumberOfItems_Tag_name."|".$PackageDimensions_Tag_name."|".$PackageQuantity_Tag_name."|".$PartNumber_Tag_name."|".$ProductGroup_Tag_name."|".$ProductTypeName_Tag_name."|".$Publisher_Tag_name."|".$SKU_Tag_name."|".$Studio_Tag_name."|".$Title_Tag_name."|".$UPC_Tag_name."|".$Warranty_Tag_name."|".$LowestNewPrice_Tag_name."|".$TotalNew_Tag_name."|".$TotalCollectible_Tag_name."|".$TotalRefurbished_Tag_name."|".$OfferPrice_Tag_name."|".$AmountSaved_Tag_name."|".$PercentageSaved_Tag_name."|".$Availability_Tag_name."|".$IsEligibleForSuperSaverShipping_Tag_name."|".$CustomerReviews_Tag_name."|".$EditorialReviews_Tag_name."|");
 	
 	fwrite($f,"".PHP_EOL);
@@ -124,7 +59,7 @@ function xml_to_csv_conversion($xml,$csvfile)
 					$flag_for_itemlink=1;
 					$flag_for_Feature=1;
 					$flag_for_ItemDimensions=1;
-					$flag_for_ListPrice=1; 
+					$flag_for_ListPrice=1;
 					$flag_for_feature=0;
 					$flag_for_Imageset=1;
 					$counter="ok";
@@ -193,8 +128,8 @@ function xml_to_csv_conversion($xml,$csvfile)
 							$flag_for_ListPrice=2;
 							$flag_for_PackageDimensions=2;
 							$flag_for_Editorial_Review=1;
-							$in_stock= 1;
-							$qty     = 4;
+							$CustomerReviews=1;
+							$Technical_Details=1;
 							$feature_string=NULL;
 							$arr=array();
 							$ImageSet_arr=array();
@@ -315,7 +250,7 @@ function xml_to_csv_conversion($xml,$csvfile)
 									if ($subchild1_name!="IFrameURL" && $subchild1_name=="HasReviews")
 									{	
 										
-										echo "<br>customer Review is not there".$subchild1_name; 
+										echo "<br>customer Review is not there".$subchild1_name;
 									}
 								}*/
 								if($subchild_name=="ItemAttributes")
@@ -484,7 +419,6 @@ function xml_to_csv_conversion($xml,$csvfile)
 								if($Binding=="ok" && $counter==5)
 								{	
 									fwrite($f,"\"BLANK\"|");
-
 									$counter=6;
 									$Binding=1;
 								}
@@ -735,6 +669,7 @@ function xml_to_csv_conversion($xml,$csvfile)
 								}
 								if($Publisher=="ok" && $counter==24)
 								{
+
 									fwrite($f,"\"BLANK\"|");
 									$counter=25;
 									$Publisher=1;
@@ -907,42 +842,30 @@ function xml_to_csv_conversion($xml,$csvfile)
 							
 								if($subchild1_name=="EditorialReview")
 								{	
-									if($subchild1->Source=="Product Description")
+									if($subchild1->Source=="Product Description" )
 									{
-										$comma_filter_content=$subchild1->Content;
-										$comma_filter_content = trim(preg_replace('/\s\s+/', ' ', $comma_filter_content));
-									  //$comma_filter_content = preg_replace('/[^A-Za-z0-9 |!@#$%^&*(),< >".]/u','', trim($comma_filter_content));
-										$comma_filter_content="\"$comma_filter_content\"";
-										//echo "this is product description Editorial Review<br>".$comma_filter_content;
-										fwrite($f,$comma_filter_content."hello"."|");
+										$comma_filter_content=$subchild1->Content; 
+										$comma_filter_content = preg_replace('/\s+/', ' ', trim($comma_filter_content));
+										$comma_filter_content="\"$comma_filter_content";
+										
+										fwrite($f,$comma_filter_content."<br/>");
 										$EditorialReview=1;
-										$counter=37;
+										$counter=36;
+									  }
+								 if($subchild1->Source=="Amazon.com" && $flag_for_Editorial_Review==1 && $counter==36) 
+										{
+											$comma_filter_content=$subchild1->Content;
+											$comma_filter_content = preg_replace('/\s+/', ' ', trim($comma_filter_content)); 
+											 $comma_filter_content="$comma_filter_content\"";
+												fwrite($f,$comma_filter_content."|");
+											$flag_for_Editorial_Review++;
+											$EditorialReview=1;
+											$counter=37;
+										}
 									}
-									if($subchild1->Source=="Amazon.com" && $flag_for_Editorial_Review==1 && $counter==36)
-									{
-										$comma_filter_content=$subchild1->Content;
-										$comma_filter_content = trim(preg_replace('/\s\s+/', ' ', $comma_filter_content));
-										//$comma_filter_content = preg_replace('/[^A-Za-z0-9 |!@#$%^&*(),< >".]/u','', trim($comma_filter_content));
-										$comma_filter_content="\"$comma_filter_content\"";
-										//echo "this is amazon.com Editorial Review<br>".$comma_filter_content;
-										fwrite($f,$comma_filter_content."|");
-										$flag_for_Editorial_Review++;
-										$EditorialReview=1;
-										$counter=37;
-									}
-							
-									
-								
-									
-									
-									
-								}
-								
-								
-								
-							}
+								} 
 						}
-						else
+						else 
 						{	
 							array_push($Subchild_arr,$subchild_name);
 							if($subchild_name=="ParentASIN")
@@ -950,7 +873,7 @@ function xml_to_csv_conversion($xml,$csvfile)
 							else
 							{
 								$subchild="\"$subchild\"";
-								if($subchild_name=="ASIN" && in_array("ASIN", $arr123))
+								if($subchild_name=="ASIN" && in_array("ASIN", $arr123)) 
 								{
 									$counter=0;
 									fwrite($f,$subchild."|");
@@ -984,5 +907,6 @@ function xml_to_csv_conversion($xml,$csvfile)
 				{
 				}
 			}
+	return true;
 }
-?>	
+?>
