@@ -131,7 +131,7 @@ textarea { width: 250px; }
 .links li.first a { background: none !important; padding-left: 0; }
 
 /* <<< top toolbar */
-.top-toolbar-container { background: #eaeaea; }
+.top-toolbar-container { background: #125393 !important; border-top: 3px solid #fff; }
 .top-toolbar { color: #7f7f7f; font: normal 12px Arial, Helvetica!important; }
 
 /* cms links */
@@ -140,9 +140,9 @@ textarea { width: 250px; }
 .top-toolbar .welcome-msg { float: left; margin: 0 10px 0 0;}
 /*.top-toolbar .welcome-msg { float: left; margin: 0 10px 0 0; display:none;}*/
 .top-toolbar { padding: 9px 5px; }
-.top-toolbar .quick-links { float: right; text-align: right; }
+.top-toolbar .quick-links { float: right; text-align: right; color:whitesmoke; }
 .top-toolbar .quick-links .links { float: right; }
-.top-toolbar .links a { color: #7f7f7f; text-decoration: none; }
+.top-toolbar .links a { color: whitesmoke; text-decoration: none; }
 .top-toolbar .links a:hover { text-decoration: underline; }
 
 .top-toolbar input,
@@ -361,13 +361,14 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 .col-right { border: none; padding: 0; }
 
 /* blocks */
-.block { border: none; font-size: 1.0em; }
+.block { border: none; font-size: 1.0em; border: 1px solid #D7D7D7;
+border-radius: 10px 10px 10px 10px; }
 .block .block-title { border: 1px solid #ddd; padding: 8px 8px 8px;
     color: #033862; border-width: 0 0 1px;
     font: normal 13px Arial, Helvetica;
 }
 .block .block-title strong,
-.block .block-title span { font-weight: normal; color: #000; font-size: 1.1em;}
+.block .block-title span { font-weight: 600; color: #FFF; font-size: large ;}
 .block .block-subtitle { font-size: 12px; }
 .block .block-content li.item { padding: 3px 0; }
 .block li.even { background: none; }
@@ -1236,7 +1237,7 @@ button.btn-checkout:hover span span
 /* ======================================================================================= */
 
 /* footer */
-.footer-container {}
+.footer-container { background:#093967 !important;}
 .footer,
 .footer a { color: #cfcfcf; }
 /*.footer { padding: 10px 5px; font-size: .9em; }*/
