@@ -70,9 +70,9 @@ analytics.track('Product', {
     <div style="float:left;width:322px !important" class="add-to-cart">
        
 		<?php if(!$_product->isGrouped()): ?>
-		 <button style="margin-right:125px !important;float:right; border-radius:7px; box-shadow:inherit; height:27px; background:transparent url(/skin/frontend/argento/default/images/bkg_button.gif) 0 0 no-repeat; background-position:100% -170px; padding-right: 27px; margin-top:2px" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this); analytischk_ad();"><span><span><?php echo $buttonTitle ?></span></span></button>
+		 <button style="margin-right:140px !important;float:right; border-radius:7px; box-shadow:inherit; height:27px; background:transparent url(/skin/frontend/argento/default/images/bkg_button.gif) 0 0 no-repeat; background-position:100% -170px; padding-right: 27px; margin-top:2px" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this); analytischk_ad();"><span><span><?php echo $buttonTitle ?></span></span></button>
 		
-	   <label style="line-height: 10px;margin: 3px 5px 0 17px;" for="qty"><?php echo $this->__('Qty:') ?></label>
+	   <label style="line-height: 10px;margin: 3px 5px 0 0;" for="qty"><?php echo $this->__('Qty:') ?></label>
 	   		<?php $currentUrl = Mage::helper('core/url')->getCurrentUrl();
 				$url = Mage::getSingleton('core/url')->parseUrl($currentUrl);
 				$path = $url->getPath();
@@ -88,7 +88,7 @@ analytics.track('Product', {
 					?>
 		<!-- Changes by liki ext start -->
 		<!--REASON: Add some validation class in inputbox such as required-entry,validate-number,validate-greater-than-zero -->
-	    <input style="float:right" type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty validate-digits " />
+	    <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="required-entry input-text validate-number validate-greater-than-zero qty validate-digits " />
 		<?php endif; ?>
         <!-- Changes by liki ext end -->
 	<?php echo $this->getChildHtml('', true, true) ?>
