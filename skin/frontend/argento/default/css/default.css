@@ -366,6 +366,16 @@ border-radius: 10px 10px 10px 10px; }
 .block .block-title { border: 1px solid #ddd; padding: 8px 8px 8px;
     color: #033862; border-width: 0 0 1px;
     font: normal 13px Arial, Helvetica;
+	border-radius: 9px 9px 0 0; 
+	border: #125393;
+	background: #ff670f; /* Old browsers */
+	background: -moz-linear-gradient(top, #ff670f 58%, #ff995e 99%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(58%,#ff670f), color-stop(99%,#ff995e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ff670f 58%,#ff995e 99%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ff670f 58%,#ff995e 99%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ff670f 58%,#ff995e 99%); /* IE10+ */
+	background: linear-gradient(to bottom, #ff670f 58%,#ff995e 99%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#ff995e',GradientType=0 ); /* IE6-9 */
 }
 .block .block-title strong,
 .block .block-title span { font-weight: 600; color: #FFF; font-size: large ;}
