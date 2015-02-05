@@ -378,7 +378,7 @@ border-radius: 10px 10px 10px 10px; }
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#ff995e',GradientType=0 ); /* IE6-9 */
 }
 .block .block-title strong,
-.block .block-title span { font-weight: 600; color: #FFF; font-size: large ;}
+.block .block-title span { font-weight: 600; color: #FFF; font-size: large ; text-transform: uppercase;}
 .block .block-subtitle { font-size: 12px; }
 .block .block-content li.item { padding: 3px 0; }
 .block li.even { background: none; }
@@ -1553,6 +1553,12 @@ button.ajaxpro-continue-button span span,
     .event-container .status,
     .event-container .event-dates { font-size: 14px }
 }
+@media(min-width: 200px) and (max-width: 750px){ 
+    
+	..page{ width: 100%; }	
+	.block .block-title strong,
+	.block .block-title span { font-weight:500; color: #FFF; font-size:13px ; text-transform: uppercase; margin-left:-2px;} 
+	.blog-search .input-text{ width: 90%;}  
 @media (max-width: 480px) {
 	/* Change made on 10 dec */
 	.footer-cms .footer-contacts .h6 ul.icons
