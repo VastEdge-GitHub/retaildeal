@@ -105,9 +105,15 @@ textarea { width: 250px; }
 .page-head-alt h3,
 .page-head-alt h2 { font-size:24px; font-weight: normal; }
 
+.cms_prod { text-decoration:none; }
+cms_prod: hover {color:#FF6633; }
+
 /* layout */
-.page { width: auto; padding: 0; );
-background-attachment: fixed;}
+.page { width: auto; padding: 0;
+/* background: url(http://demo.retaildeal.biz/skin/frontend/argento/default/images/a1.jpg);   */
+/* background: #fff url(http://demo.retaildeal.biz/skin/frontend/argento/default/images/bg.gif) repeat-x 0 10px; */
+ background-attachment: fixed;
+}
 .col3-layout .col-wrapper { width: 75%; }
 .col3-layout .col-right { width: 24%; }
 .col3-layout .col-left { width: 30%; }
@@ -123,7 +129,7 @@ background-attachment: fixed;}
 .main,
 .footer,
 .footer-toolbar,
-.footer-cms { padding: 0 5px; width: 960px; margin: 0 auto; border: none; font-family: Arial, Helvetica !important; background: #fff url(http://demo.retaildeal.biz/skin/frontend/argento/argento/images/footer_cms_container.gif) repeat-x 0 0; }
+.footer-cms { padding: 0 5px; width: 960px; margin: 0 auto; border: none; font-family: Arial, Helvetica !important; /*background: #fff url(http://demo.retaildeal.biz/skin/frontend/argento/argento/images/footer_cms_container.gif) repeat-x 0 0; width:1000px; */}
 
 /* header */
 .top-toolbar .links li,
@@ -131,14 +137,14 @@ background-attachment: fixed;}
 .links a { padding: 0 5px 0 6px; background: url(../images/links_div.gif) no-repeat 0 50% !important; white-space: nowrap; }
 .links li.first a { background: none !important; padding-left: 0; }
 
-.searchautocomplete{background:none !important;}
+/*.searchautocomplete{background:none !important;} */
 
 
 
 
 /* <<< top toolbar */
-.top-toolbar-container { background: transparent !important; border-top: 3px solid #fff; }
-.top-toolbar { color: #7f7f7f; font: normal 12px Arial, Helvetica!important; background: #125393 !important; width:1000px;}
+.top-toolbar-container {  background: #125393 !important; /*background: transparent !important;*/ border-top: 3px solid #fff; }
+.top-toolbar { color: #7f7f7f; font: normal 12px Arial, Helvetica!important;background: #125393 !important;/* width:1000px; */}
 
 /* cms links */
 .header-links { margin-right: 80px; float: left; }
@@ -163,7 +169,7 @@ background-attachment: fixed;}
 /* >>> top toolbar */
 
 /*.header-container { background: #fff; }*/
-.header-container { background: transparent margin-top:-10px; /* Old browsers */
+.header-container { /*background: transparent margin-top:-10px; /* Old browsers */
 /*background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%) !important;*/ /* FF3.6+ */
 /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)) !important;*/ /* Chrome,Safari4+ */
 /*background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%) !important;*/ /* Chrome10+,Safari5.1+ */
@@ -173,7 +179,7 @@ background-attachment: fixed;}
 /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ) !important;*/ /* IE6-9 */
 padding-top:0px !important;
 }
-.header { padding: 20px 5px; background:url(http://demo.retaildeal.biz/skin/frontend/argento/argento/images/footer_cms_container.gif) repeat-x 0 0 !important; width:1000px;}
+.header { padding: 20px 5px; /*background:url(http://demo.retaildeal.biz/skin/frontend/argento/argento/images/footer_cms_container.gif) repeat-x 0 0 !important; width:1000px;*/}
 
 .header-callout { float: left; }
 
@@ -361,7 +367,7 @@ select.ajaxsearch-category-select { padding: 9px 1px 9px 3px; width: 60px; backg
 
 /* middle */
 .main-container { background: #fff; border-bottom:none !important ; }
-.main { padding: 10px 5px; min-height: 385px; margin-bottom:-10px; width:1000px}
+.main { padding: 10px 5px; min-height: 385px; margin-bottom:-10px; /*width:1000px */}
 /*.main { padding: 10px 5px; min-height: 400px; }*/
 /*.breadcrumbs { border: none; font-size: .9em; padding: 6px 10px; }*/
 .breadcrumbs { border: none; font-size: 12px; padding: 6px 10px; }
@@ -1255,8 +1261,9 @@ button.btn-checkout:hover span span
 .checkout-multishipping-billing .multiple-checkout { position:relative; }
 /* ======================================================================================= */
 
+
 /* footer */
-.footer-container { background:transparent !important;}
+.footer-container { background: #093967 !important;/*background:transparent !important; */}
 .footer,
 .footer a { color: #cfcfcf; }
 /*.footer { padding: 10px 5px; font-size: .9em; }*/
@@ -1965,7 +1972,8 @@ width:170px !important;
 .footer-cms-container .footer-cms .h6{font-family:Arial, Helvetica!important;font-size:14px !important;}
 
 
-.footer-cms-container{ background:transparent !important; border-bottom: none !important;}  
+
+.footer-cms-container{/* background:transparent !important; border-bottom: none !important; */}  
 
 
 #oar_widget_orders_and_returns_form ul.form-alt .input-box label{font-size:12px !important;}
