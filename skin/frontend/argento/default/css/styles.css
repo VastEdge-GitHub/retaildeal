@@ -450,7 +450,7 @@ tr.summary-details-excluded { font-style:italic; }
 .notice-cookie .notice-inner p { margin:0 0 10px; border:1px dotted #cccc73; padding:10px; }
 .notice-cookie .notice-inner .actions { }
 
-/* ======================================================================================= */
+/* top toolbar container ======================================================================================= */
 
 
 /* Header ================================================================================ */
@@ -1213,13 +1213,17 @@ tr.summary-details-excluded { font-style:italic; }
 /* Footer ================================================================================ */
 .footer { border:1px solid #ddd; padding:10px; }
 .footer p { text-align:right; }
-.footer address { text-align:left; }
-.footer_inner address{text-align:left !important;width:51% !important;}
+.footer address { text-align:left;width:51% !important; }
 .footer .amazon_disclaimer{text-align:left;font-size:10px;width:100%;float:left;margin-top:5px;}
 .footer ul {}
 .footer ul li { display:inline; }
-.footer-container .bottom-container { text-align:center; }
+.footer-container .bottom-container { text-align:center;  }
 .footer_inner{float:left;width:100%;}
+
+
+.footer-cms-container{background:#093967;}
+
+
 /* ======================================================================================= */
 
 
@@ -1331,7 +1335,9 @@ text-indent: -9999px;}
 	background: -o-linear-gradient(top, #86aecc 0%,#d4e4ef 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top, #86aecc 0%,#d4e4ef 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #86aecc 0%,#d4e4ef 100%); /* W3C */
+	<!--[if IE]>
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#86aecc', endColorstr='#d4e4ef',GradientType=0 ); /* IE6-9 */	
+	<![endif]-->
 }
 .category-products .price-box .price, .regular-price .price, .price-from .price-label, .price-to .price-label{font-family:​Arial, Helvetica;font-size:16px;}
 
@@ -1368,7 +1374,39 @@ text-indent: -9999px;}
  	font-family: Arial, Helvetica;
 
 }
+/*
+ .block-title span{
+	font-family: Arial, Helvetica !important;
+ }
+ .about-page-content span{
+ 	font-family: Arial, Helvetica !important;
+}
 
+
+.product-shop .f-fix .product-name a{
+ 	font-family: Arial, Helvetica;
+
+}
+.post-list-item h2{
+ 	font-family: Arial, Helvetica;
+
+}
+
+.col-1 .box .box-title h2, .col-2 .box .box-title h2{
+ 	font-family: Arial, Helvetica;
+
+}
+
+.oar_widget_orders_and_returns_form .order_return{
+ 	font-family: Arial, Helvetica;
+}
+.order-items .table-caption{
+ 	font-family: Arial, Helvetica;
+}
+
+.cartinfo .actions .btn-suggest-page span{
+ 	font-family: Arial, Helvetica;
+}*/
 /***************************************************************************************************************/
  
 @media only screen and (min-width: 500px) and (max-width: 650px){
@@ -1410,8 +1448,10 @@ text-indent: -9999px;}
 	 .link_contacts{
 		margin-top: 0px;
 	 }
-	/*.footer-cms .footer-links li.last, .footer-cms .footer-contacts{
+	 /*.footer-cms .footer-links li.last, .footer-cms .footer-contacts{
 		margin-left: 18px!important;
-	}*/
+	} */
 
 } 
+
+
