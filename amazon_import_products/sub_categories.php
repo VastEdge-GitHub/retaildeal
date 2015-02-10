@@ -1,18 +1,15 @@
 <?php
 	ini_set("max_execution_time", 0);
 	ini_set("memory_limit", -1);
-	ini_set('display_errors', 1);
-	
-	error_reporting(E_ALL | E_STRICT);
+	ini_set('display_errors', 1);	
+    error_reporting(E_ALL | E_STRICT);   
 	ob_implicit_flush(true);
 
 	global $base_url_magento;
 	$base_url_magento = '/opt/bitnami/apps/magento/htdocs/';
-	
 	echo gmdate('Y-m-d H:i:s')."----> Sub Category Product Import Started \n";
-	
     include($base_url_magento."amazon_import_products/amazon_api_class.php");
-    include($base_url_magento."amazon_import_products/amazon_parse_xml.php");
+    include($base_url_magento."amazon_import_products/amazon_parse_xml.php"); 
 	include($base_url_magento."app/Mage.php");
 	global $chk_exception;	
 
@@ -25,7 +22,7 @@
 	fclose($fh);
 	
 	$cat_array_namings		= array("Appliances","Automotive","Baby","PCHardware","Electronics","HealthPersonalCare","HomeGarden","PetSupplies","SportingGoods","Toys","Jewelry","Beauty","Kitchen","OutdoorLiving","Photo","Tools","Watches","Wireless","WirelessAccessories");		// Amazon Categories
-	$cat_id_arr_ids			= array("3559","3560","3561","3562","3564","3565","3566","3567","3568","3569","3570","3565","3566","3566","3564","3559","3564","3564","3564","4199");																		
+	$cat_id_arr_ids			= array("3559","3560","3561","3562","3564","3565","3566","3567","3568","3569","3570","3565","3566","3566","3564","3559","3564","3564","3564","3697");																		
 	
 	
 	// Magento category IDs
@@ -37,109 +34,44 @@
 	
 	echo gmdate('Y-m-d H:i:s')."----> Getting magento sub categories \n";
 												
-	// Get all categories and their details fro magento
-	Mage::app();
-	$category 				= Mage::getModel('catalog/category');
-	$tree 					= $category->getTreeModel();
-	$tree->load();
-	$ids 					= $tree->getCollection()->getAllIds();
-	if($ids)
+	$dbhost = 'localhost';
+	$dbuser = 'bn_magento';
+	$dbpass = 'fbeee979d3';
+	//$dbuser = 'root';
+	//$dbpass = 'abc.123';
+	$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+	if(! $conn )
 	{
-		foreach($ids as $id)
-		{
-			$cat 			= Mage::getModel('catalog/category');
-			$cat->load($id);
-			$data 			= $cat->getData();
-			$description	= $data['description'];
-			$cat_active		= $data['is_active'];
-			$desc_arr		= explode("==",$description);
-			$amazon_id		= $desc_arr[1];
-			if($cat_active == '1')												// Only active categories
-			{
-				if($amazon_id != '1' && $amazon_id != '')						// Only categories with browsenode values
-				{		
-					if($data['level'] >= 3)										// Only sub-categories upto level 3
-					{
-						$parent_name_arr	= explode("/",$data['url_path']);						
-						$parent_name_count	= count($parent_name_arr);
-						$parent_name		= $parent_name_arr[$parent_name_count -2];  // For get oarent catgory edit by liki on 25-Nov-014
-					 if($parent_name != 'and-more')
-					    {
-						if($parent_name == 'appliances')
-						{
-							$cat_name		= $cat_array_namings[0];
-							$cat_id 		= $cat_id_arr_ids[0];
-						}
-                   		if($parent_name == 'automotive')
-						{
-							$cat_name 		= $cat_array_namings[1];
-							$cat_id 		= $cat_id_arr_ids[1];
-						}
-						if($parent_name == 'baby-products')
-						{
-							$cat_name 		= $cat_array_namings[2];
-							$cat_id 		= $cat_id_arr_ids[2];
-						}
-						if($parent_name == 'computers')
-						{
-							$cat_name 		= $cat_array_namings[3];
-							$cat_id 		= $cat_id_arr_ids[3];
-						}
-						if($parent_name == 'electronics')
-						{
-							$cat_name 		= $cat_array_namings[4];
-							$cat_id 		= $cat_id_arr_ids[4];
-						}
-						if($parent_name == 'health-personal-care')
-						{
-							$cat_name 		= $cat_array_namings[5];
-							$cat_id 		= $cat_id_arr_ids[5];
-						}
-						if($parent_name == 'home-garden')
-						{
-							$cat_name 		= $cat_array_namings[6];
-							$cat_id 		= $cat_id_arr_ids[6];
-						}
-						if($parent_name == 'pet-supplies')
-						{
-							$cat_name 		= $cat_array_namings[7];
-							$cat_id 		= $cat_id_arr_ids[7];
-						}
-						if($parent_name == 'sports-outdoors')
-						{
-							$cat_name 		= $cat_array_namings[8];
-							$cat_id 		= $cat_id_arr_ids[8];
-						}
-						if($parent_name == 'toys-games')
-						{
-							$cat_name 		= $cat_array_namings[9];
-							$cat_id 		= $cat_id_arr_ids[9];
-						}
-						if($parent_name == 'jewelry')
-						{
-							$cat_name 		= $cat_array_namings[10];
-							$cat_id 		= $cat_id_arr_ids[10];
-						}
-						if($parent_name == 'furniture')
-						{
-							$cat_name 		= $cat_array_namings[6];
-							$cat_id 		= $cat_id_arr_ids[11];
-						}
-					  }
-						$cat_info 	= $data['name']."||".$data['entity_id']."||".$data['parent_id']."||".$data['path']."||".$data['level']."||".$data['children_count']."||".$amazon_id."||".$data['is_active'];
-						$prod_cat_ids = $cat_id.",".$data['entity_id'];
-						array_push($browsenodes_array,$amazon_id);
-						array_push($cat_array,$cat_name);
-						array_push($cat_id_arr,$prod_cat_ids);
-						array_push($sub_cat_name,trim($data['name']));
-					}
-				}
-			}
-		}
+	  die('Could not connect: ' . mysql_error());
 	}
-	echo gmdate('Y-m-d H:i:s')."----> Total magento sub categories : ".count($cat_array)." \n";
-	for($n=0;$n<count($cat_array);$n++)
+	$sql = "select * from query where parent_id!=2 and state='active'";
+	
+	mysql_select_db('rd_qmt');
+	$retval = mysql_query( $sql, $conn );
+	if(! $retval )
 	{
+	  die('Could not get data: ' . mysql_error());
+	}
+	$fh1	= fopen($base_url_magento.'amazon_import_products/sub_categories_query_count1.csv', 'w');
+	$rows = array();
+	while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
+	{	
+		$rows[$row['id']] = $row;
+	}
+	foreach($rows as $row)
+	{	
+		fwrite($fh1,$row['nodeid']."|".$row['categoryid']."|".$row['categoryname']."|".$row['manufacturer']."|".$row['brands']."|".$row['keywords']."|".$row['nodename']."|".$row['id'].PHP_EOL);
+		echo $row['nodeid']."|".$row['categoryid']."|".$row['categoryname']."|".$row['manufacturer']."|".$row['brands']."|".$row['keywords']."|".$row['nodename']." <br> ";	
+		$nodeid 		= $row['nodeid'];
+		$categoryid		= $row['categoryid'];
+		$parentid		= $row['parent_id'];
+		$categoryname	= $row['categoryname'];
+		$manufacturer	= $row['manufacturer'];
+		$brands			= $row['brands'];
+		$keyowrds		= $row['keywords'];
+		$nodename		= $row['nodename'];
+		$query_state	= 'inactive';
+
 		for($l=1;$l<=3;$l++)
 		{
 			$max_pages		= 10;
@@ -158,192 +90,97 @@
 				$minPrice 	= '165100';				// $1651
 				$maxPrice 	= '250000';				// $2500
 			}
-			$file_name		= "/opt/bitnami/apps/magento/htdocs/amazon_import_products/Video_Games.csv";
-			$file = fopen($file_name, 'r');													// Reading CSV file
-			$a=1;																		// Variable = 1 to omit 1st line(header) of CSV file
 			echo gmdate('Y-m-d H:i:s')."----> CSV processing started \n";
-			if($sub_cat_name[$n]=='Laptops' || $sub_cat_name[$n]=='Camera & Photo' || $sub_cat_name[$n]=='Video Game Consoles & Accessories' || $sub_cat_name[$n]=='Furniture')
+			$count_error	= '0';
+			$pageNum		= 1;
+			$lastPage 		= 10;
+			while($pageNum <= $lastPage)
 			{
-				while(($content = fgets($file)) !== FALSE)									// Reading file line by line
-				{ 	
-					if($a != '1')															// Leaving header line from csv file
-					{
-						$content_arr	= explode(",",$content);
-						echo " <br> Category : ".$content_arr[0]." <br> Manufacturer : ".$content_arr[1]." <br> Keywords :".$content_arr[2]." \n";
-						$Node_Name		= $content_arr[0];
-						if($Node_Name=='Laptops' && $sub_cat_name[$n]=='Laptops')										//Query For Laptop
-						{
-							$manufacturer 	= $content_arr[1];
-							$keywords		= $content_arr[3];
-						}
-						if($Node_Name=='Camera & Photo' && $sub_cat_name[$n]=='Camera & Photo')								//Query FOr Camera & Photo
-						{
-							$manufacturer 	= $content_arr[1];
-							$keywords		= $content_arr[3];
-						}
-						if($Node_Name=='Video Game Consoles & Accessories' && $sub_cat_name[$n]=='Video Game Consoles & Accessories')				//Query For Video Game Consoles & Accessories
-						{
-							$manufacturer 	= $content_arr[1];
-							$keywords		= $content_arr[3];
-						}
-						if($Node_Name=='Furniture' && $sub_cat_name[$n]=='Furniture')				//Query For Furniture
-						{
-							$manufacturer 	= $content_arr[1];
-							$keywords		= $content_arr[3];
-						}			
-						$count_error	= '0';
-						$pageNum		= 1;
-						$lastPage 		= 10;
-						echo " <br> Sub category name : ".$sub_cat_name[$n]." <br> category_name:".$cat_array[$n]." <br>";	
-						while($pageNum <= $lastPage)
-						{
-							$chk_exception		= '';
-			
-				/////*****\\\\\
-				echo gmdate('Y-m-d H:i:s')."----> Amazon Import Started for Title = ".$sub_cat_name[$n]." || Page No. = ".$pageNum." || Min Price = ".$minPrice." \n";
-				/////*****\\\\\
-															
-							try
-							{
-								$result = $obj->searchProducts($browsenodes_array[$n],$cat_array[$n],"BrowseNode",$pageNum,$manufacturer,$keywords,$minPrice,$maxPrice,$sub_cat_name[$n]);
-							}
-							catch(Exception $e)
-							{
-								$chk_exception = $e->getMessage();
-								
-				/////*****\\\\\
-				echo gmdate('Y-m-d H:i:s')."----> ".$chk_exception ." for: \n";
-				echo "Error Count - ".$count_error." || BN ID - ".$browsenodes_array[$n]." || Cat Name - ".$cat_array[$n]." || Page No. - ".$pageNum." || Min Price - ".$minPrice." || Max Price - ".$maxPrice."++++++++++++ \n";
-				/////*****\\\\\
-													
-								if($chk_exception == 'Invalid xml response.')
-								{
-									$count_error++;
-									if($count_error > 1)
-									{
-										$pageNum++;
-										$count_error = 0;
-									}
-								}
-								ob_flush();
-								sleep(2);
-								continue;
-							}
-							$TotalPages=$result->Items->TotalPages;
-							if($TotalPages < 10){$lastPage = $TotalPages;}
-				
-				/////*****\\\\\
-				echo gmdate('Y-m-d H:i:s')."----> Amazon Import Completed \n";
-				/////*****\\\\\
-							
-							if($chk_exception != ''){}
-							else
-							{
-				
-				/////*****\\\\\
-				echo gmdate('Y-m-d H:i:s')."----> XML to CSV Started \n";
-				/////*****\\\\\
-				
-								$csv_filename				= $cat_array[$n]."@".$cat_id_arr[$n]."@MainLoop".$n."@SubLoop".$l."@manufacturer".$manufacturer."@keywords".$keywords."@PageNum".$pageNum.".csv"; // xml to csv file name
-				$csv_filename	= preg_replace('/\s+/', '', $csv_filename);
-	
-				/////*****\\\\\
-				echo gmdate('Y-m-d H:i:s')."----> CSV File: ".$csv_filename." \n";
-				/////*****\\\\\
-				
-								$csv_file					= $base_url_magento."amazon_import_products/csv_file/".$csv_filename;		// xml to csv file full path
-								$fileconversion_response	= xml_to_csv_conversion($result,$csv_file);
-								$file_count++;
-				
-				/////*****\\\\\	
-				echo gmdate('Y-m-d H:i:s')."----> XML to CSV Completed \n";
-				/////*****\\\\\
-								$count_error = 0;
-								$pageNum++;				
-							}
-						}
-					}	$a++;		//IF $a Close
-				}					//End Of FILE Reading LOOP 		
-			}						//IF Sub-cat close
-			else
-			{
-				$count_error	= '0';
-				$pageNum		= 1;
-				$lastPage 		= 10;
-				$manufacturer	= "";
-				$keywords		= "";
-				echo " <br> Sub category name : ".$sub_cat_name[$n]." <br> category_name:".$cat_array[$n]." <br>";	
-				while($pageNum <= $lastPage)
-				{
-					$chk_exception		= '';
-	
-		/////*****\\\\\
-		echo gmdate('Y-m-d H:i:s')."----> Amazon Import Started for Title = ".$sub_cat_name[$n]." || Page No. = ".$pageNum." || Min Price = ".$minPrice." \n";
-		/////*****\\\\\
-													
-					try
-					{
-						$result = $obj->searchProducts($browsenodes_array[$n],$cat_array[$n],"BrowseNode",$pageNum,$manufacturer,$keywords,$minPrice,$maxPrice,$sub_cat_name[$n]);
-					}
-					catch(Exception $e)
-					{
-						$chk_exception = $e->getMessage();
-						
-		/////*****\\\\\
-		echo gmdate('Y-m-d H:i:s')."----> ".$chk_exception ." for: \n";
-		echo "Error Count - ".$count_error." || BN ID - ".$browsenodes_array[$n]." || Cat Name - ".$cat_array[$n]." || Page No. - ".$pageNum." || Min Price - ".$minPrice." || Max Price - ".$maxPrice."++++++++++++ \n";
-		/////*****\\\\\
-											
-						if($chk_exception == 'Invalid xml response.')
-						{
-							$count_error++;
-							if($count_error > 1)
-							{
-								$pageNum++;
-								$count_error = 0;
-							}
-						}
-						ob_flush();
-						sleep(2);
-						continue;
-					}
-					$TotalPages=$result->Items->TotalPages;
-					if($TotalPages < 10){$lastPage = $TotalPages;}
-		
-		/////*****\\\\\
-		echo gmdate('Y-m-d H:i:s')."----> Amazon Import Completed \n";
-		/////*****\\\\\
-					
-					if($chk_exception != ''){}
-					else
-					{
-		
-		/////*****\\\\\
-		echo gmdate('Y-m-d H:i:s')."----> XML to CSV Started \n";
-		/////*****\\\\\
-		
-						$csv_filename				= $cat_array[$n]."@".$cat_id_arr[$n]."@MainLoop".$n."@SubLoop".$l."@manufacturer_null".$manufacturer."@keywords_null".$keywords."@PageNum".$pageNum.".csv"; // xml to csv file name
-		$csv_filename	= preg_replace('/\s+/', '', $csv_filename);
+				$chk_exception		= '';
 
-		/////*****\\\\\
-		echo gmdate('Y-m-d H:i:s')."----> CSV File: ".$csv_filename." \n";
-		/////*****\\\\\
-		
-						$csv_file					= $base_url_magento."amazon_import_products/csv_file/".$csv_filename;		// xml to csv file full path
-						$fileconversion_response	= xml_to_csv_conversion($result,$csv_file);
-						$file_count++;
-		
-		/////*****\\\\\	
-		echo gmdate('Y-m-d H:i:s')."----> XML to CSV Completed \n";
-		/////*****\\\\\
-						$count_error = 0;
-						$pageNum++;				
+	/////*****\\\\\
+	echo gmdate('Y-m-d H:i:s')."----> Amazon Import Started for Title = ".$categoryname." || Page No. = ".$pageNum." || Min Price = ".$minPrice." \n";
+	/////*****\\\\\
+												
+				try
+				{
+					$result = $obj->searchProducts($nodeid,$nodename,"BrowseNode",$pageNum,$manufacturer,$brands,$keyowrds,$minPrice,$maxPrice,$nodename);
+					 if (isset($result->Items->Item->ItemAttributes->Title)){$query_state='active'; echo " \n ".$query_state." activated \n ";}
+				}
+				catch(Exception $e)
+				{
+					$chk_exception = $e->getMessage();
+					
+	/////*****\\\\\
+	echo gmdate('Y-m-d H:i:s')."----> ".$chk_exception ." for: \n";
+	echo "Error Count - ".$count_error." || BN ID - ".$nodeid." || Cat Name - ".$nodename." || Page No. - ".$pageNum." || Min Price - ".$minPrice." || Max Price - ".$maxPrice."++++++++++++ \n";
+	/////*****\\\\\
+										
+					if($chk_exception == 'Invalid xml response.')
+					{
+						$count_error++;
+						if($count_error > 1)
+						{
+							//deleterow($file_name,$a);
+							//$fh_zero_result = fopen($base_url_magento.'amazon_import_products/zero_result.csv', 'a');
+							//fwrite($fh_zero_result,$browsenodes_array[$n]."|".$cat_array[$n]."|".$pageNum."|".$manufacturer."|".$keywords."|".$minPrice."|".$maxPrice."|".$sub_cat_name[$n]."|".$csv_filename."|".$content."".PHP_EOL);
+							$pageNum++;
+							$count_error = 0;
+						}
 					}
-				}				//Page loop End
-			}	
-		} 				
-	}											
-	$fh				= fopen($base_url_magento.'amazon_import_products/csv_file/sub_categories.txt', 'w');
+					ob_flush();
+					sleep(2);
+					continue;
+				}
+				$TotalPages=$result->Items->TotalPages;
+				if($TotalPages < 10){$lastPage = $TotalPages;}
+	
+	/////*****\\\\\
+	echo gmdate('Y-m-d H:i:s')."----> Amazon Import Completed \n";
+	/////*****\\\\\
+				
+				if($chk_exception != ''){}
+				else
+				{
+	
+	/////*****\\\\\
+	echo gmdate('Y-m-d H:i:s')."----> XML to CSV Started \n";
+	/////*****\\\\\
+	
+					$csv_filename				= $nodename."@".$parentid.",".$categoryid."@MainLoop".$row['id']."@SubLoop".$l."@manufacturer".trim($manufacturer)."@brand".trim($brands)."@keywords".trim($keyowrds)."@PageNum".$pageNum.".csv"; // xml to csv file name
+	$csv_filename	= preg_replace('/\s+/', '', $csv_filename);
+
+	/////*****\\\\\
+	echo gmdate('Y-m-d H:i:s')."----> CSV File: ".$csv_filename." \n";
+	/////*****\\\\\
+	
+					$csv_file					= $base_url_magento."amazon_import_products/csv_file/".$csv_filename;		// xml to csv file full path
+					$fileconversion_response	= xml_to_csv_conversion($result,$csv_file);
+					echo gmdate('Y-m-d H:i:s')."----> NO of Result in a query: ".$fileconversion_response." \n";
+					/*if($fileconversion_response>10 || $fileconversion_response!=10){
+					$fh_morethan_ten = fopen($base_url_magento.'amazon_import_products/greater_than_ten_result.csv', 'a');
+					fwrite($fh_morethan_ten,$browsenodes_array[$n]."|".$cat_array[$n]."|".$pageNum."|".$manufacturer."|".$keywords."|".$minPrice."|".$maxPrice."|".$sub_cat_name[$n]."|".$fileconversion_response."|".$csv_filename."".PHP_EOL);}*/
+					$file_count++;
+					$count++;
+	
+	/////*****\\\\\	
+	echo gmdate('Y-m-d H:i:s')."----> XML to CSV Completed \n";
+	/////*****\\\\\
+					$count_error = 0;
+					$pageNum++;				
+				}
+			}
+		}
+		echo "resultant query summary : ".$query_state." \n ";
+		if($query_state=='inactive')
+		{
+			$sql = "UPDATE query SET state='inactive' WHERE id='".$row['id']."'";
+			$retval = mysql_query( $sql, $conn) or mysql_error();
+			echo " \n set state : ".$retval." \n ";
+		}
+	}
+	fclose($fh1);	
+	$fh	= fopen($base_url_magento.'amazon_import_products/csv_file/sub_categories.txt', 'w');
 	fwrite($fh,'False');
 	fclose($fh);
 	
