@@ -81,15 +81,15 @@ endif;
 ?>
 <!--RD-392 Start-->
 <?php   $cur_Url = $this->helper('core/url')->getCurrentUrl();
-   if(($cur_Url == 'http://retaildeal.biz/checkout/cart/') ||($cur_Url == 'http://retaildeal.biz/checkout/cart')) 
+   if(($cur_Url == 'https://www.retaildeal.biz/checkout/cart/') ||($cur_Url == 'https://www.retaildeal.biz/checkout/cart')) 
    {    
  ?>
-<link rel="canonical" href="http://demo.retaildeal.biz/checkout/cart/" />
+<link rel="canonical" href="https://www.retaildeal.biz/checkout/cart/" />
 <?php } 
 if(($cur_Url == 'http://retaildeal.biz/customer/account/login/') ||($cur_Url == 'http://retaildeal.biz/customer/account/login')) 
    {
 ?>
-<link rel="http://demo.retaildeal.biz/customer/account/login/" />
+<link rel="https://www.retaildeal.biz/customer/account/login/" />
 <?php } ?>
 <!--RD-392 END-->
 
@@ -101,9 +101,9 @@ if(($cur_Url == 'http://retaildeal.biz/customer/account/login/') ||($cur_Url == 
 <!-- Changes by liki ext -->
 <!-- Changes by Likiext Start -->
 <!-- Reason of Change: To defer parsing of javascript  -->
-<script type="text/javascript" src="http://retaildeal.biz/js/prototype/window.js" defer="defer"></script>
+<script type="text/javascript" src="https://www.retaildeal.biz/js/prototype/window.js" defer="defer"></script>
 <!-- Changes by Likiext End -->
-<link rel="shortcut icon" href="http://retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
+<link rel="shortcut icon" href="https://www.retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
 <script type="text/javascript">
 function showForm(id){
 	win = new Window({
@@ -190,8 +190,8 @@ function close_popup(){
 			  Action: 'ArrivesAtRD'
 			});	 
 			  }
-			};
-</script> 
+			}; 
+</script>  
 <?php
 }
 ?> <!-- End RD-404--> 
