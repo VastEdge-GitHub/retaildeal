@@ -106,7 +106,7 @@ textarea { width: 250px; }
 .page-head-alt h2 { font-size:24px; font-weight: normal; }
 
 /* layout */
-.page { width: auto; padding: 0; background: url(http://demo.retaildeal.biz/skin/frontend/argento/default/images/a1.jpg);
+.page { width: auto; padding: 0; );
 background-attachment: fixed;}
 .col3-layout .col-wrapper { width: 75%; }
 .col3-layout .col-right { width: 24%; }
@@ -123,7 +123,7 @@ background-attachment: fixed;}
 .main,
 .footer,
 .footer-toolbar,
-.footer-cms { padding: 0 5px; width: 960px; margin: 0 auto; border: none; font-family: Arial, Helvetica !important; background: #fff url(http://demo.retaildeal.biz/skin/frontend/argento/argento/images/footer_cms_container.gif) repeat-x 0 0; width:1000px;}
+.footer-cms { padding: 0 5px; width: 960px; margin: 0 auto; border: none; font-family: Arial, Helvetica !important; background: #fff url(http://demo.retaildeal.biz/skin/frontend/argento/argento/images/footer_cms_container.gif) repeat-x 0 0; }
 
 /* header */
 .top-toolbar .links li,
