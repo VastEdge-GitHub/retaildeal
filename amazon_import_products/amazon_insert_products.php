@@ -691,6 +691,8 @@
 											$amazon_use_categories 		= '0';							// 1 = True, 0 = False
 											
 											$meta_tag_robot				= '';							// 3 = INDEX,FOLLOW, 4 = INDEX,NOFOLLOW, 5 = NOINDEX,FOLLOW, 6 = NOINDEX,NOFOLLOW
+											if($prod_root_cat_id[0]=='4198'){$prod_root_cat_id[0]=$prod_root_cat_id[1];}
+											if($prod_root_cat_id[0]=='3564' && $prod_root_cat_id[1]=='3562'){$prod_root_cat_id[0]=$prod_root_cat_id[1];}
 											//// Calcualting Standard Shipping \\\\
 											$mag_catid_arr = array("3559","3560","3561","3562","3564","3565","3566","3567","3568","3569","3570");
 											switch ($prod_root_cat_id[0])
