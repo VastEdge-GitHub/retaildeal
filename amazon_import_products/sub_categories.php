@@ -104,7 +104,7 @@
 												
 				try
 				{
-					$result = $obj->searchProducts($nodeid,$nodename,"BrowseNode",$pageNum,$manufacturer,$brands,$keyowrds,$minPrice,$maxPrice,$nodename);
+					$result = $obj->searchProducts($nodeid,$nodename,"BrowseNode",$pageNum,$brands,$keyowrds,$minPrice,$maxPrice,$nodename);
 					 if (isset($result->Items->Item->ItemAttributes->Title)){$query_state='active'; echo " \n ".$query_state." activated \n ";}
 				}
 				catch(Exception $e)
