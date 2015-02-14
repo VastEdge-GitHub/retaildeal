@@ -1,3 +1,26 @@
+<!-- RD-432 ENDS--> 
+<?php
+	$root = Mage::getBaseDir();
+	require_once($root . "/lib/Segment.php");
+	class_alias('Segment', 'Analytics');
+	Analytics::init("0MU7nO4Tfu");
+	$cur_Url = $this->helper('core/url')->getCurrentUrl();
+	
+if(Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms')
+	{
+	  $page = Mage::getSingleton('cms/page')->getIdentifier();
+	}
+	if($page == 'home')
+	{
+ 		Analytics::track(array(
+		"userId" => "First Detected User",
+		"event" => "ArrivesAtServer", 
+		"properties" => array(
+		"action" => "ArrivesAtServer" 
+		 )));
+	}
+?>
+<!-- RD-432 ENDS-->
 <!-- Changes by Likiext Start -->
 <!-- Reason of Change: RD-214 To make liki popup resizable at mobile  -->
 <style>
