@@ -6,19 +6,38 @@
 	Analytics::init("t1i25nju6y");
 	$cur_Url = $this->helper('core/url')->getCurrentUrl();
 	
+	$u_id = rand().'utm';
+	$us_id = rand();
+		
 if(Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms')
 	{
 	  $page = Mage::getSingleton('cms/page')->getIdentifier();
 	}
 	if($page == 'home')
 	{
- 		Analytics::track(array(
-		"userId" => "ArrivesAtServer",
+		Analytics::track(array(
+		"userId" => $u_id,  
 		"event" => "ArrivesAtServer", 
 		"properties" => array(
-		"action" => "ArrivesAtServer" 
-		 )));
+		"action" => "ArrivesAtServer",
+		"Referrer" => " "
+		))); 
 	}
+			Analytics::alias(array(
+			"userId" => $u_id,
+			"previousId" => $us_id
+			));	
+		
+				Analytics::identify(array(
+				"userId" => $us_id,
+				"traits" => array(
+				"event" => "Free"
+				)));	
+		
+					Analytics::track(array(
+					"userId" => $us_id,
+					"event" => "Identified server"  
+					));	
 ?>
 <!-- RD-432 ENDS-->
 <!-- Changes by Likiext Start -->
