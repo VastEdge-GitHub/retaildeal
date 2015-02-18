@@ -2288,3 +2288,5 @@ position: relative;
         }
 
         /* <<< custom styles for About page  */
+.breadcrumbs a{ text-decoration:none;}
+.breadcrumbs a:hover{ color: #F60;}
