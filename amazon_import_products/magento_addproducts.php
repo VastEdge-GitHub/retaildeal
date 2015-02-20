@@ -13,7 +13,7 @@
 	echo gmdate('Y-m-d H:i:s')."----> Magento script started \n";
 	/////*****\\\\\
 	
-	$base_url_magento	= '/opt/bitnami/apps/magento/htdocs/';
+	$base_url_magento	= '/home/retail/public_html/';
     include($base_url_magento."amazon_import_products/amazon_api_class.php");
     include($base_url_magento."amazon_import_products/amazon_parse_xml.php");
 	include($base_url_magento."app/Mage.php");
