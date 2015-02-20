@@ -19,8 +19,22 @@ if(Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms')
 		"action" => "ArrivesAtServer" 
 		 )));
 	}
-?>
-<!-- RD-432 ENDS-->
+	Analytics::alias(array(
+		"userId" => $u_id,
+		"previousId" => $us_id
+		));	
+	Analytics::identify(array(
+		"userId" => $us_id,
+		"traits" => array(
+		"event" => "Free"
+		)));	
+	
+	Analytics::track(array(
+		"userId" => $us_id,
+		"event" => "Identified server"  
+		));	
+	 ?>
+<!-- RD-432 ENDS--> 
 <!-- Changes by Likiext Start -->
 <!-- Reason of Change: RD-214 To make liki popup resizable at mobile  -->
 <style>
