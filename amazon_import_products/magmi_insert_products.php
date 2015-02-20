@@ -7,7 +7,7 @@ error_reporting(E_ALL | E_STRICT);
 ob_implicit_flush(true);
 
 global $base_url_magento;
-$base_url_magento	= '/opt/bitnami/apps/magento/htdocs/';
+$base_url_magento	= '/home/retail/public_html/';
 /////*****\\\\\
 echo gmdate('Y-m-d H:i:s')."----> Magmi started \n";
 /////*****\\\\\
@@ -42,7 +42,8 @@ function add_magmi_products($flag_magmi)
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Magmi product insert started with flag ".$flag_magmi." \n";
 	/////*****\\\\\
-	shell_exec('sudo php '.$base_url_magento.'magmi/cli/magmi.cli.php -mode=create -profile=default');
+//	shell_exec('sudo php '.$base_url_magento.'magmi/cli/magmi.cli.php -mode=create -profile=default');
+shell_exec('/usr/bin/php '.$base_url_magento.'magmi/cli/magmi.cli.php -mode=create -profile=default');
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Magmi product completed \n";
 	/////*****\\\\\
@@ -172,7 +173,7 @@ fclose($fh);
 
 $url 		= Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
 $mail_data	= 'Total number of products within sub-categories is: '.$abc.'. Visit following link for more details: '.$url.'amazon_import_products/detail_products.php';
-shell_exec('echo "'.$mail_data.'" | mail -s \'Products Update\' upinder@essitco.com,vivek@essitco.com,vishal@essitco.com,manoj@essitco.com,kailash@vastedge.com');
+shell_exec('echo "'.$mail_data.'" | mail -s \'Magemojo Products Update\' upinder@essitco.com,vivek@essitco.com,vishal@essitco.com,manoj@essitco.com,kailash@vastedge.com'); 
 /////*****\\\\\
 echo gmdate('Y-m-d H:i:s')."----> Magmi completed \n";
 /////*****\\\\\
