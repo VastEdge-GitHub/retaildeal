@@ -173,6 +173,12 @@
 
                 <?php echo $this->getChildHtml('other');?>
 
+ <!--Start RD-482-->	<?php $attribute = $_product->getResource()->getAttribute('feature');  						
+				 if($attribute ->getFrontend()->getValue($_product)!='') { ?>  
+			   <div class="featur">  
+				<?php
+				  echo $attribute_value = $attribute ->getFrontend()->getValue($_product); }?>
+<!--ENDRD-482-->  </div>	
                 <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                     <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
                 <?php endif;?>
