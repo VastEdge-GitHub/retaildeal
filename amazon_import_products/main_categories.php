@@ -6,7 +6,7 @@
 	ob_implicit_flush(true);
 	
 	global $base_url_magento;
-	$base_url_magento = '/opt/bitnami/apps/magento/htdocs/';
+	$base_url_magento = '/home/retail/public_html/';
 	
 	echo gmdate('Y-m-d H:i:s')."----> Main Category Product Import Started \n";
 	
