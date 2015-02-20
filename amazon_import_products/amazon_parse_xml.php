@@ -493,7 +493,7 @@ function xml_to_csv_conversion($xml,$csv_filename)
 									}
 									else
 									{
-										$feature_string=$feature_string.", ".$subchild1;
+										$feature_string=$feature_string."~^".$subchild1; 
 									}
 									if($flag_for_feature==$feature_length_count)
 									{
@@ -503,7 +503,7 @@ function xml_to_csv_conversion($xml,$csv_filename)
 									}
 									$counter=12;
 								}
-								if($Feature=="ok" && $counter==11)
+								if($Feature=="ok" && $counter==11) 
 								{	
 									fwrite($f,"\"BLANK\"|");
 									$counter=12;
