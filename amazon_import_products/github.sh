@@ -1,3 +1,3 @@
-cd /opt/bitnami/apps/magento/retaildeal/
+cd /home/retail/retaildeal/
 git pull
-rsync -zvr --exclude '.git' --exclude '.gitignore' /opt/bitnami/apps/magento/retaildeal/ /opt/bitnami/apps/magento/htdocs/
+rsync -zvr --exclude '.git' --exclude '.gitignore' /home/retail/retaildeal/ /home/retail/public_html/
