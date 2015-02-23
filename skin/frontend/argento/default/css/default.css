@@ -2290,3 +2290,6 @@ position: relative;
         /* <<< custom styles for About page  */
 .breadcrumbs a{ text-decoration:none;}
 .breadcrumbs a:hover{ color: #F60;}
+
+.featur{ font-weight:bold;}
+.featur ul li {list-style:disc; font-weight:normal; margin-left:10px;} 
