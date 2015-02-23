@@ -597,7 +597,7 @@
 									$prod_price = preg_replace('/\s+/', ' ', trim($content_listprice));
 								} 																	
 							}
-							else{
+							else{ 
 								$prod_price = preg_replace('/\s+/', ' ', trim($content_offerprice));}
 			                
 							if($prod_price >= '50' && $prod_price <= '2500')
@@ -631,24 +631,28 @@
 											$product_cat_id		= $prod_categoryid;
 											$findme				= 'unlocked';
 											if($product_cat_id == '3651' && stripos($prod_name, $findme)===false)continue;
+											$findme1				= 'no contract';
+											if($product_cat_id == '3651' && stripos($prod_name, $findme1)===false)continue;
 											$prod_status		= '1';														// 1 = Enabled, 2 = Disabled
 											
 											$feature_string  = trim($content_arr[14]);  									// Feature add in products description
 											$feature_arr 	= explode("~^",$feature_string);
 											$feature_count	= count($feature_arr);
 											$feature   = '';
+											if(trim($feature_string)!= "")
+											 {
 											foreach ($feature_arr as $value) {
 											   $feature1 ="<li>".$value."</li>";
 											   $feature = $feature.$feature1;
-												}
+												 }
 											$feature = "<ul>".$feature."</ul>";  	
-																							
+											}											
 											$prod_desc			= preg_replace('/\s+/', ' ', trim($content_arr[43]));  // Product Description from EditorialReviews
 						
 											if($content_arr[9] != ''){
-												$prod_shortdesc = 'By '.preg_replace('/\s+/', ' ', trim($content_arr[9]));						// Brand
-												$prod_brand		= ucfirst(strtolower(preg_replace('/\s+/', ' ', trim($content_arr[9]))));		// Brand
-											}
+											$prod_shortdesc = 'By '.preg_replace('/\s+/', ' ', trim($content_arr[9]));						// Brand
+											$prod_brand		= ucfirst(strtolower(preg_replace('/\s+/', ' ', trim($content_arr[9]))));		// Brand
+										    }
 											else if($content_arr[18] != ''){
 												$prod_shortdesc = 'By '.preg_replace('/\s+/', ' ', trim($content_arr[18]));						// Manufacturer
 												$prod_brand		= ucfirst(strtolower(preg_replace('/\s+/', ' ', trim($content_arr[18]))));		// Manufacturer
@@ -661,8 +665,8 @@
 												$prod_shortdesc = '';
 												$prod_brand		= '';
 											}
-											$prod_tax_class		= '2';						//edite 15-Dec014 Replace 0 by 2 for make taxable 0 = None, 2 = Taxable Goods, 4 = Shipping
-											$prod_visibility	= '4';						// 1=Not Visible Individually, 2=Catalog, 3=Search, 4=Catalog and Search
+											$prod_tax_class		= '2';		//edite 15-Dec014 Replace 0 by 2 for make taxable 0 = None, 2 = Taxable Goods, 4 = Shipping
+											$prod_visibility	= '4';					// 1=Not Visible Individually, 2=Catalog, 3=Search, 4=Catalog and Search
 											$prod_typeid		= 'simple';
 											if($prod_qty > 0){$prod_instock	= '1';}			 // 0 = Out Of Stock, 1 = In Stock
 											else{$prod_instock	= '0';}
@@ -753,7 +757,7 @@
 												$liki_disc			= '15';														// 15%
 												$liki_price			= ($liki_disc/100)*$price_with_tax_shipping;				// LIKI price calculation
 												$liki_price			= number_format($liki_price, 2, '.', ',');					// Value upto 2 decimals
-												$monthly_price      =  $RD_price;                                       //liki price without $. use for amazon price in godata feed
+												$monthly_price      =  $RD_price;                                       //Main price without $. use for amazon price in godata feed
 												$liki_price			= "$".$liki_price;
 												$prod_likidesc		= "LeaseItKeepIt Price : ".$liki_price." per month";							
 												$new_sku			.= $prod_sku.",";			// Pushing all new SKUs in global variable to disable/delete old magento products
@@ -807,7 +811,7 @@
 														$old_rewrite_id		= $rowcheck_rewrite['url_rewrite_id'];
 														$custom_id			= $rowcheck_rewrite['id'];
 																								
-														echo gmdate('Y-m-d H:i:s')."----> Rewrite exists of product = ".$prod_sku." with URL Rewrite id = ".$old_rewrite_id." and Custom Rewrite id = ".$custom_id." \n";
+														echo gmdate('Y-m-d H:i:s')."----> Rewrite exists of product = ".$prod_sku." with URL Rewrite id = ".              																	$old_rewrite_id." and Custom Rewrite id = ".$custom_id." \n";
 														$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` = '".$old_rewrite_id."' ";
 														$rdel_rewriteid		= mysql_query($qdel_rewriteid);
 														$qdel_customid		= "delete from `custom_rewrite_check` where `id` = '".$custom_id."' ";
