@@ -1,26 +1,46 @@
 <!-- RD-432 ENDS--> 
 <?php
-	$root = Mage::getBaseDir();
+	$root = Mage::getBaseDir();	
 	require_once($root . "/lib/Segment.php");
 	class_alias('Segment', 'Analytics');
-	Analytics::init("t1i25nju6y");
-	$cur_Url = $this->helper('core/url')->getCurrentUrl();
-	
-if(Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms')
+	Analytics::init("t1i25nju6y");	
+
+	$a = $this->helper('core/url')->getCurrentUrl(); /** for utm facebook**/
+	$ar =explode('=',$a);
+	$arr = $ar[1];
+	$arrr = explode('&',$arr);
+	$ref = $arrr[0];              /** fecebook user**/
+		
+	$u_id = rand().'utm';
+	$us_id = rand();
+		
+if (strpos($a, '?utm_source=facebook') !== false) 
 	{
-	  $page = Mage::getSingleton('cms/page')->getIdentifier();
-	}
-	if($page == 'home')
-	{
- 		Analytics::track(array(
-		"userId" => "ArrivesAtServer",
+		Analytics::track(array(
+		"userId" => $u_id,  
 		"event" => "ArrivesAtServer", 
 		"properties" => array(
-		"action" => "ArrivesAtServer" 
-		 )));
+		"action" => "ArrivesAtServer",
+		"Referrer" => $ref
+		))); 
 	}
-?>
-<!-- RD-432 ENDS-->
+	Analytics::alias(array(
+		"userId" => $u_id,
+		"previousId" => $us_id
+		));	
+	Analytics::identify(array(
+		"userId" => $us_id,
+		"traits" => array(
+		"event" => "Free"
+		)));	
+	
+	Analytics::track(array(
+		"userId" => $us_id,
+		"event" => "Identified server"  
+		));	
+	 ?>
+<!-- RD-432 ENDS--> 
+
 <!-- Changes by Likiext Start -->
 <!-- Reason of Change: RD-214 To make liki popup resizable at mobile  -->
 <style type="text/css"> <!--RD-390-->
@@ -128,6 +148,10 @@ if(($cur_Url == 'http://retaildeal.biz/customer/account/login/') ||($cur_Url == 
 <!-- Changes by Likiext End -->
 <link rel="shortcut icon" href="https://www.retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
 <script type="text/javascript">
+
+
+ 
+
 function showForm(id){
 	win = new Window({
 		title: "Introducing LeaseItKeepIt",
@@ -178,7 +202,6 @@ function close_popup(){
  var state = document.readyState;
 	 if (state == 'interactive')
 	 {
-	 console.log("not loaded");
 	 }
 	 else if (state == 'complete')
 	 { 
@@ -205,7 +228,6 @@ function close_popup(){
 		 var state = document.readyState;
 			 if (state == 'interactive')
 			 {
-			 console.log("not loaded");
 			 }
 			 else if (state == 'complete')
 			 { 
@@ -217,4 +239,4 @@ function close_popup(){
 </script>  
 <?php
 }
-?> <!-- End RD-404--> 
+?> <!-- End RD-404-->
