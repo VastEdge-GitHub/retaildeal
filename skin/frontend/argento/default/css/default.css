@@ -12,6 +12,21 @@ body { background: #444; font: normal 12px/1.35em Arial, Helvetica; }
 body{font-family: Arial, Helvetica!important;}
 .page-popup { background: #fff; }
 
+
+/* breadcrums */
+
+.breadcrumbs a{ text-decoration:none;}
+.breadcrumbs a:hover{ color: #F17207;}
+
+
+
+
+/* p.availability.in-stock{ visibility:hidden !important;}
+ 
+ .availability.in-stock span{ visibility: hidden !important;} */
+
+/* .availability span{ visibility:hidden !important;} */
+
 /* Headings */
 h1, .h1            { font-size:24px; font-weight:normal; line-height:1.15; }
 h2, .h2            { font-size:18px; font-weight:normal; line-height:1.25; }
@@ -45,7 +60,7 @@ button.btn-alt span { background:transparent url(../images/bkg_button.gif) 0 0 n
 /*button.btn-alt span span { background-position: 100% -340px; padding:0 12px 0 4px; }*/
 button.btn-alt span span { padding:0 10px 0 4px; }
 
-.strong { font-weight: bold; }
+/* .strong { font-weight: bold; } */
 
 .std ul.add-to-links { padding: 0; list-style: none; }
 .std .products-grid { padding: 0; list-style: none; }
@@ -100,7 +115,7 @@ textarea { width: 250px; }
 /*.page-title h1,
 .page-title h2 { font-size:2em; }*/
 .page-title h1,
-.page-title h2 { font-size:20px;font-family:Arial, Helvetica !important; }
+.page-title h2 { font-size:20px;font-family:Arial, Helvetica !important; margin-top:30px !important;}
 .page-head-alt { padding: 7px 0 8px; margin: 0 0 7px; }
 .page-head-alt h3,
 .page-head-alt h2 { font-size:24px; font-weight: normal; }
@@ -169,17 +184,23 @@ cms_prod: hover {color:#FF6633; }
 /* >>> top toolbar */
 
 /*.header-container { background: #fff; }*/
-.header-container { /*background: transparent margin-top:-10px; /* Old browsers */
+.header-container { background: #e2e2e2; /* Old browsers */
+background: transparent margin-top:-10px; /* Old browsers */
 /*background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%) !important;*/ /* FF3.6+ */
 /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)) !important;*/ /* Chrome,Safari4+ */
 /*background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%) !important;*/ /* Chrome10+,Safari5.1+ */
 /*background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%) !important;*/ /* Opera 11.10+ */
 /*background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%) !important;*/ /* IE10+ */
 /*background: linear-gradient(to bottom, #ffffff 0%,#f6f6f6 47%,#ededed 100%) !important;*/ /* W3C */
-/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ) !important;*/ /* IE6-9 */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ) !important;*/ /* IE6-9 */ 
 padding-top:0px !important;
 }
-.header { padding: 20px 5px; /*background:url(http://demo.retaildeal.biz/skin/frontend/argento/argento/images/footer_cms_container.gif) repeat-x 0 0 !important; width:1000px;*/}
+.header { padding: 20px 5px; /*background:url(http://demo.retaildeal.biz/skin/frontend/argento/argento/images/footer_cms_container.gif) repeat-x 0 0 !important; width:1000px;*/ background:transparent !important;}
+/* RD-420
+.header-container{ background: #F7F7F7 !important; }*/
+
+.searchautocomplete{ background:transparent !important;}
+
 
 .header-callout { float: left; }
 
@@ -461,6 +482,9 @@ border-radius: 10px 10px 10px 10px; }
 .col2-left-layout .products-grid,
 .col2-right-layout .products-grid { width: auto; }
 
+.featur{ font-weight:bold;}
+.featur ul li {list-style:disc; font-weight:normal; margin-left:10px;}     
+
 .product-name a { text-decoration: none; }
 .product-name a:hover { text-decoration: underline; }
 .products-grid { padding: 5px 0; }
@@ -534,7 +558,7 @@ border-radius: 10px 10px 10px 10px; }
 .product-view .product-shop .price-box .price,
 .product-view .product-shop .regular-price .price,
 .product-view .product-shop .price-from .price-label,
-.product-view .product-shop .price-to .price-label { font-weight: bold; }
+.product-view .product-shop .price-to .price-label { font-weight: bold; color:black !important;}
 
 .product-view .product-shop .tier-prices { clear: both; margin: 7px 0; padding: 7px 12px; background: #ffffff; border: 1px dotted #ddd; font-size: .9em; }
 .product-view .product-shop .tier-prices li { line-height: 1.7em; }
@@ -959,7 +983,7 @@ border-radius: 10px 10px 10px 10px; }
 .cart .shipping .form-list .input-box { width: auto; }
 .cart .shipping .form-list .input-text { width: 100%; }
 .cart .shipping .buttons-set { margin-top:5px; text-align:right; }
-.cart .totals { font-size:12px; font-size:12px; border: 1px solid #d4d4d4; border-radius: 5px; background: #f6f6f6; padding: 5px 10px; width: 23%; }
+.cart .totals { font-size:12px; font-size:12px; border: 1px solid #d4d4d4; border-radius: 5px; background: #f6f6f6; padding: 5px 10px; width: 23%; margin-bottom:5px; }
 .cart .totals #shopping-cart-totals-table { float: right; }
 .cart .totals .checkout-types { margin: 10px 0 0; }
 .cart .totals strong { font-size:14px; }
@@ -1574,7 +1598,8 @@ button.ajaxpro-continue-button span span,
 	..page{ width: 100%; }	
 	.block .block-title strong,
 	.block .block-title span { font-weight:500; color: #FFF; font-size:12px ; text-transform: uppercase;} 
-	.blog-search .input-text{ width: 90%;}  
+	.blog-search .input-text{ width: 90%;} 
+	.norton_img{  float:left; width:25% ; margin-top: -13% !important ;margin-left: 60% !important ; /* margin-top: -4%; margin-left:-45%; */} 
 }
 @media (max-width: 480px) {
 	/* Change made on 10 dec */
@@ -1584,7 +1609,8 @@ button.ajaxpro-continue-button span span,
 		margin-right:auto !important;
 		width:120px !important;
 	}
- 
+     
+    .footer-cms .footer-imgs{  margin-left:40% !important; }
    /* Change made on 10 dec end */
     img { max-width: 100%; width: auto; height: auto; }
 
@@ -1963,7 +1989,7 @@ float:left !important;
 margin:40px auto 6px 58px !important;
 width:170px !important;
 }
-.add-to-box .add-to-cart{width:100% !important;}
+.add-to-box .add-to-cart{width:100% !important; margin-top:-8px;}
 
 /* Liki page */
 .liki_intro_page p{line-height:1.8em !important;margin-bottom:20px !important;}
@@ -2230,6 +2256,8 @@ position: relative;
 	{
 		width:90% !important; 
 	}
+	
+	
 }
 /* <<< custom styles for About page  */
         .about-page-content .page-title-bordered { padding: 7px 0 6px; border-bottom: 1px solid #c9deef; color: #033862; }
@@ -2285,11 +2313,52 @@ position: relative;
             .about-page-content .arrow-title-bg .text { background: transparent; width: 100%; padding-bottom: 4px; border-bottom: 1px solid #023761; }
             .about-page-content .arrow-title-bg.title-orange .text { background: transparent; border-bottom: 1px solid #ff851e; }
             .about-page-content .arrow-title-bg p { padding: 0; color: #023761; }
+			/* .page-title h1, .page-title h2 { margin-top: 30px;}	 */		
+			
+			.footer-cms .footer-contacts{ width:100% !important; }
+			
         }
 
         /* <<< custom styles for About page  */
-.breadcrumbs a{ text-decoration:none;}
-.breadcrumbs a:hover{ color: #F60;}
 
-.featur{ font-weight:bold;}
-.featur ul li {list-style:disc; font-weight:normal; margin-left:10px;} 
+           .norton_img{  float:left; width:25% !important; margin-top: -3% ; margin-left:-20%;} 
+			 
+			 
+		@media(min-width:1000px) and (max-width:1920px)
+		{
+			.norton_img{  float:left; width:25% !important; margin-top: -4%; margin-left:-23%;}  
+		} 
+		
+		
+		@media(min-width:530px) and  (max-width:970px)
+		{
+			/* .norton_img{ margin-top: -4% !important; margin-left: -23% !important;}  */
+			.norton_img{ margin-top: -12% !important ;margin-left: 60% !important ;} 
+		} 
+		
+	 /*  @media(min-width:530px) and (max-width:860px) 
+		{
+			.norton_img{ margin-top: -15% !important;margin-left: 60% !important;}
+		}  */
+		
+		.norton_img{ margin-top: -4%;  margin-left: -22%; } 		
+
+/*RD-420 start*******************************************************************************************************
+.header-container{
+    height: 100px;
+    background: -webkit-linear-gradient(#D4D4D4, #EFEFEF,white) !important; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#D4D4D4, #EFEFEF ,white) !important; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#D4D4D4, #EFEFEF ,white) !important; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#D4D4D4, #EFEFEF ,white) !important; /* Standard syntax (must be last) 
+
+}  /*RD-420 end ***/
+
+@media only screen and (min-width:320px) and (max-width:480px) 
+{
+	.footer-cms .footer-imgs{ margin-left:40% !important; }
+	
+}
+
+
+
+
