@@ -94,6 +94,8 @@ ul,ol         { list-style:none; }
 /* ======================================================================================= */
 
 
+ 
+
 /* Layout ================================================================================ */
 .wrapper {}
 .page { width:1000px; margin:0 auto; padding:10px 0; text-align:left; }
@@ -1454,4 +1456,65 @@ text-indent: -9999px;}
 
 } 
 
+/*RD-460 start*/
+ .footer-cms-container .footer-cms .img2 table{
+	float: left;
+}
+@media only screen and (min-width: 176px) and (max-width: 466px){
+	.footer-cms .footer-contacts{
+		width:100% !important;
+		
+	}
+}
+@media only screen and(min-width: 480px) and (max-width: 320px)){
+	.footer-cms .footer-imgs{
+			/*float:left; */	 	
+			margin-left:40% !important; 	
+		}
+     .footer-cms .footer-contacts { width: 100% !important;
+	  }
+	  
+}
+@media only screen and(min-width: 320px) and (max-width: 480px)){
+	.footer-cms .footer-imgs{
+		float:left;
+		margin-left: 166px;
+		width: 23% !important; 
+	}
+	.footer-cms .footer-contacts { width: 100% !important;}
+}
+@media only screen and (min-width: 450px) and (max-width: 966px){
+	.footer-cms .footer-imgs{
+		width: 23% !important;
+		
+	}
+}
+@media only screen and (min-width: 267px) and (max-width: 450px){
+	.footer-cms .footer-imgs{
+		width: 35% !important;  
+	}
+}
+@media only screen (max-width: 266px){
+	.footer-cms .footer-imgs{
+		width: 45% !important;
+	}
+}
+
+@media only screen and (min-width: 176px) and (max-width: 420px){
+	.footer-cms .footer-imgs{
+	/*	padding-left: 35%;  */
+	}
+}
+@media only screen and (min-width: 420px) and (max-width: 466px){
+	.footer-cms .footer-imgs{
+		padding-left: 35% !important;
+	}
+}
+@media only screen and (width: 480px){
+	.add-to-box .norton_img{
+		padding-top: 10px !important;
+	}
+}
+
+/*RD-460 end*/
 

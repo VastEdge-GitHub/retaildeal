@@ -1,4 +1,6 @@
 <style>
+.free_shipping{ float: right; height: 18%; margin-bottom: -6%; margin-right:-15%; width: 30%;}
+
 @media (max-width: 480px)
  {
 	.chkout_btn { padding: 0 3px 0 3px !important; margin-left: -8px !important; }
@@ -6,7 +8,45 @@
 	.opc h2 { font-size: 9px !important; margin-left: -5px !important; margin-right: 16px !important; }
 	.product-name { font-size: 0.8em !important; }
 	#chk_edit { font-size: 10px !important; padding-right: 0px !important; }
+	
+	.free_shipping { float: right; height: 18%; margin-bottom: -5%; margin-top:5px; width: 30%; margin-right: 0%; } 
 }
+@media (max-width: 860px){
+	.free_shipping { 
+	margin-right: -12%;
+	}
+}
+@media (max-width: 670px){
+	.free_shipping { 
+	margin-right: -5%;
+	}
+}
+@media (max-width: 385px){
+	.free_shipping { 
+	margin-right: 1%;
+	}	
+}
+@media (max-width: 320px){
+	.free_shipping { 
+	margin-right: 6%;
+	}	
+}
+@media (max-width: 245px){
+	.free_shipping { 
+	margin-right: 20%;
+	}	
+}
+@media (max-width: 180px){
+	.free_shipping { 
+	margin-right: 35%;
+	}	
+}
+@media (min-width: 200px) and (max-width: 480px){
+	.page-title .chckout { 
+	margin-top: 30px !important; 
+	}	
+}
+
 </style>
 <?php
 /**
@@ -35,7 +75,21 @@
  */
 ?>
 <div class="page-title">
-    <h1><?php echo $this->__('Checkout') ?></h1>
+    <h1 class="chckout" style="float:left"><?php echo $this->__('Checkout') ?></h1>
+	<div class="free_shipping">
+<!--Start RD-394-->
+    <!-- <img alt="free shipping" style="width:80%" src=" <?php //echo $this->getSkinUrl('images/norton_secure.png', array('_secure'=>true)) ?>"/> -->
+<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+<tr>
+<td width="135" align="center" valign="top">
+<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=demo.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
+<a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
+</tr>
+</table>
+    
+    
+ <!--END RD-394-->
+	</div>
 </div>
 <!-- Changes by liki ext start -->
 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
@@ -69,7 +123,7 @@
 		$custom_style_margin_text = '';
 	}
 	?>
-        <div class="step-title" <?php echo $custom_style_ht ?>>
+       <div class="step-title" <?php echo $custom_style_ht ?>>
             <span <?php echo $custom_style_margin_no ?> class="number"><?php echo $i ?></span>
             <h2 <?php echo $custom_style_margin_text ?>><?php echo $_stepInfo['label'] ?></h2>
             <a id="chk_edit" href="#"><?php echo $this->__('Edit') ?></a>
