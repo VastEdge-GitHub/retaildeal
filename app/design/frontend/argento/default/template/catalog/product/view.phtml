@@ -155,11 +155,8 @@
                         </div>
                         <!--LIKI price div ends-->
                 <?php endif ?>
-			<div class="or-purchase-for-text" style="float:left;width:105px;margin-top:11px;font-weight:bold;font-size:12px;font-family:Arial;">or purchase for</div>
-            
-          <!-- start RD-425 --> 
-              <?php echo $this->getChildHtml('product_type_data') ?>
-           <!-- end RD-425 -->
+				<div class="or-purchase-for-text" style="float:left;width:105px;margin-top:11px;font-weight:bold;font-size:12px;font-family:Arial;">or purchase for</div>
+                <?php echo $this->getChildHtml('product_type_data') ?>
 
                 <?php if (!$this->hasOptions()):?>
                     <div style="float: left;width: 100%;margin-top: 20px;text-align: right; " class="add-to-box">
@@ -170,12 +167,11 @@
                             <img alt="norton_img" class="norton_img" src=" <?php //echo $this->getSkinUrl('images/norton_secure.png', array('_secure'=>true)) ?>"/>  -->
                            <div class="norton_img">
                            <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
-<tr>
-<td width="135" align="center" valign="top">
-<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=demo.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
-<a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
-</tr>
-</table>
+	<tr>
+	<td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
+	<a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
+	</tr>
+	</table> 
                            
                            
                            </div>
@@ -284,7 +280,7 @@
     </div>
 </div>
 <?php $custom_description = $this->getProduct()->getDescription(); ?>
-<?php $custom_description_content = $this->helper('catalog/output')->productAttribute($this->getProduct(), $custom_description, 'description'); ?> 
+<?php $custom_description_content = $this->helper('catalog/output')->productAttribute($this->getProduct(), $custom_description, 'description'); ?>
 <!-- Changes by LIKI Ext Starts
 	Reason of Change: Changes made to add Product Description -->
 <script type="text/javascript" src="/amazon_import_products/js/htmlparser.js"></script>
