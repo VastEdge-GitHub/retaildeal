@@ -24,20 +24,7 @@ if (strpos($a, '?utm_source=facebook') !== false)
 		"Referrer" => $ref
 		))); 
 	}
-	Analytics::alias(array(
-		"userId" => $u_id,
-		"previousId" => $us_id
-		));	
-	Analytics::identify(array(
-		"userId" => $us_id,
-		"traits" => array(
-		"event" => "Free"
-		)));	
 	
-	Analytics::track(array(
-		"userId" => $us_id,
-		"event" => "Identified server"  
-		));	
 	 ?>
 <!-- RD-432 ENDS--> 
 
