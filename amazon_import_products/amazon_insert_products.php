@@ -630,9 +630,11 @@
 											else{$prod_categoryid = $prod_root_cat_id[1];}									// Sub Category
 											$product_cat_id		= $prod_categoryid;
 											$findme				= 'unlocked';
-											if($product_cat_id == '3651' && stripos($prod_name, $findme)===false)continue;
-											$findme1				= 'no contract';
-											if($product_cat_id == '3651' && stripos($prod_name, $findme1)===false)continue;
+											$findme1			= 'no contract';
+											if($product_cat_id == '3651')
+											{
+												if(stripos($prod_name, $findme)===false && stripos($prod_name, $findme1)===false)continue;
+											}
 											$prod_status		= '1';														// 1 = Enabled, 2 = Disabled
 											
 											$feature_string  = trim($content_arr[14]);  									// Feature add in products description
