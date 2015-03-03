@@ -558,7 +558,7 @@ border-radius: 10px 10px 10px 10px; }
 .product-view .product-shop .price-box .price,
 .product-view .product-shop .regular-price .price,
 .product-view .product-shop .price-from .price-label,
-.product-view .product-shop .price-to .price-label { font-weight: bold; color:black !important;}
+.product-view .product-shop .price-to .price-label { font-weight: bold; color:black !important; margin-top: 11.5px;}
 
 .product-view .product-shop .tier-prices { clear: both; margin: 7px 0; padding: 7px 12px; background: #ffffff; border: 1px dotted #ddd; font-size: .9em; }
 .product-view .product-shop .tier-prices li { line-height: 1.7em; }
