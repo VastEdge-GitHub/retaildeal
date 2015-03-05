@@ -482,7 +482,7 @@ border-radius: 10px 10px 10px 10px; }
 .col2-left-layout .products-grid,
 .col2-right-layout .products-grid { width: auto; }
 
-.featur{ font-weight:bold;}
+.featur{ float: left; font-weight:bold;}
 .featur ul li {list-style:disc; font-weight:normal; margin-left:10px;}     
 
 .product-name a { text-decoration: none; }
