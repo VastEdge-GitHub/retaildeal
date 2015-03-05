@@ -554,7 +554,7 @@ border-radius: 10px 10px 10px 10px; }
 /*.product-view .product-shop .availability { font-size: .9em; margin: 7px 0; }*/
 .product-view .product-shop .availability { font-size: 12px; margin: 7px 0; }
 
-.product-view .product-shop .price-box { float: left; margin: 0 20px 7px 0; font-size: 1.5em; }
+.product-view .product-shop .price-box { margin: 0 20px 7px 0; font-size: 1.5em; /* float: left; */} /**  RD-558 comment float left **/
 .product-view .product-shop .price-box .price,
 .product-view .product-shop .regular-price .price,
 .product-view .product-shop .price-from .price-label,
