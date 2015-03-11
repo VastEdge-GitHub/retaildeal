@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+        <LikiMode_Sales>
+            <version>1.0.0</version>
+        </LikiMode_Sales>
+    </modules>
+	
+	<global>
+	   <models>
+		  <sales>
+			<rewrite>
+			<service_quote>LikiMode_Sales_Model_Service_Quote</service_quote>
+			 </rewrite>
+		  </sales>
+	   </models>
+	</global>
+</config>
+
+
+

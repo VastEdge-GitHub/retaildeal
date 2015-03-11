@@ -1,9 +1,0 @@
-<?xml version = "1.0"?>
-   <config>
-      <modules>
-        <LikiextCatalog_catalog>
-            <active>true</active>
-            <codePool>local</codePool>
-         </LikiextCatalog_catalog>
-       </modules>
-    </config>
