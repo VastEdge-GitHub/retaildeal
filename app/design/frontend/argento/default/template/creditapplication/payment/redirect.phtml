@@ -9,8 +9,32 @@
  
 <?php
 // Get Liki Payment Details
-$likipayment = Mage::registry( 'likipayment' );?>
+$likipayment = Mage::registry( 'likipayment' );
 
+
+$no_of_products = count($likipayment['Order']['OrderItem']);
+//$product_sku = array();
+//$product_shipping = array();
+for($i=0;$i<$no_of_products;$i++)
+{
+	$sku = $likipayment['Order']['OrderItem'][$i]['ProductDefinition']['ReferenceID'];
+	$product_sku=$product_sku."^^^".$sku;
+	
+	//array_push($product_sku,$sku);
+	$prod             = Mage::getModel('catalog/product')->loadByAttribute('sku', $sku);
+	$product_name	  = $prod->getName();
+	$product_names 	  = $product_names."^^^".$product_name;
+	$shipping_value   = $prod->getFreeShipping();
+	$product_shipping =$product_shipping."^^^".$shipping_value;
+	//array_push($product_shipping,$shipping_value);
+}
+//echo $product_shipping;
+//print_r($product_sku);
+//print_r($product_shipping);
+//echo count($product_sku);
+//echo count($product_shipping);
+//print_r($likipayment);
+?>
 <div style="float:left;width:100%;">
     <div style="background: #eeeeee;background: -moz-linear-gradient(top, #eeeeee 0%, #d1d0d0 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#d1d0d0));background: -webkit-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);background: -o-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);background: -ms-linear-gradient(top, #eeeeee 0%,#d1d0d0 100%);	background: linear-gradient(to bottom, #eeeeee 0%,#d1d0d0 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#d1d0d0',GradientType=0 );padding:30px 0 38px 0;	margin-top:50px;text-align:center;border-radius:10px;font-weight:bold;margin-left: auto;box-shadow: 0 0 10px #888888;margin-right: auto;width: 420px;	border-radius: 10px;height:90px;">
     	<!--<div style="float:left;width:90px;">
@@ -20,7 +44,7 @@ $likipayment = Mage::registry( 'likipayment' );?>
     		<p style="text-align:justify;font-family:calibri;font-weight:bold;font-size:29px;margin: 0 0 35px 0;padding: 0;line-height: 20px;"><img width="30px" alt="Redirecting..." title="Redirecting..." src="/amazon_import_products/liki_img/loading_icon.gif" alt="" style="float:left;" /><span style="float:left;padding:3px 0 0 10px;">Processing...</span> <!--<a style="color:	#0029A3;text-decoration:underline;" href="javascript:document.likipayment.submit();">click here</a>--></p><br />
 			<p style="font-size:18px;text-align:justify;margin: 0;padding: 0;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif !important;font-weight:normal;line-height: 24px;">Don't click your Back button!</p>
             <p style="font-size:18px;text-align:justify;margin: 0;padding: 0;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif !important;font-weight:normal;line-height: 24px;">If you've been here for a while, <a style="color:	#0029A3;text-decoration:underline;" href="javascript:document.likipayment.submit();">click here</a></p>
-       </div>
+       </div> 
     </div>
 </div>
 <form name="likipayment" method="post" action="<?php echo $likipayment['liki_payment_url']; ?>">
@@ -31,19 +55,49 @@ $likipayment = Mage::registry( 'likipayment' );?>
 				document.onreadystatechange = function () {
 				var state = document.readyState;
 				 if (state == 'interactive')
-				 {
-					 analytics.track('Cart',{
+				   {
+					analytics.track('Cart',{
 					UserId: '<?php echo $customer_Id; ?>',
 					Action: 'PlacesOrder/StartsLeaseApplication'});
+						
+					var shipping_values = '<?php echo $product_shipping; ?>';
+					var product_names	= '<?php echo $product_names; ?>';
+					//alert(shipping_values);
+					var shipp_array = shipping_values.split("^^^");
+					var product_names_array = product_names.split("^^^");
+					var i;
+					//alert(shipp_array.length);
+					var a=0;
+					for(i=0;i<shipp_array.length;i++)
+					{
+						if(a!=0)
+						{
+							//alert(shipp_array[i]);
+							//alert(product_names_array[i]);
+							if(shipp_array[i]==1)
+							{ 
+							    analytics.track('zExperiment',{
+								ProductNames:product_names_array[i],
+								TestId:'RD-394',
+								Action: 'Experiment'}); 
+							}
+							if(shipp_array[i]==0 || shipp_array[i]=='')
+							{
+								analytics.track('zExperiment',{
+								ProductNames:product_names_array[i],
+								TestId:'RD-394',
+								Action: 'Control'});
+							}
+						}
+						a++;		
+					}
 				 }
-				 else if (state == 'complete')
+				 else if (state == 'complete') 
 				 {
-					 <!-- edite on 28--nov 014 mixapanel -->
-					 
+			 <!-- edite on 28--nov 014 mixapanel -->
 					console.log(4);
 				<!-- end here -->
 				  }
-				  
 				};
  			</script>
  <script type="text/javascript">
