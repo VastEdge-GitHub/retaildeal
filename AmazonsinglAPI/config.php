@@ -2,7 +2,7 @@
 	$custom_hostname="localhost";
 	$custom_username="bn_magento";
 	$custom_password="fbeee979d3";
-	$custom_dbName="bitnami_magento";
+	$custom_dbName="rd_qmt";
 	if($custom_conn=mysql_connect($custom_hostname,$custom_username,$custom_password)){
 		echo gmdate('Y-m-d H:i:s')."----> MySQL connection successful \n";
 	}
