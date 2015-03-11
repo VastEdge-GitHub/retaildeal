@@ -1,0 +1,9 @@
+<?xml version = "1.0"?>
+   <config>
+      <modules>
+        <LikiMode_Catalogsearch>
+            <active>true</active>
+            <codePool>local</codePool>
+         </LikiMode_Catalogsearch>
+       </modules>
+    </config>

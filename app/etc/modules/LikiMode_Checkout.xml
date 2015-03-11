@@ -1,0 +1,15 @@
+<?xml version = "1.0"?>
+   <config>
+      <modules>
+        <LikiMode_Checkout>
+            <active>true</active>
+            <codePool>local</codePool>
+         </LikiMode_Checkout>
+		 
+        <LikiMode_Sales>
+            <active>true</active>
+            <codePool>local</codePool>
+         </LikiMode_Sales>
+       </modules>
+    </config>
+

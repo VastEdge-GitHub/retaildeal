@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <LikiMode_USDisableRegions>
+            <version>1.0.0.0</version>
+        </LikiMode_USDisableRegions>
+    </modules>
+    <global>
+        <models>
+            <USDisableRegions>
+                <class>LikiMode_USDisableRegions_Model</class>
+            </USDisableRegions>
+            <directory_resource>
+                <rewrite>
+                    <region_collection>LikiMode_USDisableRegions_Model_Resource_Region_Collection</region_collection>
+                </rewrite>
+            </directory_resource>
+        </models>
+    </global>
+</config>
+

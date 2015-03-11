@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+        <LikiMode_Checkout>
+            <version>1.0.0</version>
+        </LikiMode_Checkout>
+    </modules>
+
+	<global>
+	   <blocks>
+		  <checkout>
+			<rewrite>
+			<onepage>LikiMode_Checkout_Block_Onepage</onepage>
+			<onepage_progress>LikiMode_Checkout_Block_Onepage_Progress</onepage_progress>
+			   <onepage_shipping>LikiMode_Checkout_Block_Onepage_Shipping</onepage_shipping>
+			    <onepage_abstract>LikiMode_Checkout_Block_Onepage_Abstract</onepage_abstract>
+			 </rewrite>
+		  </checkout>
+	   </blocks>
+	</global>
+	<frontend>
+		<routers>
+			<checkout>
+				<args>
+					<modules>
+						<LikiMode before="Mage_Checkout">LikiMode_Checkout</LikiMode>
+					</modules>
+				</args>
+			</checkout>
+		</routers>
+	</frontend>	
+</config>
+
+
+
+

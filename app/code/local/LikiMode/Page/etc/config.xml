@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+        <LikiMode_Page>
+            <version>1.0.0</version>
+        </LikiMode_Page>
+    </modules>
+	
+	
+	<global>
+	   <blocks>
+		  <page>
+			<rewrite>
+			   <html_header>LikiMode_Page_Block_Html_Header</html_header>
+			 </rewrite>
+		  </page>
+	   </blocks>
+	</global>
+</config>

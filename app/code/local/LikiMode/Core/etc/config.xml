@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+        <LikiMode_Core>
+            <version>1.0.0</version>
+        </LikiMode_Core>
+    </modules>
+	
+	<global>
+	   <models>
+		  <core>
+			<rewrite>
+			   <email_template>LikiMode_Core_Model_Email_Template</email_template>
+			 </rewrite>
+		  </core>
+	   </models>
+	</global>
+</config>

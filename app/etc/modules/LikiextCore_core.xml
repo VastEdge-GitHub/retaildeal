@@ -1,9 +1,0 @@
-<?xml version = "1.0"?>
-   <config>
-      <modules>
-        <LikiextCore_core>
-            <active>true</active>
-            <codePool>local</codePool>
-         </LikiextCore_core>
-       </modules>
-    </config>
