@@ -482,7 +482,7 @@ border-radius: 10px 10px 10px 10px; }
 .col2-left-layout .products-grid,
 .col2-right-layout .products-grid { width: auto; }
 
-.featur{ float: left; font-weight:bold;}
+.featur{ font-weight:bold; float:left; clear:both; /*margin-top: 5px; */ }
 .featur ul li {list-style:disc; font-weight:normal; margin-left:10px;}     
 
 .product-name a { text-decoration: none; }
@@ -558,7 +558,7 @@ border-radius: 10px 10px 10px 10px; }
 .product-view .product-shop .price-box .price,
 .product-view .product-shop .regular-price .price,
 .product-view .product-shop .price-from .price-label,
-.product-view .product-shop .price-to .price-label { font-weight: bold; color:black !important; margin-top: 11.5px;}
+.product-view .product-shop .price-to .price-label { font-weight: bold; color:black !important; margin-top: 11.5px;} 
 
 .product-view .product-shop .tier-prices { clear: both; margin: 7px 0; padding: 7px 12px; background: #ffffff; border: 1px dotted #ddd; font-size: .9em; }
 .product-view .product-shop .tier-prices li { line-height: 1.7em; }
@@ -1522,7 +1522,7 @@ button.ajaxpro-continue-button span span,
 
     .header { padding: 0 0 5px; }
     .header-container { padding: 10px 5px 5px; }
-    .header-container .header-cart { margin-top: 5px; }
+    .header-container .header-cart { margin-top: 5px;  }
     .header-container .form-search { margin-top: 9px; }
     .header-container .form-search input { width: 200px; }
     .autocomplete { max-width: 280px; }
@@ -1599,7 +1599,7 @@ button.ajaxpro-continue-button span span,
 	.block .block-title strong,
 	.block .block-title span { font-weight:500; color: #FFF; font-size:12px ; text-transform: uppercase;} 
 	.blog-search .input-text{ width: 90%;} 
-	.norton_img{  float:left; width:25% ; margin-top: -13% !important ;margin-left: 60% !important ; /* margin-top: -4%; margin-left:-45%; */} 
+	.norton_img{  float:left; width:25% ; margin-top: -20% !important; /* margin-top: -13% !important */ margin-left: 60% !important ; /* margin-top: -4%; margin-left:-45%; */} 
 }
 @media (max-width: 480px) {
 	/* Change made on 10 dec */
@@ -1654,7 +1654,7 @@ button.ajaxpro-continue-button span span,
     .header-container #mobile-search-toggle {
         background: url(../images/common.gif) no-repeat -305px -39px;
         width: 37px; height: 37px; overflow: hidden;
-        text-indent: -9999px; float: left;
+        text-indent: -9999px; float: left; 
     }
     .header-container #search_mini_form {display: none; float: left; clear: both; width: 100%; min-width: 310px; }
     .header-container #search_mini_form.shown { display: block; }
@@ -2256,8 +2256,6 @@ position: relative;
 	{
 		width:90% !important; 
 	}
-	
-	
 }
 /* <<< custom styles for About page  */
         .about-page-content .page-title-bordered { padding: 7px 0 6px; border-bottom: 1px solid #c9deef; color: #033862; }
@@ -2333,7 +2331,7 @@ position: relative;
 		@media(min-width:530px) and  (max-width:970px)
 		{
 			/* .norton_img{ margin-top: -4% !important; margin-left: -23% !important;}  */
-			.norton_img{ margin-top: -12% !important ;margin-left: 60% !important ;} 
+			.norton_img{ /* margin-top: -12% !important ; */ margin-top: -20% !important ;margin-left: 60% !important ;} 
 		} 
 		
 	 /*  @media(min-width:530px) and (max-width:860px) 
@@ -2341,7 +2339,8 @@ position: relative;
 			.norton_img{ margin-top: -15% !important;margin-left: 60% !important;}
 		}  */
 		
-		.norton_img{ margin-top: -4%;  margin-left: -22%; } 		
+		.norton_img{ /* margin-top: -4%;  margin-left: -22%;  margin-top: -16% !important; margin-left: 55% !important; */ 
+		float: right; margin-top: -2%; }  		
 
 /*RD-420 start*******************************************************************************************************
 .header-container{
@@ -2359,6 +2358,18 @@ position: relative;
 	
 }
 
+.norton_shipping {/* margin-top:15%; margin-bottom: 10px; */ width: 420px; margin-top: 15%; margin-bottom: 30px; }
 
 
 
+
+<!-- RD- 575 starts -->
+.norton_img1 {float: left; margin-top: -18%; } 
+
+@media only screen and (min-width:530px) and (max-width:1280px)
+{
+/* .norton_img {margin-top: -20% !important; }   */
+
+}
+
+<!-- RD- 575 ends -->
