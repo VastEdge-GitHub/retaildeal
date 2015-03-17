@@ -75,3 +75,20 @@
 </div>
 </div>
 <?php } ?>
+<!-- RD-573 -->
+<script type="text/javascript">
+ document.onreadystatechange = function () {
+ var state = document.readyState;
+	 if (state == 'interactive')
+	 {
+	 console.log("not loaded");
+	 }
+	 else if (state == 'complete')
+	  { 
+       analytics.track('ViewedCategoryPage', {
+	   CategoryName: '<?php echo $cat_name; ?>',  
+	   Action: 'ViewedCategoryPage'});
+	  }
+	};
+</script> 
+<!--End 573-->
