@@ -1,8 +1,8 @@
 <?php
-function xml_to_csv_conversion($xml,$csv_filename,$featred)
+function xml_to_csv_conversion($xml,$csv_filename,$featred,$top_seller)
 {
 	$f = fopen($csv_filename, 'w');
-
+	
 	$Asin_Tag_name="ASIN";
 	$DetailPageURL_Tag_name="DetailPageURL";
 	$technical_detail_Tag_name="Description";
@@ -47,9 +47,10 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred)
 	$IsEligibleForSuperSaverShipping_Tag_name="IsEligibleForSuperSaverShipping";
 	$CustomerReviews_Tag_name="CustomerReviews";
 	$EditorialReviews_Tag_name="EditorialReviews";
-	$feturedNo                = "Featured";  
+	$feturedNo                = "Featured"; 
+	$topseller				  ="Topseller"; 
 	
-	fwrite($f,$Asin_Tag_name."|".$DetailPageURL_Tag_name."|".$technical_detail_Tag_name."|".$All_offer_url_Tag_name."|".$SalesRank_Tag_name."|".$SmallImage_Tag_name."|".$MediumImage_Tag_name."|".$LargeImage_Tag_name."|".$Binding_Tag_name."|".$Brand_Tag_name."|".$CatalogNumberList_Tag_name."|".$Color_Tag_name."|".$EAN_Tag_name."|".$EANListElement_Tag_name."|".$Feature_Tag_name."|".$ItemDimensions_Tag_name."|".$Label_Tag_name."|".$ListPrice_Tag_name."|".$Manufacturer_Tag_name."|".$Model_Tag_name."|".$MPN_Tag_name."|".$NumberOfItems_Tag_name."|".$PackageDimensions_Tag_name."|".$PackageQuantity_Tag_name."|".$PartNumber_Tag_name."|".$ProductGroup_Tag_name."|".$ProductTypeName_Tag_name."|".$Publisher_Tag_name."|".$SKU_Tag_name."|".$Studio_Tag_name."|".$Title_Tag_name."|".$UPC_Tag_name."|".$Warranty_Tag_name."|".$LowestNewPrice_Tag_name."|".$TotalNew_Tag_name."|".$TotalCollectible_Tag_name."|".$TotalRefurbished_Tag_name."|".$OfferPrice_Tag_name."|".$AmountSaved_Tag_name."|".$PercentageSaved_Tag_name."|".$Availability_Tag_name."|".$IsEligibleForSuperSaverShipping_Tag_name."|".$CustomerReviews_Tag_name."|".$EditorialReviews_Tag_name."|".$feturedNo."|"); 
+	fwrite($f,$Asin_Tag_name."|".$DetailPageURL_Tag_name."|".$technical_detail_Tag_name."|".$All_offer_url_Tag_name."|".$SalesRank_Tag_name."|".$SmallImage_Tag_name."|".$MediumImage_Tag_name."|".$LargeImage_Tag_name."|".$Binding_Tag_name."|".$Brand_Tag_name."|".$CatalogNumberList_Tag_name."|".$Color_Tag_name."|".$EAN_Tag_name."|".$EANListElement_Tag_name."|".$Feature_Tag_name."|".$ItemDimensions_Tag_name."|".$Label_Tag_name."|".$ListPrice_Tag_name."|".$Manufacturer_Tag_name."|".$Model_Tag_name."|".$MPN_Tag_name."|".$NumberOfItems_Tag_name."|".$PackageDimensions_Tag_name."|".$PackageQuantity_Tag_name."|".$PartNumber_Tag_name."|".$ProductGroup_Tag_name."|".$ProductTypeName_Tag_name."|".$Publisher_Tag_name."|".$SKU_Tag_name."|".$Studio_Tag_name."|".$Title_Tag_name."|".$UPC_Tag_name."|".$Warranty_Tag_name."|".$LowestNewPrice_Tag_name."|".$TotalNew_Tag_name."|".$TotalCollectible_Tag_name."|".$TotalRefurbished_Tag_name."|".$OfferPrice_Tag_name."|".$AmountSaved_Tag_name."|".$PercentageSaved_Tag_name."|".$Availability_Tag_name."|".$IsEligibleForSuperSaverShipping_Tag_name."|".$CustomerReviews_Tag_name."|".$EditorialReviews_Tag_name."|".$feturedNo."|".$topseller."|"); 
 	
 	fwrite($f,"".PHP_EOL);
 	foreach($xml->Items->children() as $child)
@@ -95,6 +96,7 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred)
 							$MediumImage=1;
 							$LargeImage=1;
 							$All_Offers=1;
+
 							$Binding=1;
 							$Brand=1;
 							$CatalogNumberList=1;
@@ -853,9 +855,9 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred)
 										//echo "this is product description Editorial Review<br>".$comma_filter_content;
 										fwrite($f,$comma_filter_content."<br/>");
 										$EditorialReview=1;
-										$counter=36;
+										$counter=37;
 									  }
-								 if($subchild1->Source=="Amazon.com" && $flag_for_Editorial_Review==1 && $counter==36) 
+								 if($subchild1->Source=="Amazon.com" && $flag_for_Editorial_Review==1 && $counter==37) 
 										{
 											$comma_filter_content=$subchild1->Content;
 											//$comma_filter_content = trim(preg_replace('/\s\s+/', ' ', $comma_filter_content));
@@ -908,8 +910,8 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred)
 						}
 					}
 				}
-			 	fwrite($f,"{}".$featred);  
-				echo "featured = ".$featred."\n";
+				fwrite($f,"{}".$featred);  
+				fwrite($f,"{}".$top_seller);
 				fwrite($f,"".PHP_EOL);
 			}	
 			else

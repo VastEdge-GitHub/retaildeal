@@ -1,13 +1,11 @@
 <?php
 function xml_to_csv_conversion_browsenode_lookup($xml,$csv_file)
 {	
-	$f = fopen($csv_file, 'w');
-	
+	$f = fopen($csv_file, 'w');	
 	$Asin_Tag_name="ASIN";
 	fwrite($f,$Asin_Tag_name);
 	
-	fwrite($f,"".PHP_EOL);
-	
+	fwrite($f,"".PHP_EOL);	
 	foreach($xml->BrowseNodes->BrowseNode->TopItemSet->TopItem as $child)
 	{
 				foreach($child->children() as $child1)
@@ -19,7 +17,7 @@ function xml_to_csv_conversion_browsenode_lookup($xml,$csv_file)
 					}
 					
 				}
-	} 
+	}
 	fclose($f); 
 	return true;
 }
@@ -72,7 +70,7 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred,$top_seller)
 	$CustomerReviews_Tag_name="CustomerReviews";
 	$EditorialReviews_Tag_name="EditorialReviews";
 	$feturedNo                = "Featured";
-	$topseller				  ="Topseller";
+	$topseller				  ="Topseller";	
 	
 	fwrite($f,$Asin_Tag_name."|".$DetailPageURL_Tag_name."|".$technical_detail_Tag_name."|".$All_offer_url_Tag_name."|".$SalesRank_Tag_name."|".$SmallImage_Tag_name."|".$MediumImage_Tag_name."|".$LargeImage_Tag_name."|".$Binding_Tag_name."|".$Brand_Tag_name."|".$CatalogNumberList_Tag_name."|".$Color_Tag_name."|".$EAN_Tag_name."|".$EANListElement_Tag_name."|".$Feature_Tag_name."|".$ItemDimensions_Tag_name."|".$Label_Tag_name."|".$ListPrice_Tag_name."|".$Manufacturer_Tag_name."|".$Model_Tag_name."|".$MPN_Tag_name."|".$NumberOfItems_Tag_name."|".$PackageDimensions_Tag_name."|".$PackageQuantity_Tag_name."|".$PartNumber_Tag_name."|".$ProductGroup_Tag_name."|".$ProductTypeName_Tag_name."|".$Publisher_Tag_name."|".$SKU_Tag_name."|".$Studio_Tag_name."|".$Title_Tag_name."|".$UPC_Tag_name."|".$Warranty_Tag_name."|".$LowestNewPrice_Tag_name."|".$TotalNew_Tag_name."|".$TotalCollectible_Tag_name."|".$TotalRefurbished_Tag_name."|".$OfferPrice_Tag_name."|".$AmountSaved_Tag_name."|".$PercentageSaved_Tag_name."|".$Availability_Tag_name."|".$IsEligibleForSuperSaverShipping_Tag_name."|".$CustomerReviews_Tag_name."|".$EditorialReviews_Tag_name."|".$feturedNo."|".$topseller."|"); 
 	
@@ -123,6 +121,7 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred,$top_seller)
 							$Binding=1;
 							$Brand=1;
 							$CatalogNumberList=1;
+
 
 							$Color=1;
 							$EAN=1;
@@ -822,6 +821,7 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred,$top_seller)
 									$amountsaved=$subchild1->OfferListing->AmountSaved->Amount;
 									$percentage=$subchild1->OfferListing->PercentageSaved;
 									$availability=$subchild1->OfferListing->Availability;
+
 									$shipping=$subchild1->OfferListing->IsEligibleForSuperSaverShipping;
 									if($amountsaved==NULL || $amountsaved=="")
 									{
@@ -885,7 +885,7 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred,$top_seller)
 											$comma_filter_content=$subchild1->Content;
 											$comma_filter_content = preg_replace('/\s+/', ' ', trim($comma_filter_content)); 
 											 $comma_filter_content="$comma_filter_content\"";
-												fwrite($f,$comma_filter_content."|");
+												fwrite($f,$comma_filter_content);
 											$flag_for_Editorial_Review++;
 											$EditorialReview=1;
 											$counter=37;
@@ -928,11 +928,11 @@ function xml_to_csv_conversion($xml,$csv_filename,$featred,$top_seller)
 								}
 							}
 						}
-					} 
+					}
 				fwrite($f,"{}".$featred);  
 				fwrite($f,"{}".$top_seller);
-				
 				fwrite($f,"".PHP_EOL);
+					fwrite($f,"".PHP_EOL);
 				}	
 				else
 				{
