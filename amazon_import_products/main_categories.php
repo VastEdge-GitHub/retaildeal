@@ -146,7 +146,8 @@
 					$csv_file					= $base_url_magento."amazon_import_products/csv_file/".$csv_filename;		// xml to csv file full path
 					//echo file_put_contents($csv_file,print_r($result,true));echo " \n";
 				    $feturedNo					= 0;
-					$fileconversion_response	= xml_to_csv_conversion($result,$csv_file,$feturedNo);
+					$topseller					= 0;
+					$fileconversion_response	= xml_to_csv_conversion($result,$csv_file,$feturedNo,$topseller);
 					/*if($fileconversion_response>10 || $fileconversion_response!=10){
 					$fh_morethan_ten = fopen($base_url_magento.'amazon_import_products/greater_than_ten_result.csv', 'a');
 					fwrite($fh_morethan_ten,$browsenodes_array[$n]."|".$cat_array[$n]."|".$pageNum."|".$manufacturer."|".$keywords."|".$minPrice."|".$maxPrice."|".$cat_array[$n]."|".$fileconversion_response."|".$csv_filename."".PHP_EOL);}*/ 

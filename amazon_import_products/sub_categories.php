@@ -155,7 +155,9 @@
 	/////*****\\\\\
 	
 					$csv_file					= $base_url_magento."amazon_import_products/csv_file/".$csv_filename;		// xml to csv file full path
-					$fileconversion_response	= xml_to_csv_conversion($result,$csv_file);
+					$feturedNo					= 0;
+					$topseller					= 0;
+					$fileconversion_response	= xml_to_csv_conversion($result,$csv_file,$feturedNo,$topseller);
 					echo gmdate('Y-m-d H:i:s')."----> NO of Result in a query: ".$fileconversion_response." \n";
 					/*if($fileconversion_response>10 || $fileconversion_response!=10){
 					$fh_morethan_ten = fopen($base_url_magento.'amazon_import_products/greater_than_ten_result.csv', 'a');
