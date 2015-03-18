@@ -23,27 +23,128 @@
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+?> 
+<style>
+.sorter { border-left: none; border-right: none;}
+.tabs { 
+clear: both;
+float: left;
+width:100%;
+margin-top:-35px;
+padding-left:15px;
+border-bottom:1px solid #e1e1e1;
+}
+.tabs li{
+display: inline;
+list-style: none;
+ }
+.tabs li a{ 
+color: #414040;
+display: block;
+float:left;
+font-size: 14px;
+font-weight:bold;
+padding:12px 12px;
+background-color:#eee;
+border:1px solid #ddd;
+border-bottom:none;
+margin-bottom: -1px;
+text-decoration: none;
+border-radius: 5px 5px 0 0;
+} 
+.tabs .active li{ background:#fff; }
+
+.category-products .sorter .view-mode { display: none;}
+.toolbar .pager{display:none;}
+.toolbar .sorter { border: none;}
+.toolbar-bottom .tabs-view { display:none;}
+.sorter .sort-by { margin-right: -10px}
+.toolbar-bottom { margin-bottom: 10px;}
+.sorter { position: relative; z-index: 99999;} 
+.toolbar-bottom .sorter .view-mode { display: block;}
+.toolbar-bottom .toolbar .sorter { border: 1px solid #E6E6E7;}
+.toolbar-bottom .sorter .sort-by { margin-right: 0;}
+.toolbar-bottom .toolbar .pager { width: 99%; display: inline-block;}
+</style>
+
+<?php 
+$vmod = $_GET["mod"];
+if($vmod =='all')
+ {
 ?>
-<?php
+<style>
+.aal{ background:#fff !important;}
+.feturred{ background:#eee !important; }
+</style>
+<?php } else{ ?>
+<style>
+.feturred{ background:#fff !important;}
+.aal{ background:#eee !important;}
+</style>
+<?php } ?>
+
+<?php 
 /**
  * Product list template
  *
  * @see Mage_Catalog_Block_Product_List
  */
 ?>
-<?php
-    $_productCollection=$this->getLoadedProductCollection();
-    $_helper = $this->helper('catalog/output');
-?>
+ <?php 
+	$currentUrl = $this->helper('core/url')->getCurrentUrl();
+	$findme 	= 'catalogsearch/result/';
+	$findme2	= 'retaildeal.biz/?limit';
+	if(stripos($currentUrl, $findme) != false) 
+	{
+		$_productCollection=$this->getLoadedProductCollection(); 			
+	}
+	else
+	{
+		if(Mage::getBlockSingleton('page/html_header')->getIsHomePage() || (stripos($currentUrl, $findme2) != false)){   
+			$_productCollection=$this->getLoadedProductCollection();
+		}
+		else{
+			$viewmod = $_GET["mod"]; 
+			if($viewmod == 'featured' || $viewmod =='')
+			{
+				$cat_id = Mage::getModel('catalog/layer')->getCurrentCategory()->getId();
+				$_productCollection = Mage::getResourceModel('catalog/product_collection')
+				->addAttributeToFilter('featured', array('eq' => array(1)))
+				->addAttributeToSelect('*')
+				->addCategoryFilter(Mage::getModel('catalog/category')->load($cat_id));
+	
+			}
+			else
+			{
+				$_productCollection=$this->getLoadedProductCollection();
+			}
+		}
+	}
+	$this->getToolbarBlock()->setCollection($_productCollection);
+	$_helper = $this->helper('catalog/output');
+	$lazy_img = $this->getSkinUrl('images/mgt_lazy_image_loader/loader.gif');
+	$imag_helper = $this->helper('catalog/image');
+
+
+  ?>
 <?php if(!$_productCollection->count()): ?>
-<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<div class="category-products" style="margin-top:35px">
+    <?php echo $this->getToolbarHtml() ?>
+<br clear="all"/><p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+</div>
+
 <?php else: ?>
 <div class="category-products">
     <?php echo $this->getToolbarHtml() ?>
-    <?php echo $this->getAdditionalHtml() ?>
+   <?php echo $this->getAdditionalHtml() ?>
+	 
     <?php // List mode ?>
     <?php if($this->getMode()!='grid'): ?>
     <?php $_iterator = 0; ?>
+	
+<!--RD-515--->	
+	
+
     <ol class="products-list" id="products-list">
     <?php foreach ($_productCollection as $_product): ?>
         <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
@@ -94,13 +195,17 @@
     </ol>
     <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
 
-    <?php else: ?>
+      <?php else: ?>
 
-    <?php // Grid Mode ?>
+    <?php // Grid Mode ?> 
 
     <?php $_collectionSize = $_productCollection->count() ?>
     <?php $_columnCount = $this->getColumnCount(); ?>
-    <?php $i=0; foreach ($_productCollection as $_product): ?>
+	
+<!--RD-515--->	
+<!-- end RD-515--->
+    <?php $i=0; foreach ($_productCollection as $_product): ?>	
+
         <?php if ($i++%$_columnCount==0): ?>
         <ul class="products-grid">
         <?php endif ?>
