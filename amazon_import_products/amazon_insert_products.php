@@ -614,7 +614,7 @@
 										$prod_name 			= preg_replace('/\s+/', ' ', trim($content_arr[30]));			// Title
 										for($bl=0;$bl<count($blocklist_arr);$bl++)											// Checking Stop Word list
 										{								
-											if (stripos($prod_name,$blocklist_arr[$bl]) !== false)
+											if (strripos($prod_name,$blocklist_arr[$bl]) !== false)
 											{
 												$stopword_check = 1;
 												echo gmdate('Y-m-d H:i:s')."----> Stop = ".$stopword_check." for word (".$blocklist_arr[$bl].") for SKU (".$prod_sku.") \n";
@@ -641,7 +641,7 @@
 											$findme1			= 'no contract';
 											if($product_cat_id == '3651')
 											{	
-												if(stripos($prod_name, $findme)===false && stripos($prod_name, $findme1)===false)
+												if(strripos($prod_name, $findme)===false && strripos($prod_name, $findme1)===false)
 												{
 													echo gmdate('Y-m-d H:i:s')."----> Skipped due to Category id 3651 \n\n";
 													continue;
