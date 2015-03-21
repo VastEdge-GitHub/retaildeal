@@ -46,7 +46,7 @@
 
 	// Getting SKU of all products already stored in magento
 	// If these products are not found in current amazon feed then these products will be disabled
-	$products_sku	= Mage::getModel("catalog/product")->getCollection();	// Getting all products from magento
+	$products_sku	= Mage::getModel("catalog/product")->getCollection()->addAttributeToSelect('sku');	// Getting all products from magento
 	$all_sku		= '';
 	foreach ($products_sku as $product_sku)									// For each product
 	{
