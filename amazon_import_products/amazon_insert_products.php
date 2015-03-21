@@ -778,11 +778,18 @@
 													$build_image = true;
 												}
 												else{
+													$new_main_img_check		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$price.'_'.$prod_sku.'_liki.'.$prod_img_ext;	                                             //  Path of new LIKI image												
+													$amazon_raw_img_check		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_img_name.'_'.$price.'_'.$prod_sku.'.'.$prod_img_ext; 
+													$new_smail_img_check		= $base_url_magento.'amazon_import_products/liki_img/cache/'.$prod_smlimg_name.'_'.$price.'_'.$prod_sku.'_liki.'.$prod_smlimg_ext;
+													if(!file_exists($new_main_img_check) || !file_exists($amazon_raw_img_check) || !file_exists($new_smail_img_check))
+													{
+														$build_image = true;
+													}
 												}
 											}
 											$RD_price			= ceil($prod_price)-0.01;
 											if($prod_price <= '2500')
-											 {
+											{
 												$prod_tax = ($RD_price * 8.3)/100;											//Calculating tax price over amazon price
 												$price_with_tax_shipping = $prod_tax+$RD_price;							//Price included Tax and shipping
 												$liki_disc			= '15';														// 15%
@@ -889,13 +896,13 @@
 							
 												fwrite($mainfile_fh,'^admin^|^base^|^Default^|^simple^|^'.$prod_categoryid.'^|^'.$prod_sku.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_name,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_main_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_raw_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($new_smail_img,'"'),'"')).'^|^'.$prod_amazonprime.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_likidesc,'"'),'"')).'^|^'.$meta_tag_robot.'^|^'.$prod_price.'^|^'.$prod_weight.'^|^'.$standard_shipping.'^|^'.$prod_status.'^|^'.$prod_visibility.'^|^'.$prod_tax_class.'^|^'.$amazon_sync.'^|^'.$amazon_use_categories.'^|^'.$feature.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_desc,'"'),'"')).'^|^'.$prod_shortdesc.'^|^'.$amazon_local.'^|^'.$amazon_asin.'^|^'.$amazon_ean.'^|^'.$amazon_offer_condition.'^|^'.$amazon_offer_price_type.'^|^'.$amazon_offer_price.'^|^'.$amazon_offer_currency.'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_offers_list_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_product_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($amazon_reviews_url,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($liki_price,'"'),'"')).'^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($monthly_price,'"'),'"')).'^|^'.$prod_qty.'^|^0^|^1^|^0^|^0^|^0^|^1^|^10000^|^1^|^'.$prod_instock.'^|^1^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_name,'"'),'"')).'^|^0^|^simple^|^'.$prod_salesrank.'^|^'.$prod_brand.'^|^'.'Buy rent-to-own '.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_name,'"'),'"')).' now and pay later with affordable monthly payments. We stock up with more than 10,000 products from leading brands^|^'.str_replace($search_spcl_chars,$replace_spcl_chars,ltrim(rtrim($prod_name,'"'),'"')).',shop '.strtolower($category_Name).' on monthly installments, LIKI, rent to own, lease to own, buy now pay later, low monthly payments^|^'.$free_shipping.'^|^'.$featured.'^|^'.$bestseller.'^'.PHP_EOL);		
 												fclose($mainfile_fh);
-											}	// End of Stopword list check
-										}		// End of Product Qunatity check
-									}			// End of Weight loop
-								}				// End $2500 price check loop
-							}				// End of Price Range loop
-						}					// End of Shiping Detail products loop
-					}						// End of leaving header line loop
+											}	// Product Price < $2500	
+										}		// End of Stopword list check	
+									}			// End of Product Qunatity check	
+								}				// End of Weight loop
+							}					// End of Price Range loop
+						}						// End of Shiping Detail products loop
+					}							// End of leaving header line loop
 					$a++;
 				}							// End of file reading
 				return $prod_count;
