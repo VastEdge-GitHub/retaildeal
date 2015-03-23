@@ -20,8 +20,8 @@ $categories = $category->getCollection()
 <img src="<?php echo Mage::getBaseUrl('media')?>catalog/category/<?php echo $category->getThumbnail() ?>" alt="<?php echo $this->htmlEscape($category->getName()) ?>" />
 </div>
 <div style="float:right">
-<a href="<?php echo Mage::getBaseUrl();?>liki_prequalification">
-<img class="right_banner" src= "<?php echo$this->getSkinUrl('images/banner_right.png')?>" alt="Liki image" /></a>
+<a href="#">
+<img class="right_banner" src= "<?php echo$this->getSkinUrl('images/banner_right.png')?>" alt="Liki image" onclick="return showForm('liki_intro_popup')" /></a>
 </div>
 </div>
     <?php foreach ($categories as $category): ?>
