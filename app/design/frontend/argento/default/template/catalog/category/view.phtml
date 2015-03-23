@@ -61,7 +61,14 @@
     <?php echo $this->getProductListHtml() ?>
 
 <?php else: ?>
+
+<?php if($_category->getContentPage() ==1) {?>
+	<?php echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/category/contentpage.phtml')->toHtml(); ?>
+<?php } else{?>
+
     <?php echo $this->getProductListHtml() ?>
+<?php } ?>
+
 <?php endif; ?>
 <?php 
    $cat_id =$_helper->categoryAttribute($_category, $_category->getId(), 'id');
@@ -75,19 +82,20 @@
 </div>
 </div>
 <?php } ?>
+
 <!-- RD-573 -->
 <script type="text/javascript">
- document.onreadystatechange = function () {
- var state = document.readyState;
-	 if (state == 'interactive')
+ document.onreadyIsPageLoadedchange = function () {
+ var IsPageLoaded = document.readyIsPageLoaded;
+	 if (IsPageLoaded == 'interactive')
 	 {
-	 console.log("not loaded");
+		 console.log("not loaded");
 	 }
-	 else if (state == 'complete')
+	 else if (IsPageLoaded == 'complete')
 	  { 
-       analytics.track('ViewedCategoryPage', {
-	   CategoryName: '<?php echo $cat_name; ?>',  
-	   Action: 'ViewedCategoryPage'});
+		   analytics.track('ViewedCategoryPage', {
+		   CategoryName: '<?php echo $cat_name; ?>',  
+		   Action: 'ViewedCategoryPage'});
 	  }
 	};
 </script> 

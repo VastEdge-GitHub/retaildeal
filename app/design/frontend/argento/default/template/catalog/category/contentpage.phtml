@@ -1,0 +1,35 @@
+<style>
+.block-layered-nav{display:none; }
+.category-title{display: none;}
+.subcat_list{float:left;width:30%; margin-top: 30px; margin-left: 20px; margin-right: 3px; margin-bottom: 30px; display:block;}
+.cat_img img{float:left; width:528px; height:300px;}
+.spantitle{float:left; text-align:center; width:80%; margin-top: 8px;}
+.right_banner{height:300px; width:196px !important; margin:2px;} 
+.subcat_list span{float: left; width: 75%; margin-left: 20px; margin-top: 10px; font-weight :bold; font-size:14px; text-align:inherit;}
+</style>
+<div>
+<?php
+$category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$categories = $category->getCollection()
+        ->addAttributeToSelect(array('name', 'thumbnail'))
+        ->addAttributeToFilter('is_active', 1)
+        ->addIdFilter($category->getChildren())
+?>
+<div style="float: left; background: url('https://www.retaildeal.biz/skin/frontend/argento/argento/images/easyslider_bg.gif') no-repeat scroll 50% 100% rgb(255, 255, 255); width: 730px; height:340px;">
+<div class="cat_img">
+<img src="<?php echo Mage::getBaseUrl('media')?>catalog/category/<?php echo $category->getThumbnail() ?>" alt="<?php echo $this->htmlEscape($category->getName()) ?>" />
+</div>
+<div style="float:right">
+<a href="<?php echo Mage::getBaseUrl();?>liki_prequalification">
+<img class="right_banner" src= "<?php echo$this->getSkinUrl('images/banner_right.png')?>" alt="Liki image" /></a>
+</div>
+</div>
+    <?php foreach ($categories as $category): ?>
+      <div class="subcat_list">
+            <a href="<?php echo $category->getUrl() ?>">
+<img src="<?php echo Mage::getBaseUrl('media')?>catalog/category/<?php echo $category->getThumbnail()?>"alt="<?php echo $this->htmlEscape($category->getName())?>" width="180" height="180"/>
+     <span class="spantitle">
+	Shop <?php echo $category->getName() ?></span></a>
+        </div>
+    <?php endforeach; ?>
+</div>
