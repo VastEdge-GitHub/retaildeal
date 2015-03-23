@@ -165,8 +165,45 @@
                     </div>
                 <?php endif ?>
 
-                <?php echo $this->getChildHtml('other');?>
- 
+                <?php echo $this->getChildHtml('other');?>                
+                            
+      <!-- start RD-527 -->       
+                          <div class="norton_shipping"> 
+
+                       
+                     <!-- free-shipping image start -->           
+                <?php if($_product->getFreeShipping()) { ?>
+                <div class="free-shipping" style="margin-bottom:20px; float:left;" > <!-- style="margin-bottom:10px;margin-top:-20px;">  -->
+                <img alt="free-shipping" src="<?php echo $this-> getSkinUrl('images/free-shipping.jpg') ?>" />   
+                </div>
+     <!-- free-shipping image ends -->  
+     <!-- start RD-454 -->
+     <div class="norton_img"> 
+                           <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+<tr>
+<td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=demo.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
+<a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
+</tr>
+</table>
+                           </div>
+     <!-- end RD-454 -->
+        <?php }else  { ?>
+        
+          
+            <div class="norton_img1"> 
+                 <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+                 <tr>
+                <td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=demo.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
+                 <a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
+                </tr>
+                </table>
+             </div> 
+        <?php  } ?>
+    
+     
+ </div>    
+     <!-- start RD-527 -->
+      
  <!--Start RD-482--><?php $attribute = $_product->getResource()->getAttribute('feature');  						
 				 if($attribute ->getFrontend()->getValue($_product)!='') { ?>   
 			   <div class="featur">  
