@@ -139,7 +139,9 @@ if($vmod =='all')
             <?php // Product Image ?>
             <div class="prolabel-wrapper">
                 <?php echo Mage::helper('prolabels')->getLabel($_product, 'category'); ?>
-                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                <a href="<?php echo $_product->getProductUrl();
+                $_small_img_strip_tag = $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ;
+                 ?>" title="<?php echo $_small_img_strip_tag ?>" class="product-image"><img class="lazy" src="<?php echo $this->getSkinUrl('images/mgt_lazy_image_loader/loader.gif'); ?>" longdesc="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $_small_img_strip_tag ?>" /></a>
             </div>
             <?php if (Mage::helper('core')->isModuleOutputEnabled('TM_QuickShopping')) : ?>
                 <?php echo Mage::helper('quickshopping')->getViewButton($this->__('Quick View'), $_product, $this->getMode(), null, $_productCollection); ?>
@@ -148,7 +150,7 @@ if($vmod =='all')
             <div class="product-shop">
                 <div class="f-fix">
                     <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
-                    <p style="font-family:'Source Sans Pro',sans-serif; line-height:1.25" class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></p>
+                    <p style="font-family:'Source Sans Pro',sans-serif; line-height:1.25" class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_product->getName(); ?></a></p>
                     <?php echo $this->getPriceHtml($_product, true) ?>
                     <?php if($_product->isSaleable()): ?>
                         <p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
@@ -164,7 +166,7 @@ if($vmod =='all')
                         <?php endif; ?>
                     <?php endif; ?>
                     <div class="desc std">
-                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                        <?php echo $_product->getShortDescription(); ?>
                         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
                     </div>
                 </div>
@@ -191,8 +193,7 @@ if($vmod =='all')
 		<!-- Custom code added to shift description below MSRP and to remove Add To Cart button from list of products -->
             <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
                 <div class="prolabel-wrapper">
-                    <?php echo Mage::helper('prolabels')->getLabel($_product, 'category'); ?>
-                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" width="200px" height="200px" /></a>
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_small_img_strip_tag ?>" class="product-image"><img class="lazy" src="<?php echo $this->getSkinUrl('images/mgt_lazy_image_loader/loader.gif'); ?>" longdesc="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(200); ?>" alt="<?php echo $_small_img_strip_tag ?>" width="200px" height="200px" /></a>
                 </div>
                 <?php if (Mage::helper('core')->isModuleOutputEnabled('TM_QuickShopping')) : ?>
                     <?php echo Mage::helper('quickshopping')->getViewButton($this->__('Quick View'), $_product, $this->getMode(), null, $_productCollection); ?>
