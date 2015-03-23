@@ -11,8 +11,21 @@ $_url              = $this->getAjaxUrl();
 <!-- Changes Start for onpage SEO to remove html errors -->
 <style type="text/css">
 .nav .UI-NAV-INPUT{padding:0 !important}
-.searchautocomplete .nav {width:270px !important;}
+.searchautocomplete .nav {width:270px !important; /* RD-588 css*/ height:36px; float:left; background:#f6f6f6; /* RD-588 css  */}
 .UI-SEARCHAUTOCOMPLETE .nav-submit-button .search:hover {background-color: #E6791E !important}
+
+/* RD-588 css*/
+
+#search {width: 97%; opacity: 1; color: #7f7f7f;}
+.searchautocomplete-loader.UI-LOADER { display: none;}
+.search1 { background: url(/skin/frontend/argento/default/images/search_btn_trans.png);background-color: #ff851e; border-radius: 0px;height: 38px;
+  background-color: #ff851e; border-radius: 0px;height: 38px; width: 38px; height: 38px; padding: 0px 9px; margin: 0px;cursor: pointer;
+  font-weight: bold; color: white; line-height: 12px; font-size: 13px; border: 0px;}
+.searchautocomplete-placeholder.UI-PLACEHOLDER { display: none; position: relative; top: 42px; left: 0px;}
+  
+  
+/* RD-588 css*/
+
 </style>
 <!-- Changes for onpage SEO End -->
 <form style="position:inherit; width:315px; float:right; padding:15px 0 4px 20px; height:37px" class="searchautocomplete UI-SEARCHAUTOCOMPLETE" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get"
@@ -20,21 +33,19 @@ $_url              = $this->getAjaxUrl();
     data-url="<?php echo $_url ?>"
     data-minchars="<?php echo Mage::getStoreConfig('searchautocomplete/general/min_chars') ?>"
     data-delay="<?php echo Mage::getStoreConfig('searchautocomplete/general/delay') ?>">
-    <div class="nav" style="height:36px; float:left; background:#f6f6f6;">
+    <div class="nav">
         <div class="nav-input UI-NAV-INPUT" >
-            <input onkeyup="trim_search()" id="search" style="width: 97%;opacity: 1;color: #7f7f7f;" class="input-text UI-SEARCH" type="text" autocomplete="off" name="<?php echo $_helper->getQueryParamName() ?>" value="<?php echo $_helper->getEscapedQueryText() ?>" maxlength="<?php echo $_helper->getMaxQueryLength() ?>" />
+            <input onkeyup="trim_search()" id="search" class="input-text UI-SEARCH" type="text" autocomplete="off" name="<?php echo $_helper->getQueryParamName() ?>" value="<?php echo $_helper->getEscapedQueryText() ?>" maxlength="<?php echo $_helper->getMaxQueryLength() ?>" />
         </div>
-        <div class="searchautocomplete-loader UI-LOADER" style="display:none;"></div>
+        <div class="searchautocomplete-loader UI-LOADER"></div>
     </div>
     <div class="nav-submit-button">
-	<button class="search" style="background:url(/skin/frontend/argento/default/images/search_btn_trans.png);background-color: #ff851e; border-radius: 0px;height: 38px;background-color: #ff851e;border-radius: 0px;height: 38px;width: 38px;height: 38px;padding: 0px 9px;margin: 0px;cursor: pointer;font-weight: bold;color: white;line-height: 12px;
-font-size: 13px;
-border: 0px;" type="submit"></button>
+	<button class="search1" type="submit"></button>
        
     </div>
 	<!--LIKI Code Start
 		Reason : look & feel change-->
-    <div style="display: none; position:relative;top: 42px;left: 0px;" class="searchautocomplete-placeholder UI-PLACEHOLDER"></div>
+    <div class="searchautocomplete-placeholder UI-PLACEHOLDER"></div>
 	<!--LIKI Code End-->
 </form>
 

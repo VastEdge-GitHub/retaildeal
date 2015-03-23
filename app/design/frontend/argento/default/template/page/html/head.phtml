@@ -18,9 +18,9 @@ if (strpos($a, '?utm_source=facebook') !== false)
 	{
 		Analytics::track(array(
 		"userId" => $u_id,  
-		"event" => "ArrivesAtServer", 
+		"event" => "FacebookVisitorArrives", 
 		"properties" => array(
-		"action" => "ArrivesAtServer",
+		"action" => "FacebookVisitorArrives",
 		"Referrer" => $ref
 		))); 
 	}
@@ -44,6 +44,27 @@ if (strpos($a, '?utm_source=facebook') !== false)
 	.custom_inner_text{width:30px; !important}
 	.custom_popup_liki_img{width:100 !important;} 
 }
+
+
+<!-- RD-588 css -->
+ .footer-contacts{ float: left !important; width: 183px; }
+ul.icons { margin-top: 7px !important; margin-left: -6px !important;}
+li.facebook {float: left !important; margin-left: 5px !important;}
+li.twitter {float: left !important; margin-left: 5px !important;}
+li.pinterest {float: left !important; margin-left: 5px !important;}
+li.googleplus {float: left !important; margin-left: 5px !important;}
+.img1 { float: left !important; margin-top: 10px !important;}
+.img1 p { margin-top: 5px !important;}
+
+.custom_inner_text { float: left !important; width: 63% !important;}
+.custom_inner_text a {text-decoration: underline !important; font-weight: bold !important; color: #144f91 !important; font-size: 14px !important;}
+.leaseit {float:right !important; width: 35% !important;}
+.leaseit a { text-decoration: none; }
+.custom_popup_liki_img { float: right; margin: 30px 10px 0 20px;}
+.footer-contacts { float: left !important; width: 183px !important;}
+.footer-contacts .h6 { margin-top: 15px;}
+<!-- RD-588 css -->
+
 </style>
 <!-- Changes by Likiext End --> 
  <?php
@@ -111,15 +132,16 @@ endif;
 ?>
 <!--RD-392 Start-->
 <?php   $cur_Url = $this->helper('core/url')->getCurrentUrl();
-   if(($cur_Url == 'https://www.retaildeal.biz/checkout/cart/') ||($cur_Url == 'https://www.retaildeal.biz/checkout/cart')) 
+		$base_url = Mage::getBaseUrl();
+if(($cur_Url == $base_url.'checkout/cart/') ||($cur_Url == $base_url.'checkout/cart')) 
    {    
  ?>
-<link rel="canonical" href="https://www.retaildeal.biz/checkout/cart/" />
+<link rel="canonical" href="<?php echo $base_url; ?>checkout/cart/" />
 <?php } 
-if(($cur_Url == 'http://retaildeal.biz/customer/account/login/') ||($cur_Url == 'http://retaildeal.biz/customer/account/login')) 
+if(($cur_Url == $base_url.'customer/account/login/') ||($cur_Url == $base_url.'customer/account/login')) 
    {
 ?>
-<link rel="https://www.retaildeal.biz/customer/account/login/" />
+<link rel="canonical" rel="<?php echo $base_url; ?>customer/account/login/" />
 <?php } ?>
 <!--RD-392 END-->
 
@@ -131,9 +153,9 @@ if(($cur_Url == 'http://retaildeal.biz/customer/account/login/') ||($cur_Url == 
 <!-- Changes by liki ext -->
 <!-- Changes by Likiext Start -->
 <!-- Reason of Change: To defer parsing of javascript  -->
-<script type="text/javascript" src="https://www.retaildeal.biz/js/prototype/window.js" defer="defer"></script>
+<script type="text/javascript" src="<?php echo $base_url; ?>js/prototype/window.js" defer="defer"></script>
 <!-- Changes by Likiext End -->
-<link rel="shortcut icon" href="https://www.retaildeal.biz/js/prototype/windows/themes/default.css" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $base_url; ?>js/prototype/windows/themes/default.css" type="image/x-icon" />
 <script type="text/javascript">
 
 
@@ -186,11 +208,11 @@ function close_popup(){
 	 ?>
 <script type="text/javascript">
  document.onreadystatechange = function () {
- var state = document.readyState;
-	 if (state == 'interactive')
+ var IsPageLoaded = document.readystate;
+	 if (IsPageLoaded == 'interactive')
 	 {
 	 }
-	 else if (state == 'complete')
+	 else if (IsPageLoaded == 'complete')
 	 { 
 	 analytics.track('Visitor', {
 	 visitor: '<?php echo $visito_id; ?>',
@@ -200,30 +222,4 @@ function close_popup(){
 </script>
 <?php 
 	 }             // End here for mixpanel
-?>                                     
-<!-- RD-404 -->	
-	<?php
-		if(Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms')
-		{
-		  $page = Mage::getSingleton('cms/page')->getIdentifier();
-		}
-		if($page == 'home')
-		{
-	?>
-<script type="text/javascript">
-		 document.onreadystatechange = function () {
-		 var state = document.readyState;
-			 if (state == 'interactive')
-			 {
-			 }
-			 else if (state == 'complete')
-			 { 
-			  analytics.track('ArrivesAtRD', { 
-			  Action: 'ArrivesAtRD'
-			});	 
-			  }
-			}; 
-</script>  
-<?php
-}
-?> <!-- End RD-404-->
+?>

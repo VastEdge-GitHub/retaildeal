@@ -64,24 +64,14 @@
 
 .free-shipping{ margin-bottom:20px; float:left; }
 <!-- inline css  --->>
+<!-- RD-588 inline css  --->>
+#chkout_btn_id a span {float: left; margin-left: 8px; margin-top: 3px; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/amazon_import_products/liki_img/leaseit_keepit.png',sizingMethod='scale');}
+
+#chkout_btn_id a span img {width: 90%; margin-top: -5px; height: 47px;} /* RD-588  */
+.style_liki{ position:absolute; /*margin-left:85px; */ margin-top:-13px; width:470px; }
+<!-- RD-588 inline css  --->>
+
 </style>
-<!-- RD-404 -->
-<script type="text/javascript">
- document.onreadystatechange = function () {
- var state = document.readyState;
-	 if (state == 'interactive')
-	 {
-	 console.log("not loaded");
-	 }
-	 else if (state == 'complete')
-	 { 
-	  analytics.track('Arrives At Product Page', {  
-	  Action: 'Arrives At Product Page'
-	}); 	 
-	  }
-	};
-</script> 
-<!--End 404-->
 
 	<?php $_helper 		= $this->helper('catalog/output'); ?>
     <?php $_product 	= $this->getProduct();
@@ -138,24 +128,22 @@
                             $prod_price_new = $_product->getPrice();
                             $prod_price_new = explode(".",$prod_price_new);
                             $price_len = strlen($prod_price_new[0]);
-                            if($price_len == '2'){$style_liki_maindiv = 'style="position:absolute; /*margin-left:85px; */ margin-top:-13px; width:470px; "';}
-                            if($price_len == '3'){$style_liki_maindiv = 'style="position:absolute; /*margin-left:95px;*/ margin-top:-13px; width:470px; "';}
-                            if($price_len == '4'){$style_liki_maindiv = 'style="position:absolute; /*margin-left:115px;*/ margin-top:-13px; width:470px; "';}
+                            if($price_len == '2'){$style_liki_maindiv ;}
+                            if($price_len == '3'){$style_liki_maindiv ;}
+                            if($price_len == '4'){$style_liki_maindiv ;}
                         ?>
-                        <div <?php echo $style_liki_maindiv; ?>>
+                        <div class="style_liki" <?php echo $style_liki_maindiv; ?>>
                         	<div class="monthly-price-display">
-                                <span >	<?php echo $_product->getLikiPrice(); ?> </span>
+                                <span>	<?php echo $_product->getLikiPrice(); ?> </span>
                                 <span>/mo.</span>
                                 
                                 <div id="chkout_btn_id" onClick="return showForm('liki_intro_popup')">
 								<!--LIKI Code Start
 									Reason: text-decoration set none for anchor tag -->
-                                <a>
+                                <a> 
 								<!--LIKI Code End-->
-									<span style="float:left; margin-left:8px; margin-top:3px; width:90%; 
-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/amazon_import_products/liki_img/leaseit_keepit.png',sizingMethod='scale');">
-                      <img src="/amazon_import_products/liki_img/leaseitkeepit__Button_No_Background.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style=" margin-top: -5px; height: 47px;
-"/>
+						   
+<span> <img src="/amazon_import_products/liki_img/leaseitkeepit__Button_No_Background.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" />
                                     </span>
                                 	
 								</a>

@@ -1359,7 +1359,7 @@ text-indent: -9999px;}
  }
 
  .link_contacts{
-	margin-top: 0px;
+	margin-top: 0px !important; /* RD-588  */
  }
  
  	 

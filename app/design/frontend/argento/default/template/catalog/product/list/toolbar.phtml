@@ -31,6 +31,14 @@
  * @see Mage_Catalog_Block_Product_List_Toolbar
  */
 ?>
+
+<!-- RD-588 inline css  --->
+<style>
+.feturred{float:left;}
+.aal{float:left;}
+</style>
+<!-- RD-588 inline css  --->
+
 <?php if($this->getCollection()->getSize()): ?>
 <div class="toolbar">
     <div class="pager">
@@ -103,6 +111,7 @@
 	$currentUrl = $this->helper('core/url')->getCurrentUrl();
 	$findme   = 'catalogsearch/result/'; 
 	$findme2	= 'retaildeal.biz/?limit';
+	$findme4	='?utm';
 	if(stripos($currentUrl, $findme) !=false) 
 	{
 		//echo "search by pass toolbar1";  
@@ -110,7 +119,7 @@
 	else
 	{	
 	 	$is_homepage = Mage::getBlockSingleton('page/html_header')->getIsHomePage(); 
-		if($is_homepage || (stripos($currentUrl, $findme2) != false)){} 
+		if($is_homepage || (stripos($currentUrl, $findme2) != false) || stripos($currentUrl, $findme4) != false){} 
 		else
 		{
 			//for total number of products.
@@ -123,10 +132,10 @@
 							->addAttributeToFilter('featured', array('eq' => array(1)))
 							->getSize();
 ?>
-<div class="tabs-view"> 
+<div class="tabs-view">
 	<ul class="tabs">
-		<li><a class="feturred" style="float:left;" href ="?mod=featured">Featured(<?php  echo $products_feature; ?>)</a></li>
-		<li><a class="aal"style="float:left;" href ="?mod=all"> All(<?php  echo $products_count; ?>)</a></li>
+		<li><a class="feturred" href ="?mod=featured">Featured(<?php  echo $products_feature; ?>)</a></li>
+		<li><a class="aal" href ="?mod=all"> All(<?php  echo $products_count; ?>)</a></li>
 	</ul> 
 </div>
 <?php 

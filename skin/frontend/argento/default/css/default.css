@@ -1583,7 +1583,8 @@ button.ajaxpro-continue-button span span,
     .footer-cms .footer-links .h6 { margin-bottom: 4px; }
     .footer-cms .footer-links li { width: 49%; margin: 0;}
     .footer-cms .footer-links li ul { margin-bottom: 10px; }
-    .footer-cms .footer-contacts { float: right; width: 39%; }
+   /*RD-588  .footer-cms .footer-contacts { float: right; width: 39%; }  RD-588 */
+   
     .footer-cms .footer-contacts img { max-width: 100%; width: auto; height: auto; }
     .footer address { float: none; text-align: center; margin-bottom: 5px; }
     .footer .store-switcher { float: none; display: block; margin: 0 0 5px 0; }
@@ -1989,7 +1990,7 @@ float:left !important;
 margin:40px auto 6px 58px !important;
 width:170px !important;
 }
-.add-to-box .add-to-cart{width:100% !important; margin-top:-8px;}
+.add-to-box .add-to-cart{/* width:100% !important; */ margin-top:-8px;}
 
 /* Liki page */
 .liki_intro_page p{line-height:1.8em !important;margin-bottom:20px !important;}
