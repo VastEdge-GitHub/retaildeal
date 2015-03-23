@@ -52,6 +52,18 @@
 .product-view .product-shop .add-to-cart .qty { margin:3px 5px 0 0;height:19px;text-align:center;}
 .product-view .add-to-cart-wrapper{padding-left:0;}
 
+<!-- inline css  --->>
+.monthly-price-display { float: left; width: 100%; color: #000; font-size: 1.5em; font-weight: bold; }
+.monthly-price-display span { float:left; margin-top: 0;font-size:30px;font-weight:normal;  }
+#chkout_btn_id { float:left;;margin-left:-4px;margin-top:-2%; }
+#chkout_btn_id a {text-decoration:none; float:left;cursor:pointer; }
+
+
+.or-purchase-for-text{ float:left;width:105px;margin-top:11px;font-weight:bold;font-size:12px;font-family:Arial; }
+.add-to-box {float: left;width: 100%;margin-top: 20px;text-align: right; }
+
+.free-shipping{ margin-bottom:20px; float:left; }
+<!-- inline css  --->>
 </style>
 <!-- RD-404 -->
 <script type="text/javascript">
@@ -131,21 +143,20 @@
                             if($price_len == '4'){$style_liki_maindiv = 'style="position:absolute; /*margin-left:115px;*/ margin-top:-13px; width:470px; "';}
                         ?>
                         <div <?php echo $style_liki_maindiv; ?>>
-                        	<div class="monthly-price-display" style="float:left; width:100%; color: #000; font-size:1.5em; font-weight:bold;">
-                                <span  style="float:left; margin-top: 0;font-size:30px;font-weight:normal;">
-									<?php echo $_product->getLikiPrice(); ?>
-								</span>
-                                <span style="float:left; margin-top: 0;font-size:30px;font-weight:normal;">/mo.</span>
+                        	<div class="monthly-price-display">
+                                <span >	<?php echo $_product->getLikiPrice(); ?> </span>
+                                <span>/mo.</span>
                                 
-                                <div id="chkout_btn_id" style="float:left;background-repeat:no-repeat;height:40px;margin-left:12px;margin-top:-9px;" onClick="return showForm('liki_intro_popup')">
+                                <div id="chkout_btn_id" class="chkout_btn" onClick="return showForm('liki_intro_popup')">
 								<!--LIKI Code Start
 									Reason: text-decoration set none for anchor tag -->
-                                <a style="text-decoration:none; float:left; margin-top:6px;cursor:pointer;">
+                                <a>
 								<!--LIKI Code End-->
-								<span style="float:left; margin-left:8px; margin-top:3px; width:90%; 
+									<span style="float:left; margin-left:8px; margin-top:3px; width:90%; 
 filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/amazon_import_products/liki_img/leaseit_keepit.png',sizingMethod='scale');">
-                       			<img src="/amazon_import_products/liki_img/leaseitkeepit__Button_No_Background.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style=" margin-top: -5px; height: 47px;"/>
-                                 </span>
+                      <img src="/amazon_import_products/liki_img/leaseitkeepit__Button_No_Background.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style=" margin-top: -5px; height: 47px;
+"/>
+                                    </span>
                                 	
 								</a>
                                 </div>
@@ -154,51 +165,13 @@ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/amazon_import_pr
                         </div>
                         <!--LIKI price div ends-->
                 <?php endif ?>
-				<div class="or-purchase-for-text" style="float:left;width:105px;margin-top:11px;font-weight:bold;font-size:12px;font-family:Arial;">or purchase for</div>
+				<div class="or-purchase-for-text">or purchase for</div>
                 <?php echo $this->getChildHtml('product_type_data') ?>
 
                 <?php if (!$this->hasOptions()):?>
-                    <div style="float: left;width: 100%;margin-top: 20px;text-align: right; " class="add-to-box">
+                    <div class="add-to-box">
                         <?php if($_product->isSaleable()): ?>
                             <?php echo $this->getChildHtml('addtocart') ?>
-                          <!-- start RD-454 -->
-                         <!--   <div class="norton">
-                            <img alt="norton_img" class="norton_img" src=" <?php //echo $this->getSkinUrl('images/norton_secure.png', array('_secure'=>true)) ?>"/>  -->
-				    <!-- start RD-527 -->       
-                          <div class="norton_shipping"> 
-                     <!-- free-shipping image start -->           
-                <?php if($_product->getFreeShipping()) { ?>
-                <div class="free-shipping" style="margin-bottom:20px; float:left;" > <!-- style="margin-bottom:10px;margin-top:-20px;">  -->
-                <img alt="free-shipping" src="<?php echo $this-> getSkinUrl('images/free-shipping.jpg') ?>" />   
-                </div>
-     <!-- free-shipping image ends -->  
-     <!-- start RD-454 -->
-     <div class="norton_img"> 
-                           <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
-<tr>
-<td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
-<a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
-</tr>
-</table>
-                           </div>
-     <!-- end RD-454 -->
-        <?php }else  { ?>
-        
-          
-            <div class="norton_img1"> 
-                 <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
-                 <tr>
-                <td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
-                 <a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
-                </tr>
-                </table>
-             </div> 
-        <?php  } ?>
-    
-     
- </div>    
-     <!-- End RD-527 -->
-						
                         <?php endif; ?>
                     </div>
 					
