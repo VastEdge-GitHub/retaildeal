@@ -103,12 +103,7 @@
                     <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                 </div>
 
-                <?php if ($this->canEmailToFriend()): ?>
-                    <p class="email-friend"><a rel="nofollow" href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
-                <?php endif; ?>
 
-                <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-                <?php echo $this->getChildHtml('alert_urls') ?>
 
                 <?php if ($_product->getShortDescription()):?>
                     <div class="short-description">
@@ -259,7 +254,7 @@
         </div>
 <?php endforeach;?>
         <?php echo $this->getChildHtml('product_additional_data') ?>
-        <?php echo $this->getChildHtml('upsell_products') ?>
+
     </div>
 </div>
 <?php $custom_description = $this->getProduct()->getDescription(); ?>
