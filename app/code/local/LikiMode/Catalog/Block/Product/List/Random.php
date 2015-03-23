@@ -36,20 +36,20 @@ class LikiMode_Catalog_Block_Product_List_Random extends Mage_Catalog_Block_Prod
 {
     protected function _getProductCollection()
     {
-		if (is_null($this->_productCollection)) {
+        if (is_null($this->_productCollection)) {
 			$cache = Mage::getSingleton('core/cache');
 			$key = 'homepage-most-view-' . $storeId;
 			  if(! $data = $cache->load($key)){
 			$collection = Mage::getResourceModel('catalog/product_collection');      
 			Mage::getModel('catalog/layer')->prepareProductCollection($collection);
 			$collection->addAttributeToFilter('promotion', 1)->addStoreFilter();
-				  $data = serialize($collection);
-				  $cache->save(urlencode($data), $key, array("homepage_cache"), 60*60*24);
-			shuffle($collection); $this->_productCollection = $collection;  }
+		  $data = serialize($collection);
+		  $cache->save(urlencode($data), $key, array("homepage_cache"), 60*60*24);
+			shuffle($collection);
+			 $this->_productCollection = $collection;  }
 			  else{       $collection = unserialize(urldecode($data)); shuffle($collection);
 				  $numProducts = $this->getNumProducts() ? $this->getNumProducts() : 0;
-			$this->_productCollection = $collection; }
-        }
+			$this->_productCollection = $collection; }}
         return $this->_productCollection;
     }
 }
