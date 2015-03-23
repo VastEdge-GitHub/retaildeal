@@ -85,8 +85,8 @@
 
 <!-- RD-573 -->
 <script type="text/javascript">
- document.onreadyIsPageLoadedchange = function () {
- var IsPageLoaded = document.readyIsPageLoaded;
+ document.onreadystatechange = function () {
+ var IsPageLoaded = document.readystate;
 	 if (IsPageLoaded == 'interactive')
 	 {
 		 console.log("not loaded");
