@@ -84,13 +84,14 @@ if($vmod =='all')
 	$currentUrl = $this->helper('core/url')->getCurrentUrl();
 	$findme 	= 'catalogsearch/result/';
 	$findme2	= 'retaildeal.biz/?limit';
+	$findme4	='retaildeal.biz/??utm';
 	if(stripos($currentUrl, $findme) != false) 
 	{
 		$_productCollection=$this->getLoadedProductCollection(); 			
 	}
 	else
 	{
-		if(Mage::getBlockSingleton('page/html_header')->getIsHomePage() || (stripos($currentUrl, $findme2) != false)){   
+		if(Mage::getBlockSingleton('page/html_header')->getIsHomePage() || (stripos($currentUrl, $findme2) != false) || (stripos($currentUrl, $findme4) != false)){   
 			$_productCollection=$this->getLoadedProductCollection();
 		}
 		else{
