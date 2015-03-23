@@ -44,7 +44,7 @@
     <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
         <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
     <?php endif; ?>
-    <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+    <h1><?php echo $_category->getName() ?></h1>
 </div>
 
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
@@ -53,20 +53,23 @@
     <?php echo $_imgHtml ?>
 <?php endif; ?>
 
-<?php if($this->isContentMode()): ?>
-    <?php echo $this->getCmsBlockHtml() ?>
-
+<?php 
+$cmsBlock = $this->getCmsBlockHtml(); 
+$productList = $this->getProductListHtml();
+ 
+if($this->isContentMode()): ?>
+    <?php echo $cmsBlock ?>
 <?php elseif($this->isMixedMode()): ?>
-    <?php echo $this->getCmsBlockHtml() ?>
-    <?php echo $this->getProductListHtml() ?>
-
+    <?php echo $cmsBlock ?>
+	
+    <?php echo $productList ?>
 <?php else: ?>
 
 <?php if($_category->getContentPage() ==1) {?>
 	<?php echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/category/contentpage.phtml')->toHtml(); ?>
 <?php } else{?>
 
-    <?php echo $this->getProductListHtml() ?>
+    <?php echo $productList ?>	
 <?php } ?>
 
 <?php endif; ?>

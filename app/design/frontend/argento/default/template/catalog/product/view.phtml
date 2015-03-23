@@ -100,14 +100,13 @@
             <div class="product-shop-inner">
             <div itemscope itemtype="http://schema.org/Product">
                 <div class="product-name">
-                    <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <h1 itemprop="name"><?php echo $_product->getName(); ?></h1>
                 </div>
-
-
-
-                <?php if ($_product->getShortDescription()):?>
+                <?php 
+                $productShortDesc = $_product->getShortDescription();
+                if ($productShortDesc):?>
                     <div class="short-description">
-                        <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
+                        <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $productShortDesc, 'short_description') ?></div>
                     </div>
                 <?php endif;?>
 
