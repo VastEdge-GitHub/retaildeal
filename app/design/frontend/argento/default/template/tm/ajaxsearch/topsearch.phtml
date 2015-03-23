@@ -1,5 +1,7 @@
-<?php if (Mage::getStoreConfig('tm_ajaxsearch/general/enabled')) :?>
-<form id="search_mini_form" action="<?php echo $this->helper('catalogSearch')->getResultUrl() ?>" method="get">
+<?php 
+$catalogSearch = Mage::registry('catalog_search_helper'); //RD-581c
+if (Mage::getStoreConfig('tm_ajaxsearch/general/enabled')) :?>
+<form id="search_mini_form" action="<?php echo $catalogSearch->getResultUrl() ?>" method="get">
     <fieldset>
         <legend><?php echo $this->__('Search Site') ?></legend>
         <div class="mini-search form-search">
@@ -19,7 +21,7 @@
                 </script>
             <?php endif; ?>
 			<!-- Changes by LIKIExt Starts -->
-            <input onkeyup="trim_search()" id="search" type="text" class="input-text" name="<?php echo $this->helper('catalogSearch')->getQueryParamName() ?>" value="<?php echo Mage::getStoreConfig('tm_ajaxsearch/general/searchfieldtext'); ?>" />
+            <input onkeyup="trim_search()" id="search" type="text" class="input-text" name="<?php echo $catalogSearch->getQueryParamName() ?>" value="<?php echo Mage::getStoreConfig('tm_ajaxsearch/general/searchfieldtext'); ?>" />
 			<!-- Changes by LIKIExt Ends -->			
             <button type="button" title="<?php echo $this->__('Search') ?>" class="button"><span><span><?php echo $this->__('Search') ?></span></span></button>
         </div>

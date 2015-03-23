@@ -24,12 +24,11 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 $quote = Mage::getSingleton('checkout/session')->getQuote();
- //echo $quote->getItemsQty(); 
 function qty_check()
-{
-$itemsCollection = Mage::getSingleton('checkout/session')->getQuote()->getItemsCollection();
-$itemsVisible = Mage::getSingleton('checkout/session')->getQuote()->getAllVisibleItems();
-$items = Mage::getSingleton('checkout/session')->getQuote()->getAllItems(); 
+{	
+$itemsCollection = $quote->getItemsCollection();
+$itemsVisible = $quote->getAllVisibleItems();
+$items = $quote->getAllItems(); 
 foreach($items as $item) {
 	
 if($item->getQty()>1){return 1;}
@@ -132,9 +131,9 @@ function check_liki_price()
 			}
 		}
 	if(option_newcase_value == 'CreditApplication'){
-	var qty_check = '<?php $itemsCollection = Mage::getSingleton('checkout/session')->getQuote()->getItemsCollection();
-$itemsVisible = Mage::getSingleton('checkout/session')->getQuote()->getAllVisibleItems();
-$items = Mage::getSingleton('checkout/session')->getQuote()->getAllItems();
+	var qty_check = '<?php $itemsCollection = $quote->getItemsCollection();
+$itemsVisible = $quote->getAllVisibleItems();
+$items = $quote->getAllItems();
 $qty=0; 
 foreach($items as $item) {
 	
@@ -180,9 +179,9 @@ return false;
 <div class="buttons-set" id="payment-buttons-container">
 	<!--LIKI Code start Reason: RD-158 -->
     <?php
-	$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
-	$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
-	$path = $url->getPath();
+	$lastUrl = Mage::registry('last_url_var');
+	$url = Mage::registry('url_var');
+	$path = Mage::registry('path_var');
     if (preg_match("#/CreditApplication/Payment/cancel/#", $path)) {?>
 		<?php } else{?>
 		<!--Remove back link-->
@@ -219,9 +218,9 @@ return false;
 function test(id)
 {
 	<?php
-	$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
-	$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
-	$path = $url->getPath();
+	$lastUrl = Mage::registry('last_url_var');
+	$url = Mage::registry('url_var');
+	$path = Mage::registry('path_var');
     if (preg_match("#/CreditApplication/Payment/cancel/#", $path)) {?>
 		setTimeout(function(){
 		document.getElementById("opc-payment").className = "section allow";

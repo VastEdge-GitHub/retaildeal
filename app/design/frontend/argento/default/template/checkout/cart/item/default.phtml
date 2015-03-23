@@ -28,17 +28,18 @@
 $_item = $this->getItem();
 $isVisibleProduct = $_item->getProduct()->isVisibleInSiteVisibility();
 $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage_Catalog_Model_Product_Attribute_Source_Msrp_Type::TYPE_BEFORE_ORDER_CONFIRM);
+$proName = $this->htmlEscape($this->getProductName());
 ?>
 <li class="item">
-    <?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(180); ?>" width="90" height="90" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?>
+    <?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $proName ?>" class="product-image"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(180); ?>" width="90" height="90" alt="<?php echo $proName ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?>
     <div class="product-shop">
         <div class="f-fix">
             <div class="col-description">
                 <h2 class="product-name">
                 <?php if ($this->hasProductUrl()):?>
-                    <a href="<?php echo $this->getProductUrl() ?>"><?php echo $this->htmlEscape($this->getProductName()) ?></a>
+                    <a href="<?php echo $this->getProductUrl() ?>"><?php echo $proName ?></a>
                 <?php else: ?>
-                    <?php echo $this->htmlEscape($this->getProductName()) ?>
+                    <?php echo $proName ?>
                 <?php endif; ?>
                 <?php if ($isVisibleProduct): ?>
                     <small><a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo $this->__('Edit item parameters') ?>"><?php echo $this->__('Edit') ?></a></small>

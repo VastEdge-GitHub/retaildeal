@@ -34,9 +34,9 @@
 		<!--LIKI Code start
 			Reason: When user cancel the order it redirect to payment information tab then address should be filled so we have made changes here on the basis of last url.-->
 		<?php
-	$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
-	$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
-	$path = $url->getPath();
+	$lastUrl = Mage::registry('last_url_var');
+	$url = Mage::registry('url_var');
+	$path = Mage::registry('path_var');
 	if (preg_match("#/checkout/onepage/progress/#", $path) && $this->isStepComplete('payment'))  {  ?>
 	 <dt class="complete">
                 <?php echo $this->__('Billing Address') ?> <span class="separator">|</span>

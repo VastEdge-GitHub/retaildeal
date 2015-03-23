@@ -1,0 +1,46 @@
+<?php
+/**
+ * DO NOT REMOVE OR MODIFY THIS NOTICE
+ *
+ * EasyBanner module for Magento - flexible banner management
+ *
+ * @author Templates-Master Team <www.templates-master.com>
+ */
+?>
+
+<?php
+$title = $this->getTitle();
+$onclick = '';
+$options = '\'\'';
+if ($this->getTarget() == 'popup') {
+    $options = '\'width=600,height=400\'';
+}
+if ($this->getTarget() != 'self') {
+    $onclick = 'onclick="return !window.open(this.href, \'easybanners'.$this->getBannerId().'\', '.$options.')"';
+}
+
+$height = $this->getHeight();
+$width  = $this->getWidth();
+?>
+
+<a rel="nofollow" href="<?php echo $this->getUrl() . $this->getBannerUrl() ?>" title="<?php echo $title ?>" <?php echo $onclick ?>>
+<?php if(!$this->getResizeImage()): ?>
+    <?php
+    $style = '';
+    if (!empty($width)):
+        $style = 'width: ' . $width . 'px';
+    elseif (!empty($height)):
+        $style = 'height: ' . $height . 'px';
+    endif;
+    ?>
+    <img src="<?php echo $this->getImage() ?>" style="<?php echo $style ?>" alt="<?php echo $this->htmlEscape($title) ?>" />
+<?php else: ?>
+    <?php
+    $multiplier = 1;
+    if ($this->getRetinaSupport()) :
+        $multiplier = 2;
+    endif;
+    ?>
+    <img src="<?php echo $this->resizeImage($width * $multiplier, $height * $multiplier) ?>" width="<?php echo $width ?>"<?php echo $height ? " height='$height'" : '' ?> alt="<?php echo $this->htmlEscape($title) ?>" />
+<?php endif; ?>
+</a>

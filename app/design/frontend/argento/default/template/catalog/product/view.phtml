@@ -115,7 +115,9 @@
 
                 <div class="clearer"></div>
                 
-                <?php if (!$this->hasOptions() || !$_product->isSaleable()) : ?>
+                <?php 
+                $saleable =$_product->isSaleable();
+                if (!$this->hasOptions() || !$saleable) : ?>
                     <div class="add-to-cart-wrapper">
                     	<!--LIKI prcie div starts-->
 						<?php
@@ -152,7 +154,7 @@
 
                 <?php if (!$this->hasOptions()):?>
                     <div class="add-to-box">
-                        <?php if($_product->isSaleable()): ?>
+                        <?php if($saleable): ?>
                             <?php echo $this->getChildHtml('addtocart') ?>
                         <?php endif; ?>
                     </div>
@@ -160,7 +162,7 @@
                     <?php echo $this->getChildHtml('extra_buttons') ?> 
                 <?php endif; ?>
 
-                <?php if (!$this->hasOptions() || !$_product->isSaleable()) : ?>
+                <?php if (!$this->hasOptions() || !$saleable) : ?>
                     </div>
                 <?php endif ?>
 
@@ -210,10 +212,10 @@
 				  echo $attribute_value = $attribute ->getFrontend()->getValue($_product); ?>
 <!--ENDRD-482-->  </div>	
 					<?php } ?>
-				<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+				<?php if ($saleable && $this->hasOptions()):?>
                     <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
                 <?php endif;?>
-                <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php if ($saleable && $this->hasOptions()):?>
                     <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
                 <?php endif;?>
 

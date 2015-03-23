@@ -35,8 +35,10 @@
     <div class="page-title title-buttons">
         <h1><?php echo $this->__('Shopping Cart') ?></h1>
         <?php if(!$this->hasError()): ?>
-        <?php if($this->getContinueShoppingUrl()): ?>
-            <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue btn-alt" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+        <?php 
+        $shoppingUrl = $this->getContinueShoppingUrl();
+        if($shoppingUrl): ?>
+            <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue btn-alt" onclick="setLocation('<?php echo $shoppingUrl ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
         <?php endif; ?>
         <ul class="checkout-types">
         <?php foreach ($this->getMethods('top_methods') as $method): ?>
@@ -105,8 +107,8 @@
                     });
                 <?php endif; ?>
             </script>
-            <?php if(false && $this->getContinueShoppingUrl()): ?>
-                <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+            <?php if(false && $shoppingUrl): ?>
+                <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $shoppingUrl ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
             <?php endif; ?>
         </fieldset>
     </form>

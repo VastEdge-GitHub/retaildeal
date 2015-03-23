@@ -89,18 +89,6 @@
  <!--END RD-394-->
 	</div>
 </div>
-<!-- Changes by liki ext start -->
-<script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
-<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
-<?php
-    /*$lastUrl = Mage::getSingleton('core/session')->getLastUrl();
-	$url = Mage::getSingleton('core/url')->parseUrl($lastUrl);
-	$path = $url->getPath();
-    if (preg_match("#/CreditApplication/Payment/cancel/#", $path)) {
-        echo "<ul class=message style=margin-bottom:10px;><li class=error-msg><ul><li><span>LeaseItKeepIt was unable to finance this transaction for you. You can try again, or you can pay with a credit card.</span></li></ul></li></ul>";
-    }*/
-?>
-<!-- Changes by liki ext end -->
 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
 <ol class="opc" id="checkoutSteps">

@@ -33,19 +33,22 @@
 <?php
     $_product = $this->getProduct();
     $_helper = $this->helper('catalog/output');
+    $proLabel = Mage::helper('prolabels')->getLabel($_product, 'product'); //RD-581 c
+    Mage::register('product_label_variable', $proLabel); //RD-581 c
 ?>
 <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
 <!-- Changes by liki ext start -->
     <?php
-        $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+    $helperImg = $this->helper('catalog/image')->init($_product, 'image');
+    $escape = $this->htmlEscape($this->getImageLabel());
+        $_img = '<img id="image" src="'.$helperImg.'" alt="'.$escape.'" title="'.$escape.'" />';
         echo $_helper->productAttribute($_product, $_img, 'image');
     ?>
  <div class="prolabel-wrapper">
-  <?php echo Mage::helper('prolabels')->getLabel($_product, 'product'); ?>
+  <?php echo $proLabel; ?>
   <p class="product-image product-image-zoom">
 	<?php
-	$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" 
-                     alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+	$_img = '<img id="image" src="'.$helperImg.'" alt="'.$escape.'" title="'.$escape.'" />';
 	echo $_helper->productAttribute($_product, $_img, 'image');
 	?>
   </p>
@@ -72,15 +75,15 @@
 <?php else: ?>
 <!-- Changes by liki ext start -->
     <?php
-        $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+        $_img = '<img src="'.$helperImg->resize(265).'" alt="'.$escape.'" title="'.$escape.'" />';
         echo $_helper->productAttribute($_product, $_img, 'image');
     ?>
     <div class="prolabel-wrapper">
-	<?php echo Mage::helper('prolabels')->getLabel($_product, 'product'); ?>
+	<?php echo $proLabel; ?>
 	<!-- Changes by liki ext end -->
      <p class="product-image">
 	<?php
-	$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+	$_img = '<img src="'.$helperImg->resize(265).'" alt="'.$escape.'" title="'.$escape.'" />';
 	echo $_helper->productAttribute($_product, $_img, 'image');
 	?>
      </p>
