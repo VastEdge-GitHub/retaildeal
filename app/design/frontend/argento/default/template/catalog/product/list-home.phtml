@@ -1,0 +1,93 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<!-- RD-588 inline css  --->
+<style>
+.product-name{font-family:'Source Sans Pro',sans-serif; line-height:1.25; margin:10px 0 0 0; float:left; width:100%;}
+</style>
+<!-- RD-588 inline css  --->
+
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+	$imag_helper = $this->helper('catalog/image');
+?>
+<?php if(!count($_productCollection->getAllIds())): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<div class="category-products">
+    <?php $a= $this->getToolbarHtml(); echo $a; ?>
+    <?php //echo $this->getAdditionalHtml() ?>
+
+    <?php $_collectionSize = $_productCollection->count() ?>
+    <?php $_columnCount = $this->getColumnCount(); ?>
+    <?php $i=0; foreach ($_productCollection as $_product): ?>
+<?php Varien_Profiler::start('__LIST_ITEM'); ?>
+        <?php if ($i++%$_columnCount==0): ?>
+        <ul class="products-grid">
+        <?php endif ?>
+            <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+<?php $url = $_product->getProductUrl(); ?>
+<?php Varien_Profiler::start('__LIST_ITEM_IMG'); ?>
+	<?php $img = $imag_helper->init($_product, 'small_image'); ?>	
+<?php Varien_Profiler::stop('__LIST_ITEM_IMG'); ?>
+
+	<?php $label =  $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>
+                <div class="prolabel-wrapper">
+                    <a href="<?php echo $url ?>" title="<?php echo $label ?>" class="product-image">
+					<img class="lazy" src="<?php echo $this->getSkinUrl('images/mgt_lazy_image_loader/loader.gif'); ?>" longdesc="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>" width="200" height="200" alt="<?php echo $label ?>" />
+  </a>
+                </div>
+                <?php echo $this->getPriceHtml($_product, true) ?>
+<?php $name =  $_product->getName(); ?>
+                <p class="product-name">
+<a href="<?php echo $url ?>" title="<?php echo $this->stripTags($name, null, true) ?>">
+<?php echo $name ?>
+</a>
+</p>
+            </li>
+        <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+        </ul>
+<?php endif; ?><?php Varien_Profiler::stop('__LIST_ITEM'); ?>
+
+        <?php endforeach ?>
+        <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+        <script defer="defer" type="text/javascript">jQuery('.lazy').each(function(e) {
+jQuery(this).attr('src',jQuery(this).attr('longdesc'));
+});</script>
+
+    <div class="toolbar-bottom">
+        <?php echo $a ?>
+    </div>
+</div>
+<?php endif; ?>
