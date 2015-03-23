@@ -192,7 +192,7 @@ if($vmod =='all')
             <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
                 <div class="prolabel-wrapper">
                     <?php echo Mage::helper('prolabels')->getLabel($_product, 'category'); ?>
-                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" width="200px" height="200px" /></a>
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(200); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" width="200px" height="200px" /></a>
                 </div>
                 <?php if (Mage::helper('core')->isModuleOutputEnabled('TM_QuickShopping')) : ?>
                     <?php echo Mage::helper('quickshopping')->getViewButton($this->__('Quick View'), $_product, $this->getMode(), null, $_productCollection); ?>
