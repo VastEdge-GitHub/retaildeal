@@ -36,20 +36,74 @@ class LikiMode_Catalog_Block_Product_List_Random extends Mage_Catalog_Block_Prod
 {
     protected function _getProductCollection()
     {
-        if (is_null($this->_productCollection)) {
+		
+		
+$mageFilename = 'app/Mage.php';
+
+require_once $mageFilename;
+
+umask(0);
+Mage::app('admin');
+$types = Array(
+          0 => 'config', 
+          1 => 'layout',
+          2 => 'block_html', 
+          3 => 'translate', 
+          4 => 'collections',
+          5 => 'eav',
+          6 => 'config_api',
+          7 => 'config_api2'                    
+        );
+
+ $allTypes = Mage::app()->useCache();
+
+$updatedTypes = 0;
+foreach ($types as $code)
+{
+    if ($allTypes[$code]==0)
+    {
+		$cache_disabled = "True";
+        break;
+	}
+    else
+    {
+		$cache_disabled = "False";
+		$updatedTypes++;
+	}
+}
+if($cache_disabled=="True")
+{
+	if (is_null($this->_productCollection)) {
+            $collection = Mage::getResourceModel('catalog/product_collection');
+            Mage::getModel('catalog/layer')->prepareProductCollection($collection);
+//            $collection->getSelect()->order('rand()');
+shuffle($collection);
+			$collection->addAttributeToFilter('promotion', 1)
+                ->addStoreFilter(); 
+// $collection->getSelect()->order('rand()');
+
+			//$collection->addStoreFilter();
+            $numProducts = $this->getNumProducts() ? $this->getNumProducts() : 0;
+      //      $collection->setPage(1, $numProducts);
+            $this->_productCollection = $collection;
+        }
+}
+else{		
+		if (is_null($this->_productCollection)) {
 			$cache = Mage::getSingleton('core/cache');
 			$key = 'homepage-most-view-' . $storeId;
 			  if(! $data = $cache->load($key)){
 			$collection = Mage::getResourceModel('catalog/product_collection');      
 			Mage::getModel('catalog/layer')->prepareProductCollection($collection);
 			$collection->addAttributeToFilter('promotion', 1)->addStoreFilter();
-		  $data = serialize($collection);
-		  $cache->save(urlencode($data), $key, array("homepage_cache"), 60*60*24);
-			shuffle($collection);
-			 $this->_productCollection = $collection;  }
+				  $data = serialize($collection);
+				  $cache->save(urlencode($data), $key, array("homepage_cache"), 60*60*24);
+			shuffle($collection); $this->_productCollection = $collection;  }
 			  else{       $collection = unserialize(urldecode($data)); shuffle($collection);
 				  $numProducts = $this->getNumProducts() ? $this->getNumProducts() : 0;
-			$this->_productCollection = $collection; }}
+			$this->_productCollection = $collection; }
+        }
+   }     
         return $this->_productCollection;
     }
 }
