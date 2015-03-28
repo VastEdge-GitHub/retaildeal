@@ -612,14 +612,22 @@
 									if($prod_qty > 0)
 									{
 										$prod_name 			= preg_replace('/\s+/', ' ', trim($content_arr[30]));			// Title
-										for($bl=0;$bl<count($blocklist_arr);$bl++)											// Checking Stop Word list
-										{								
-											if (strripos($prod_name,$blocklist_arr[$bl]) !== false)
-											{
-												$stopword_check = 1;
-												echo gmdate('Y-m-d H:i:s')."----> Stop = ".$stopword_check." for word (".$blocklist_arr[$bl].") for SKU (".$prod_sku.") \n";
+										if(strripos($file_name,"Top_seller") !== false || strripos($file_name,"Featured_ASIN") !== false)
+										{
+											$stopword_check=0;
+										}
+										else
+										{
+											for($bl=0;$bl<count($blocklist_arr);$bl++)											// Checking Stop Word list
+											{							
+												if (strripos($prod_name,$blocklist_arr[$bl]) !== false)
+												{
+													$stopword_check = 1;
+													echo gmdate('Y-m-d H:i:s')."----> Stop = ".$stopword_check." for word (".$blocklist_arr[$bl].") for SKU (".$prod_sku.") \n";
+												}
 											}
-										} 
+										}
+										if($stopword_check==1){echo gmdate('Y-m-d H:i:s')."----> Stop keywords found";} 
 										if($stopword_check != 1)															// If Stopword does not exists
 										{
 											if($content_weight == ''){$prod_weight 		= preg_replace('/\s+/', ' ', trim($content_itemweight));}
