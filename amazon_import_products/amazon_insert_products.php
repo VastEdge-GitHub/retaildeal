@@ -890,7 +890,7 @@
 												 {
 													$free_shipping=1;
 												 }
-												 else
+												 else 
 												 {
 													$free_shipping=0;
 												 }
