@@ -1,0 +1,321 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<style>
+.product-view .product-shop .price-box .price, .product-view .product-shop .regular-price .price, .product-view .product-shop .price-from .price-label, .product-view .product-shop .price-to .price-label
+{
+	font-weight: bold;
+	float: left;
+	margin-top: 11.5px;
+	font-size: 12px;
+	font-family:Arial;
+}
+.product-view .product-shop .product-name{margin: 0 0 0;}
+.monthly-price-display span{font-family:Arial;}
+.product-view .product-shop .short-description {margin: 0 0;}
+.product-view .add-to-cart-wrapper .availability{top: -25px;}
+.or-purchase-for-text{margin-right: -14px;}
+.product-view .product-shop .add-to-cart button.button
+{
+	background-position: 99% -170px !important;padding: 0px 27px 11px 11px !important;height :25px !important;margin:3px 5px 0 0!important;
+}
+.product-view .product-shop .add-to-cart .qty { margin:3px 5px 0 0;height:19px;text-align:center;}
+.product-view .add-to-cart-wrapper{padding-left:0;}
+
+<!-- inline css  --->>
+.monthly-price-display { float: left; width: 100%; color: #000; font-size: 1.5em; font-weight: bold; }
+.monthly-price-display span { float:left; margin-top: 0;font-size:30px;font-weight:normal;  }
+#chkout_btn_id { float:left;;margin-left:-4px;margin-top:-2%; }
+#chkout_btn_id a {text-decoration:none; float:left;cursor:pointer; }
+
+
+.or-purchase-for-text{ float:left;width:105px;margin-top:11px;font-weight:bold;font-size:12px;font-family:Arial; }
+.add-to-box {float: left;width: 100%;margin-top: 20px;text-align: right; }
+
+.free-shipping{ margin-bottom:20px; float:left; }
+<!-- inline css  --->>
+<!-- RD-588 inline css  --->>
+#chkout_btn_id a span {float: left; margin-left: 8px; margin-top: 3px; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/amazon_import_products/liki_img/leaseit_keepit.png',sizingMethod='scale');}
+
+#chkout_btn_id a span img {width: 95%; margin-top: -5px; height: 47px;} /* RD-588  */
+.style_liki{ position:absolute; /*margin-left:85px; */ margin-top:-13px; width:470px; }
+<!-- RD-588 inline css  --->>
+
+</style>
+
+	<?php $_helper 		= $this->helper('catalog/output'); ?>
+    <?php $_product 	= $this->getProduct();
+          if($_product = Mage::registry('current_product')){
+            $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+            $prod_name   =  $_product->getName();
+            $month_price =  $_product->getLikiPrice();
+			$free_shipping =  $_product->getFreeShipping();
+            }
+        ?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view">
+    <div class="product-essential">
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+
+        <div class="product-img-box">
+            <?php echo $this->getChildHtml('media') ?>
+        </div>
+
+        <div class="product-shop">
+            <div class="product-shop-inner">
+            <div itemscope itemtype="http://schema.org/Product">
+                <div class="product-name">
+                    <h1 itemprop="name"><?php echo $_product->getName(); ?></h1>
+                </div>
+                <?php 
+                $productShortDesc = $_product->getShortDescription();
+                if ($productShortDesc):?>
+                    <div class="short-description">
+                        <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $productShortDesc, 'short_description') ?></div>
+                    </div>
+                <?php endif;?>
+
+                <?php echo $this->getTierPriceHtml() ?>
+                <?php echo $this->getChildHtml('extrahint') ?>
+
+                <div class="clearer"></div>
+                
+                <?php 
+                $saleable =$_product->isSaleable();
+                if (!$this->hasOptions() || !$saleable) : ?>
+                    <div class="add-to-cart-wrapper">
+                    	<!--LIKI prcie div starts-->
+						<?php
+                            $prod_price_new = $_product->getPrice();
+                            $prod_price_new = explode(".",$prod_price_new);
+                            $price_len = strlen($prod_price_new[0]);
+                            if($price_len == '2'){$style_liki_maindiv ;}
+                            if($price_len == '3'){$style_liki_maindiv ;}
+                            if($price_len == '4'){$style_liki_maindiv ;}
+                        ?>
+                        <div class="style_liki" <?php echo $style_liki_maindiv; ?>>
+                        	<div class="monthly-price-display">
+                                <span>	<?php echo $_product->getLikiPrice(); ?> </span>
+                                <span>/mo.</span>
+                                
+                                <div id="chkout_btn_id" onClick="return showForm('liki_intro_popup')">
+								<!--LIKI Code Start
+									Reason: text-decoration set none for anchor tag -->
+                                <a> 
+								<!--LIKI Code End-->
+						   
+<span> <img src="/amazon_import_products/liki_img/leaseitkeepit__Button_No_Background.jpg" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" />
+                                    </span>
+                                	
+								</a>
+                                </div>
+                                
+							</div>
+                        </div>
+                        <!--LIKI price div ends-->
+                <?php endif ?>
+				<div class="or-purchase-for-text">or purchase for</div>
+                <?php echo $this->getChildHtml('product_type_data') ?>
+
+                <?php if (!$this->hasOptions()):?>
+                    <div class="add-to-box">
+                        <?php if($saleable): ?>
+                            <?php echo $this->getChildHtml('addtocart') ?>
+                        <?php endif; ?>
+                    </div>
+					
+                    <?php echo $this->getChildHtml('extra_buttons') ?> 
+                <?php endif; ?>
+
+                <?php if (!$this->hasOptions() || !$saleable) : ?>
+                    </div>
+                <?php endif ?>
+
+                <?php echo $this->getChildHtml('other');?>                
+                            
+      <!-- start RD-527 -->       
+                          <div class="norton_shipping"> 
+
+                       
+                     <!-- free-shipping image start -->           
+                <?php if($_product->getFreeShipping()) { ?>
+                <div class="free-shipping" style="margin-bottom:20px; float:left;" > <!-- style="margin-bottom:10px;margin-top:-20px;">  -->
+                <img alt="free-shipping" src="<?php echo $this-> getSkinUrl('images/free-shipping.jpg') ?>" />   
+                </div>
+     <!-- free-shipping image ends -->  
+     <!-- start RD-454 -->
+     <div class="norton_img"> 
+                           <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+<tr>
+<td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
+<a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
+</tr>
+</table>
+                           </div>
+     <!-- end RD-454 -->
+        <?php }else  { ?>
+        
+          
+            <div class="norton_img1"> 
+                 <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+                 <tr>
+                <td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
+                 <a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
+                </tr>
+                </table>
+             </div> 
+        <?php  } ?>
+    
+     
+ </div>    
+     <!-- start RD-527 -->
+      
+ <!--Start RD-482--><?php $attribute = $_product->getResource()->getAttribute('feature');  						
+				 if($attribute ->getFrontend()->getValue($_product)!='') { ?>   
+			   <div class="featur">  
+				<?php
+				  echo $attribute_value = $attribute ->getFrontend()->getValue($_product); ?>
+<!--ENDRD-482-->  </div>	
+					<?php } ?>
+				<?php if ($saleable && $this->hasOptions()):?>
+                    <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                <?php endif;?>
+                <?php if ($saleable && $this->hasOptions()):?>
+                    <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                <?php endif;?>
+
+                <?php
+                    echo $this->getLayout()
+                        ->createBlock('richsnippets/product')
+                        ->setTemplate('tm/richsnippets/richsnippets_view.phtml')
+                        ->toHtml();
+                ?>
+            </div>
+            </div>
+        </div>
+
+        <div class="clearer"></div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) { 
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+    </script>
+    
+    </div>
+
+    <div class="product-collateral">
+<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+        <div class="box-collateral <?php echo "box-{$alias}"?>">
+            <?php echo $html; ?>
+        </div>
+<?php endforeach;?>
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+
+    </div>
+</div>
+<?php $custom_description = $this->getProduct()->getDescription(); ?>
+<?php $custom_description_content = $this->helper('catalog/output')->productAttribute($this->getProduct(), $custom_description, 'description'); ?>
+<!-- Changes by LIKI Ext Starts
+	Reason of Change: Changes made to add Product Description -->
+<script type="text/javascript" src="/amazon_import_products/js/htmlparser.js"></script>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+	window.onload = desc_modify();
+	function desc_modify()
+	{
+		var content = encodeURIComponent("<?php echo addslashes(preg_replace('#<script(.*?)>(.*?)</script>#is', '', $custom_description_content)); ?>");
+		content = content.replace(/^\s+|\s+$/g,'');
+		var content_new = '';
+		content_new = HTMLtoXML(content);
+		content_new = content_new.replace(/^\s+|\s+$/g,'');
+		content_new = decodeURIComponent(content_new);
+		if(document.getElementById('custom_description'))
+		{
+			document.getElementById('custom_description').innerHTML = content_new;
+		}
+		
+	}
+</script>
+<!-- Changes by LIKI Ext Ends -->
