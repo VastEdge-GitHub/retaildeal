@@ -30,5 +30,41 @@ class LikiMode_Core_Model_Email_Template extends Mage_Core_Model_Email_Template
 	
         return $this->_mail;
     }
+    
+    public function getProcessedTemplate(array $variables = array())
+    {
+        $processor = $this->getTemplateFilter();
+        $processor->setUseSessionInUrl(false)
+            ->setPlainTemplateMode($this->isPlain());
+
+        if (!$this->_preprocessFlag) {
+            $variables['this'] = $this;
+        }
+
+        if (isset($variables['subscriber']) && ($variables['subscriber'] instanceof Mage_Newsletter_Model_Subscriber)) {
+            $processor->setStoreId($variables['subscriber']->getStoreId());
+        }
+
+        if (!isset($variables['logo_url'])) {
+            $variables['logo_url'] = $this->_getLogoUrl($processor->getStoreId());
+        }
+        if (!isset($variables['logo_alt'])) {
+            $variables['logo_alt'] = $this->_getLogoAlt($processor->getStoreId());
+        }
+        $variables['current_date'] =Mage::getModel('core/date')->date('m-d-Y');
+        $processor->setIncludeProcessor(array($this, 'getInclude'))
+            ->setVariables($variables);
+
+        $this->_applyDesignConfig();
+        try {
+            $processedResult = $processor->filter($this->getPreparedTemplateText());
+        }
+        catch (Exception $e)   {
+            $this->_cancelDesignConfig();
+            throw $e;
+        }
+        $this->_cancelDesignConfig();
+        return $processedResult;
+    }
 
 }
