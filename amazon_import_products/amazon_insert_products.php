@@ -562,6 +562,7 @@
 							if($content_arr[$n] == 'BLANK'){$content_arr[$n] = '';}			// Replacing word BLANK with null
 						}
 						$amazon_asin				= preg_replace('/\s+/', ' ', trim($content_arr[0]));		 // ASIN	B00O65HZKS,B00CMHWTRQ for SEO Products  
+				if($content_arr[41] == ''){$content_arr[41] = '0';}	
 				if($content_arr[41] == '1' || $content_arr[41] == '0' || $amazon_asin =='B00CMHWTRQ') 
 																																// Only getting Shiping Detail products 
 						{

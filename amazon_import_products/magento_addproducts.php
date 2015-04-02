@@ -226,6 +226,17 @@
 		global $new_mainfile;
 		global $base_url_magento;
 		/////*****\\\\\
+		
+		$magmi_start = 1;
+		while($magmi_start > 0)
+		{
+			$magmi_start = file_exists($base_url_magento."var/import/main_file_import.csv");
+			//echo $magmi_start;
+			sleep(10);
+		}
+		sleep(10);
+		//echo $magmi_start;
+		
 		echo gmdate('Y-m-d H:i:s')."----> Copying file 'main_file_import_new' to 'main_file_import' \n";
 		/////*****\\\\\		
 		shell_exec("cp ".$base_url_magento."var/import/main_file_import_new.csv ".$base_url_magento."var/import/main_file_import.csv");
@@ -412,14 +423,16 @@
  	
 	$tempfiles_del = glob($base_url_magento.'amazon_import_products/prod_sku/*'); // get all file names
 	foreach($tempfiles_del as $file){ // iterate files
-	  if(is_file($file))
-		unlink($file); // delete file
+	  	if(is_file($file))
+	  	{
+			unlink($file); // delete file
+		}
 	}  
 	
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Old products deleted \n"; 
 	/////*****\\\\\
-
+	
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Clearing Cache \n";
 	/////*****\\\\\
