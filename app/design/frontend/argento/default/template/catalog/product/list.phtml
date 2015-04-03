@@ -80,13 +80,14 @@ if($vmod =='all')
 	$findme2	= 'retaildeal.biz/?limit';  
 	$findme3	= '?manufacturer=';
 	$findme4	= 'price='; 
+	$findme5	='?utm';
 	if(stripos($currentUrl, $findme) != false)  
 	{
 		$_productCollection=$this->getLoadedProductCollection(); 			
 	}
 	else
 	{
-		if(Mage::getBlockSingleton('page/html_header')->getIsHomePage() || (stripos($currentUrl, $findme2) != false) || (stripos($currentUrl, $findme3) != false) || (stripos($currentUrl, $findme) != false) || (stripos($currentUrl, $findme4) != false)){   
+		if(Mage::getBlockSingleton('page/html_header')->getIsHomePage() || (stripos($currentUrl, $findme2) != false) || (stripos($currentUrl, $findme3) != false) || (stripos($currentUrl, $findme) != false) || (stripos($currentUrl, $findme4) != false) || (stripos($currentUrl, $findme5) != false)){   
 			$_productCollection=$this->getLoadedProductCollection();
 		}
 		else{
