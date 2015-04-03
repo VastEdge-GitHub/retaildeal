@@ -2372,6 +2372,56 @@ position: relative;
 /* .norton_img {margin-top: -20% !important; }   */
 
 }
+<!-- RD-407 starts-->
 
-<!-- RD- 575 ends -->
-.ajaxpro-spinner {z-index: 1050;}
+.footer-cms-container .footer1{ float:left !important; margin-left: 15% !important; margin-bottom: -2%; margin-top: 1%;  }
+<!-- RD-407 ends-->
+
+<!-- RD-432 ENDS--> 
+<!-- Reason of Change: RD-214 To make liki popup resizable at mobile  -->
+<!--RD-390-->
+@media (max-width: 767px)
+ {
+	.dialog{height:190px !important; width:264px !important; left:10% !important; top:8% !important;} 
+	.dialog_content{height:150px !important; width:264px !important;}
+}
+@media (max-width: 480px)
+ {
+	.dialog{height:308px !important;width:264px !important; left:10% !important; top:20% !important;}
+	.dialog_content{height:265px !important; width:264px !important;}
+	/* .liki_intro_popup {width:30px !important;} */ 
+	.custom_inner_text{width:30px; !important}
+	.custom_popup_liki_img{width:100 !important;} 
+}
+
+
+<!-- RD-588 css --> .footer-contacts{ float: left !important; width: 183px; }
+ul.icons { margin-top: 7px !important; margin-left: -6px !important;} 
+li.facebook {float: left !important; margin-left: 5px !important;}
+li.twitter {float: left !important; margin-left: 5px !important;}
+li.pinterest {float: left !important; margin-left: 5px !important;}
+li.googleplus {float: left !important; margin-left: 5px !important;}
+.img1 { float: left !important; margin-top: 10px !important;}
+.img1 p { margin-top: 5px !important;}
+.custom_inner_text { float: left !important; width: 63% !important;}
+.custom_inner_text a {text-decoration: underline !important; font-weight: bold !important; color: #144f91 !important; font-size: 14px !important;}
+.leaseit {float:right !important; width: 35% !important;}
+.leaseit a { text-decoration: none; }
+.custom_popup_liki_img { float: right; margin: 30px 10px 0 20px;}
+.footer-contacts { float: left !important; width: 183px !important;}
+.footer-contacts .h6 { margin-top: 15px;}
+.side_banner1{border-radius: 7px; background: #fff; border: 1px solid #666; -moz-box-shadow: 0 0 5px 3px #888; -webkit-box-shadow: 0 0 5px 5px #888; box-shadow: 0 0 2px 2px #888; text-align: center; margin-bottom: 20px;}
+
+.side_banner1 img{border-radius: 5px; width: 100%;}
+.side_banner2{ border-radius: 7px; background: #fff; border: 1px solid #666; -moz-box-shadow: 0 0 5px 3px #888; -webkit-box-shadow: 0 0 5px 5px #888; box-shadow: 0 0 2px 2px #888; text-align: center; margin-bottom: 5px;} 
+.side_banner2 a img{border-radius: 5px; width: 100%;}
+
+<!-- RD-588 css --> 
+/*** for position **/
+.header-container .header-cart{ z-index: 1001!important;}
+.searchautocomplete .searchautocomplete-placeholder { z-index: 1150!important} 
+.searchautocomplete-placeholder .highlight {display:none;}
+.ajaxpro-overlay { z-index: 1150!important}
+#header-cart-content .product-details .product-name { float: none !important}
+.ajaxpro-form { z-index: 1160 !important;} 
+/*** for position **/
