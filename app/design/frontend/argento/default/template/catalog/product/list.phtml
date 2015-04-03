@@ -40,25 +40,13 @@ z-index:1000;
 display: inline;
 list-style: none;
  }
-.tabs li a{ 
-color: #414040;
-display: block;
-float:left;
-font-size: 14px;
-font-weight:bold;
-padding:12px 12px;
-background-color:#eee;
-border:1px solid #ddd;
-border-bottom:none;
-margin-bottom: -1px;
-text-decoration: none;
-border-radius: 5px 5px 0 0;
+.tabs li a{ color: #414040; display: block; float:left; font-size: 14px; font-weight:bold; padding:12px 12px; background-color:#eee; border:1px solid #ddd;  border-bottom:none; margin-bottom: -1px; text-decoration: none; border-radius: 5px 5px 0 0;
 } 
 .tabs .active li{ background:#fff; }
 
 .category-products .sorter .view-mode { display: none;}
-.toolbar {float: right;}
-.toolbar-bottom .toolbar {float:none;}
+.toolbar { float:right; position:relative; z-index: 990;/*z-index: 1010;*/} 
+.toolbar-bottom .toolbar{ float:none !important}
 .toolbar .pager{display:none;}
 .toolbar .sorter { border: none;}
 .toolbar-bottom .tabs-view { display:none;}
@@ -97,15 +85,16 @@ if($vmod =='all')
  <?php 
 	$currentUrl = $this->helper('core/url')->getCurrentUrl();
 	$findme 	= 'catalogsearch/result/';
-	$findme2	= 'retaildeal.biz/?limit';
-	$findme4		= 'retaildeal.biz/?utm';
-	if(stripos($currentUrl, $findme) != false) 
+	$findme2	= 'retaildeal.biz/?limit';  
+	$findme3	= '?manufacturer=';
+	$findme4	= 'price='; 
+	if(stripos($currentUrl, $findme) != false)  
 	{
 		$_productCollection=$this->getLoadedProductCollection(); 			
 	}
 	else
 	{
-		if(Mage::getBlockSingleton('page/html_header')->getIsHomePage() || (stripos($currentUrl, $findme2) != false) || (stripos($currentUrl, $findme4) != false)){   
+		if(Mage::getBlockSingleton('page/html_header')->getIsHomePage() || (stripos($currentUrl, $findme2) != false) || (stripos($currentUrl, $findme3) != false) || (stripos($currentUrl, $findme) != false) || (stripos($currentUrl, $findme4) != false)){   
 			$_productCollection=$this->getLoadedProductCollection();
 		}
 		else{
@@ -116,7 +105,7 @@ if($vmod =='all')
 				$_productCollection = Mage::getResourceModel('catalog/product_collection')
 				->addAttributeToFilter('featured', array('eq' => array(1)))
 				->addAttributeToSelect('*')
-				->addCategoryFilter(Mage::getModel('catalog/category')->load($cat_id));
+				->addCategoryFilter(Mage::getModel('catalog/category')->load($cat_id));			 
 	
 			}
 			else
@@ -129,8 +118,6 @@ if($vmod =='all')
 	$_helper = $this->helper('catalog/output');
 	$lazy_img = $this->getSkinUrl('images/mgt_lazy_image_loader/loader.gif');
 	$imag_helper = $this->helper('catalog/image');
-
-
   ?>
 <?php if(!count($_productCollection->getAllIds())): ?> 
 <div class="category-products" style="margin-top:35px">

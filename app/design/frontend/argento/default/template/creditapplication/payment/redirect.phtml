@@ -94,11 +94,11 @@ for($i=0;$i<$no_of_products;$i++)
 				 }
 				 else if (state == 'complete') 
 				 {
-			 <!-- edite on 28--nov 014 mixapanel -->
-					console.log(4);
-				<!-- end here -->
+					analytics.track('PlacesOrder',{
+					UserId: '<?php echo $customer_Id; ?>',
+					Action: 'PlacesOrder'});
 				  }
-				};
+				}; 
  			</script>
  <script type="text/javascript">
  //Changes made by LikiExt

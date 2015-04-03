@@ -111,15 +111,17 @@
 	$currentUrl = $this->helper('core/url')->getCurrentUrl();
 	$findme   = 'catalogsearch/result/'; 
 	$findme2	= 'retaildeal.biz/?limit';
-	$findme4	='retaildeal.biz/?utm';
-	if(stripos($currentUrl, $findme) !=false) 
+	$findme3	= '?manufacturer=';
+	$findme4	= 'price=';
+	$findme5	='?utm';
+	if(stripos($currentUrl, $findme) !=false)  
 	{
 		//echo "search by pass toolbar1";  
 	}
 	else
 	{	
 	 	$is_homepage = Mage::getBlockSingleton('page/html_header')->getIsHomePage(); 
-		if($is_homepage || (stripos($currentUrl, $findme2) != false) || stripos($currentUrl, $findme4) != false){} 
+		if($is_homepage || (stripos($currentUrl, $findme2) != false) || (stripos($currentUrl, $findme3) != false) || (stripos($currentUrl, $findme4) != false) || (stripos($currentUrl, $findme) != false) || (stripos($currentUrl, $findme4) != false)){} 
 		else
 		{
 			//for total number of products.
@@ -127,10 +129,10 @@
 			$products_count = Mage::getModel('catalog/category')->load($_category_detail->getId()) ->getProductCount();
 			// For feature products.
 			$products_feature = Mage::getModel('catalog/category')->load($_category_detail->getId())
-							->getProductCollection()
-							->addAttributeToSelect('*')
-							->addAttributeToFilter('featured', array('eq' => array(1)))
-							->getSize();
+								->getProductCollection()
+								->addAttributeToSelect('*')
+								->addAttributeToFilter('featured', array('eq' => array(1)))
+								->getSize();
 ?>
 <div class="tabs-view">
 	<ul class="tabs">
@@ -141,4 +143,15 @@
 <?php 
 		} 
 	} 
-?>   
+?>    
+ <?php if(stripos($currentUrl, $findme) != false){?>
+ <style>
+	.toolbar { margin-top: -7%;}
+ </style>
+ <?php }if(stripos($currentUrl, $findme3) != false || stripos($currentUrl, $findme4) != false){ ?>
+ <style>
+	.toolbar { margin-top: -6%;}
+	.link-rss{ margin-top: -3%;}
+	.category-products{ border-top:1px solid #E6E6E7;}
+ </style>
+ <?php } ?>

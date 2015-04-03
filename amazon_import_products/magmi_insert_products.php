@@ -8,6 +8,10 @@ ob_implicit_flush(true);
 
 global $base_url_magento;
 $base_url_magento	= '/home/retail/public_html/';
+include($base_url_magento."app/Mage.php");
+$mageFilename		= $base_url_magento.'app/Mage.php';
+require_once $mageFilename;
+$app				= Mage::app('default');
 /////*****\\\\\
 echo gmdate('Y-m-d H:i:s')."----> Magmi started \n";
 /////*****\\\\\
@@ -177,4 +181,40 @@ shell_exec('echo "'.$mail_data.'" | mail -s \'Magemojo Products Update\' upinder
 /////*****\\\\\
 echo gmdate('Y-m-d H:i:s')."----> Magmi completed \n";
 /////*****\\\\\
+$custom_hostname="localhost"; 
+$custom_username="bn_magento";
+$custom_password="fbeee979d3";
+$custom_dbName="rd_qmt";
+if($custom_conn=mysql_connect($custom_hostname,$custom_username,$custom_password)){}
+else{echo "Something went wrong. Unable to establish MySQL conection";}
+mysql_select_db($custom_dbName, $custom_conn);
+$sql = "select asin from featured_products";
+$retval = mysql_query($sql);
+if(! $retval )
+{
+	 die('Could not get data: ' . mysql_error());
+}
+//QUERY MANAGEMENT TOOLDATABASE CONNECTION CREATED
+
+$_asin = array();
+//print_r($_asin);
+while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
+{	
+	array_push($_asin,$row['asin']);
+}
+//Converted into an array
+print_r($_asin);
+$custom_hostname="localhost";
+$custom_username="bn_magento";
+$custom_password="fbeee979d3";
+$custom_dbName="bitnami_magento";
+if($custom_conn=mysql_connect($custom_hostname,$custom_username,$custom_password)){}
+else{echo "Something went wrong. Unable to establish MySQL conection";}
+mysql_select_db($custom_dbName, $custom_conn);
+
+$sql = "update `catalog_product_flat_1` set `featured`=1,`best_seller`=1 where sku in ('".implode("','",$_asin)."')";
+echo $sql; 
+mysql_query($sql) or mysql_error();
+
+
 ?>

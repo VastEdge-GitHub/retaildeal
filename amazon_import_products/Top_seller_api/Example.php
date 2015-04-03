@@ -6,8 +6,59 @@
  	header('Content-Type: text/html; charset=utf-8'); 
 
     $obj = new AmazonProductAPI();
-    $base_url_magento = '/opt/bitnami/apps/magento/htdocs/';
-	
+    $base_url_magento = '/home/retail/public_html/';
+	$file_main_check	= "false";
+	$file_sub_check		= "false";
+	if(file_exists($base_url_magento.'amazon_import_products/csv_file/main_categories.txt'))
+	{
+		$file_main_check		= 'true';
+	}
+	if(file_exists($base_url_magento.'amazon_import_products/csv_file/main_categories.txt'))
+	{
+		$file_sub_check			= 'true';
+	}
+	echo gmdate('Y-m-d H:i:s')."----> Top Seller Product started \n";
+	while($file_main_check == 'true' || $file_sub_check == 'true')
+	{
+		$main_file = $base_url_magento.'amazon_import_products/csv_file/main_categories.txt';
+		$fh = fopen($main_file,'r');
+		while ($line = fgets($fh))
+		{
+			//echo $line;
+			if($line == 'True')
+			{
+				$file_main_check = 'true';
+				echo gmdate('Y-m-d H:i:s')."----> Wating...! Main Categories(".$line.") Products are pushing \n";
+				sleep(10);
+				continue; 
+			}
+			else
+			{
+				$file_main_check = 'false';
+			}
+		}
+		fclose($fh);
+		$sub_file = $base_url_magento.'amazon_import_products/csv_file/sub_categories.txt';
+		$fh = fopen($sub_file,'r');
+		while ($line = fgets($fh))
+		{
+			//echo $line;
+			if($line == 'True')
+			{
+				$file_sub_check = 'true';
+				echo gmdate('Y-m-d H:i:s')."----> Wating...! Sub Categories(".$line.") Products are pushing \n";
+				sleep(10);
+				continue;
+			}
+			else
+			{
+				$file_sub_check = 'false';
+			}
+		}
+		fclose($fh);	
+	}
+	if($file_sub_check == 'false' && $file_main_check== 'false')
+	{
 		$count_error=0;
 		$files_process	= glob($base_url_magento.'amazon_import_products/Top_seller_api/csv_file/*'); // get all file names
 		$filecount_flag	= 'false';
@@ -19,8 +70,8 @@
 					$cat_id		= $cat_array[1];
 					echo "<br>".$cat_id."<br/>";
 					$a=1;
-					$file = fopen($file, 'r');	
-				while(($content = fgets($file)) !== FALSE)									// Reading file line by line
+					$filehandler = fopen($file, 'r');	
+				while(($content = fgets($filehandler)) !== FALSE)									// Reading file line by line
 				{
 				echo "file name == --->".$file;
 				
@@ -63,5 +114,5 @@
 				}	
 			}		
 		}
-		
+	}
 ?>
