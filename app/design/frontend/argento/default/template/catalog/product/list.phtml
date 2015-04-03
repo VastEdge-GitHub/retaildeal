@@ -26,15 +26,7 @@
 ?> 
 <style>
 .sorter { border-left: none; border-right: none;}
-.tabs { 
-clear: both;
-float: left;
-width:100%;
-margin-top:-35px;
-padding-left:15px;
-border-bottom:1px solid #e1e1e1;
-position: relative;
-z-index:1000; 
+.tabs { clear: both; float: left;width:100%; margin-top:-35px; padding-left:15px; border-bottom:1px solid #e1e1e1; position:relative; z-index:970;/*z-index:1000;*/
 }
 .tabs li{
 display: inline;
@@ -208,6 +200,7 @@ if($vmod =='all')
         <?php   endif ?>
         <?php endforeach ?>
         <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+
     <?php endif; ?>
 
     <div class="toolbar-bottom">
