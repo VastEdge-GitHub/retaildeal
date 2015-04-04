@@ -547,6 +547,7 @@
 				echo gmdate('Y-m-d H:i:s')."----> CSV processing started \n";
 				while(($content = fgets($file)) !== FALSE)									// Reading file line by line
 				{
+				echo gmdate('Y-m-d H:i:s')."----> CSV processing started \n";
 					if($a != '1')															// Leaving header line from csv file
 					{
 						$stopword_check 				= 0;
@@ -733,7 +734,7 @@
 											if($prod_root_cat_id[0]=='4198'){$prod_root_cat_id[0]=$prod_root_cat_id[1];}
 											if($prod_root_cat_id[0]=='3564' && $prod_root_cat_id[1]=='3562'){$prod_root_cat_id[0]=$prod_root_cat_id[1];}
 											//// Calcualting Standard Shipping \\\\
-											$mag_catid_arr = array("3559","3560","3561","3562","3564","3565","3566","3567","3568","3569","3570");
+											$mag_catid_arr = array("3559","3560","3561","3562","3564","3565","3566","3567","3568","3569","3570","4199","3662","3660");
 											switch ($prod_root_cat_id[0])
 											{
 											  case $mag_catid_arr[0]:
@@ -768,6 +769,15 @@
 												break;
 											  case $mag_catid_arr[10]:
 												$standard_shipping=0.99;
+												break;
+											  case $mag_catid_arr[11]:
+												$standard_shipping=$prod_weight*0.75;
+												break;
+											  case $mag_catid_arr[12]:
+												$standard_shipping=$prod_weight*0.75;
+												break;
+											  case $mag_catid_arr[13]:
+												$standard_shipping=$prod_weight*0.75;
 												break;
 											}
 											//// Standard Shipping Calculation Ends \\\\
@@ -873,17 +883,25 @@
 												echo gmdate('Y-m-d H:i:s')."----> Count = ".$count_rewrite." and Error = ".mysql_error()."\n";
 												if($count_rewrite > 0)
 												{
+													$delete_old_rewrite_id_insert_arr 	= array();
+													$delete_custom_id_insert_arr 		= array();
 													while($rowcheck_rewrite	= mysql_fetch_array($rcheck_rewrite))
 													{
 														$old_rewrite_id		= $rowcheck_rewrite['url_rewrite_id'];
 														$custom_id			= $rowcheck_rewrite['id'];
 																								
 														echo gmdate('Y-m-d H:i:s')."----> Rewrite exists of product = ".$prod_sku." with URL Rewrite id = ".              																	$old_rewrite_id." and Custom Rewrite id = ".$custom_id." \n";
-														$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` = '".$old_rewrite_id."' ";
+														array_push($delete_old_rewrite_id_insert_arr,$old_rewrite_id);
+														array_push($delete_custom_id_insert_arr,$custom_id);
+														/*$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` = '".$old_rewrite_id."' ";
 														$rdel_rewriteid		= mysql_query($qdel_rewriteid);
 														$qdel_customid		= "delete from `custom_rewrite_check` where `id` = '".$custom_id."' ";
-														$rdel_customid		= mysql_query($qdel_customid);
+														$rdel_customid		= mysql_query($qdel_customid);*/
 													}
+													$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` in ('".implode("','",$delete_old_rewrite_id_insert_arr)."')";
+													$rdel_rewriteid		= mysql_query($qdel_rewriteid);
+													$qdel_customid		= "delete from `custom_rewrite_check` where `id` in ('".implode("','",$delete_custom_id_insert_arr)."')";
+													$rdel_customid		= mysql_query($qdel_customid);
 												}
 												$prod_count++;
 												static $free_shipping = 0;
@@ -891,7 +909,7 @@
 												 {
 													$free_shipping=1;
 												 }
-												 else 
+												 else
 												 {
 													$free_shipping=0;
 												 }

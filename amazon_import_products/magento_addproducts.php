@@ -46,18 +46,30 @@
 
 	// Getting SKU of all products already stored in magento
 	// If these products are not found in current amazon feed then these products will be disabled
-	$products_sku	= Mage::getModel("catalog/product")->getCollection()->addAttributeToSelect('sku');	// Getting all products from magento
-	$all_sku		= '';
-	foreach ($products_sku as $product_sku)									// For each product
+	$custom_hostname="localhost";
+	$custom_username="bn_magento";
+	$custom_password="fbeee979d3";
+	$custom_dbName="bitnami_magento";
+	if($custom_conn=mysql_connect($custom_hostname,$custom_username,$custom_password)){}
+	else{echo "Something went wrong. Unable to establish MySQL conection";}
+	mysql_select_db($custom_dbName, $custom_conn);
+	
+	$sql = "select sku from catalog_product_flat_1"; 
+	//echo $sql; 
+	$retval = mysql_query( $sql, $custom_conn );
+	if(! $retval )
 	{
-		$sku		= $product_sku->getSku();								// Getting SKU of each product
-		$all_sku	.= $sku.",";											// Pushing all SKUs in variable
+	  echo 'Could not get data: ' . mysql_error();
 	}
-	rtrim($all_sku,",");
+	$all_sku		= '';
+	while($row = mysql_fetch_array($retval, MYSQL_ASSOC))					// For each product
+	{
+		$all_sku	.= $row['sku'].",";											// Pushing all SKUs in variable
+	}
+	$all_sku = rtrim($all_sku,",");
 	$fh				= fopen($base_url_magento.'amazon_import_products/prod_sku/old_products_sku.txt', 'w');
 	fwrite($fh,$all_sku);
 	fclose($fh);
-	
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Getting all old products completed \n";
 	/////*****\\\\\
@@ -254,7 +266,7 @@
 		$new_mainfile	= 1;
 	}
 	
-	rtrim($new_sku,",");
+	$new_sku = rtrim($new_sku,",");
 	$filehandler	= fopen($base_url_magento.'amazon_import_products/prod_sku/new_products_sku.txt', 'w');
 	fwrite($filehandler,$new_sku);
 	fclose($filehandler);
@@ -401,6 +413,8 @@
 	/////*****\\\\\
 	$q = "select * from `custom_rewrite_check`";
 	$r = mysql_query($q);
+	$delete_old_rewrite_id_arr = array();
+	$delete_custom_id_arr = array();
 	while($row = mysql_fetch_array($r))
 	{
 		$deleted_on = date_create($row['deleted_on']);
@@ -411,12 +425,18 @@
 			$old_rewrite_id		= $rowget_rewriteid['url_rewrite_id'];
 			echo gmdate('Y-m-d H:i:s')."----> OLD REWRITE (".$old_rewrite_id.") \n";
 			$custom_id			= $rowget_rewriteid['id'];
-			$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` = '".$old_rewrite_id."' ";
-			$rdel_rewriteid		= mysql_query($qdel_rewriteid);
-			$qdel_customid		= "delete from `custom_rewrite_check` where `id` = '".$custom_id."' ";
-			$rdel_customid		= mysql_query($qdel_customid);
+			array_push($delete_old_rewrite_id_arr,$old_rewrite_id);
+			array_push($delete_custom_id_arr,$custom_id);
+			//$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` = '".$old_rewrite_id."' ";
+//			$rdel_rewriteid		= mysql_query($qdel_rewriteid);
+//			$qdel_customid		= "delete from `custom_rewrite_check` where `id` = '".$custom_id."' ";
+//			$rdel_customid		= mysql_query($qdel_customid);
 		}
 	}
+	$qdel_rewriteid		= "delete from `core_url_rewrite` where `url_rewrite_id` in ('".implode("','",$delete_old_rewrite_id_arr)."')";
+	$rdel_rewriteid		= mysql_query($qdel_rewriteid);
+	$qdel_customid		= "delete from `custom_rewrite_check` where `id` in ('".implode("','",$delete_custom_id_arr)."')";
+	$rdel_customid		= mysql_query($qdel_customid);
 	/////*****\\\\\
 	echo gmdate('Y-m-d H:i:s')."----> Old rewrites deleted \n";
 	/////*****\\\\\
