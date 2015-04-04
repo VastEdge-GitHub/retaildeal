@@ -29,8 +29,7 @@
 .tabs { clear: both; float: left;width:100%; margin-top:-35px; padding-left:15px; border-bottom:1px solid #e1e1e1; position:relative; z-index:970;/*z-index:1000;*/
 }
 .tabs li{
-display: inline;
-list-style: none;
+display: inline;list-style: none;
  }
 .tabs li a{ color: #414040; display: block; float:left; font-size: 14px; font-weight:bold; padding:12px 12px; background-color:#eee; border:1px solid #ddd;  border-bottom:none; margin-bottom: -1px; text-decoration: none; border-radius: 5px 5px 0 0;
 } 
@@ -67,28 +66,37 @@ if($vmod =='all')
 </style>
 <?php } ?>
 
+
+<!-- RD-588 inline css  --->
+<style>
+.product-name{font-family:'Source Sans Pro',sans-serif; line-height:1.25; margin:10px 0 0 0; float:left; width:100%;}
+</style>
+<!-- RD-588 inline css  --->
+
 <?php 
 /**
  * Product list template
  *
  * @see Mage_Catalog_Block_Product_List
  */
-?>
- <?php 
+?> 
+ <?php
 	$currentUrl = $this->helper('core/url')->getCurrentUrl();
-	$findme 	= 'catalogsearch/result/';
-	$findme2	= 'retaildeal.biz/?limit';  
-	$findme3	= '?manufacturer=';
-	$findme4	= 'price='; 
-	$findme5	='?utm';
-	if(stripos($currentUrl, $findme) != false)  
+	$SearchUrl	    = 'catalogsearch/result/'; 
+	$homeUtm		= "retaildeal.biz/?utm_source";
+	$homeLimit		= 'retaildeal.biz/?limit';
+	$manufacturer	= '?manufacturer=';
+	$price			= 'price=';
+	if(Mage::getBlockSingleton('page/html_header')->getIsHomePage())  
 	{
-		$_productCollection=$this->getLoadedProductCollection(); 			
+		$_productCollection=$this->getLoadedProductCollection();				
 	}
 	else
 	{
-		if(Mage::getBlockSingleton('page/html_header')->getIsHomePage() || (stripos($currentUrl, $findme2) != false) || (stripos($currentUrl, $findme3) != false) || (stripos($currentUrl, $findme) != false) || (stripos($currentUrl, $findme4) != false) || (stripos($currentUrl, $findme5) != false)){   
-			$_productCollection=$this->getLoadedProductCollection();
+		if(stripos($currentUrl, $SearchUrl) != false || (stripos($currentUrl, $homeUtm) != false) || (stripos($currentUrl, $homeLimit) != false) || 
+			(stripos($currentUrl, $price) != false))
+		{   
+			$_productCollection=$this->getLoadedProductCollection(); 
 		}
 		else{
 			$viewmod = $_GET["mod"]; 
@@ -112,7 +120,7 @@ if($vmod =='all')
 	$lazy_img = $this->getSkinUrl('images/mgt_lazy_image_loader/loader.gif');
 	$imag_helper = $this->helper('catalog/image');
   ?>
-<?php if(!count($_productCollection->getAllIds())): ?> 
+<?php if(!$_productCollection->count()): ?>
 <div class="category-products" style="margin-top:35px">
     <?php echo $this->getToolbarHtml() ?>
 <br clear="all"/><p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
@@ -136,7 +144,7 @@ if($vmod =='all')
             <?php // Product Image ?>
             <div class="prolabel-wrapper">
                 <?php echo Mage::helper('prolabels')->getLabel($_product, 'category'); ?>
-                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img class="lazy" src="<?php echo $this->getSkinUrl('images/mgt_lazy_image_loader/loader.gif'); ?>" longdesc="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
             </div>
             <?php if (Mage::helper('core')->isModuleOutputEnabled('TM_QuickShopping')) : ?>
                 <?php echo Mage::helper('quickshopping')->getViewButton($this->__('Quick View'), $_product, $this->getMode(), null, $_productCollection); ?>
@@ -145,7 +153,7 @@ if($vmod =='all')
             <div class="product-shop">
                 <div class="f-fix">
                     <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
-                    <p style="font-family:'Source Sans Pro',sans-serif; line-height:1.25" class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></p>
+                    <p style="font-family:'Source Sans Pro',sans-serif; line-height:1.25" class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_product->getName(); ?></a></p>
                     <?php echo $this->getPriceHtml($_product, true) ?>
                     <?php if($_product->isSaleable()): ?>
                         <p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
@@ -161,7 +169,7 @@ if($vmod =='all')
                         <?php endif; ?>
                     <?php endif; ?>
                     <div class="desc std">
-                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                        <?php echo $_product->getShortDescription(); ?>
                         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
                     </div>
                 </div>
@@ -175,9 +183,7 @@ if($vmod =='all')
 
     <?php // Grid Mode ?> 
 
-<?php  $current_page = Mage::getBlockSingleton('page/html_pager')->getCurrentPage(); ?>
-
-    <?php $_collectionSize = count($_productCollection->getAllIds()) ?>
+    <?php $_collectionSize = $_productCollection->count() ?>
     <?php $_columnCount = $this->getColumnCount(); ?>
 	
 <!--RD-515--->	
@@ -190,10 +196,14 @@ if($vmod =='all')
 		<!-- Custom code added to shift description below MSRP and to remove Add To Cart button from list of products -->
             <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
                 <div class="prolabel-wrapper">
-                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img class="lazy" src="<?php echo $this->getSkinUrl('images/mgt_lazy_image_loader/loader.gif'); ?>" longdesc="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" width="200px" height="200px" /></a>
+                    <?php echo Mage::helper('prolabels')->getLabel($_product, 'category'); ?>
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" width="200px" height="200px" /></a>
                 </div>
+                <?php if (Mage::helper('core')->isModuleOutputEnabled('TM_QuickShopping')) : ?>
+                    <?php echo Mage::helper('quickshopping')->getViewButton($this->__('Quick View'), $_product, $this->getMode(), null, $_productCollection); ?>
+                <?php endif ?>
                 <?php echo $this->getPriceHtml($_product, true) ?>
-                <p style="font-family:'Source Sans Pro',sans-serif; line-height:1.25; margin:10px 0 0 0; float:left; width:100%; " class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></p>
+                <p class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></p>
                 <?php echo Mage::helper('facebooklb')->getCategoryLikeButton($_product) ?>
             </li>
         <?php  if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
@@ -209,8 +219,3 @@ if($vmod =='all')
     </div>
 </div>
 <?php endif; ?>
-<!------------------------------******************************************************------------------------->
-<script defer="defer" type="text/javascript">jQuery('.lazy').each(function(e) {
-	jQuery(this).attr('src',jQuery(this).attr('longdesc'));
-});
-</script>

@@ -39,6 +39,8 @@
 </style>
 <!-- RD-588 inline css  --->
 
+
+
 <?php if($this->getCollection()->getSize()): ?>
 <div class="toolbar">
     <div class="pager">
@@ -108,20 +110,24 @@
 <?php endif ?>
 <?php 
 
-	$currentUrl = $this->helper('core/url')->getCurrentUrl();
-	$findme   = 'catalogsearch/result/'; 
-	$findme2	= 'retaildeal.biz/?limit';
-	$findme3	= '?manufacturer=';
-	$findme4	= 'price=';
-	$findme5	='?utm';
-	if(stripos($currentUrl, $findme) !=false)  
+	$currentUrl		= $this->helper('core/url')->getCurrentUrl();
+	$SearchUrl	    = 'catalogsearch/result/'; 
+	$homeUtm		= "retaildeal.biz/?utm_source";
+	$homeLimit		= 'retaildeal.biz/?limit';
+	$manufacturer	= '?manufacturer=';
+	$price			= 'price=';
+		
+	$is_homepage = Mage::getBlockSingleton('page/html_header')->getIsHomePage();
+	
+	if($is_homepage || stripos($currentUrl, $homeUtm) !=false ||  stripos($currentUrl, $SearchUrl) !=false)  
 	{
-		//echo "search by pass toolbar1";  
+	
 	}
 	else
 	{	
-	 	$is_homepage = Mage::getBlockSingleton('page/html_header')->getIsHomePage(); 
-		if($is_homepage || (stripos($currentUrl, $findme2) != false) || (stripos($currentUrl, $findme3) != false) || (stripos($currentUrl, $findme4) != false) || (stripos($currentUrl, $findme) != false) || (stripos($currentUrl, $findme5) != false)){} 
+		 
+		if((stripos($currentUrl, $homeLimit) != false) || (stripos($currentUrl, $manufacturer) != false) || (stripos($currentUrl,$price) != false))
+		{} 
 		else
 		{
 			//for total number of products.
@@ -144,11 +150,11 @@
 		} 
 	} 
 ?>    
- <?php if(stripos($currentUrl, $findme) != false){?>
+ <?php if(stripos($currentUrl, $SearchUrl) != false){?>
  <style>
 	.toolbar { margin-top: -7%;}
  </style>
- <?php }if(stripos($currentUrl, $findme3) != false || stripos($currentUrl, $findme4) != false){ ?>
+ <?php }if(stripos($currentUrl, $manufacturer) != false || stripos($currentUrl, $price) != false){ ?>
  <style>
 	.toolbar { margin-top: -6%;}
 	.link-rss{ margin-top: -3%;}
