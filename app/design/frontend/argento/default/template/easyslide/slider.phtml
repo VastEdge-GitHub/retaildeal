@@ -21,7 +21,7 @@ if ($slides = $this->getSlider()->getSlides()) :
                 <div class="content">
                     <?php $i = 0; foreach ($slides as $slide): ?>
                         <div class="section" id="section<?php echo ++$i ?>" style="width:720px !important; height:409px !important;">
-                            <a href="<?php echo $slide['target'] ?>">
+                            <a style='cursor:default;' href="<?php echo $slide['target'] ?>">
                                 <?php
                                     if (strncmp($slide['url'],'http', 4) == 0) {
                                         $image_src = $slide['url'];
