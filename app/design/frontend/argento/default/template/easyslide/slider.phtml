@@ -1,11 +1,10 @@
 <!-- RD-588 css -->
 <style>
-#slider_main_div{ float:left;width:730px;background: #fff url(https://www.retaildeal.biz/skin/frontend/argento/argento/images/easyslider_bg.gif) no-repeat 50% 100%;}
-.likibannerright{float:left;margin:0;cursor:pointer;}
-</style>
+#slider_main_div{ width:720px !important ;Height:409px !important;}
+.likibannerright{float:left;margin:0;cursor:pointer;} .easyslideslider-id img {width:720px !important; height:409 !important;}
 <!-- RD-588 css -->
 
-
+</style>
 
 <?php
 if ($slides = $this->getSlider()->getSlides()) :
@@ -16,11 +15,12 @@ if ($slides = $this->getSlider()->getSlides()) :
 ?>
     <?php if ($slider['slider_type'] == '0') : ?>
     	<div id="slider_main_div">
-        <div class="easyslideslider-id" id="easyslideslider-<?php echo $easyslide_id; ?>" style='position: relative;float:left; <?php echo "width:".$width."px; height:".$height."px"; ?>'>
-            <div class="scroller" style='<?php echo "width:".$width."px; height:".$height."px"; ?>'>
+		<!--RD-423 start-->
+        <div class="easyslideslider-id" id="easyslideslider-<?php echo $easyslide_id; ?>" style='position: relative;float:left; width:720px !important; height:409px !important;'> <!--RD-423 end-->
+            <div class="scroller" style='width:720px !important; height:409px !important;'>
                 <div class="content">
                     <?php $i = 0; foreach ($slides as $slide): ?>
-                        <div class="section" id="section<?php echo ++$i ?>" style="width:<?php echo $width ?>px; height:<?php echo $height ?>px">
+                        <div class="section" id="section<?php echo ++$i ?>" style="width:720px !important; height:409px !important;">
                             <a href="<?php echo $slide['target'] ?>">
                                 <?php
                                     if (strncmp($slide['url'],'http', 4) == 0) {
@@ -29,7 +29,10 @@ if ($slides = $this->getSlider()->getSlides()) :
                                         $image_src = Mage::getBaseUrl('media') . 'easyslide/' . $slide['url'];
                                     }
                                 ?>
-                                <img src="<?php echo $image_src; ?>" width="528" height="300" alt="<?php echo $this->escapeHtml($slide['image']) ?>"/>
+                                <!--RD-423 start-->
+                                <img src="<?php echo $image_src; ?>" width="720" height="409" alt="<?php echo $this->escapeHtml($slide['image']) ?>"/>
+                                
+                                <!--RD-423 end-->
                             </a>
                             <?php if (!empty($slide['description'])) : ?>
                                 <div class="easyslidedescription <?php echo $this->getDescriptionClassName($slide['desc_pos']); ?> <?php echo $this->getBackgroundClassName($slide['background']); ?>"><?php echo $slide['description']; ?></div>
@@ -39,7 +42,8 @@ if ($slides = $this->getSlider()->getSlides()) :
                 </div>
             </div>
 
-            <div class="easyslidecontrolwr">
+            <!--RD-551start
+             <div class="easyslidecontrolwr">
                 <div class="easyslidercontrol">
                 <?php if ($this->getSlider()->getControlsType() == 'number'):
                     $slcount = count($slides);
@@ -55,11 +59,15 @@ if ($slides = $this->getSlider()->getSlides()) :
                 <?php endif; ?>
                 </div>
             </div>
+           -->
         </div>
+        <!--
         <div class="likibannerright">
-       <img id="banner_rt" src="/skin/frontend/argento/default/images/banner_right.jpg" width="196" height="300" alt="" onclick="return showForm('liki_intro_popup')" />
-        </div>
+		 </script>
+       <a href="<?php echo Mage::getBaseUrl().'liki_prequalification'; ?>"><img id="banner_rt" src="/skin/frontend/argento/default/images/banner_right.png" width="196" height="330" alt="" onclick="" /></a>
+        </div> RD-551 end-->
 		</div>
+		<div class="custom_slider_bottom" style='margin-top:-40px; float:left;width:730px; background: #fff url(https://www.retaildeal.biz/skin/frontend/argento/argento/images/easyslider_bg.gif) no-repeat 50% 100%;'><br></div><!--RD-423-->
         <script type="text/javascript" charset="utf-8"> 
         var new_glider = new Glider('easyslideslider-<?php echo $easyslide_id; ?>', {
             duration     : <?php echo $slider['duration'];?>,
