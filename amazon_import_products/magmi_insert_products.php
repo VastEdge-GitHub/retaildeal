@@ -209,13 +209,27 @@ $custom_hostname="localhost";
 $custom_username="bn_magento";
 $custom_password="fbeee979d3";
 $custom_dbName="bitnami_magento";
-if($custom_conn=mysql_connect($custom_hostname,$custom_username,$custom_password)){}
+if($custom_conn=mysql_connect($custom_hostname,$custom_username,$custom_password)){echo "MySQL conection has been created successfully ";}
 else{echo "Something went wrong. Unable to establish MySQL conection";}
 mysql_select_db($custom_dbName, $custom_conn);
 
-$sql = "update `catalog_product_flat_1` set `featured`=1,`best_seller`=1 where sku in ('".implode("','",$_asin)."')";
+$sql = "select entity_id from `catalog_product_flat_1` where sku in ('".implode("','",$_asin)."')";
 //echo $sql; 
-mysql_query($sql) or mysql_error();
+$retval = mysql_query($sql);
+if(! $retval )
+{
+	 die('Could not get data: ' . mysql_error());
+}
+//QUERY MANAGEMENT TOOLDATABASE CONNECTION CREATED
 
-
+$_entity = array();
+//print_r($_asin);
+while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
+{	
+	array_push($_entity,$row['entity_id']);
+}
+$sql = "update catalog_product_entity_int set value=1 where attribute_id=154 and entity_id in ('".implode("','",$_entity)."')";
+$retval = mysql_query($sql);
+$sql = "update catalog_product_entity_int set value=1 where attribute_id=192 and entity_id in ('".implode("','",$_entity)."')";
+$retval = mysql_query($sql);
 ?>
