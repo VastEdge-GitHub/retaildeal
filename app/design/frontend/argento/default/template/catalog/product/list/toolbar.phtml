@@ -116,6 +116,10 @@
 	$homeLimit		= 'retaildeal.biz/?limit';
 	$manufacturer	= '?manufacturer=';
 	$price			= 'price=';
+	$color			= 'color=';
+	$cat			= '?cat=';
+	$size			= '?size=';
+	$liki_price		= 'liki_price=';
 		
 	$is_homepage = Mage::getBlockSingleton('page/html_header')->getIsHomePage();
 	
@@ -126,7 +130,9 @@
 	else
 	{	
 		 
-		if((stripos($currentUrl, $homeLimit) != false) || (stripos($currentUrl, $manufacturer) != false) || (stripos($currentUrl,$price) != false))
+		if(stripos($currentUrl, $SearchUrl) != false || (stripos($currentUrl, $homeUtm) != false) || (stripos($currentUrl, $homeLimit) != false) || 
+			(stripos($currentUrl, $price) != false) || (stripos($currentUrl, $color) != false) || (stripos($currentUrl, $liki_price) != false) || 
+			(stripos($currentUrl, $cat) != false) || (stripos($currentUrl, $size) != false) || (stripos($currentUrl, $manufacturer) != false))
 		{} 
 		else
 		{
@@ -154,7 +160,7 @@
  <style>
 	.toolbar { margin-top: -7%;}
  </style>
- <?php }if(stripos($currentUrl, $manufacturer) != false || stripos($currentUrl, $price) != false){ ?>
+ <?php }if(stripos($currentUrl, $manufacturer) != false || stripos($currentUrl, $price) != false || stripos($currentUrl, $color) != false || stripos($currentUrl, $liki_price != false)){ ?> 
  <style>
 	.toolbar { margin-top: -6%;}
 	.link-rss{ margin-top: -3%;}

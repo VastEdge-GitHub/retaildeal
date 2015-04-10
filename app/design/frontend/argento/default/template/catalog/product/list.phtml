@@ -87,6 +87,10 @@ if($vmod =='all')
 	$homeLimit		= 'retaildeal.biz/?limit';
 	$manufacturer	= '?manufacturer=';
 	$price			= 'price=';
+	$color			= 'color=';
+	$cat			= '?cat=';
+	$size			= '?size=';
+	$liki_price		= 'liki_price=';
 	if(Mage::getBlockSingleton('page/html_header')->getIsHomePage())  
 	{
 		$_productCollection=$this->getLoadedProductCollection();				
@@ -94,7 +98,8 @@ if($vmod =='all')
 	else
 	{
 		if(stripos($currentUrl, $SearchUrl) != false || (stripos($currentUrl, $homeUtm) != false) || (stripos($currentUrl, $homeLimit) != false) || 
-			(stripos($currentUrl, $price) != false))
+			(stripos($currentUrl, $price) != false) || (stripos($currentUrl, $color) != false) || (stripos($currentUrl, $liki_price) != false) || 
+			(stripos($currentUrl, $cat) != false) || (stripos($currentUrl, $size) != false) || (stripos($currentUrl, $manufacturer) != false))
 		{   
 			$_productCollection=$this->getLoadedProductCollection(); 
 		}
@@ -169,7 +174,7 @@ if($vmod =='all')
                         <?php endif; ?>
                     <?php endif; ?>
                     <div class="desc std">
-                        <?php echo $_product->getShortDescription(); ?>
+                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?> 
                         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
                     </div>
                 </div>
