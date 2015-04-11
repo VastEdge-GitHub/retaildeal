@@ -913,6 +913,7 @@
 												 {
 													$free_shipping=0;
 												 }
+												$liki_price = str_replace("$","",$liki_price);
 												$search_spcl_chars	= array("PHP_EOL","|","^","\r\n","\r","\n");
 												$replace_spcl_chars	= array(" ",","," "," "," "," ");
 												
