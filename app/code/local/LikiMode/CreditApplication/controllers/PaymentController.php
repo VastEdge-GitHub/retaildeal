@@ -107,7 +107,7 @@ class LikiMode_CreditApplication_PaymentController extends Mage_Core_Controller_
 			// Retrieve order
 			$order = new Mage_Sales_Model_Order();
 			$order->loadByIncrementId( Mage::getSingleton('checkout/session')->getLastRealOrderId() );
-			 $likipayment['liki_payment_url'] =  Mage::getStoreConfig('payment/CreditApplication/submit_url').'/LeaseApplication/ProcessPostLeaseApplication';
+			$likipayment['liki_payment_url'] =  Mage::getStoreConfig('payment/CreditApplication/submit_url').'/LeaseApplication/ProcessPostLeaseApplication';
 			//Now, Order has only  one product  so that $items[0] is hardcorded, it will update when multiple product will come in Order.
 		    $items = $order->getAllItems(); 
 			$MerchantSession['MerchantId'] = '1';
@@ -157,7 +157,7 @@ class LikiMode_CreditApplication_PaymentController extends Mage_Core_Controller_
 			$email=$shippingAddress['email'];
 			
 			//Code Added by LikiExt
-			//reason: When user email is blank then payment gateway gives the error. So we can not send blank value of emailid to payment gateway.
+			//reason: When user email is blank then payment gateway gives an error. So we can not send blank value of emailid to payment gateway.
  			if($email=='')
 			{
 				$email = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
@@ -184,7 +184,7 @@ class LikiMode_CreditApplication_PaymentController extends Mage_Core_Controller_
 				$region = Mage::getModel('directory/region')->load($shippingAddress['region_id']);
 //				$AddressShipping['State']=urlencode($shippingAddress['code']);	
 				$AddressShipping['State']=str_replace("&","and",$region['code']);	
-				$HomePhoneNumber['Type']='Home';
+				$HomePhoneNumber['Type']='Cell';
 //				$HomePhoneNumber['Number']=urlencode($shippingAddress['telephone']);
 				$HomePhoneNumber['Number']=str_replace("&","and",$shippingAddress['telephone']);
 				array_push($Address, $AddressShipping);
@@ -193,6 +193,7 @@ class LikiMode_CreditApplication_PaymentController extends Mage_Core_Controller_
 			{
 //				$street=urlencode($shippingAddress['street']);
 				$street=$shippingAddress['street'];
+
 				$BillingAddress['Street1']=str_replace("&","and",$street);
 //				$postcode=urlencode($shippingAddress['postcode']);
 				$postcode=$shippingAddress['postcode'];

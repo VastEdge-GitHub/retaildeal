@@ -67,7 +67,7 @@
 <!-- RD-588 inline css  --->>
 #chkout_btn_id a span {float: left; margin-left: 8px; margin-top: 3px; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/amazon_import_products/liki_img/leaseit_keepit.png',sizingMethod='scale');}
 
-#chkout_btn_id a span img {width: 95%; margin-top: -5px; height: 47px;} /* RD-588  */
+#chkout_btn_id a span img {width: 90%; margin-top: -5px; height: 47px;} /* RD-588  */
 .style_liki{ position:absolute; /*margin-left:85px; */ margin-top:-13px; width:470px; }
 <!-- RD-588 inline css  --->>
 
@@ -130,21 +130,20 @@
                         ?>
                         <div class="style_liki" <?php echo $style_liki_maindiv; ?>>
                         	<div class="monthly-price-display">
-                                <span>	<?php echo $_product->getLikiPrice(); ?> </span>
+                                <span>	<?php echo "$".number_format($_product->getLikiPrice(), 2); ?> </span>
                                 <span>/mo.</span>
                                 
-                                <div id="chkout_btn_id" onClick="return showForm('liki_intro_popup')">
-								<!--LIKI Code Start
-									Reason: text-decoration set none for anchor tag -->
-                                <a> 
-								<!--LIKI Code End-->
-						   
-<span> <img src="/amazon_import_products/liki_img/leaseitkeepit__Button_No_Background.jpg" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" />
-                                    </span>
-                                	
-								</a>
-                                </div>
-                                
+                                <div class="chkout_btn" style="float: left;height: 32px;padding: 0 10px 0 10px;margin: 8px; margin-left:50px;cursor:pointer;" onclick="return showForm('liki_intro_popup')">
+                   <!--LIKI Code Start
+						Reason: displaying a underline of anchor tag so, text-decoration has set none of anchor tag -->
+				    <a style="text-decoration:none;float:left;display:block;padding-right:0;">
+					<!--LIKI Code End-->
+					<!-- Changes by Likiext Start, Reason : RD-203 -->
+                        <span id="chk_liki_spam" style="float:left;font-size:12px;font-weight:bold;color:#333;line-height:32px;">Featuring</span>
+                        <img id="chkout_liki_img" src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;" width="45px">
+					<!-- Changes by Likiext End -->	
+                    </a>
+                </div>                   
 							</div>
                         </div>
                         <!--LIKI price div ends-->
