@@ -35,7 +35,7 @@
         <li>
             <a href="<?php echo $_filter->getRemoveUrl() ?>" title="<?php echo $this->__('Remove This Item') ?>" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
 			<?php $item_min_max= explode("-",$this->stripTags($_filter->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
-			<span class="label"><?php echo $this->__($_filter->getName()) ?>:</span> <?php echo $_filter->getMShowSelected() ? $this->__('not') : '' ?> <?php if ($this->__($_filter->getName())=="Price"){ echo $item_min[0]."&nbsp;-".$item_max[0];} else { echo $this->stripTags($_filter->getLabel()); } ?> 
+			<span class="label"><?php echo $this->__($_filter->getName()) ?>:</span> <?php echo $_filter->getMShowSelected() ? $this->__('not') : '' ?> <?php if ($this->__($_filter->getName())=="Monthly Price"){ echo $item_min[0]."&nbsp;-".$item_max[0];} else { echo $this->stripTags($_filter->getLabel()); } ?> 
 		 </li>
     <?php endif; ?>
     <?php endforeach; ?>

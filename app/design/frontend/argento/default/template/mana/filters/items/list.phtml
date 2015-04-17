@@ -16,7 +16,59 @@
 ?>
 <?php echo Mage::helper('mana_core')->getNamedHtml('mana_filters/markup', 'before_items', array('block' => $this)) ?>
 <ol class="m-filter-item-list <?php echo $this->getFilterOptions()->getIsReverse() ? 'm-reverse' : '' ?>">
-<?php foreach ($this->getItems() as $_item): ?>
+<?php $top_five_brand=array();
+$top_five_brand_name=array();
+$highest_five_del=array();
+global $is_Filterable_item_brand;
+$is_Filterable_item_brand=0;
+foreach ($this->getItems() as $_item):  
+if($_item->getName()=='Brand'){array_push($top_five_brand,$_item->getCount());}
+?>
+<?php endforeach ?>
+<?php 
+	arsort($top_five_brand);
+	$arraylength=count($top_five_brand);		
+	if($arraylength > 5)
+		 $highest_five_del= array_slice($top_five_brand,0,5);
+	else
+		$highest_five_del=$top_five_brand;
+		$highest_five = $highest_five_del;
+?> <?php $i=0;
+foreach ($this->getItems() as $_item): 
+
+if($_item->getName()=='Brand')
+{
+	if (!in_array($_item->getCount(), $highest_five_del))
+				{
+					continue;
+				}
+				if (($key = array_search($_item->getCount(), $highest_five_del))  !== false)
+				{
+					unset($highest_five_del[$key]);
+				}
+}
+?>
+        <?php if ($_item->getMSelected()): ?>
+		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
+        <?php else : ?>
+	        <?php if (!$this->getFilterOptions()->getDisableNoResultOptions() || $_item->getCount() > 0 || $_item->getMSelected()): ?>
+       		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
+			<?php 
+			if (strpos($item_min[0],'$') !== false)
+			{
+			}
+			else
+			{			
+			}
+			?>
+			</a>
+ <?php else: //echo $this->escapeHtml($_item->getLabel()) ?>
+	        <?php endif; ?>
+        <?php endif; ?>
+        <?php // MANA END ?>
+        <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>
+            <?php //echo $_item->getCount() ?>
+        <?php endif; ?>
     <li <?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
         <?php // MANA BEGIN ?>
         <?php if ($_item->getMSelected()): ?>
@@ -25,7 +77,18 @@
         <?php else : ?>
 	        <?php if (!$this->getFilterOptions()->getDisableNoResultOptions() || $_item->getCount() > 0 || $_item->getMSelected()): ?>
        		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
-	        <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>" title="<?php if (strpos($item_min[0],'$') !== false) { echo $item_min[0]."&nbsp;-".$item_max[0]; } else{echo $this->escapeHtml($_item->getLabel());}?>"><?php if (strpos($item_min[0],'$') !== false) { echo $item_min[0]."&nbsp;-".$item_max[0]; } else{echo $this->escapeHtml($_item->getLabel());}?></a>
+	        <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>" title="<?php if (strpos($item_min[0],'$') !== false) { echo $item_min[0]."&nbsp;-".$item_max[0]; } else{echo $this->escapeHtml($_item->getLabel());}?>">
+			<?php 
+			if (strpos($item_min[0],'$') !== false)
+			{
+				echo $item_min[0]."&nbsp;-".$item_max[0];
+			}
+			else
+			{
+				echo $this->escapeHtml($_item->getLabel());
+			}
+			?>
+			</a>
  <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
 	        <?php endif; ?>
         <?php endif; ?>
@@ -35,5 +98,87 @@
         <?php endif; ?>
     </li>
 <?php endforeach ?>
+<?php
+foreach ($this->getItems() as $_item): ?>
+
+        <?php if ($_item->getMSelected()): ?>
+		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
+        <?php else : ?>
+	        <?php if (!$this->getFilterOptions()->getDisableNoResultOptions() || $_item->getCount() > 0 || $_item->getMSelected()): ?>
+       		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
+			<?php 
+			if (strpos($item_min[0],'$') !== false)
+			{
+				continue;
+			}
+			else
+			{
+				if (in_array($_item->getCount(), $highest_five))
+				{
+					$key = array_search($_item->getCount(), $highest_five);
+					unset($highest_five[$key]);
+					continue;
+				}
+			}
+			?>
+			</a>
+ <?php else: //echo $this->escapeHtml($_item->getLabel()) ?>
+	        <?php endif; ?>
+        <?php endif; ?>
+        <?php // MANA END ?>
+        <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>
+            <?php //echo $_item->getCount() ?>
+        <?php endif; ?>
+    <li class="other_brands_ids" style="display:none;"<?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
+        <?php // MANA BEGIN ?>
+        <?php if ($_item->getMSelected()): ?>
+		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
+        	<span class="m-selected-filter-item"><?php echo $item_min[0]."&nbsp;-".$item_max[0]; ?></span>
+        <?php else : ?>
+	        <?php if (!$this->getFilterOptions()->getDisableNoResultOptions() || $_item->getCount() > 0 || $_item->getMSelected()): ?>
+       		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
+	        <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>" title="<?php if (strpos($item_min[0],'$') !== false) { echo $item_min[0]."&nbsp;-".$item_max[0]; } else{echo $this->escapeHtml($_item->getLabel());}?>">
+			<?php 
+			if (strpos($item_min[0],'$') !== false)
+			{
+				echo $item_min[0]."&nbsp;-".$item_max[0];
+			}
+			else
+			{
+				echo $this->escapeHtml($_item->getLabel());
+			}
+			?>
+			</a>
+ <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
+	        <?php endif; ?>
+        <?php endif; ?>
+        <?php // MANA END ?>
+        <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>
+            <span id='other_brands_ids'>(<?php echo $_item->getCount() ?>)</span>
+        <?php endif; ?>
+    </li>
+	<?php if($_item->getName()=='Brand'){global $is_Filterable_item_brand;
+$is_Filterable_item_brand=1;} ?>
+<?php endforeach ?>
 </ol>
-<?php echo Mage::helper('mana_core')->getNamedHtml('mana_filters/markup', 'after_items', array('block' => $this)) ?>
+<?php
+if($is_Filterable_item_brand==1){
+echo "<span id='more_span' style='cursor: pointer;text-decoration:none;font-size:18px; padding-right:5px; color:#EF6E00; ' onclick='open_more();'>+</span><a class='more'  style='background-position:left center; cursor: pointer;' id='more' onclick='open_more();'>Other Brands</a>"; }
+ echo Mage::helper('mana_core')->getNamedHtml('mana_filters/markup', 'after_items', array('block' => $this)) ?>
+<script type="text/javascript">
+	function open_more(){
+		var elements = document.getElementsByClassName('other_brands_ids');
+		var more_btn = document.getElementById('more_span');
+		for(var i=0; i<elements.length; i++) { 
+		  if(elements[i].style.display == 'none'){
+			  elements[i].style.display='block';
+				  more_btn.innerHTML = "-";
+			}
+		else{
+			elements[i].style.display='none';	
+				  more_btn.innerHTML = "+";
+			}
+		}
+	}
+</script>
+

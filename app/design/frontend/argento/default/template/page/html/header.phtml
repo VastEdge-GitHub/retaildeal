@@ -30,6 +30,7 @@
 <!-- inline css  --->
 <style>
 a.logo { margin-left: -20px; }
+
 </style>
 <!-- inline css  --->
 	<?php  if (extension_loaded ('newrelic')) { echo newrelic_get_browser_timing_header();} // RD-301 edited on 25-DEC-2014
@@ -46,14 +47,15 @@ a.logo { margin-left: -20px; }
  ?>             
 <?php } ?>											
 <!-- Changes by liki ext -->
-<div id="liki_intro_popup" style="display:none"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('liki_intro')->toHtml()?></div>
+<div id="liki_intro_popup" style="display:none;"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('liki_intro')->toHtml()?></div>
 <!-- Changes by liki ext End -->
 <div class="top-toolbar-container">
     <div class="top-toolbar">
-        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_links')->toHtml() ?>
-        <?php echo $this->getChildHtml('store_language') ?>
+        <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_links')->toHtml() ?>
+        <?php //echo $this->getChildHtml('store_language') ?>
         <div class="quick-links">
-            <p class="welcome-msg"><?php echo $this->getWelcome() ?> <?php echo $this->getAdditionalHtml() ?></p>
+		<?php  ?>
+            <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></p>
             <?php echo $this->getChildHtml('topLinks') ?>
         </div>
     </div>
@@ -89,20 +91,20 @@ a.logo { margin-left: -20px; }
         <?php echo $this->getChildHtml('topSearch') ?>
     </div>
 
-    <?php $menu = $this->getChildHtml('topMenu') ?>
-    <?php if (!empty($menu)) : ?>
-        <?php if (!$navpro || !$navpro->getEnabled()) : ?>
-            <div class="navpro-mobile-toggle" data-menu="nav">
+    <?php //$menu = $this->getChildHtml('topMenu') ?>
+    <?php //if (!empty($menu)) : ?>
+        <?php //if (!$navpro || !$navpro->getEnabled()) : ?>
+           <!-- <div class="navpro-mobile-toggle" data-menu="nav">
                 <span class="navpro-mobile-toggle-icon">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </span>
                 <span class="navpro-mobile-toggle-label"><?php echo $this->__('Menu') ?></span>
-            </div>
-        <?php endif ?>
-        <?php echo $menu ?>
-    <?php endif; ?>
+            </div>-->
+        <?php //endif ?>
+        <?php //echo $menu ?>
+    <?php //endif; ?>
     <?php echo $this->getChildHtml('topContainer'); ?>
 </div>
 
