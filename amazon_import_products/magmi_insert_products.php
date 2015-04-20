@@ -99,9 +99,9 @@ if($ids)
 		$cat_active		= $data['is_active'];
 		if($cat_active == '1')												// Only active categories
 		{
-			if($amazon_id != '1' && $amazon_id != '')
-			{
-			if($data['level'] >= 3)										// Only sub-categories upto level 3
+			//if($amazon_id != '1' && $amazon_id != '')
+			//{
+			if($data['level'] >= 2)										// Only sub-categories upto level 3
 				{
 					$parent_name_arr	= explode("/",$data['url_path']);						
 					$parent_name_count	= count($parent_name_arr);
@@ -112,11 +112,15 @@ if($ids)
 					{
 						$cat_name		= $cat_array_namings[0];
 					}
-					if($parent_name == 'automotive')
+					/*if($parent_name == 'automotive')
+					{
+						$cat_name 		= $cat_array_namings[1];
+					}*/
+					if($parent_name == 'baby-products')
 					{
 						$cat_name 		= $cat_array_namings[1];
 					}
-					if($parent_name == 'baby-products')
+					if($parent_name == 'camera-electronics')
 					{
 						$cat_name 		= $cat_array_namings[2];
 					}
@@ -124,34 +128,30 @@ if($ids)
 					{
 						$cat_name 		= $cat_array_namings[3];
 					}
-					if($parent_name == 'electronics')
+					if($parent_name == 'furniture')
 					{
 						$cat_name 		= $cat_array_namings[4];
 					}
-					if($parent_name == 'health-personal-care')
+					if($parent_name == 'mattresses')
 					{
 						$cat_name 		= $cat_array_namings[5];
 					}
-					if($parent_name == 'home-garden')
+					/*if($parent_name == 'pet-supplies')
+					{
+						$cat_name 		= $cat_array_namings[7];
+					}*/
+					if($parent_name == 'television-home-theater')
 					{
 						$cat_name 		= $cat_array_namings[6];
 					}
-					if($parent_name == 'pet-supplies')
+					if($parent_name == 'video-games')
 					{
 						$cat_name 		= $cat_array_namings[7];
 					}
-					if($parent_name == 'sports-outdoors')
-					{
-						$cat_name 		= $cat_array_namings[8];
-					}
-					if($parent_name == 'toys-games')
-					{
-						$cat_name 		= $cat_array_namings[9];
-					}
-					if($parent_name == 'jewelry')
+					/*if($parent_name == 'jewelry')
 					{
 						$cat_name 		= $cat_array_namings[10];
-					  }
+					  }*/
 					}
 					$cat_info 	= $data['name']."||".$data['entity_id']."||".$data['parent_id']."||".$data['path']."||".$data['level']."||".$data['children_count']."||".$amazon_id."||".$data['is_active'];
 					$collection=$cat->getProductCollection();
@@ -161,7 +161,7 @@ if($ids)
 					$abc += $collection->count();
 					$sno++;
 				}
-			}
+			//}
 		}
 	}
 }
