@@ -19,7 +19,7 @@ if ($slides = $this->getSlider()->getSlides()) :
             <div class="scroller" style=" width:auto; height:409px;">
                 <div class="content">
                     <?php $i = 0; foreach ($slides as $slide): ?>
-                        <div class="section1" id="section<?php echo ++$i ?>">
+                        <div class="section1" id="section<?php echo ++$i ?>" style="width:720px">
                             <a style='cursor:default;' href="<?php echo $slide['target'] ?>">
                                 <?php
                                     if (strncmp($slide['url'],'http', 4) == 0) {
