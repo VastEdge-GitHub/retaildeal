@@ -1,11 +1,10 @@
 <!-- RD-588 css -->
 <style>
-#slider_main_div{ width:720px !important ;Height:409px !important;}
-.likibannerright{float:left;margin:0;cursor:pointer;} .easyslideslider-id img {width:720px !important; height:409 !important;}
+#slider_main_div{ /*width:720px !important ;Height:409px /*!important*/;}
+.likibannerright{float:left;margin:0;cursor:pointer;} .easyslideslider-id img {width:100%; height:auto; /*width:720px !important;s height:409px !important;*/}
 <!-- RD-588 css -->
 
 </style>
-
 <?php
 if ($slides = $this->getSlider()->getSlides()) :
     $slider = $this->getSlider();
@@ -13,14 +12,14 @@ if ($slides = $this->getSlider()->getSlides()) :
     $height = $slider['height'];
     $easyslide_id = $slider['easyslide_id'];
 ?>
-    <?php if ($slider['slider_type'] == '0') : ?>
+    <?php if ($slider['slider_type'] == '0') : ?> 
     	<div id="slider_main_div">
 		<!--RD-423 start-->
-        <div class="easyslideslider-id" id="easyslideslider-<?php echo $easyslide_id; ?>" style='position: relative;float:left; width:720px !important; height:409px !important;'> <!--RD-423 end-->
-            <div class="scroller" style='width:720px !important; height:409px !important;'>
+        <div class="easyslideslider-id" id="easyslideslider-<?php echo $easyslide_id; ?>" style='position: relative;float:left;'> <!--RD-423 end-->
+            <div class="scroller" style=" width:auto; height:409px;">
                 <div class="content">
                     <?php $i = 0; foreach ($slides as $slide): ?>
-                        <div class="section" id="section<?php echo ++$i ?>" style="width:720px !important; height:409px !important;">
+                        <div class="section1" id="section<?php echo ++$i ?>">
                             <a style='cursor:default;' href="<?php echo $slide['target'] ?>">
                                 <?php
                                     if (strncmp($slide['url'],'http', 4) == 0) {
@@ -67,7 +66,7 @@ if ($slides = $this->getSlider()->getSlides()) :
        <a href="<?php echo Mage::getBaseUrl().'liki_prequalification'; ?>"><img id="banner_rt" src="/skin/frontend/argento/default/images/banner_right.png" width="196" height="330" alt="" onclick="" /></a>
         </div> RD-551 end-->
 		</div>
-		<div class="custom_slider_bottom" style='margin-top:-40px; float:left;width:730px; background: #fff url(https://www.retaildeal.biz/skin/frontend/argento/argento/images/easyslider_bg.gif) no-repeat 50% 100%;'><br></div><!--RD-423-->
+		<div class="custom_slider_bottom" style=' width:730px; background: #fff url(https://www.retaildeal.biz/skin/frontend/argento/argento/images/easyslider_bg.gif) no-repeat 50% 100%;'><br></div><!--RD-423-->
         <script type="text/javascript" charset="utf-8"> 
         var new_glider = new Glider('easyslideslider-<?php echo $easyslide_id; ?>', {
             duration     : <?php echo $slider['duration'];?>,

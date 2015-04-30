@@ -74,7 +74,7 @@ ul,ol         { list-style:none; }
 
 /* Tools */
 .hidden       { display:block !important; border:0 !important; margin:0 !important; padding:0 !important; font-size:0 !important; line-height:0 !important; width:0 !important; height:0 !important; overflow:hidden !important; }
-.nobr         { white-space:nowrap !important; }
+/* .nobr         { white-space:nowrap !important; }  */
 .wrap         { white-space:normal !important; }
 .a-left       { text-align:left !important; }
 .a-center     { text-align:center !important; }
@@ -1115,6 +1115,7 @@ tr.summary-details-excluded { font-style:italic; }
 }
 
 /* Remember Me Popup ===================================================================== */
+
 .window-overlay { background:url(../images/window_overlay.png) repeat; background:rgba(0, 0, 0, 0.35); position:absolute; top:0; left:0; height:100%; width:100%; z-index:990; }
 
 .remember-me label {}
