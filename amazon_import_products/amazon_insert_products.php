@@ -833,7 +833,7 @@
 												// Defining path where images are to be temporarily stored
 												
 												
-												if($build_image)
+												if(1)
 												{
 													if(!$_img_data = file_get_contents($prod_img_url))
 													{

@@ -54,7 +54,7 @@
 	else{echo "Something went wrong. Unable to establish MySQL conection";}
 	mysql_select_db($custom_dbName, $custom_conn);
 	
-	$sql = "select sku from catalog_product_flat_1"; 
+	$sql = "select distinct * from catalog_product_entity"; 
 	//echo $sql; 
 	$retval = mysql_query( $sql, $custom_conn );
 	if(! $retval )
