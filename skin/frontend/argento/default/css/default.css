@@ -2054,6 +2054,7 @@ position: relative;
 	padding: 22px 25px 12px 33px;
 
 
+
 	margin: 20px 0;
 }
 .account-login .registered-users h2
@@ -2471,8 +2472,9 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 }
 @media only screen and (max-width:480px) 
 {
-	.leaseit_keepit.odd {margin-left: 64% !important;width: 90px !important; }
-	.leaseit_keepit.even {margin-left: 64% !important;width: 90px !important; }
+	.leaseit_keepit.odd {margin-left: 64% !important;width: 90px !important; } 
+	.leaseit_keepit.even {margin-left: 64% !important;width: 90px !important;}
+	iframe{width: 303px; height: 226px;}  /* video css*/
 }
 .custom_slider_bottom{margin-top:85% !important;}
 @media only screen and (min-width:480px) 
@@ -2550,6 +2552,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -242px !important;}
+	 iframe{width:478px; height:272px; margin-top:10px;}/* video css*/
 }
 @media only screen and (width:568px) 
 {
@@ -2577,6 +2580,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -217px !important;}
+	iframe{width:376px; height:214px;} /* video css*/
 }
 @media only screen and (min-width:533px) and (max-width:603px) 
 {
@@ -2697,6 +2701,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -232px !important;}
 	a.btn-remove.item-remove.col-delete-item {margin-left: 7px !important;}
+	iframe{width:459px; height:262px;} /* video css*/
 }
 @media only screen and (width:360px)
 {
@@ -2720,6 +2725,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -217px !important;}
+	iframe{width:224px !important; height:178px !important;} /* video css*/
 }
 @media only screen and (width:375px)  
 {
@@ -2743,6 +2749,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -217px !important;}
+	iframe{width:232px !important; height:132px !important;} /* video css*/
 }
 @media only screen and (width:414px) 
 {
@@ -2765,6 +2772,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -217px !important;}
+	 iframe{width:260px !important; height:148px !important;}/* video css*/
 }
 @media only screen and (width:640px) and (height:360px) 
 {
@@ -2789,6 +2797,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -232px !important;}
 	a.btn-remove.item-remove.col-delete-item {margin-left: 7px !important;}
+	 iframe{width:458px !important; height:261px !important;}/* video css*/
 }
 @media only screen and (width:568px) and (height:320px) 
 {
@@ -2806,6 +2815,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -217px !important;}
 	a.btn-remove.item-remove.col-delete-item {margin-left: 7px !important;}
+	 iframe{width:405px; height:231px;} /* video css*/
 }
 @media only screen and (width:533px)
 {
@@ -2830,6 +2840,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -217px !important;}
+	iframe{width:380px; height:217px;} /* video css*/
 }
 @media only screen and (width:600px)
 {
@@ -2854,6 +2865,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.cartinfo{  width: 92% !important;}
 	.chkout_btn.custom_popup{ margin-left: -215px !important;}
 	a.btn-remove.item-remove.col-delete-item {margin-left: 20px !important;}
+	iframe{width:429px; height:245px;} /* video css*/
 }
 @media only screen and (width:768px)
 {
@@ -2868,6 +2880,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width: 92% !important;}
 	.chkout_btn.custom_popup{ margin-left: -278px !important;}
+	iframe{width:555px; height:316px;} /* video css*/
 }
 @media only screen and (width:800px)
 {
@@ -2883,6 +2896,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width: 92% !important;}
 	.chkout_btn.custom_popup{ margin-left: -282px !important;}
+	iframe{width:579px; height:329px;} /* video css*/
 }
 @media only screen and (width:853px) and (height:533px) 
 {
@@ -2896,6 +2910,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -312px !important;}
+	iframe{width:618px; height:353px;} /* video css*/
 }
 @media only screen and (width:603px) 
 {
@@ -2917,6 +2932,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:89% !important;}
 	.chkout_btn.custom_popup{ margin-left: -217px !important;}
+	iframe{width:429px; height:245px;} /* video css*/
 }
 @media only screen and (width:966px) 
 {
@@ -2937,6 +2953,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width: 92% !important;}
 	.chkout_btn.custom_popup{ margin-left: -339px !important;}
+	iframe{width:656px; height:373px;} /* video css*/
 }
 @media only screen and (width:736px) 
 {
@@ -2952,6 +2969,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.suggestpage-activity {min-width: 288px !important;}
 	.cartinfo{  width:94% !important;}
 	.chkout_btn.custom_popup{ margin-left: -269px !important;}
+	iframe{width:530px; height:301px;} /* video css*/
 }
 @media only screen and (width:480px) and (height:640px)
 {
@@ -2985,6 +3003,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.norton_img{float: left !important;margin-left: 7px !important;}
 	.section1{ width: 196px !important;}
 	.scroller{ height: 120px !important;}
+	iframe{width: 200px; height: 150px; margin-top: -50px; margin-bottom: 65px;}   /* video css*/
 }
 .easyslideslider-id .scroller{padding-bottom: 0px !important;}
 .easyslideslider-id {padding-bottom: 0px !important;}
