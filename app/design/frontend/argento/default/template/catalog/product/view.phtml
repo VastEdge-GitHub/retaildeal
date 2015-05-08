@@ -83,9 +83,6 @@
             $month_price =  $_product->getLikiPrice();
 			$free_shipping =  $_product->getFreeShipping();
             }
-			
-			$cash		= $_product->getPrice();
-			$cash_price = ceil($cash)- 0.01;
         ?>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <div class="product-view">
@@ -137,18 +134,18 @@
                         	<div class="monthly-price-display">
                                 <span>	<?php echo "$".number_format($_product->getLikiPrice(), 2); ?> </span>
                                 <span>/mo.</span>
-                              <!--  
+                                
                                 <div class="chkout_btn" style="float: left;height: 32px;padding: 0 10px 0 10px;margin: 8px; margin-left:50px;cursor:pointer;" onclick="return showForm('liki_intro_popup')">
                    <!--LIKI Code Start
-						Reason: displaying a underline of anchor tag so, text-decoration has set none of anchor tag 
+						Reason: displaying a underline of anchor tag so, text-decoration has set none of anchor tag -->
 				    <a style="text-decoration:none;float:left;display:block;padding-right:0;">
 					<!--LIKI Code End-->
-					<!-- Changes by Likiext Start, Reason : RD-203 
+					<!-- Changes by Likiext Start, Reason : RD-203 -->
                         <span id="chk_liki_spam" style="float:left;font-size:12px;font-weight:bold;color:#333;line-height:32px;">Featuring</span>
                         <img id="chkout_liki_img" src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;" width="45px">
-					<!-- Changes by Likiext End 
+					<!-- Changes by Likiext End -->	
                     </a>
-                </div> -->                  
+                </div>                   
 							</div>
                         </div>
                         <!--LIKI price div ends-->
