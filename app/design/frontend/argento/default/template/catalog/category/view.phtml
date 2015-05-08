@@ -24,9 +24,6 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<style>
-.price-box {display: none;}
-</style>
 <?php
 /**
  * Category view template
@@ -34,6 +31,9 @@
  * @see Mage_Catalog_Block_Category_View
  */
 ?>
+<style>
+span.price{display: none;}
+</style>
 <?php
     $_helper     = $this->helper('catalog/output');
     $_category   = $this->getCurrentCategory();
