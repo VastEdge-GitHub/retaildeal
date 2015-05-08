@@ -1,0 +1,33 @@
+<style>
+.category-title{display: none;}
+.subcat_homelist{float:left;width:26%; height:180px; margin-top: 30px; margin-left: 15px; margin-right: 15px; margin-bottom: 30px;padding: 5px 10px 5px 10px; background:#F1F1F1; border:1px solid #d7d7d7; display:block;}
+.spantitle{float:left; text-align:center; width:80%; margin-top: 8px;}
+.subcat_homelist span{float: left; width: 85%; margin-left: 20px; margin-top: 10px; font-weight :bold; font-size:16px; text-align:center;margin-right: 25px;}
+</style>
+
+	<?php
+		$categories = Mage::getModel('catalog/category')
+		->getCollection()
+		->addAttributeToSelect('*')
+		->addIsActiveFilter();
+		
+		$ids = array(3559,3561,3562,4220,3660,3662); 
+    ?>
+	<div class="home-catlist" style="float:left;margin-bottom:50px;width:auto;"> 
+		<?php
+        foreach ($categories as $category)
+        {
+		  if( in_array($category->getId(),$ids) )
+            {
+         ?>
+        <div class="subcat_homelist">
+            <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>">
+                <img src="<?php echo Mage::getBaseUrl('media')?>catalog/category/<?php echo $category->getThumbnail()?>" alt="<?php echo 
+				$category->getName() ?>" width="180" height="180"/>
+                 <span class="spantitle"> Shop <?php echo $category->getName() ?></span>
+            </a>
+         </div>
+         <?php
+        	}
+        } ?>
+	</div>
