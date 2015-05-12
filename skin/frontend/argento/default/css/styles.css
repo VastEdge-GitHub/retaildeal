@@ -1115,6 +1115,7 @@ tr.summary-details-excluded { font-style:italic; }
 }
 
 /* Remember Me Popup ===================================================================== */
+
 .window-overlay { background:url(../images/window_overlay.png) repeat; background:rgba(0, 0, 0, 0.35); position:absolute; top:0; left:0; height:100%; width:100%; z-index:990; }
 
 .remember-me label {}
@@ -1621,12 +1622,50 @@ text-indent: -9999px;}
 		margin-top: -52% !important;
 	}
 } 
-@media only screen and (width: 640px){
+@media only screen and (min-width: 640px) and (max-width: 670px){
 	.product-shop-inner .same-as-cash{
 		margin-top: -60% !important;
 	}
 } 
-
+@media only screen and (width: 736px){
+	.product-shop-inner .same-as-cash{
+		margin-top: -50% !important;
+	}
+} 
+@media only screen and (min-width: 500px) and (max-width: 970px) {
+	.catpage-video1 img#Ifram{
+		width: 100%;
+	}
+	.main .catpage-video #iFrameName{
+		width: 100%;
+	}
+	
+}
+@media only screen and (min-width: 500px) and (max-width: 600px) {
+	.main .catpage-video #iFrameName{
+		height: 242px;
+	}
+}
+@media only screen and (min-width: 601px) and (max-width: 676px) {
+	.main .catpage-video #iFrameName{
+		height: 280px;
+	}
+}
+@media only screen and (min-width: 677px) and (max-width: 740px) {
+	.main .catpage-video #iFrameName{
+		height: 310px;
+	}
+}
+@media only screen and (min-width: 741px) and (max-width: 860px) {
+	.main .catpage-video #iFrameName{
+		height: 360px;
+	}
+}
+@media only screen and (min-width: 8611px) and (max-width: 900px) {
+	.main .catpage-video #iFrameName{
+		height: 375px;
+	}
+}
 /**************product-page-video-responsive end*************/
 
 

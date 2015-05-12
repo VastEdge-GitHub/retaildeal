@@ -50,7 +50,7 @@
 	background-position: 99% -170px !important;padding: 0px 27px 11px 11px !important;height :25px !important;margin:3px 5px 0 0!important;
 }
 .product-view .product-shop .add-to-cart .qty { margin:3px 5px 0 0;height:19px;text-align:center;}
-.product-view .add-to-cart-wrapper{padding-left:0;}
+.product-view .add-to-cart-wrapper{padding-left:0; position: inherit; z-index: -1; }
 
 <!-- inline css  --->>
 .monthly-price-display { float: left; width: 100%; color: #000; font-size: 1.5em; font-weight: bold; }
@@ -59,7 +59,7 @@
 #chkout_btn_id a {text-decoration:none; float:left;cursor:pointer; }
 
 
-.or-purchase-for-text{ float:left;width:105px;margin-top:11px;font-weight:bold;font-size:12px;font-family:Arial; }
+.or-purchase-for-text{ float:left;width:151px;margin-top:11px;font-weight:bold;font-size:14px;font-family:Arial;}
 .add-to-box {float: left;width: 100%;margin-top: 20px;text-align: right; }
 
 .free-shipping{ margin-bottom:20px; float:left; }
@@ -81,6 +81,9 @@
             $month_price =  $_product->getLikiPrice();
 			$free_shipping =  $_product->getFreeShipping();
             }
+	  		$cash		= $_product->getPrice();
+			$cash_price = ceil($cash)- 0.01;
+			$cash_price = number_format($cash_price, 2); 
         ?>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <div class="product-view">
@@ -148,9 +151,21 @@
                         </div>
                         <!--LIKI price div ends-->
                 <?php endif ?>
-				<div class="or-purchase-for-text">or purchase for</div>
-                <?php echo $this->getChildHtml('product_type_data') ?>
-
+				<!--<div class="or-purchase-for-text">own it in 12 payments</div>-->
+                <?php //echo $this->getChildHtml('product_type_data') ?> 
+                 <!-- RD-626 starts -->
+				<div class="chkout_btn" style="float: left;height: 50px; width:27%; padding: 0 10px 10px 10px;margin: 8px;cursor:pointer;margin-left: 0; margin-top: 3%;" onclick="return showForm('liki_intro_popup')"> <span class="own-purchase">Own it in 12 payments</span>
+                                   <!--LIKI Code Start
+                                        Reason: displaying a underline of anchor tag so, text-decoration has set none of anchor tag -->
+                                    <a style="text-decoration:none;float:left;display:block;padding-right:0;">
+                                    <!--LIKI Code End-->
+                                    <!-- Changes by Likiext Start, Reason : RD-203 -->
+                                        <span id="chk_liki_spam" style="float:left; margin-left:1px; font-size:13px;font-weight:bold;color:#430000;line-height:32px;">Featuring</span>
+                                        <img id="chkout_liki_img" src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;" width="45px">
+                                    <!-- Changes by Likiext End -->	
+                                    </a>
+               	 </div>  
+                  <!-- RD-626 ends-->    
                 <?php if (!$this->hasOptions()):?>
                     <div class="add-to-box">
                         <?php if($saleable): ?>
@@ -165,8 +180,16 @@
                     </div>
                 <?php endif ?>
 
-                <?php echo $this->getChildHtml('other');?>                
-                            
+                <?php echo $this->getChildHtml('other');?>
+                <!-- RD-626 starts -->    
+					 <div style="display:none" id="myFrame"> <iframe style="margin-left:40%; margin-top: -24%;border: 1px solid;" id="iFrameName" width="350" height="200" src="https://www.youtube.com/embed/KSlP9crt0vM?rel=0" frameborder="0" allowfullscreen></iframe></div>
+						<?php $img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+						 $imge = $img."wysiwyg/video-img.jpg"; ?> 
+						<div id="video-img" class="prodpage-video" style="display:block;">
+						<img id="Ifram" src="<?php echo $imge; ?>" alt="See How It Works Live" title="See How It Works Live" onclick="myFunction()" width="350" height="200" style=" margin-top: -24%; cursor:pointer;" /></div>												  
+						<div class="same-as-cash">90 days same as cash for $<?php echo $cash_price; ?></div> 
+                      <!-- RD-626 ends -->  
+               
       <!-- start RD-527 -->       
                           <div class="norton_shipping"> 
 
@@ -316,5 +339,17 @@
 		}
 		
 	}
+	
+/** RD- 626 **/	
+function myFunction()
+{                    
+	document.getElementById('iFrameName').src = "https://www.youtube.com/embed/KSlP9crt0vM?&wmode?rel=0&autoplay=1&modestbranding=1&wmode=opaque&rel=0&autohide=1&showinfo=0&wmode=transparent&vq=hd720&hd=1";
+	//jQuery('#Ifram').fadeOut(500); 
+	setTimeout( "jQuery('#myFrame').show();",500); 
+	document.getElementById("video-img").style.display = "block";
+	document.getElementById("video-img").style.opacity = "0";
+	document.getElementById("myFrame").style.display = "block";
+} 
+/** end **/
 </script>
 <!-- Changes by LIKI Ext Ends -->
