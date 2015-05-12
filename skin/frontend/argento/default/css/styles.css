@@ -293,7 +293,7 @@ p.required { font-size:10px; text-align:right; color:#f00; }
 .error-msg,
 .success-msg,
 .note-msg,
-.notice-msg { border-style:solid !important; border-width:1px !important; background-position:10px 9px !important; background-repeat:no-repeat !important; min-height:24px !important; padding:8px 8px 8px 32px !important; font-size:12px !important; font-weight:normal !important; }
+.notice-msg { border-style:solid !important; border-width:1px !important; background-position:10px 9px !important; background-repeat:no-repeat !important; min-height:24px !important; padding:8px 8px 8px 32px !important; font-size:14px !important; font-weight:normal !important; }
 
 .error-msg { border-color:#f16048; background-color:#faebe7; background-image:url(../images/i_msg-error.gif); color:#df280a; }
 .success-msg { border-color:#446423; background-color:#eff5ea; background-image:url(../images/i_msg-success.gif); color:#3d6611; }
@@ -1115,7 +1115,6 @@ tr.summary-details-excluded { font-style:italic; }
 }
 
 /* Remember Me Popup ===================================================================== */
-
 .window-overlay { background:url(../images/window_overlay.png) repeat; background:rgba(0, 0, 0, 0.35); position:absolute; top:0; left:0; height:100%; width:100%; z-index:990; }
 
 .remember-me label {}
@@ -1360,7 +1359,7 @@ text-indent: -9999px;}
  }
 
  .link_contacts{
-	margin-top: 0px !important; /* RD-588  */
+	margin-top: 0px !important;
  }
  
  	 
@@ -1518,4 +1517,116 @@ text-indent: -9999px;}
 }
 
 /*RD-460 end*/
+
+/**************product-page-video-responsive start*************/
+@media only screen and (min-width: 500px) and (max-width: 1100px) {
+	iframe#iFrameName {
+		margin-left: 0% !important;
+		margin-top: 0% !important;
+	}
+	.product-shop-inner #myFrame {
+	  position: absolute;
+	  margin-left: 0%;
+	  margin-top: 6%;
+	}
+}
+
+@media only screen and (min-width: 500px) and (max-width: 533px){
+	.product-shop-inner .same-as-cash{
+		margin-top: -81% !important;
+	}
+	.product-shop-inner .prodpage-video{
+		margin-left: 0% !important;
+		margin-top: 35% !important;
+	}
+	.product-shop-inner .add-to-cart-wrapper .chkout_btn{
+		width:59% !important;
+		margin-left: 0px !important;
+	}
+	img#Ifram{
+		width: 100%;
+	}
+	iframe#iFrameName{
+		width:98%;
+	}
+	
+}
+@media only screen and (min-width: 534px) and (max-width: 570px){
+	.product-shop-inner .same-as-cash{
+		margin-top: -70% !important;
+	}
+	.product-shop-inner .prodpage-video{
+		margin-left: 0% !important;
+		margin-top: 35% !important;
+	}
+	.add-to-cart-wrapper .chkout_btn{
+		width:44% !important;
+	}
+}
+@media only screen and (min-width: 571px) and (max-width: 800px){
+	.product-shop-inner .same-as-cash{
+		margin-top: -67% !important;
+	}
+	.product-shop-inner .prodpage-video{
+		margin-left: 0% !important;
+		margin-top: 35% !important;
+	}
+	.product-shop-inner .add-to-cart-wrapper .chkout_btn{
+		width:44% !important;
+		margin-left: 0px !important;
+	}
+}
+
+@media only screen and (min-width: 801px) and (max-width: 900px){
+	.product-shop-inner .same-as-cash{
+		margin-top: -53% !important;
+	}
+	.product-shop-inner .prodpage-video{
+		margin-left: 0% !important;
+		margin-top: 35% !important;
+	}
+	.add-to-cart-wrapper .chkout_btn{
+		width:35% !important;
+	}
+}
+
+@media only screen and (min-width: 901px) and (max-width: 1100px){
+	.product-shop-inner .same-as-cash{
+		margin-top: -46% !important;
+	}
+	.product-shop-inner .prodpage-video{
+		margin-left: 0% !important;
+		margin-top: 35% !important;
+	}
+	.add-to-cart-wrapper .chkout_btn{
+		width:27% !important;
+	}
+
+}
+@media only screen and (min-width: 1100px){
+	.product-shop-inner #myFrame {
+		  margin-left: 5.5%;
+		  margin-top: -2%;
+		  position: absolute;
+	}
+}
+
+@media only screen and (min-width: 1100px){
+	.product-shop-inner .same-as-cash{
+		font-size: 12px !important;
+	}
+} 
+@media only screen and (width: 720px){
+	.product-shop-inner .same-as-cash{
+		margin-top: -52% !important;
+	}
+} 
+@media only screen and (width: 640px){
+	.product-shop-inner .same-as-cash{
+		margin-top: -60% !important;
+	}
+} 
+
+/**************product-page-video-responsive end*************/
+
 

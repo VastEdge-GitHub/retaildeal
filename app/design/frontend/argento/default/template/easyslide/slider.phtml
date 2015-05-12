@@ -15,12 +15,12 @@ if ($slides = $this->getSlider()->getSlides()) :
     <?php if ($slider['slider_type'] == '0') : ?> 
     	<div id="slider_main_div">
 		<!--RD-423 start-->
-        <div class="easyslideslider-id" id="easyslideslider-<?php echo $easyslide_id; ?>" style='position: relative;float:left;'> <!--RD-423 end-->
-            <div class="scroller" style=" width:auto; height:409px;">
+        <div class="easyslideslider-id" id="easyslideslider-<?php echo $easyslide_id; ?>" style='position: relative;float:left; margin-bottom:3px;'> <!--RD-423 end-->
+            <div class="scroller" style=" width:auto; height:409px;"> 
                 <div class="content">
                     <?php $i = 0; foreach ($slides as $slide): ?>
-                        <div class="section1" id="section<?php echo ++$i ?>" style="width:720px">
-                            <a style='cursor:default;' href="<?php echo $slide['target'] ?>">
+                        <div class="section1" style="width:720px;" id="section<?php echo ++$i ?>" >
+                         <a style="cursor:default;"> 
                                 <?php
                                     if (strncmp($slide['url'],'http', 4) == 0) {
                                         $image_src = $slide['url'];
@@ -29,8 +29,10 @@ if ($slides = $this->getSlider()->getSlides()) :
                                     }
                                 ?>
                                 <!--RD-423 start-->
-                                <img src="<?php echo $image_src; ?>" width="720" height="409" alt="<?php echo $this->escapeHtml($slide['image']) ?>"/>
-                                
+                                <img src="<?php echo $image_src; ?>" usemap="#toQualify" width="720" height="409" alt="<?php echo $this->escapeHtml($slide['image']) ?>"/>
+                                <map name="toQualify">
+									<area style="cursor:pointer;" shape="poly" coords="52,15,44,25,44,100,51,108,468,108,478,102,481,25,468,15,66,15" onclick="analytischk_ad(); LikiPrequalifyAPI();" />
+								</map>
                                 <!--RD-423 end-->
                             </a>
                             <?php if (!empty($slide['description'])) : ?>
@@ -41,7 +43,7 @@ if ($slides = $this->getSlider()->getSlides()) :
                 </div>
             </div>
 
-            <!--RD-551start
+            <!--RD-551_start
              <div class="easyslidecontrolwr">
                 <div class="easyslidercontrol">
                 <?php if ($this->getSlider()->getControlsType() == 'number'):
@@ -66,7 +68,8 @@ if ($slides = $this->getSlider()->getSlides()) :
        <a href="<?php echo Mage::getBaseUrl().'liki_prequalification'; ?>"><img id="banner_rt" src="/skin/frontend/argento/default/images/banner_right.png" width="196" height="330" alt="" onclick="" /></a>
         </div> RD-551 end-->
 		</div>
-		<div class="custom_slider_bottom" style=' width:730px; background: #fff url(https://www.retaildeal.biz/skin/frontend/argento/argento/images/easyslider_bg.gif) no-repeat 50% 100%;'><br></div><!--RD-423-->
+	<!--RD Changes ->	<div class="custom_slider_bottom" style=' width:730px; background: #fff url(https://www.retaildeal.biz/skin/frontend/argento/argento/images/easyslider_bg.gif) no-repeat 50% 100%;'><br></div> <!--RD Changes ->
+    <!--RD-423-->
         <script type="text/javascript" charset="utf-8"> 
         var new_glider = new Glider('easyslideslider-<?php echo $easyslide_id; ?>', {
             duration     : <?php echo $slider['duration'];?>,
@@ -136,4 +139,55 @@ if ($slides = $this->getSlider()->getSlides()) :
         </script>
     <?php endif; ?>
 <?php endif; ?>
-<div> <iframe width="720" height="409" src="https://www.youtube.com/embed/KSlP9crt0vM?rel=0" frameborder="0" allowfullscreen></iframe> </div>
+
+<!--RD-551 Start-->
+ 
+<div style="display:none" id="myFrame"> <iframe id="iFrameName" width="720" height="409" src="https://www.youtube.com/embed/KSlP9crt0vM?rel=0" frameborder="0" allowfullscreen></iframe> </div>
+
+<?php $img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+$imge = $img."wysiwyg/video-img.jpg"; ?>
+
+<div style="display:block; cursor:pointer"> 
+<img id="Ifram" src="<?php echo $imge; ?>" alt="See How It Works Live" title="See How It Works Live" onclick="myFunction()" />
+</div>
+<?php
+$liki_prequalify_url = "https://likistaging.azurewebsites.net/LeaseApplication/ProcessPostPrequalification"; //For Demo Server prequalify liki API url
+$liki_prequalfication_data = array("MerchantSession" => array
+        (
+            "MerchantId" => "1",
+            "MerchantCustomerId" => "0",
+            "SuccessURL" => Mage::getBaseUrl().'CreditApplication/Payment/success',
+            "CancelURL" => Mage::getBaseUrl().'CreditApplication/Payment/cancel',
+            "RejectURL" => Mage::getBaseUrl().'CreditApplication/Payment/reject',
+            "LogoURL" => Mage::getBaseUrl().'Logo.png',
+			"ChangeOrderURL" => 'http://demo.retaildeal.biz'
+        ));
+ //echo json_encode($liki_prequalfication_data);		
+?>
+<form name="likiPrequalify" method="post" action="<?php echo $liki_prequalify_url; ?>">
+	<input type="hidden" name="requestString" value='<?php echo urlencode(json_encode($liki_prequalfication_data)); ?>'>
+	
+</form>
+<script type="text/javascript">
+function analytischk_ad()
+{
+	analytics.track('Prequalification', {
+	  Action: 'DEMO Prequalification'
+	});
+}
+function LikiPrequalifyAPI()
+{
+	var decoded_form = '<?php echo json_encode($liki_prequalfication_data) ?>';
+	alert("URL Decoded Form : "+decoded_form);
+	alert("URL Encoded Form: "+document.likiPrequalify.requestString.value);
+	document.likiPrequalify.submit();
+}
+/** RD-626 **/
+function myFunction()
+{                    
+	document.getElementById('iFrameName').src ="https://www.youtube.com/embed/KSlP9crt0vM?&wmode?rel=0&autoplay=1&modestbranding=1&wmode=opaque&rel=0&autohide=1&showinfo=0&wmode=transparent&vq=hd720&hd=1";
+	jQuery('#Ifram').fadeOut(500); 
+	setTimeout( "jQuery('#myFrame').show();",500); 		 
+}
+/** End here **/
+</script>
