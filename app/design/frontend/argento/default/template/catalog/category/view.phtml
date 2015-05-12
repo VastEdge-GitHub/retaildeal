@@ -31,6 +31,9 @@
  * @see Mage_Catalog_Block_Category_View
  */
 ?>
+<style>
+span.price{ display: none;} 
+</style>
 <?php
     $_helper     = $this->helper('catalog/output');
     $_category   = $this->getCurrentCategory();
@@ -80,14 +83,14 @@ $imge = $img."wysiwyg/video-img.jpg"; ?>
 <div style="display:block; cursor:pointer;">
 <img id="Ifram" src="<?php echo $imge; ?>" alt="See How It Works Live" title="See How It Works Live" onclick="myFunction()" />
 </div>
+
 <!-- End -->
 <?php endif; ?>
 <?php 
-   $cat_id =$_helper->categoryAttribute($_category, $_category->getId(), 'id');
-   	$cat_name = $_category->getName();
-     if($_category->getBottomDescription()!=''){
- ?>  
-  
+		$cat_id =$_helper->categoryAttribute($_category, $_category->getId(), 'id');
+		$cat_name = $_category->getName();
+		if($_category->getBottomDescription()!=''){
+ ?>    
 <div class="page-title category-title">
 <div style="float:left; margin-top:10px; text-align:justify;">
 <?php echo $_category->getBottomDescription() ?>
@@ -97,8 +100,8 @@ $imge = $img."wysiwyg/video-img.jpg"; ?>
 
 <!-- RD-573 -->
 <script type="text/javascript">
- document.onreadystatechange = function () {
- var IsPageLoaded = document.readystate;
+ document.onreadyIsPageLoadedchange = function () {
+ var IsPageLoaded = document.readyIsPageLoaded;
 	 if (IsPageLoaded == 'interactive')
 	 {
 		 console.log("not loaded");
