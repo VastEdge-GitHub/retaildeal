@@ -70,6 +70,10 @@
 #chkout_btn_id a span img {width: 90%; margin-top: -5px; height: 47px;} /* RD-588  */
 .style_liki{ position:absolute; /*margin-left:85px; */ margin-top:-13px; width:470px; }
 <!-- RD-588 inline css  --->>
+<!-- RD-626 -->
+.same-as-cash { float: left; height: 32px;padding: 0 10px 0 10px;margin-top: -12%;;margin-left: -2%;width:42%; height: 35px;float:left;font-size:16px;font-weight:bold;color:#FF7C0E;}
+.norton_shipping{ margin-top:4% !important;} 
+.own-purchase{ float: left; font-size: 13px; font-weight: bold; color: #430000; margin-top: 4%;} 
 
 </style>
 
@@ -135,18 +139,18 @@
                         	<div class="monthly-price-display">
                                 <span>	<?php echo "$".number_format($_product->getLikiPrice(), 2); ?> </span>
                                 <span>/mo.</span>
-                                
-                                <div class="chkout_btn" style="float: left;height: 32px;padding: 0 10px 0 10px;margin: 8px; margin-left:50px;cursor:pointer;" onclick="return showForm('liki_intro_popup')">
-                   <!--LIKI Code Start
-						Reason: displaying a underline of anchor tag so, text-decoration has set none of anchor tag -->
-				    <a style="text-decoration:none;float:left;display:block;padding-right:0;">
-					<!--LIKI Code End-->
-					<!-- Changes by Likiext Start, Reason : RD-203 -->
-                        <span id="chk_liki_spam" style="float:left;font-size:12px;font-weight:bold;color:#333;line-height:32px;">Featuring</span>
-                        <img id="chkout_liki_img" src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;" width="45px">
-					<!-- Changes by Likiext End -->	
-                    </a>
-                </div>                   
+                           
+                        <!--         <div class="chkout_btn" style="float: left;height: 32px;padding: 0 10px 0 10px;margin: 8px;cursor:pointer;margin-left: -28%; margin-top: 10%;" onclick="return showForm('liki_intro_popup')">  -->
+                                   <!--LIKI Code Start
+                                        Reason: displaying a underline of anchor tag so, text-decoration has set none of anchor tag -->
+                            <!--        <a style="text-decoration:none;float:left;display:block;padding-right:0;"> -->
+                                    <!--LIKI Code End-->
+                                    <!-- Changes by Likiext Start, Reason : RD-203 -->
+                             <!--            <span id="chk_liki_spam" style="float:left;font-size:12px;font-weight:bold;color:#333;line-height:32px;">Featuring</span>
+                                        <img id="chkout_liki_img" src="/amazon_import_products/liki_img/liki_btn.png" alt="LeasIt-KeepIt" title="LeaseIt-KeepIt" style="float:left; padding-left:6px;" width="45px">
+                                    <!-- Changes by Likiext End -->	
+                              <!--      </a>
+               				  </div>   -->                   
 							</div>
                         </div>
                         <!--LIKI price div ends-->
@@ -182,7 +186,7 @@
 
                 <?php echo $this->getChildHtml('other');?>
                 <!-- RD-626 starts -->    
-					 <div style="display:none" id="myFrame"> <iframe style="margin-left:40%; margin-top: -24%;border: 1px solid;" id="iFrameName" width="350" height="200" src="https://www.youtube.com/embed/KSlP9crt0vM?rel=0" frameborder="0" allowfullscreen></iframe></div>
+					 <div class="prodpage-video1" style="display:none" id="myFrame"> <iframe style="margin-left:40%; margin-top: -24%;border: 1px solid;" id="iFrameName" width="350" height="200" src="https://www.youtube.com/embed/KSlP9crt0vM?rel=0" frameborder="0" allowfullscreen></iframe></div>
 						<?php $img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
 						 $imge = $img."wysiwyg/video-img.jpg"; ?> 
 						<div id="video-img" class="prodpage-video" style="display:block;">
@@ -196,35 +200,12 @@
                        
                      <!-- free-shipping image start -->           
                 <?php if($_product->getFreeShipping()) { ?>
-                <div class="free-shipping" style="margin-bottom:20px; float:left;" > <!-- style="margin-bottom:10px;margin-top:-20px;">  -->
-                <img alt="free-shipping" src="<?php echo $this-> getSkinUrl('images/free-shipping.jpg') ?>" />   
+                <div class="free-shipping"> <!-- style="margin-bottom:10px;margin-top:-20px;">  -->
+                <img alt="free-shipping" src="<?php echo $this-> getSkinUrl('images/free-shipping .jpg') ?>" />   
                 </div>
      <!-- free-shipping image ends -->  
-     <!-- start RD-454 -->
-     <div class="norton_img"> 
-                           <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
-<tr>
-<td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
-<a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
-</tr>
-</table>
-                           </div>
-     <!-- end RD-454 -->
-        <?php }else  { ?>
-        
-          
-            <div class="norton_img1"> 
-                 <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
-                 <tr>
-                <td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.retaildeal.biz&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
-                 <a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;"></a></td>
-                </tr>
-                </table>
-             </div> 
-        <?php  } ?>
-    
-     
- </div>    
+        <?php }?>
+ 	</div>    
      <!-- start RD-527 -->
       
  <!--Start RD-482--><?php $attribute = $_product->getResource()->getAttribute('feature');  						
