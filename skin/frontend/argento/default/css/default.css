@@ -1531,7 +1531,7 @@ button.ajaxpro-continue-button span span,
     .col3-layout .col-right { display: none; }
     .col3-layout .col-wrapper { width: auto; }
 
-    .pager { text-align: right; }
+   /* .pager { text-align: right; }  */
     .pager .limiter {/* display: none; */}  /* Mobile optimization */
     .pager .pages { margin-right: 0; }
 
@@ -1956,6 +1956,7 @@ button.ajaxpro-continue-button span span,
 @media (max-width: 767px) {
   .hidden-desktop { display: inherit !important; }
   .visible-desktop { display: none !important; }
+
   .visible-phone { display: inherit !important; }
   .hidden-phone { display: none !important; }
   .header-container .header-cart{background: #f6f6f6 !important; border: 1px solid #ddd !important; }
