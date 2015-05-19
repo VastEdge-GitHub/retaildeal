@@ -55,10 +55,10 @@ if($_item->getName()=='Brand')
        		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
 			<?php 
 			if (strpos($item_min[0],'$') !== false)
-			{
+			{ 
 			}
 			else
-			{			
+			{		
 			}
 			?>
 			</a>
@@ -73,7 +73,14 @@ if($_item->getName()=='Brand')
         <?php // MANA BEGIN ?>
         <?php if ($_item->getMSelected()): ?>
 		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
-        	<span class="m-selected-filter-item"><?php echo $item_min[0]."&nbsp;-".$item_max[0]; ?></span>
+        	<span class="m-selected-filter-item"><?php if($_item->getName()=='Size')
+				{
+					echo str_replace("$","",$item_min[0]."&nbsp;-".$item_max[0])." Inches";
+				}
+				else
+				{
+					echo $item_min[0]."&nbsp;-".$item_max[0];
+				} ?></span>
         <?php else : ?>
 	        <?php if (!$this->getFilterOptions()->getDisableNoResultOptions() || $_item->getCount() > 0 || $_item->getMSelected()): ?>
        		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>
@@ -81,7 +88,14 @@ if($_item->getName()=='Brand')
 			<?php 
 			if (strpos($item_min[0],'$') !== false)
 			{
-				echo $item_min[0]."&nbsp;-".$item_max[0];
+				if($_item->getName()=='Size')
+				{
+					echo str_replace("$","",$item_min[0]."&nbsp;-".$item_max[0])." Inches";
+				}
+				else
+				{
+					echo $item_min[0]."&nbsp;-".$item_max[0];
+				}
 			}
 			else
 			{
@@ -129,7 +143,7 @@ foreach ($this->getItems() as $_item): ?>
         <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>
             <?php //echo $_item->getCount() ?>
         <?php endif; ?>
-    <li class="other_brands_ids" style="display:none;"<?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
+    <li class="<?php if($_item->getName()=='Brand'){echo "other_brands_ids";} ?>" style="display:none;"<?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
         <?php // MANA BEGIN ?>
         <?php if ($_item->getMSelected()): ?>
 		<?php $item_min_max= explode("-",$this->escapeHtml($_item->getLabel()));$item_min = explode(".",$item_min_max[0]);$item_max = explode(".",$item_min_max[1]);?>

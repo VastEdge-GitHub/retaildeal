@@ -55,6 +55,12 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
+<!-- browser stop to cache starts -->
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<!-- browser stop to cache ends -->
+
 <meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
 <title><?php echo $this->getTitle() ?></title>
 <meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
@@ -79,14 +85,6 @@ window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){va
 </script>
 
 <!--RD-301 End-->
-<script type="text/javascript">// <![CDATA[
-    (function() {
-      var upfront = document.createElement('SCRIPT'); upfront.type = "text/javascript"; upfront.async = true;
-      upfront.src = document.location.protocol + "//upfront.thefind.com/scripts/main/utils-init-ajaxlib/upfront-badgeinit.js";
-      upfront.text = "thefind.upfront.init('tf_upfront_badge', 'ec714403756ff5e15abd7e68ab9b34f8')";
-      document.getElementsByTagName('HEAD')[0].appendChild(upfront);
-    })();
-// ]]></script>
 <?php
 if ($head = $this->getChild('argento.head')) :
     echo $head->getLinks();
