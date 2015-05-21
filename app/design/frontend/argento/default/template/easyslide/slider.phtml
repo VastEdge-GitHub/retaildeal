@@ -31,7 +31,7 @@ if ($slides = $this->getSlider()->getSlides()) :
                                 <!--RD-423 start-->
                                 <img src="<?php echo $image_src; ?>" usemap="#toQualify" width="720" height="409" alt="<?php echo $this->escapeHtml($slide['image']) ?>"/>
                                 <map name="toQualify">
-									<area style="cursor:pointer;" shape="poly" coords="52,15,44,25,44,100,51,108,468,108,478,102,481,25,468,15,66,15" onclick="analytischk_ad(); LikiPrequalifyAPI();" />
+									<area style="cursor:default;" shape="poly" coords="52,15,44,25,44,100,51,108,468,108,478,102,481,25,468,15,66,15" onclick="analytischk_ad();" />
 								</map>
                                 <!--RD-423 end-->
                             </a>
