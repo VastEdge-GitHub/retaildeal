@@ -76,13 +76,8 @@ if($this->isContentMode()): ?>
 <?php } ?>
 <!-- RD-626 -->
 <!--<div class="catpage-video"> <iframe width="720" height="409" src="https://www.youtube.com/embed/KSlP9crt0vM?rel=0" frameborder="0" allowfullscreen></iframe> </div> -->
-<div class="catpage-video" style="display:none" id="myFrame"> <iframe id="iFrameName" width="720" height="409" src="https://www.youtube.com/embed/KSlP9crt0vM?rel=0" frameborder="0" allowfullscreen></iframe> </div>
+<div class="catpage-video" id="myFrame"> <iframe id="iFrameName" width="720" height="409" src="https://www.youtube.com/embed/64Ld-EG-K0E?rel=0" frameborder="0" allowfullscreen></iframe> </div>
 
-<?php $img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
-$imge = $img."wysiwyg/video-img.jpg"; ?>
-<div class="catpage-video1" style="display:block; cursor:pointer;">
-<img id="Ifram" src="<?php echo $imge; ?>" alt="See How It Works Live" title="See How It Works Live" onclick="myFunction()" />
-</div>
 <!-- End -->
 <?php endif; ?>
 <?php 
@@ -112,13 +107,5 @@ $imge = $img."wysiwyg/video-img.jpg"; ?>
 		   Action: 'ViewedCategoryPage'});
 	  }
 	};
-/** RD- 626 **/	
-function myFunction()
-{                    
-	document.getElementById('iFrameName').src = "https://www.youtube.com/embed/KSlP9crt0vM?&wmode?rel=0&autoplay=1&modestbranding=1&wmode=opaque&rel=0&autohide=1&showinfo=0&wmode=transparent&vq=hd720&hd=1";
-	jQuery('#Ifram').fadeOut(500); 
-	setTimeout( "jQuery('#myFrame').show();",500);
-} 
-/** end **/
 </script> 
 <!--End 573-->
