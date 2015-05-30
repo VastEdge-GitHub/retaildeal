@@ -1959,6 +1959,8 @@ button.ajaxpro-continue-button span span,
 
 
 
+
+
   .visible-phone { display: inherit !important; }
   .hidden-phone { display: none !important; }
   .header-container .header-cart{background: #f6f6f6 !important; border: 1px solid #ddd !important; }
@@ -2373,11 +2375,6 @@ position: relative;
 {
 	#slider_main_div {height: 180px !important;}
 }
-@media only screen and (min-width:320px) and (max-width:480px) 
-{
-	.footer-cms .footer-imgs{ margin-left:40% !important; }
-	
-}
 
 .norton_shipping {/* margin-top:15%; margin-bottom: 10px; */ width: 420px; margin-top: 30%; margin-bottom: 30px; }
 
@@ -2529,6 +2526,8 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.footer-cms .footer-imgs{ margin-left:40% !important; }
 	.subcat_homelist{height: 138px !important; width: 70% !important;}
 	.subcat_homelist span{margin-left: 13px !important; margin-top: 5px !important;font-size: 12px !important;}
+	
+	#myFrame{float: left; margin-top: 27%; margin-left: -68px; width: 65%; } 
 }
 @media only screen and (min-width:176px) and (max-width:320px) 
 {
@@ -2733,7 +2732,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	p.hello {  margin-top: 0%; /* display:none;*/}
 	.cat_img img {float: left;width:223px !important;height: auto !important;}
 	/* .catpage_slider {width: auto !important; height: 150px !important;} */
-	.norton_shipping {width: 227px !important;}
+	.norton_shipping {width: 227px !important; margin-top: 38% !important;}
 	.norton_img {margin-right: -57px; margin-top: -75px !important;}
 	.leaseit_keepit.odd {margin-left: 67% !important; margin-top:20% !important;}
 	.leaseit_keepit.even{margin-left: 67% !important; margin-top:20% !important;}
@@ -2753,6 +2752,8 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.catpage-video iframe{margin-top: 13% !important; margin-left: 0% !important; width: 224px !important; height: 130px !important;}
 	.dialog{left: 5% !important;top: 20% !important;height: 220px !important;width: 273px !important;}
 	.dialog_content {height: 199px !important;width: 269px !important;}
+
+	.product-shop-inner #myFrame iframe#iFrameName{ margin-top: -9%!important; margin-left: 22% !important; }
 }
 @media only screen and (width:375px)  
 {
@@ -2767,7 +2768,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	p.hello { margin-top: 0%; /* display:none;*/ }
 	.cat_img img {float: left;width:230px !important;height: auto !important;}
 	/* .catpage_slider {width: auto !important; height: 160px !important;} */
-	.norton_shipping {width: 240px !important;}
+	.norton_shipping {width: 240px !important;margin-top: 35% !important;}
 	.norton_img {margin-right: -57px; margin-top: -75px !important;}
 	.page-sitemap .links{margin-bottom: -23px !important;width: 130px;margin-left: 63%;}
 	.page-sitemap .pages{width:55% !important;}
@@ -2780,6 +2781,8 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.catpage-video iframe{width: 233px; height: 173px;margin-top: -15%;}
 	.dialog{left: 5% !important;top: 20% !important;height: 220px !important;width: 273px !important;}
 	.dialog_content {height: 199px !important;width: 269px !important;}
+	.product-shop-inner iframe{  margin-top: 3% !important ; margin-left: 30% !important;} 
+	.product-shop-inner .same-as-cash { margin-top: -35% !important; }
 }
 @media only screen and (width:414px) 
 {
@@ -2793,7 +2796,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	p.hello { margin-top: 0%; /* display:none; */}
 	.cat_img img {float: left;width:260px !important;height: auto !important;}
 	/* .catpage_slider {width: auto !important; height: 170px !important;} */
-	.norton_shipping {width: 240px !important;}
+	.norton_shipping {width: 240px !important;margin-top: 34% !important;}
 	.norton_img {margin-right: -57px; margin-top: -75px !important;}
 	.page-sitemap .links{margin-bottom: -23px !important;width: 130px;margin-left: 63%;}
 	.page-sitemap .pages{width:55% !important;}
@@ -3106,7 +3109,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 @media only screen and (width:320px) 
 {
 	.prodpage-video #Ifram { margin-bottom: 10%;margin-top: 20% !important;  width: 100%; margin-left: -55%;}
-	.product-shop-inner iframe{width: 195px; height: 150px; margin-top:-50px !important; margin-bottom: 20px;margin-left: -5% !important;}   /* video css*/
+	 .product-shop-inner iframe{width: 195px; height: 150px; margin-top:-50px !important; margin-bottom: 20px;margin-left: 40% !important;} /* video css*/
 	 .home-catlist{ margin-top: -4%; } 
 	.subcat_homelist{ height: 130px !important; width: 70% !important; margin-top: 10px !important; margin-left: 15px !important; margin-right: 0 !important; margin-bottom: 40px !important; padding: 4% !important } /* RD-626 */  
 	.home-catlist{ margin-top: -50% !important; margin-bottom: 0px; } /* RD-626 */
@@ -3114,26 +3117,19 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.catpage-video { margin-top: 27% !important; } /* RD-626 */ 
 	.add-to-cart-wrapper .chkout_btn { width: 50% !important; margin-top: 6% !important } 
 	.add-to-cart { width: 112% !important; }
-	.same-as-cash {float: left;margin-top:-55% !important;width: 77% !important; font-size:12px; margin-left: -3% !important;position:absolute; }
+	.same-as-cash {float: left;margin-top:-26% !important;width: 77% !important; font-size:12px; margin-left: -3% !important;position:absolute; }
 	.prodpage-video { float: left; margin-top: 27%; margin-left: 12px; width: 65%; }
 	#myFrame { float: left; margin-top: 27%; margin-left: 12px; width: 65%; }
 	.dialog{left: 5% !important;top: 20% !important;height: 220px !important;width: 273px !important;}
 	.dialog_content {height: 199px !important;width: 269px !important;}
 	.own-purchase { font-size: 12px; }	
+	
+	.product-shop-inner #myFrame{ margin-left: -70px !important;} 
 }
 @media only screen and (width:480px)  
 {
-	 iframe#iFrameName  {
-	  margin-left: 0% !important;
-	  margin-top: -4% !important;
-	  width: 100% !important;
-	  height: 174px !important;
-	}
-	.product-shop-inner #myFrame {
-	  position: absolute;
-	  margin-left: 0%;
-	  margin-top: -3%;
-	}
+	 iframe#iFrameName  { margin-left: 35%; margin-top: -65%; width: 145%; height: 174px !important;}
+	.product-shop-inner #myFrame { position: absolute; margin-left: 0%; margin-top: -3%;} 
 	.homepage-video #Ifram{margin-top: -4% !important;}
 	.prodpage-video #Ifram { margin-bottom: 10%;  margin-top: 25% !important;  width: 100%; margin-left: -62%;}
 	 /*iframe{width: 89%; height: 174px; margin-top: -50px; margin-bottom: 20px;}   /* video css*/
@@ -3149,22 +3145,24 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 	.same-as-cash {float: left;   margin-top: -52% !important; width: 70% !important; font-size:12px; }
 	.prodpage-video { float: left; margin-top: 27%; margin-left: 12px; width: 60%; } 
 	.own-purchase { font-size: 12px }
+	.catpage-video #iFrameName{ margin-top: -45% !important;}
+	.product-shop-inner iframe{ width: 98% !important; margin-left: 0% !important; } 
 }
 @media only screen and (min-width:375px) and (max-width:414px)  
 {
 	.product-shop-inner #Ifram { margin-bottom: 10%;  margin-top: 20% !important;  width: 100%; }
-	.product-shop-inner iframe{width:247px; height: 150px; margin-top: 20px !important; margin-bottom: -80px; margin-left:0% !important;}   /* video css*/
+	.product-shop-inner iframe{width:247px; height: 150px; margin-top: 5px !important ; margin-bottom: -80px; margin-left: 30% !important;}   /* video css*/
 	 .home-catlist{ margin-top: -4%; } 
 	.subcat_homelist{ height: 190px !important; width: 85% !important;  margin-top: 10px !important; margin-left: 10px !important; margin-right: 0 !important; margin-bottom: 10 !important; padding: 4% !important } /* RD-626 */  
 	.home-catlist{ margin-top: -50% !important; margin-bottom: 0px; } /* RD-626 */
-
 	.subcat_homelist span { width: 90% !important; font-size: 11px !important; margin-top:10px !important; margin-bottom:10px !important; margin-left: 10px !important; font-size:12px !important; }  /* RD-626 */  
 	.catpage-video { margin-top: 27% !important; } /* RD-626 */ 
 	.add-to-cart-wrapper .chkout_btn { width: 45% !important; margin-top: 6% !important } 
 	.add-to-cart { width: 95% !important; }
-	.same-as-cash {float: left; margin-top: -55% !important; width: 70% !important; font-size:12px; margin-left: -3% !important; }
-	.prodpage-video { float: left; margin-top: -24% !important; margin-left: 0% !important; width: 65%; margin-top: -30% !important;}
-	.own-purchase { font-size: 12px }
+	.same-as-cash {float: left; margin-top: -34% !important; width: 70% !important; font-size:12px; margin-left: -3% !important; }
+	.prodpage-video { float: left; margin-top: -24% !important; margin-left: 0% !important; width: 65%; margin-top: -30% ;}
+	.own-purchase { font-size: 12px } 
+	
 }
 /** RD-626 end**/
 @media only screen and (min-width:176px) and (max-width:640px) 
@@ -3222,6 +3220,12 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 .prodpage-video {  float: none; margin-left: 37%; margin-top: -6%; } 
 .same-as-cash { float: left;height: 32px;padding: 0 10px 0 10px;margin-top: -12% ;margin-left: -1%; height: 35px;float:left;font-size:13px;font-weight:bold;color:#FF7C0E; } 
 /** RD-626 end**/
+.product-shop-inner .same-as-cash, x:-moz-any-link, x:default { margin-top: 0% !important;} /* for mozilla */
+.product-shop-inner .norton_shipping, x:-moz-any-link, x:default { margin-top: 20%; !important;} /* for mozilla */
+.product-shop-inner #myFrame iframe#iFrameName x:-moz-any-link, x:default { margin-left: 30% !important; margin-top: -20% !important;} /* for mozilla */ 
+ body:first-of-type .product-shop-inner .prodpage-video1 iframe {margin-top: -35%; margin-left: 40% ;} /* for safari */
+.product-shop-inner #myFrame iframe#iFrameName, x:-moz-any-link, x:default{margin-top: -20% !important;  margin-left: 30% !important;}  
+.product-shop-inner iframe{-webkit-margin-top:-32% !important }
 
 /*** Product page changes starts ****/
 @media only screen and (width:1024px),screen and (width:1050px),screen and (width:1080px)
@@ -3250,24 +3254,26 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 }
 @media only screen and (width:1440px)
 {
-.add-to-cart-wrapper .style_liki{margin-top: -20px;}
-.product-shop-inner #myFrame iframe#iFrameName{  margin-left: 38% !important;margin-top: -28% !important;}
+.add-to-cart-wrapper .style_liki{margin-top: -20px;} 
+.product-shop-inner #myFrame iframe#iFrameName{  margin-left: 38% ;margin-top: -28% ;}
 .product-shop-inner .prodpage-video #Ifram{margin-top: -30% !important;}
 .product-shop-inner .same-as-cash {margin-left: -2%;}
 }
 @media only screen and (width:1600px),screen and (width:1680px)
 {
 	.add-to-cart-wrapper .style_liki{margin-top: -20px;}
-.product-shop-inner #myFrame iframe#iFrameName{  margin-left: 34.5% !important;margin-top: -27% !important;}
+.product-shop-inner #myFrame iframe#iFrameName{  margin-left: 34.5% ;margin-top: -27% ;}
 .product-shop-inner .prodpage-video #Ifram{margin-top: -30% !important;}
 .product-shop-inner .same-as-cash {margin-left: -2%;}
+.product-shop-inner #myFrame iframe#iFrameName, x:-moz-any-link, x:default { margin-left: 26.5% !important;margin-top: -20% !important;} 
+
+/* change for product page on mozilla */
 }
 
 .catpage-video1 #Ifram{margin-bottom:10% !important;}
 .catpage-video iframe#iFrameName{margin-bottom:10% !important;}
 .pager .pages{margin-top:3px !important;}
 /*** Product page changes ends ****/
-
 
 /*** sidebar image changes starts ****/
 @media only screen and (max-width:480px),screen and (width:533px) and (height:320px),screen and (width:568px),screen and (width:736px),screen and (width:640px),screen and (width:667px)
@@ -3294,7 +3300,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 {
 .sidebanner img{width:100% !important;}
 }
-@media only screen and (width:512px) and (height:853px)  
+@media only screen and (width:512px) and (height:853px)   
 {
 .section1{width:362px !important;}
 .subcat_homelist { height: 178px !important; width: 55% !important;margin-left: 20% !important;}
