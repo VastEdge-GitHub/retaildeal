@@ -3218,7 +3218,7 @@ li.googleplus {float: left !important; margin-left: 5px !important;}
 .spantitle{float:left; text-align:center; width:80%; margin-top: 8px; }
 .subcat_homelist span{float: left; width: 85%; margin-left: 20px; margin-top: 10px; font-weight :bold; font-size:16px; text-align:center;margin-right: 25px; }
 .prodpage-video {  float: none; margin-left: 37%; margin-top: -6%; } 
-.same-as-cash { float: left;height: 32px;padding: 0 10px 0 10px;margin-top: -12% ;margin-left: -1%; height: 35px;float:left;font-size:13px;font-weight:bold;color:#FF7C0E; } 
+.same-as-cash { float: left;height: 32px;padding: 0 10px 0 10px;margin-top: -12% ;margin-left: -1%; height: 35px;float:left;font-size:13px;font-weight:bold;/*color:#FF7C0E;*/ } 
 /** RD-626 end**/
 .product-shop-inner .same-as-cash, x:-moz-any-link, x:default { margin-top: 0% !important;} /* for mozilla */
 .product-shop-inner .norton_shipping, x:-moz-any-link, x:default { margin-top: 20%; !important;} /* for mozilla */
